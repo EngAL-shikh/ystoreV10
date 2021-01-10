@@ -18,7 +18,7 @@ open class YstoreViewModels: ViewModel() {
     var LiveDataUsers: LiveData<List<Users>>
     var LiveDataProducts: LiveData<List<Products>>
 
-
+/// init
     init {
         liveDataCategory = Featchers().fetchCat()
         liveDataCart = Featchers().fetchCart()
