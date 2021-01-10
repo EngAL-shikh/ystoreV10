@@ -39,7 +39,7 @@ class Catogrey_Fragment : Fragment() {
 
 
             var user = Featchers()
-            val LiveData = user.fetchCategory()
+            val LiveData = user.fetchCat()
             LiveData.observe(this, Observer {
                 Log.d("test", "Response received: ${it}")
                 RecyclerView.adapter = UserAdapter(it)

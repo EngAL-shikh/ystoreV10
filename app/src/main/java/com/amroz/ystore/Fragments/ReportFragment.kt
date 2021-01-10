@@ -12,7 +12,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.amroz.ystore.Feachers
+import com.amroz.ystore.Featchers
+
 import com.amroz.ystore.Models.Report
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
@@ -34,8 +35,8 @@ class ReportFragment : Fragment() {
         if (type == "report") {
 
 
-            var report = Feachers()
-            val LiveData = report.fetchReports()
+            var report = Featchers()
+            val LiveData = report.fetchReport()
             LiveData.observe(this, Observer {
                 Log.d("test", "Response received: ${it}")
                 RecyclerView.adapter = ReportAdapter(it)
