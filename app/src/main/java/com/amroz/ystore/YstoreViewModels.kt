@@ -1,8 +1,20 @@
 package com.amroz.ystore
 
+
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.amroz.ystore.Models.Cart
+import com.amroz.ystore.Models.Report
+
+class YstoreViewModels:ViewModel() {
+    val LiveData: LiveData<List<Report>>
+
+    init {
+        LiveData = Feachers().fetchContents()
+
+
+    }
+
 
 open class YstoreViewModels: ViewModel() {
 
@@ -14,5 +26,6 @@ open class YstoreViewModels: ViewModel() {
         liveDataCart = Featchers().fetchCart()
 
     }
+
 
 }
