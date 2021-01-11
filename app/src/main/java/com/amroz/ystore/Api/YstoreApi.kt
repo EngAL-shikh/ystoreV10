@@ -26,7 +26,7 @@ interface YstoreApi {
     fun fetchUsers(): Call<Response>
 
 
-    @POST
-    fun xyz(@Body x:HashMap<String,String>)
+//    @POST
+//    fun xyz(@Body x:HashMap<String,String>)
 }
 

@@ -42,7 +42,7 @@ class Catogrey_Fragment : Fragment() {
             val LiveData = user.fetchCat()
             LiveData.observe(this, Observer {
                 Log.d("test", "Response received: ${it}")
-                RecyclerView.adapter = UserAdapter(it)
+                RecyclerView.adapter = CatAdapter(it)
 
             })
         }
@@ -73,7 +73,7 @@ class Catogrey_Fragment : Fragment() {
 
 
     // News Holder
-    private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private inner class CatHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
         val cattitle = view.findViewById(R.id.cattitle) as TextView
@@ -93,7 +93,7 @@ class Catogrey_Fragment : Fragment() {
     }
 
     // NewsAdapter
-    inner class UserAdapter(var news: List<Category>) :
+    inner class CatAdapter(var news: List<Category>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -106,7 +106,7 @@ class Catogrey_Fragment : Fragment() {
                 parent, false
             )
 
-            return UsersHolder(view)
+            return CatHolder(view)
 
         }
 
@@ -123,7 +123,7 @@ class Catogrey_Fragment : Fragment() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
             val news = news[position]
-            if (holder is UsersHolder)
+            if (holder is CatHolder)
                 holder.bind(news)
 
 
