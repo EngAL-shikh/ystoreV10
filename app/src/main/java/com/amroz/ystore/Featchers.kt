@@ -134,11 +134,11 @@ fun fetchCat(): LiveData<List<Category>> {
             ) {
 
                 val response:Response? = response.body()
-                val reports:List<Users> = response?.users
+                val users:List<Users> = response?.users
                     ?: mutableListOf()
                 Log.d("TAG", "Response received")
-                responseLiveData.value = reports
-                Log.d("onResponse", reports.toString())
+                responseLiveData.value = users
+                Log.d("onResponse", users.toString())
             }
         })
         return responseLiveData

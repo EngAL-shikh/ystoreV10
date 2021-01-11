@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.Category
@@ -36,14 +35,14 @@ class Catogrey_Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (type == "cat") {
+        if (type == "Category") {
 
 
             var user = Featchers()
             val LiveData = user.fetchCat()
             LiveData.observe(this, Observer {
                 Log.d("test", "Response received: ${it}")
-                RecyclerView.adapter = UserAdapter(it)
+                RecyclerView.adapter = CatAdapter(it)
 
             })
         }
@@ -57,7 +56,7 @@ class Catogrey_Fragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_catogrey, container, false)
 
         RecyclerView = view.findViewById(R.id.rec)
-        RecyclerView.layoutManager = GridLayoutManager(context,2)
+        RecyclerView.layoutManager = LinearLayoutManager(context)
         return view
     }
 
@@ -73,18 +72,18 @@ class Catogrey_Fragment : Fragment() {
     }
 
 
-    //  Holder
-    private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
+    // Cat Holder
+    private inner class CatHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
-        val cattitle = view.findViewById(R.id.title) as TextView
-
+        val cattitle = view.findViewById(R.id.cattitle) as TextView
+        val sub_cat_title = view.findViewById(R.id.sub_cat_title) as TextView
 
 
         fun bind(cat: Category) {
 
-
-            cattitle.text = cat.cat_title
+            cattitle.text = cat.cat_id.toString()
+            sub_cat_title.text = cat.cat_title
 
 
 
@@ -94,7 +93,7 @@ class Catogrey_Fragment : Fragment() {
     }
 
     // NewsAdapter
-    inner class UserAdapter(var news: List<Category>) :
+    inner class CatAdapter(var news: List<Category>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -107,7 +106,7 @@ class Catogrey_Fragment : Fragment() {
                 parent, false
             )
 
-            return UsersHolder(view)
+            return CatHolder(view)
 
         }
 
@@ -124,7 +123,7 @@ class Catogrey_Fragment : Fragment() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
             val news = news[position]
-            if (holder is UsersHolder)
+            if (holder is CatHolder)
                 holder.bind(news)
 
 
