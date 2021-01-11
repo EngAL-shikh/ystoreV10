@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.Category
@@ -35,7 +36,7 @@ class Catogrey_Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (type == "Category") {
+        if (type == "cat") {
 
 
             var user = Featchers()
@@ -56,7 +57,7 @@ class Catogrey_Fragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_catogrey, container, false)
 
         RecyclerView = view.findViewById(R.id.rec)
-        RecyclerView.layoutManager = LinearLayoutManager(context)
+        RecyclerView.layoutManager = GridLayoutManager(context,2)
         return view
     }
 
@@ -72,18 +73,18 @@ class Catogrey_Fragment : Fragment() {
     }
 
 
-    // News Holder
+    //  Holder
     private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
-        val cattitle = view.findViewById(R.id.cattitle) as TextView
-        val sub_cat_title = view.findViewById(R.id.sub_cat_title) as TextView
+        val cattitle = view.findViewById(R.id.title) as TextView
+
 
 
         fun bind(cat: Category) {
 
-            cattitle.text = cat.cat_id.toString()
-            sub_cat_title.text = cat.cat_title
+
+            cattitle.text = cat.cat_title
 
 
 

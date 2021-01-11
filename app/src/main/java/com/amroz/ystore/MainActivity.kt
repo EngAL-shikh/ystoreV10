@@ -6,6 +6,8 @@ import android.os.Bundle
 //import com.amroz.ystore.Fragments.ReportFragment
 
 import com.amroz.ystore.Fragments.Catogrey_Fragment
+import com.amroz.ystore.Fragments.ProductsFragment
+import com.amroz.ystore.Fragments.ReportFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,9 +19,8 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction()
 
-              //  .add(R.id.fragmentContainer, ReportFragment.newInstance("report"))
 
-                .add(R.id.fragmentContainer, Catogrey_Fragment.newInstance("Category"))
+                .add(R.id.fragmentContainer, ReportFragment.newInstance("report"))
 
                 .commit()
         }

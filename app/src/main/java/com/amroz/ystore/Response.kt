@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class Response (
-    @SerializedName("getAllRows")
+    @SerializedName("getAllReports")
     var reports:List<Report>,
     @SerializedName("getAllCat")
     var cats: List<Category>,
@@ -17,7 +17,7 @@ data class Response (
     var carts: List<Cart>,
     @SerializedName("getAllProducts")
     var products: List<Products>,
-    @SerializedName("getAllRows")
+    @SerializedName("getAllUsers")
     var users: List<Users>
 ){
 

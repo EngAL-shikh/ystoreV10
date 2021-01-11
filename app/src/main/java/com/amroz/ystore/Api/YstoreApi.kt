@@ -22,11 +22,11 @@ interface YstoreApi {
     @GET("StoreApi/api/products_api.php")
     fun fetchProducts(): Call<Response>
 
-    @GET("StoreApi/api/products_api.php")
+    @GET("StoreApi/api/Users_api.php")
     fun fetchUsers(): Call<Response>
 
 
-    @POST
-    fun xyz(@Body x:HashMap<String,String>)
+//    @POST
+//    fun xyz(@Body x:HashMap<String,String>)
 }
 

@@ -15,5 +15,6 @@ data class Users (
     var address:String="" ,
     @SerializedName("user_report")
     var user_report:Int=0
+//
 ){
 }
