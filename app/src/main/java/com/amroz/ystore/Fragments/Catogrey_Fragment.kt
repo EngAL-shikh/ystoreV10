@@ -72,7 +72,7 @@ class Catogrey_Fragment : Fragment() {
     }
 
 
-    // News Holder
+    // Cat Holder
     private inner class CatHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
