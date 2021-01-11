@@ -69,18 +69,18 @@ class UsersFragment : Fragment() {
 
         val user_id= view.findViewById(R.id.user_id) as TextView
         val name= view.findViewById(R.id.name) as TextView
-        val email=view.findViewById(R.id.email) as TextView
-        val phone=view.findViewById(R.id.phone) as TextView
-        val address= view.findViewById(R.id.address) as TextView
-        val user_report= view.findViewById(R.id.user_report) as TextView
+//        val email=view.findViewById(R.id.email) as TextView
+//        val phone=view.findViewById(R.id.phone) as TextView
+//        val address= view.findViewById(R.id.address) as TextView
+//        val user_report= view.findViewById(R.id.user_report) as TextView
 
         fun bind(user:Users){
             user_id.text= user.user_id.toString()
             name.text= user.name
-            email.text= user.email
-            phone.text= user.phone
-            address.text= user.address
-            user_report.text= user.user_report.toString()
+//            email.text= user.email
+//            phone.text= user.phone
+//            address.text= user.address
+//            user_report.text= user.user_report.toString()
         }
     }
 
