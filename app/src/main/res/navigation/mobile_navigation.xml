@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/products_nv">
+
+    <fragment
+        android:id="@+id/products_nv"
+        android:name="com.amroz.ystore.Fragments.ProductsFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_products" >
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/cats_nv"
+        android:name="com.amroz.ystore.Fragments.Catogrey_Fragment"
+        android:label="@string/title_cats"
+        tools:layout="@layout/fragment_catogrey" >
+
+
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/profile_nv"
+        android:name="com.amroz.ystore.Fragments.UsersFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_users" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/report_nv"
+        android:name="com.amroz.ystore.Fragments.ReportFragment"
+        android:label="@string/title_Reports"
+        tools:layout="@layout/fragment_report" >
+
+    </fragment>
+
+</navigation>
