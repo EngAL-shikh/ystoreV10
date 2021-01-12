@@ -28,8 +28,6 @@ class Featchers {
     }
 
 
-
-
     //products
     fun fetchProducts(): LiveData<List<Products>> {
         val responseLiveData: MutableLiveData<List<Products>> = MutableLiveData()
