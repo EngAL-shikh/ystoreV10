@@ -26,13 +26,13 @@ class ReportFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         reportViewModel = ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        type=arguments?.getSerializable("type")as String
+      //  type=arguments?.getSerializable("type")as String
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (type == "report") {
+
 
 
             var report = Featchers()
@@ -42,7 +42,7 @@ class ReportFragment : Fragment() {
                 RecyclerView.adapter = ReportAdapter(it)
 
             })
-        }
+
     }
 
     override fun onCreateView(

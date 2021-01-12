@@ -29,14 +29,14 @@ class ProductsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         productsViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        type=arguments?.getSerializable("type")as String
+       // type=arguments?.getSerializable("type")as String
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (type == "products") {
+
             var products = Featchers()
             val newsLiveData=products.fetchProducts()
             newsLiveData.observe(this, Observer {
@@ -44,7 +44,7 @@ class ProductsFragment : Fragment() {
                 RecyclerView.adapter = productsAdapter(it)
 
             })
-        }
+
     }
 
     override fun onCreateView(

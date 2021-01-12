@@ -28,21 +28,21 @@ class CartFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cartViewModel=ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        type=arguments?.getString("type") as String
+//        type=arguments?.getString("type") as String
 
         }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(type == "Cart"){
+
             var cart=Featchers()
             var liveDta= cart.fetchCart()
             liveDta.observe(this, Observer {
                 Log.d("test", "Response received: ${it}")
                 cartRecyclerView.adapter= CartAdapter(it)
             })
-        }
+
     }
 
     override fun onCreateView(
@@ -68,16 +68,16 @@ class CartFragment : Fragment() {
     }
 
     private inner class CartHolder(view: View) : RecyclerView.ViewHolder(view){
-        var cart_id= view.findViewById(R.id.cart_id) as TextView
-        var user_id = view.findViewById(R.id.user_id) as TextView
-        var product_id= view.findViewById(R.id.product_id) as TextView
-        var quantity= view.findViewById(R.id.quantity) as TextView
+//        var cart_id= view.findViewById(R.id.cart_id) as TextView
+//        var user_id = view.findViewById(R.id.user_id) as TextView
+//        var product_id= view.findViewById(R.id.product_id) as TextView
+//        var quantity= view.findViewById(R.id.quantity) as TextView
 
         fun bind(cart: Cart){
-            cart_id.text= cart.cart_id.toString()
-            user_id.text= cart.user_id
-            product_id.text= cart.product_id.toString()
-            quantity.text= cart.Quantity.toString()
+//            cart_id.text= cart.cart_id.toString()
+//            user_id.text= cart.user_id
+//            product_id.text= cart.product_id.toString()
+//            quantity.text= cart.Quantity.toString()
         }
     }
 
@@ -85,7 +85,7 @@ class CartFragment : Fragment() {
     private inner class CartAdapter(var cart : List<Cart>) : RecyclerView.Adapter<CartHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartHolder {
             val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.cart_list, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.catogrey_list, parent, false)
 
             return CartHolder(view)
         }

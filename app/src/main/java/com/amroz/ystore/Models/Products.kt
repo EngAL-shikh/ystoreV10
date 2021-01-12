@@ -10,6 +10,8 @@ data class Products(
     var title:String="",
     @SerializedName("details")
     var details: String="",
+    @SerializedName("images")
+    var images:String="",
     @SerializedName("color")
     var color:String="",
     @SerializedName("order_date")
