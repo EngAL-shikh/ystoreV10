@@ -30,7 +30,9 @@ class ProductsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         productsViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        //type=arguments?.getSerializable("type")as String
+
+       // type=arguments?.getSerializable("type")as String
+
     }
 
 

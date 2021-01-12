@@ -9,5 +9,7 @@ data class Category (
    @SerializedName("cat_title")
    val cat_title:String,
    @SerializedName("images")
-   val images:String=""
+
+   var images:String=""
+
 )

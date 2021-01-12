@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.Category
@@ -30,13 +31,14 @@ class Catogrey_Fragment : Fragment() {
         super.onCreate(savedInstanceState)
         catViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        //type=arguments?.getSerializable("type")as String
+
+      //  type=arguments?.getSerializable("type")as String
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
 
 
@@ -58,7 +60,7 @@ class Catogrey_Fragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_catogrey, container, false)
 
         RecyclerView = view.findViewById(R.id.rec)
-        RecyclerView.layoutManager = LinearLayoutManager(context)
+        RecyclerView.layoutManager = GridLayoutManager(context,2)
         return view
     }
 
@@ -79,7 +81,9 @@ class Catogrey_Fragment : Fragment() {
 
 
         val cattitle = view.findViewById(R.id.title) as TextView
+
         val catImage= view.findViewById(R.id.image) as ImageView
+
 
 
 
@@ -87,6 +91,7 @@ class Catogrey_Fragment : Fragment() {
 
             cattitle.text = cat.cat_title.toString()
             Picasso.with(context).load(cat.images).into(catImage)
+
 
 
 
