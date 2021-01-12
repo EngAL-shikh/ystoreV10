@@ -28,7 +28,9 @@ class CartFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cartViewModel=ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+
 //        type=arguments?.getString("type") as String
+
 
         }
 
@@ -85,9 +87,13 @@ class CartFragment : Fragment() {
     private inner class CartAdapter(var cart : List<Cart>) : RecyclerView.Adapter<CartHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartHolder {
             val view =
+
+
                 LayoutInflater.from(parent.context).inflate(R.layout.catogrey_list, parent, false)
 
+
             return CartHolder(view)
+
         }
 
         override fun getItemCount(): Int {
