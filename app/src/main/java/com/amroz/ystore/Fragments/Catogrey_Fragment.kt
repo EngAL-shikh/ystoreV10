@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ import com.amroz.ystore.Category
 import com.amroz.ystore.Featchers
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
+import com.squareup.picasso.Picasso
 
 
 class Catogrey_Fragment : Fragment() {
@@ -28,14 +30,14 @@ class Catogrey_Fragment : Fragment() {
         super.onCreate(savedInstanceState)
         catViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        type=arguments?.getSerializable("type")as String
+        //type=arguments?.getSerializable("type")as String
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (type == "Category") {
+
 
 
             var user = Featchers()
@@ -45,7 +47,7 @@ class Catogrey_Fragment : Fragment() {
                 RecyclerView.adapter = CatAdapter(it)
 
             })
-        }
+
     }
 
     override fun onCreateView(
@@ -76,14 +78,15 @@ class Catogrey_Fragment : Fragment() {
     private inner class CatHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
-        val cattitle = view.findViewById(R.id.cattitle) as TextView
-        val sub_cat_title = view.findViewById(R.id.sub_cat_title) as TextView
+        val cattitle = view.findViewById(R.id.title) as TextView
+        val catImage= view.findViewById(R.id.image) as ImageView
+
 
 
         fun bind(cat: Category) {
 
-            cattitle.text = cat.cat_id.toString()
-            sub_cat_title.text = cat.cat_title
+            cattitle.text = cat.cat_title.toString()
+            Picasso.with(context).load(cat.images).into(catImage)
 
 
 

@@ -17,6 +17,7 @@ import com.amroz.ystore.Featchers
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
+import com.squareup.picasso.Picasso
 
 
 class ProductsFragment : Fragment() {
@@ -29,14 +30,14 @@ class ProductsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         productsViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        type=arguments?.getSerializable("type")as String
+        //type=arguments?.getSerializable("type")as String
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (type == "products") {
+
             var products = Featchers()
             val newsLiveData=products.fetchProducts()
             newsLiveData.observe(this, Observer {
@@ -44,7 +45,7 @@ class ProductsFragment : Fragment() {
                 RecyclerView.adapter = productsAdapter(it)
 
             })
-        }
+
     }
 
     override fun onCreateView(
@@ -87,6 +88,7 @@ class ProductsFragment : Fragment() {
             title.text = products.title
             deatils.text = products.details
             Raitings.text = products.rating.toString()
+            Picasso.with(context).load(products.images).into(image)
 
 
 

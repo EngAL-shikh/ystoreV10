@@ -32,7 +32,7 @@ class ReportFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (type == "report") {
+
 
 
             var report = Featchers()
@@ -42,7 +42,7 @@ class ReportFragment : Fragment() {
                 RecyclerView.adapter = ReportAdapter(it)
 
             })
-        }
+
     }
 
     override fun onCreateView(

@@ -26,13 +26,13 @@ class UsersFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userViewModel=ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        type=arguments?.getSerializable("type") as String
+        //type=arguments?.getSerializable("type") as String
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (type == "Users"){
+
 
             var user= Featchers()
             var liveData= user.fetchUsers()
@@ -40,7 +40,7 @@ class UsersFragment : Fragment() {
                 Log.d("test", "Response received: ${it}")
                 userRecyclerView.adapter= UsersAdapter(it)
             })
-        }
+
     }
 
     override fun onCreateView(
