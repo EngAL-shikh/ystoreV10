@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 //                .beginTransaction()
 //
 //
+
 //                .add(R.id.fragmentContainer, UsersFragment.newInstance("Users"))
 //
 //                .commit()
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             R.id.products_nv, R.id.cats_nv, R.id.report_nv))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
 
@@ -52,4 +54,3 @@ class MainActivity : AppCompatActivity() {
 
 
     //
-}

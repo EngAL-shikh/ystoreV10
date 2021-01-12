@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,7 @@ import com.amroz.ystore.Category
 import com.amroz.ystore.Featchers
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
+import com.squareup.picasso.Picasso
 
 
 class Catogrey_Fragment : Fragment() {
@@ -29,7 +31,9 @@ class Catogrey_Fragment : Fragment() {
         super.onCreate(savedInstanceState)
         catViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+
       //  type=arguments?.getSerializable("type")as String
+
     }
 
 
@@ -78,11 +82,15 @@ class Catogrey_Fragment : Fragment() {
 
         val cattitle = view.findViewById(R.id.title) as TextView
 
+        val catImage= view.findViewById(R.id.image) as ImageView
+
+
 
 
         fun bind(cat: Category) {
 
             cattitle.text = cat.cat_title.toString()
+            Picasso.with(context).load(cat.images).into(catImage)
 
 
 

@@ -17,6 +17,7 @@ import com.amroz.ystore.Featchers
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
+import com.squareup.picasso.Picasso
 
 
 class ProductsFragment : Fragment() {
@@ -29,7 +30,9 @@ class ProductsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         productsViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+
        // type=arguments?.getSerializable("type")as String
+
     }
 
 
@@ -87,6 +90,7 @@ class ProductsFragment : Fragment() {
             title.text = products.title
             deatils.text = products.details
             Raitings.text = products.rating.toString()
+            Picasso.with(context).load(products.images).into(image)
 
 
 
