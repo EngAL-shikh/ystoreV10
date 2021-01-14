@@ -26,9 +26,9 @@
     </fragment>
     <fragment
         android:id="@+id/profile_nv"
-        android:name="com.amroz.ystore.Fragments.UsersFragment"
+        android:name="com.amroz.ystore.Fragments.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_users" >
+        tools:layout="@layout/fragment_profile" >
 
     </fragment>
 

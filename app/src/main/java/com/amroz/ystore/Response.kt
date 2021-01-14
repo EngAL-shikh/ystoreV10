@@ -18,7 +18,19 @@ data class Response (
     @SerializedName("getAllProducts")
     var products: List<Products>,
     @SerializedName("getAllUsers")
-    var users: List<Users>
+    var users: List<Users>,
+
+
+
+
+
+
+
+
+
+
+    @SerializedName("getSingleUser")
+    var singleUsers: List<Users>
 ){
 
 
