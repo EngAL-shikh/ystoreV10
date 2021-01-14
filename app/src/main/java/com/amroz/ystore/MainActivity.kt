@@ -22,25 +22,13 @@ import com.amroz.ystore.Fragments.ProductsFragment
 
 class MainActivity : AppCompatActivity()  {
     private lateinit var nanHost:FrameLayout
-    private  lateinit var  navView: BottomNavigationView
-    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-   /*     val isFragmentContainerEmpty = savedInstanceState == null
-        if (isFragmentContainerEmpty) {
-            supportFragmentManager
-                .beginTransaction()
 
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-                .add(R.id.fragmentContainer, UsersFragment.newInstance("Users"))
-
-                .commit()
-        }*/
-        nanHost=findViewById(R.id.nav_host_fragment)
-        navView = findViewById(R.id.nav_view)
-
-
+        val navController = findNavController(R.id.nav_host_fragment)
 
         navController = findNavController(R.id.nav_host_fragment)
 
@@ -51,7 +39,7 @@ class MainActivity : AppCompatActivity()  {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-//        nanHost.visibility=View.VISIBLE
+
 
 
     }

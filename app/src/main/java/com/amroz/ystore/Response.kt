@@ -21,6 +21,9 @@ data class Response (
     var users: List<Users>,
     @SerializedName("getSingleProductByCat")
     var productByCat: List<Products>
+    @SerializedName("getSingleUser")
+    var singleUsers: List<Users>
+
 ){
 
 

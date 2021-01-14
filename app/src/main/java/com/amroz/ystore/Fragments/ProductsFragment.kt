@@ -1,4 +1,5 @@
 package com.amroz.ystore.Fragments
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.Featchers
 import com.amroz.ystore.Models.Products
+import com.amroz.ystore.MoreDetails
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
 import com.squareup.picasso.Picasso
@@ -78,14 +80,7 @@ class ProductsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(data: String): ProductsFragment {
-            val args = Bundle().apply {
-                putSerializable("type", data)
-            }
-            return ProductsFragment().apply {
-                arguments = args
-            }
-        }
+        fun newInstance() = ProductsFragment()
     }
 
 
@@ -115,6 +110,12 @@ class ProductsFragment : Fragment() {
 //            }
 
 
+            image.setOnClickListener {
+
+                var intent=Intent(context,MoreDetails::class.java)
+                intent.putExtra("data",products)
+                startActivity(intent)
+            }
 
 
         }

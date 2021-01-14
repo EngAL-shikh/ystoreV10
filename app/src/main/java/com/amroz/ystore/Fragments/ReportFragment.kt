@@ -59,17 +59,10 @@ class ReportFragment : Fragment() {
     }
 
     companion object {
+        fun newInstance() = ReportFragment()
+    }
 
-        fun newInstance(data: String): ReportFragment {
-            val args = Bundle().apply {
-                putSerializable("type", data)
-            }
-            return ReportFragment().apply {
-                arguments = args
-            }
-        }
 
-                }
     // Holder
     private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
 

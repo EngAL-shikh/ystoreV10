@@ -3,6 +3,7 @@ package com.amroz.ystore.Models
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.util.*
+import java.io.Serializable
 
 data class Products(
     @SerializedName("product_id")
@@ -34,6 +35,22 @@ data class Products(
     @SerializedName("cat_id")
     var cat_id:Int=0 ,
     @SerializedName("reports_id")
-    var reports_id:Int=0
-) :Serializable{
+    var reports_id:Int=0,
+    @SerializedName("cat_title")
+    var cat_title:String="",
+    @SerializedName("name")
+    var user_name:String="",
+    @SerializedName("email")
+    var email:String="",
+    @SerializedName("phone")
+    var phone:String="",
+    @SerializedName("address")
+    var adress:String="",
+    @SerializedName("user_image")
+    var user_image:String="",
+    @SerializedName("user_report")
+    var user_report:Int=0,
+    @SerializedName("user_raiting")
+    var user_raiting:Int=0):Serializable {
+
 }

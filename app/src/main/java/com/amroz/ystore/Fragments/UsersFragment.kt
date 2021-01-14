@@ -60,14 +60,7 @@ class UsersFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(data: String): UsersFragment {
-            val args = Bundle().apply {
-                putSerializable("type", data)
-            }
-            return UsersFragment().apply {
-                arguments = args
-            }
-        }
+        fun newInstance() = UsersFragment()
     }
 
     private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view){

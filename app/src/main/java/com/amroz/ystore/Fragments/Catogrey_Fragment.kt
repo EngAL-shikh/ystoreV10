@@ -1,6 +1,5 @@
 package com.amroz.ystore.Fragments
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -71,16 +69,7 @@ class Catogrey_Fragment : Fragment() {
         return view
     }
 
-    companion object {
-        fun newInstance(data: String): Catogrey_Fragment {
-            val args = Bundle().apply {
-                putSerializable("type", data)
-            }
-            return Catogrey_Fragment().apply {
-                arguments = args
-            }
-        }
-    }
+
 
 
     // Cat Holder
@@ -88,6 +77,7 @@ class Catogrey_Fragment : Fragment() {
 
 
         val cattitle = view.findViewById(R.id.title) as TextView
+        val card_cat = view.findViewById(R.id.card_cat) as CardView
 
         val catImage= view.findViewById(R.id.image) as ImageView
 
@@ -108,6 +98,13 @@ class Catogrey_Fragment : Fragment() {
             }
 
 
+
+            card_cat.setOnClickListener {
+
+                var intent= Intent(context,ProductsByCat::class.java)
+                intent.putExtra("cat_id",cat.cat_id)
+                startActivity(intent)
+            }
 
 
         }
@@ -151,6 +148,13 @@ class Catogrey_Fragment : Fragment() {
 
 
         }
+    }
+
+
+
+
+    companion object {
+        fun newInstance() = Catogrey_Fragment()
     }
 
 
