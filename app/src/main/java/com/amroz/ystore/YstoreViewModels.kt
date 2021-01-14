@@ -31,20 +31,20 @@ open class YstoreViewModels: ViewModel() {
 
 
     }
-
-
-
-
+//
+//    var   userLiveData:LiveData<List<Users>> = Transformations.switchMap(LiveDataUsersInfo){id->
+//        Featchers().fetchUsersInfo(id)}
+//
+//    fun loadUsers(id:Int){
+//        LiveDataUsersInfo.value=id
+//    }
 }
 
 
-var   userLiveData:LiveData<List<Users>> = Transformations.switchMap(LiveDataUsersInfo){id->
-    Featchers().fetchUsersInfo(id)}
 
-    fun loadUsers(id:Int){
-        LiveDataUsersInfo.value=id
-    }
-}
+
+
+
 
 
 

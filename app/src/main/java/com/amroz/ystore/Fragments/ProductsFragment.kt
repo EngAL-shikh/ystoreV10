@@ -1,6 +1,7 @@
 package com.amroz.ystore.Fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -112,7 +113,7 @@ class ProductsFragment : Fragment() {
 
             image.setOnClickListener {
 
-                var intent=Intent(context,MoreDetails::class.java)
+                var intent= Intent(context,MoreDetails::class.java)
                 intent.putExtra("data",products)
                 startActivity(intent)
             }

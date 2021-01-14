@@ -2,8 +2,7 @@ package com.amroz.ystore.Models
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-import java.util.*
-import java.io.Serializable
+
 
 data class Products(
     @SerializedName("product_id")

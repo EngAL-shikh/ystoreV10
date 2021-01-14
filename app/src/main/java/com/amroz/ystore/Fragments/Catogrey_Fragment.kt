@@ -101,7 +101,7 @@ class Catogrey_Fragment : Fragment() {
 
             card_cat.setOnClickListener {
 
-                var intent= Intent(context,ProductsByCat::class.java)
+                var intent= Intent(context,ProductByCat::class.java)
                 intent.putExtra("cat_id",cat.cat_id)
                 startActivity(intent)
             }

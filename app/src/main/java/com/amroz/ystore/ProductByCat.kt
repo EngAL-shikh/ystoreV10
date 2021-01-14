@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -34,7 +35,7 @@ class ProductByCat : AppCompatActivity() {
         var productsByCat= Featchers()
         val productLiveData = productsByCat.fetchProductsByCat(cat_id)
         productLiveData.observe(this, Observer {
-            //Log.d("ENS","${it}")
+            Log.d("ENS","${it}")
 
             recyclerView.adapter = ProductByCatAdapter(it)})
         recyclerView= findViewById(R.id.ProByCatRecActivity)
@@ -61,6 +62,7 @@ class ProductByCat : AppCompatActivity() {
             productCardView.setOnClickListener {
                 var intent= Intent(this@ProductByCat,MoreDetails::class.java)
                 intent.putExtra("data",products)
+                startActivity(intent)
             }
 
 
