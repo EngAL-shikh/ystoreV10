@@ -7,4 +7,6 @@
     <string name="title_cats">category</string>
     <string name="title_Reports">Reports</string>
     <string name="title_profile">Profile</string>
+    <string name="title_proByCat">ProductsByCat</string>
+    <string name="title_cart">Cart</string>
 </resources>
