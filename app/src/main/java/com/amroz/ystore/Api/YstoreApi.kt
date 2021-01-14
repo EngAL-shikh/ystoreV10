@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 
 interface YstoreApi {
@@ -24,6 +25,9 @@ interface YstoreApi {
 
     @GET("StoreApi/api/Users_api.php")
     fun fetchUsers(): Call<Response>
+
+    @GET("/StoreApi/api/products_api.php")
+    fun fetchProductsByCat(@Query("cat_id") cat_id: Int): Call<Response>
 
 
 //    @POST

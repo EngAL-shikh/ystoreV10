@@ -8,6 +8,7 @@
         android:layout_width="200dp"
         android:layout_height="300dp"
         android:layout_margin="6dp"
+        android:id="@+id/ProductCard"
         android:elevation="15dp"
         app:cardCornerRadius="15dp">
         <LinearLayout

@@ -1,6 +1,7 @@
 package com.amroz.ystore.Models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 
 data class Products(
@@ -34,5 +35,5 @@ data class Products(
     var cat_id:Int=0 ,
     @SerializedName("reports_id")
     var reports_id:Int=0
-) {
+) :Serializable{
 }

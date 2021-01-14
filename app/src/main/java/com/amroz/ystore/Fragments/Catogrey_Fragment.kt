@@ -1,5 +1,7 @@
 package com.amroz.ystore.Fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,25 +10,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.amroz.ystore.Category
-import com.amroz.ystore.Featchers
-import com.amroz.ystore.R
-import com.amroz.ystore.YstoreViewModels
+import com.amroz.ystore.*
 import com.squareup.picasso.Picasso
 
 
 class Catogrey_Fragment : Fragment() {
+
+
+
+
     private lateinit var catViewModel: ViewModel
     var count:Int=0
 
     private lateinit var RecyclerView: RecyclerView
     var type=""
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         catViewModel =
@@ -84,13 +91,21 @@ class Catogrey_Fragment : Fragment() {
 
         val catImage= view.findViewById(R.id.image) as ImageView
 
+        val cat_card= view.findViewById(R.id.card_cat) as CardView
+
 
 
 
         fun bind(cat: Category) {
 
-            cattitle.text = cat.cat_title.toString()
+            cattitle.text = cat.cat_title
             Picasso.with(context).load(cat.images).into(catImage)
+            cat_card.setOnClickListener {
+
+                var intent = Intent(context,ProductByCat::class.java)
+                intent.putExtra("cat_id",cat.cat_id)
+                startActivity(intent)
+            }
 
 
 
@@ -137,6 +152,8 @@ class Catogrey_Fragment : Fragment() {
 
         }
     }
+
+
 }
 
 

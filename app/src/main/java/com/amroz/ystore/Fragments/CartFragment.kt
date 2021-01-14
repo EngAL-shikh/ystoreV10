@@ -89,7 +89,7 @@ class CartFragment : Fragment() {
             val view =
 
 
-                LayoutInflater.from(parent.context).inflate(R.layout.catogrey_list, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.products_list, parent, false)
 
 
             return CartHolder(view)
