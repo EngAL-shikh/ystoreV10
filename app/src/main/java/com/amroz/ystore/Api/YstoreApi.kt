@@ -26,6 +26,9 @@ interface YstoreApi {
     @GET("StoreApi/api/Users_api.php")
     fun fetchUsers(): Call<Response>
 
+    @GET("/StoreApi/api/products_api.php")
+    fun fetchProductsByCat(@Query("cat_id") cat_id: Int): Call<Response>
+
 
 
 

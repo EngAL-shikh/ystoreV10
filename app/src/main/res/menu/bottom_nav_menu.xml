@@ -20,5 +20,10 @@
     android:icon="@drawable/ic_baseline_view_module_24"
     android:title="@string/title_Reports" />
 
+    <item
+        android:id="@+id/cart_nv"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="@string/title_cart" />
+
 
 </menu>

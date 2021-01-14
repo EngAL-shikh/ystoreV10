@@ -1,6 +1,7 @@
 package com.amroz.ystore.Models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 import java.io.Serializable
 
@@ -50,7 +51,6 @@ data class Products(
     @SerializedName("user_report")
     var user_report:Int=0,
     @SerializedName("user_raiting")
-    var user_raiting:Int=0
+    var user_raiting:Int=0):Serializable {
 
-):Serializable {
 }

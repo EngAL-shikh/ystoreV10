@@ -15,7 +15,6 @@
         <activity android:name=".Dashboard">
         </activity>
         <activity android:name=".MoreDetails"></activity>
-        <activity android:name=".ProductsByCat" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

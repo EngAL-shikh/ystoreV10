@@ -21,7 +21,7 @@ open class YstoreViewModels: ViewModel() {
     var LiveDataProducts: LiveData<List<Products>>
     var LiveDataUsersInfo = MutableLiveData<Int>()
 
-/// init
+
     init {
         liveDataCategory = Featchers().fetchCat()
         liveDataCart = Featchers().fetchCart()
@@ -32,6 +32,12 @@ open class YstoreViewModels: ViewModel() {
 
     }
 
+
+
+
+}
+
+
 var   userLiveData:LiveData<List<Users>> = Transformations.switchMap(LiveDataUsersInfo){id->
     Featchers().fetchUsersInfo(id)}
 
@@ -39,6 +45,7 @@ var   userLiveData:LiveData<List<Users>> = Transformations.switchMap(LiveDataUse
         LiveDataUsersInfo.value=id
     }
 }
+
 
 
 

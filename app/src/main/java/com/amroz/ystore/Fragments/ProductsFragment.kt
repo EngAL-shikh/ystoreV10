@@ -1,5 +1,6 @@
 package com.amroz.ystore.Fragments
-import android.content.Intent
+
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -23,6 +26,13 @@ import com.squareup.picasso.Picasso
 
 
 class ProductsFragment : Fragment() {
+
+//    interface Callbacks {
+//        fun onProductsSelected(catId: Int)
+//    }
+
+//    private var callbacks: Callbacks? = null
+
     private lateinit var productsViewModel: ViewModel
     var count:Int=0
 
@@ -36,6 +46,11 @@ class ProductsFragment : Fragment() {
        // type=arguments?.getSerializable("type")as String
 
     }
+
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        callbacks = context as Callbacks?
+//    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,20 +87,27 @@ class ProductsFragment : Fragment() {
     //  Holder
     private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+        private  lateinit var productsItem:Products
 
         val title = view.findViewById(R.id.title) as TextView
         val deatils = view.findViewById(R.id.deatils) as TextView
         val price = view.findViewById(R.id.price) as TextView
         val Raitings = view.findViewById(R.id.Raitings) as TextView
         val image = view.findViewById(R.id.image) as ImageView
+        val card= view.findViewById(R.id.ProductCard) as CardView
 
 
         fun bind(products: Products) {
-
+            productsItem=products
             title.text = products.title
             deatils.text = products.details
             Raitings.text = products.rating.toString()
             Picasso.with(context).load(products.images).into(image)
+
+//            card.setOnClickListener {
+//                Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show()
+//                callbacks?.onProductsSelected(productsItem.cat_id)
+//            }
 
 
             image.setOnClickListener {
@@ -97,6 +119,8 @@ class ProductsFragment : Fragment() {
 
 
         }
+
+
 
 
     }
@@ -137,6 +161,12 @@ class ProductsFragment : Fragment() {
 
         }
     }
+
+//    override fun onDetach() {
+//        super.onDetach()
+//        callbacks = null
+//    }
+
 }
 
 
