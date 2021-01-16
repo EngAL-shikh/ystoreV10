@@ -4,6 +4,11 @@ package com.amroz.ystore.Api
 import com.amroz.ystore.*
 import retrofit2.Call
 import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
+
 
 
 interface YstoreApi {
@@ -20,11 +25,17 @@ interface YstoreApi {
     @GET("StoreApi/api/products_api.php")
     fun fetchProducts(): Call<Response>
 
-    @GET("StoreApi/api/products_api.php")
+    @GET("StoreApi/api/Users_api.php")
     fun fetchUsers(): Call<Response>
 
-    @POST
-    fun xyz(@Body x:HashMap<String,String>)
+
+
+
+    @GET("/StoreApi/api/products_api.php")
+    fun fetchProductsByCat(@Query("cat_id") cat_id: Int): Call<Response>
+
+    @GET("StoreApi/api/Users_api.php?")
+    fun fetchSingleUsers(@Query("user_id") user_id: Int): Call<Response>
 
 
 }

@@ -2,4 +2,11 @@
     <string name="app_name">YSTORE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_cats">category</string>
+    <string name="title_Reports">Reports</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_proByCat">ProductsByCat</string>
+    <string name="title_cart">Cart</string>
 </resources>
