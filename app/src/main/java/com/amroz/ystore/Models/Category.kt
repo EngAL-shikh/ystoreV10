@@ -5,7 +5,9 @@ import java.util.*
 
 data class Category (
    @SerializedName("cat_id")
-   val cat_id:Int,
+   val cat_id:Int?,
    @SerializedName("cat_title")
-   val cat_title:String
+   val cat_title:String,
+   @SerializedName("images")
+val images:String
 )

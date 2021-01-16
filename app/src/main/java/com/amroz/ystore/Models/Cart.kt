@@ -1,7 +1,7 @@
 package com.amroz.ystore.Models
 
 data class Cart (
-    val cart_id:Int,
-    val user_id:String,
-   val product_id:Int,
- val Quantity:Int)
+    val cart_id:Int?=0,
+    val user_id:Int=0,
+   val product_id:Int=0,
+ val Quantity:Int=0)

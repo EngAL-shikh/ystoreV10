@@ -1,11 +1,13 @@
 
 package com.amroz.ystore.Api
 
+import com.amroz.ystore.Category
+import com.amroz.ystore.CodeRedponse
+import com.amroz.ystore.Models.Cart
+import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Response
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface YstoreApi {
@@ -26,7 +28,5 @@ interface YstoreApi {
     fun fetchUsers(): Call<Response>
 
 
-    @POST
-    fun xyz(@Body x:HashMap<String,String>)
 }
 

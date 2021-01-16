@@ -6,10 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.amroz.ystore.Api.YstoreApi
-import com.amroz.ystore.Models.Cart
-import com.amroz.ystore.Models.Products
-import com.amroz.ystore.Models.Report
-import com.amroz.ystore.Models.Users
+import com.amroz.ystore.Models.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -20,7 +17,7 @@ class Featchers {
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://172.16.16.168/")
+            .baseUrl("http://10.0.1.124/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -54,6 +51,7 @@ class Featchers {
     }
 //category
 fun fetchCat(): LiveData<List<Category>> {
+
     val responseLiveData: MutableLiveData<List<Category>> = MutableLiveData()
     val ystoreRequest: Call<Response> = ystoreApi.fetchCategory()
     ystoreRequest.enqueue(object : Callback<Response> {
@@ -104,7 +102,7 @@ fun fetchCat(): LiveData<List<Category>> {
         val newsRequest: Call<Response> = ystoreApi.fetchCart()
         newsRequest.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>, t: Throwable) {
-                Log.e("TAG", "Failed to fetch News", t)
+                Log.e("TAG", "Failed to fetch Report", t)
             }
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
             ) {
@@ -144,6 +142,8 @@ fun fetchCat(): LiveData<List<Category>> {
         return responseLiveData
 
     }
+
+
 
 }
 

@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .beginTransaction()
 
-              //  .add(R.id.fragmentContainer, ReportFragment.newInstance("report"))
+               //.add(R.id.fragmentContainer, ReportFragment.newInstance("report"))
 
                 .add(R.id.fragmentContainer, Catogrey_Fragment.newInstance("Category"))
 
