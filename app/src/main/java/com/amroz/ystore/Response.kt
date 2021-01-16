@@ -24,6 +24,7 @@ data class Response (
     @SerializedName("getSingleUser")
     var singleUsers: List<Users>
 
+
 ){
 
 
