@@ -23,7 +23,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/report_id"
+                android:id="@+id/user_id"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:text="1"
@@ -35,7 +35,7 @@
 
             </TextView>
             <TextView
-                android:id="@+id/prouct_name"
+                android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_weight="4"
                 android:text="Omar ali yhia alshikh"
@@ -45,12 +45,24 @@
                 android:layout_height="match_parent">
 
             </TextView>
-
             <TextView
-                android:id="@+id/reason"
+                android:id="@+id/active"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:text="reason"
+                android:text="Active"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:layout_height="match_parent">
+
+            </TextView>
+            <TextView
+                android:id="@+id/disactive"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:text="Disactive"
+                android:textColor="@color/red"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="15sp"
