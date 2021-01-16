@@ -7,5 +7,5 @@ data class Category (
    @SerializedName("cat_id")
    val cat_id:Int,
    @SerializedName("cat_title")
-   val cat_title:String
+   var cat_title:String=""
 )

@@ -43,8 +43,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     tools:ignore="NestedWeights">
+ </TextView>
 
-                </TextView>
                 <TextView
                     android:id="@+id/sub_cat_title"
                     android:layout_width="match_parent"
@@ -52,8 +52,13 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:text="fatma"
                     android:layout_weight="1">
-
                 </TextView>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/update"
+                    android:text="update"></Button>
+
 
             </LinearLayout>
         </LinearLayout>
