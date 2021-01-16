@@ -20,7 +20,7 @@ class Featchers {
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://172.16.16.168/")
+            .baseUrl("http://192.168.1.7:81/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -144,6 +144,8 @@ fun fetchCat(): LiveData<List<Category>> {
         return responseLiveData
 
     }
+
+
 
 }
 

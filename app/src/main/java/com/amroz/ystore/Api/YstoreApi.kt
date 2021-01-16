@@ -1,11 +1,9 @@
 
 package com.amroz.ystore.Api
 
-import com.amroz.ystore.Response
+import com.amroz.ystore.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface YstoreApi {
@@ -25,8 +23,9 @@ interface YstoreApi {
     @GET("StoreApi/api/products_api.php")
     fun fetchUsers(): Call<Response>
 
-
     @POST
     fun xyz(@Body x:HashMap<String,String>)
+
+
 }
 

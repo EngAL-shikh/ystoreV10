@@ -6,6 +6,7 @@ import android.os.Bundle
 //import com.amroz.ystore.Fragments.ReportFragment
 
 import com.amroz.ystore.Fragments.Catogrey_Fragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,22 +25,4 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //
-}
+    }
