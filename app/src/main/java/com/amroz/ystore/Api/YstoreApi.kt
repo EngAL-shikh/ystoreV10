@@ -1,7 +1,10 @@
 
 package com.amroz.ystore.Api
 
+
 import com.amroz.ystore.*
+import com.amroz.ystore.CodeResponse
+import com.amroz.ystore.Response
 import retrofit2.Call
 import retrofit2.http.*
 import retrofit2.http.Body

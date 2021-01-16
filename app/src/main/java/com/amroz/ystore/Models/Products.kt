@@ -12,15 +12,9 @@ data class Products(
     @SerializedName("details")
     var details: String="",
     @SerializedName("images")
-
     var images:String="",
-
     @SerializedName("color")
     var color:String="",
-    @SerializedName("order_date")
-    var order_date:String,
-    @SerializedName("date")
-    var date:String="",
     @SerializedName("product_features")
     var product_features:String="" ,
     @SerializedName("rating")
