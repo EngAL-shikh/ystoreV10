@@ -14,14 +14,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-class Featchers {
+open class Featchers {
 
     private val ystoreApi: YstoreApi
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.1.7:81/")
 
-            .baseUrl("http://192.168.1.2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -165,17 +165,6 @@ fun fetchCat(): LiveData<List<Category>> {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
     //get userinfo
     fun fetchUsersInfo(id:Int): LiveData<List<Users>> {
         val responseLiveData: MutableLiveData<List<Users>> = MutableLiveData()
@@ -201,5 +190,6 @@ fun fetchCat(): LiveData<List<Category>> {
 
 
 }
+
 
 

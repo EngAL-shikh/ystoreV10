@@ -17,6 +17,7 @@ data class Response (
     var carts: List<Cart>,
     @SerializedName("getAllProducts")
     var products: List<Products>,
+
     @SerializedName("getAllUsers")
     var users: List<Users>,
     @SerializedName("getSingleProductByCat")
@@ -24,7 +25,7 @@ data class Response (
     @SerializedName("getSingleUser")
     var singleUsers: List<Users>
 
+
 ){
 
 
-}
