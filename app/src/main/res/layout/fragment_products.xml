@@ -13,7 +13,8 @@
         android:clipToPadding="false"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="3dp"
-        android:visibility="gone"
+        android:layout_margin="15dp"
+        android:visibility="visible"
         app:cardElevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,17 +58,15 @@
     </androidx.cardview.widget.CardView>
 
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/products_rec"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="664dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar">
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
+        app:layout_constraintVertical_bias="0.47000003">
 
     </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

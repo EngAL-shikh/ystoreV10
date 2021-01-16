@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
 
 
         var products = Featchers()
-        val newsLiveData=products.fetchProducts()
+        val newsLiveData=products.fetchProductsByCat(1)
         newsLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             RecyclerView.adapter = ProductAdapter(it)

@@ -14,16 +14,38 @@ class MoreDetails : AppCompatActivity() {
         var title:TextView=findViewById(R.id.title)
         var details:TextView=findViewById(R.id.deatils)
         var image:ImageView=findViewById(R.id.image)
+        var image2:ImageView=findViewById(R.id.image_2)
+        var image3:ImageView=findViewById(R.id.image_3)
+        var image4:ImageView=findViewById(R.id.image_4)
+        var image5:ImageView=findViewById(R.id.image_5)
 
         var products=intent.getSerializableExtra("data") as Products
 
 
         title.text=products.title
         details.text=products.details
-        Picasso.with(this).load(products.images).into(image)
+
+
+
+      var images=  products.images.split(",").toTypedArray()
+
+       var image1= images[0]
+       var image22= images[1]
+
+
+        Picasso.with(this).load(image1).into(image)
+        Picasso.with(this).load(image22).into(image2)
+        Picasso.with(this).load(images[2]).into(image3)
+        Picasso.with(this).load(images[3]).into(image4)
+        Picasso.with(this).load(images[4]).into(image5)
 
 
 
 
     }
+
+
+
+
+
 }

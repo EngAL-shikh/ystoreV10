@@ -10,15 +10,17 @@
         android:id="@+id/cats_nv"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_cats" />
+
+    <item
+        android:id="@+id/report_nv"
+        android:icon="@drawable/ic_baseline_add_box_24"
+        android:title="@string/title_Reports" />
     <item
         android:id="@+id/profile_nv"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/title_profile" />
 
-    <item
-    android:id="@+id/report_nv"
-    android:icon="@drawable/ic_baseline_view_module_24"
-    android:title="@string/title_Reports" />
+
 
     <item
         android:id="@+id/cart_nv"

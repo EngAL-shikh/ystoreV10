@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -55,7 +56,9 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
-
+    implementation 'com.github.scottyab:showhidepasswordedittext:0.8'
+    implementation 'com.github.gayanvoice:android-animations-kotlin:1.0.1'
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
 
 
 

@@ -99,11 +99,12 @@ class ProductsFragment : Fragment() {
 
 
         fun bind(products: Products) {
+            var images=  products.images.split(",").toTypedArray()
             productsItem=products
             title.text = products.title
             deatils.text = products.details
             Raitings.text = products.rating.toString()
-            Picasso.with(context).load(products.images).into(image)
+            Picasso.with(context).load(images[0]).into(image)
 
 //            card.setOnClickListener {
 //                Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show()
