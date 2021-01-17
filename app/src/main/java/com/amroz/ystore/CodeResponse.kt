@@ -6,4 +6,6 @@ data class CodeResponse(
     @SerializedName("code") var code:String,
     @SerializedName("messege") var result:String
 
+//
+
 )
