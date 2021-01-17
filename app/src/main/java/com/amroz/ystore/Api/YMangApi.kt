@@ -1,20 +1,78 @@
 package com.amroz.ystore.Api
 
-import com.amroz.ystore.CodeRedponse
-import com.amroz.ystore.Models.Cart
-import com.amroz.ystore.Models.Products
+import com.amroz.ystore.CodeResponse
 import retrofit2.Call
-import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface YaddApi {
+interface YMangApi {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /////////add///////////////////////////////////////
     @FormUrlEncoded
     @POST("StoreApi/api/cat_api.php")
     fun addCategory(@Field("cat_title") cat_title:String,
-                    @Field("images") images:String): Call<CodeRedponse>
+                    @Field("images") images:String): Call<CodeResponse>
     @FormUrlEncoded
     @POST("StoreApi/api/products_api.php")
     fun addProduct( @Field("title") title: String,
@@ -29,11 +87,11 @@ interface YaddApi {
                      @Field("cat_d") cat_d: Int,
                     @Field("report_id") report_id: Int,
                     @Field("order_date") order_date: String,
-                    @Field("date")date: String    ): Call<CodeRedponse>
+                    @Field("date")date: String    ): Call<CodeResponse>
     @FormUrlEncoded
     @POST("StoreApi/api/cart_api.php")
     fun addCart(@Field("user_id:") user_id:Int,
                 @Field("product_id") product_id:Int,
                 @Field("Quantity") Quantity:Int
-    ): Call<CodeRedponse>
+    ): Call<CodeResponse>
 }

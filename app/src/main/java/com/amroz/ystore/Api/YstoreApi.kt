@@ -1,10 +1,6 @@
 
 package com.amroz.ystore.Api
 
-import com.amroz.ystore.Category
-import com.amroz.ystore.CodeRedponse
-import com.amroz.ystore.Models.Cart
-import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Response
 import retrofit2.Call
 import retrofit2.http.*
