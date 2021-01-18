@@ -17,15 +17,21 @@ data class Response (
     var carts: List<Cart>,
     @SerializedName("getAllProducts")
     var products: List<Products>,
-
     @SerializedName("getAllUsers")
     var users: List<Users>,
     @SerializedName("getSingleProductByCat")
     var productByCat: List<Products>,
     @SerializedName("getSingleUser")
-    var singleUsers: List<Users>
+    var singleUsers: List<Users>,
+    @SerializedName("code")
+    var code:String,
+    @SerializedName("messege")
+    var result:String
 
 
 ){
+
+
+}
 
 

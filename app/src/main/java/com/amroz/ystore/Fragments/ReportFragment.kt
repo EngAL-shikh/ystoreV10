@@ -1,5 +1,6 @@
 package com.amroz.ystore.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amroz.ystore.AddProductActivity
 import com.amroz.ystore.Featchers
 
 import com.amroz.ystore.Models.Report
@@ -33,6 +35,9 @@ class ReportFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+
+        var intent= Intent(context,AddProductActivity::class.java)
+        startActivity(intent)
 
 
             var report = Featchers()
@@ -104,6 +109,8 @@ class ReportFragment : Fragment() {
             return UsersHolder(view)
 
         }
+
+
 
 
         override fun getItemCount(): Int {

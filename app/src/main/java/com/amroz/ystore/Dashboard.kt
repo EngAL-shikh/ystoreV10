@@ -23,7 +23,7 @@ var  card_products:CardView=findViewById(R.id.card_products)
 var  card_reports:CardView=findViewById(R.id.card_reports)
 var  contact:CardView=findViewById(R.id.conactDashboard)
 
-
+        var admin=intent.extras?.getString("admin")
         cat.setOnClickListener {
 
             contact.visibility=View.GONE
@@ -31,7 +31,7 @@ var  contact:CardView=findViewById(R.id.conactDashboard)
             if (isFragmentContainerEmpty) {
                 supportFragmentManager
                     .beginTransaction()
-                    .add(R.id.container, Catogrey_Fragment.newInstance())
+                    .add(R.id.container, Catogrey_Fragment.newInstance("admin"))
                     .commit()
             }
 

@@ -4,7 +4,6 @@ package com.amroz.ystore
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.amroz.ystore.Models.Cart
 import com.amroz.ystore.Models.Products
@@ -13,16 +12,17 @@ import com.amroz.ystore.Models.Users
 class YstoreViewModels: ViewModel() {
     /////////////////////////////////Update Category
     fun updateCategory(catId:Int,category: String):
-            MutableLiveData<CodeResponse> {
+            MutableLiveData<Response> {
         return  ManagementFeatchers().updateCategory(catId,category)
     }
     fun updateProfile(id:Int,
                       name: String,
+                      email:String,
                       phone:String,
                       address:String):
-            MutableLiveData<CodeResponse> {
+            MutableLiveData<Response> {
         return  ManagementFeatchers().
-        updateProfile(id,name,phone,address)
+        updateProfile(id,name,email,phone,address)
     }
     /////////////////////////////////Update Product
     fun updateProduct(product_id:Int,
@@ -33,7 +33,7 @@ class YstoreViewModels: ViewModel() {
                       price_y:Int,
                       price_d:Int
     ):
-            MutableLiveData<CodeResponse> {
+            MutableLiveData<Response> {
          return ManagementFeatchers().
         updateProduct(
             product_id,
@@ -45,7 +45,7 @@ class YstoreViewModels: ViewModel() {
             price_d)
     }
     /////////////////////UpdateCart
-    fun updateCart(id:Int, quntity: String): MutableLiveData<CodeResponse> {
+    fun updateCart(id:Int, quntity: String): MutableLiveData<Response> {
         return ManagementFeatchers().updateCart(id,quntity)
     }
 /////////////////////////////////////////
@@ -68,11 +68,24 @@ class YstoreViewModels: ViewModel() {
 
     }
 
+    /////////////////////Rug////////////////////////////////////////////////////////////////////////////////////////////////
 
+    fun addCategory(cat_title:String,images:String) : MutableLiveData<Response> {
+        return AddFeacher().addCategory(cat_title,images)
+    }
+    fun addProduct(title:String,details:String,images:String,color:String,product_features:String,rating:Int,
+                   price_y:Int,price_d:Int,user_id: Int,cat_id:Int,report_id:Int, order_data:String, data:String): MutableLiveData<Response>
+    {
+        return AddFeacher().addproduct(title,details,images,color,product_features,rating,
+            price_y,price_d,user_id,cat_id,report_id, order_data, data)
+    }
+    fun addCart(user_id:Int,product_id:Int,Quantity:Int):MutableLiveData<Response> {
+        return AddFeacher().addCart(user_id,product_id,Quantity)
+    }
 }
 
 
-    }
+
 //
 //    var   userLiveData:LiveData<List<Users>> = Transformations.switchMap(LiveDataUsersInfo){id->
 //        Featchers().fetchUsersInfo(id)}
@@ -80,7 +93,6 @@ class YstoreViewModels: ViewModel() {
 //    fun loadUsers(id:Int){
 //        LiveDataUsersInfo.value=id
 //    }
-}
 
 
 

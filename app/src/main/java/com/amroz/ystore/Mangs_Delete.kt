@@ -26,7 +26,7 @@ butrep.setOnClickListener {
         }
 
         butpro.setOnClickListener {
-            delet_project()
+            delet_product()
         }
 
         butuser.setOnClickListener {
@@ -49,7 +49,7 @@ butrep.setOnClickListener {
         // add the buttons
         builder.setPositiveButton("Continue"){_,_->
             var del_cat = ManagementFeatchers()
-            del_cat.deleteCategory(2)
+            del_cat.deleteCategory(1)
         }
         builder.setNegativeButton("Cancel") { _, _ ->
 
@@ -60,7 +60,7 @@ butrep.setOnClickListener {
 
     }
 
-    fun delet_project() {
+    fun delet_product() {
 
         val builder = AlertDialog.Builder(this)
         //  builder.setTitle("AlertDialog")
@@ -71,7 +71,7 @@ butrep.setOnClickListener {
         // add the buttons
         builder.setPositiveButton("Continue"){_,_->
             var del_cat = ManagementFeatchers()
-            del_cat.deleteProduct(10)
+            del_cat.deleteProduct(3)
         }
         builder.setNegativeButton("Cancel") { _, _ ->
 

@@ -29,29 +29,19 @@
                 android:layout_width="20dp"
                 android:layout_height="0dp" />
 
-            <EditText
-                android:id="@+id/et_search"
+            <SearchView
+                android:id="@+id/searchfromT"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="Search or type URL"
-                android:imeOptions="actionSearch"
-                android:maxLines="1"
-                android:singleLine="true">
+                android:iconifiedByDefault="false"
+                android:queryHint="بحث..."></SearchView>
 
                 <requestFocus />
 
-            </EditText>
 
-            <ImageButton
-                android:id="@+id/bt_mic"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:tint="@color/grey_60"
-                app:srcCompat="@drawable/ic_phone" />
+
+
 
         </LinearLayout>
 
@@ -61,7 +51,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/products_rec"
         android:layout_width="match_parent"
-        android:layout_height="664dp"
+        android:layout_height="650dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

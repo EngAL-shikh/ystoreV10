@@ -1,26 +1,14 @@
 package com.amroz.ystore
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.FrameLayout
-import androidx.core.view.get
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-
-import com.amroz.ystore.Fragments.ProductsFragment
-
 //import com.amroz.ystore.Fragments.ReportFragment
-
-
-import com.amroz.ystore.Fragments.Catogrey_Fragment
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,17 +17,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
+
 
         // val appBarConfiguration = AppBarConfiguration(setOf(
         //    R.id.products_nv, R.id.cats_nv, R.id.report_nv))
         //  setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
+        var admin=intent.extras?.getString("admin")
 
-    }
+        if (admin==1.toString()){
+
+            var intent = Intent(this,Dashboard::class.java)
+            intent.putExtra("admin",admin)
+            startActivity(intent)
+        }else{
+
+
+        }
+   }
 }
 
 

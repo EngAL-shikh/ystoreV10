@@ -1,3 +1,4 @@
+
 package com.amroz.ystore.Fragments
 
 import android.content.Intent
@@ -8,35 +9,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.amroz.ystore.Category
-import com.amroz.ystore.Featchers
-import com.amroz.ystore.R
-import com.amroz.ystore.YstoreViewModels
-import kotlinx.android.synthetic.main.fragment_update_category.view.*
-class Catogrey_Fragment : Fragment() {
-    private lateinit var catViewModel: YstoreViewModels
 import com.amroz.ystore.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_update_category.view.*
 
 
 class Catogrey_Fragment : Fragment() {
 
 
+ var admin =""
 
-
-    private lateinit var catViewModel: ViewModel
+    private lateinit var catViewModel: YstoreViewModels
 
     var count:Int=0
 
@@ -49,7 +42,7 @@ class Catogrey_Fragment : Fragment() {
         catViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
 
-      //  type=arguments?.getSerializable("type")as String
+      //  admin=arguments?.getSerializable("type")as String
 
     }
 
@@ -59,90 +52,43 @@ class Catogrey_Fragment : Fragment() {
 
 
 
-            var user = Featchers()
-            val LiveData = user.fetchCat()
-            LiveData.observe(this, Observer {
-                Log.d("test", "Response received: ${it}")
-                RecyclerView.adapter = CatAdapter(it)
+        var user = Featchers()
+        val LiveData = user.fetchCat()
+        LiveData.observe(this, Observer {
+            Log.d("test", "Response received: ${it}")
+            RecyclerView.adapter = CatAdapter(it)
 
-            })
+        })
 
-        }
 
 
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_catogrey, container, false)
 
         RecyclerView = view.findViewById(R.id.rec)
-        RecyclerView.layoutManager = LinearLayoutManager(context)
-        return view
-    }
+        val addcat= view.findViewById(R.id.add_cat) as FloatingActionButton
+        RecyclerView.layoutManager = GridLayoutManager(context,2)
 
 
+        if (admin=="admin"){
 
-
-
-    // News Holder
-    private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-
-        val cattitle = view.findViewById(R.id.cattitle) as TextView
-        val sub_cat_title = view.findViewById(R.id.sub_cat_title) as TextView
-        /////////////////////////////////////////////////////UpdateCatDialog/////////////////////////
-        val button = view.findViewById(R.id.update) as Button
-        fun categoryDialogUpdate(cat: Category){
-            val alertBuilder = AlertDialog.Builder(requireContext())
-            val view = layoutInflater.inflate(R.layout.fragment_update_category, null)
-            alertBuilder.setView(view)
-            val alertDialog = alertBuilder.create()
-            alertDialog.show()
-           view.ed_update_category.setText(cat.cat_title)
-            view.btn_update.setOnClickListener {
-                 var updateEditText =view.ed_update_category.text.toString()
-                if(updateEditText.isNotEmpty()) {
-                    Log.d("hajar",updateEditText )
-                    val response = catViewModel.updateCategory(
-                        cat.cat_id,
-                        view.ed_update_category.text.toString()
-                    )
-                 response.observe(
-                        viewLifecycleOwner,
-                        Observer { message ->
-
-                            Toast.makeText(requireContext(), "updated", Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                    alertDialog.dismiss()
-                }else{
-                    view.ed_update_category.setBackgroundResource(R.drawable.erorrshape)
-                    Toast.makeText(requireContext(), " one filed empty filed require", Toast.LENGTH_SHORT).show()
-                }
-            }
-            view.btn_cancel.setOnClickListener {
-                alertDialog.dismiss()
-            }
-///////////////////////////////////////////////////////////////////////////////////////////////////
+            addcat.visibility=View.VISIBLE
         }
 
-        fun bind(cat: Category) {
+        addcat.setOnClickListener {
 
-            cattitle.text = cat.cat_id.toString()
-            sub_cat_title.text = cat.cat_title
-            button.setOnClickListener {
-                categoryDialogUpdate(cat)
-            }
-
-        RecyclerView.layoutManager = GridLayoutManager(context,2)
+            var intent=Intent(context,AddCategoryActivity::class.java)
+            startActivity(intent)
+        }
         return view
     }
+
 
 
 
@@ -153,10 +99,9 @@ class Catogrey_Fragment : Fragment() {
 
         val cattitle = view.findViewById(R.id.title) as TextView
         val card_cat = view.findViewById(R.id.card_cat) as CardView
-
         val catImage= view.findViewById(R.id.image) as ImageView
-
         val cat_card= view.findViewById(R.id.card_cat) as CardView
+        val update= view.findViewById(R.id.update) as Button
 
 
 
@@ -174,13 +119,18 @@ class Catogrey_Fragment : Fragment() {
 
 
 
+            update.setOnClickListener {
+
+
+                categoryDialogUpdate(cat)
+            }
+
             card_cat.setOnClickListener {
 
                 var intent= Intent(context,ProductByCat::class.java)
                 intent.putExtra("cat_id",cat.cat_id)
                 startActivity(intent)
             }
-
 
 
         }
@@ -195,6 +145,8 @@ class Catogrey_Fragment : Fragment() {
             parent: ViewGroup,
             viewType: Int
         ): RecyclerView.ViewHolder {
+
+
             var view: View = layoutInflater.inflate(
                 R.layout.catogrey_list,
                 parent, false
@@ -206,10 +158,14 @@ class Catogrey_Fragment : Fragment() {
 
 
         override fun getItemCount(): Int {
+
             count=news.size
+
             return news.size
 
         }
+
+
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
             val news = news[position]
@@ -221,10 +177,51 @@ class Catogrey_Fragment : Fragment() {
     }
 
 
+    fun categoryDialogUpdate(cat: Category){
+        val alertBuilder = AlertDialog.Builder(requireContext())
+        val view = layoutInflater.inflate(R.layout.fragment_update_category, null)
+        alertBuilder.setView(view)
+        val alertDialog = alertBuilder.create()
+        alertDialog.show()
+        view.ed_update_category.setText(cat.cat_title)
+        view.btn_update.setOnClickListener {
+            var updateEditText =view.ed_update_category.text.toString()
+            if(updateEditText.isNotEmpty()) {
+                Log.d("hajar",updateEditText )
+                val response = catViewModel.updateCategory(
+                    cat.cat_id,
+                    view.ed_update_category.text.toString()
+                )
+                response.observe(
+                    viewLifecycleOwner,
+                    Observer { message ->
+
+                        Toast.makeText(requireContext(), "updated", Toast.LENGTH_SHORT).show()
+                    }
+                )
+                alertDialog.dismiss()
+            }else{
+                view.ed_update_category.setBackgroundResource(R.drawable.erorrshape)
+                Toast.makeText(requireContext(), " one filed empty filed require", Toast.LENGTH_SHORT).show()
+            }
+        }
+        view.btn_cancle.setOnClickListener {
+            alertDialog.dismiss()
+        }
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    companion object {
-        fun newInstance() = Catogrey_Fragment()
+    }
+
+    companion object{
+        fun newInstance(data: String):Catogrey_Fragment{
+            val args=Bundle().apply {
+                putSerializable("name", data)
+            }
+            return  Catogrey_Fragment().apply {
+                arguments=args
+            }
+        }
     }
 
 

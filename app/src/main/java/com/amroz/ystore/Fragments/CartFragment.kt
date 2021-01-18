@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.Featchers
@@ -54,7 +55,7 @@ class CartFragment : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_cart, container, false)
         cartRecyclerView= view.findViewById(R.id.cart_recycler_view)
-        cartRecyclerView.layoutManager= LinearLayoutManager(context)
+        cartRecyclerView.layoutManager= GridLayoutManager(context,2)
         return view
     }
 

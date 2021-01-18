@@ -3,6 +3,7 @@ package com.amroz.ystore
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         var loginbyphone:ImageView=findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
+        var username:EditText=findViewById(R.id.username)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
         var linearLoginbyemail:LinearLayout=findViewById(R.id.linear_login_by_email)
         var linearLoginbyphone:LinearLayout=findViewById(R.id.linear_login_by_phone)
@@ -27,6 +29,12 @@ class LoginActivity : AppCompatActivity() {
 
 // Set Animation
 
+        login.setOnClickListener {
+
+            var intent = Intent(this,MainActivity::class.java)
+            intent.putExtra("admin",username.text.toString())
+            startActivity(intent)
+        }
 
         loginbyphone.setOnClickListener {
             linearLoginbyphone.visibility=View.VISIBLE
@@ -52,8 +60,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        var intent = Intent(this,MainActivity::class.java)
-        startActivity(intent)
 
 
     }

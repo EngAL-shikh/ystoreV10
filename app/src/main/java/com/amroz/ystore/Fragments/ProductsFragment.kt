@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -24,10 +25,13 @@ import com.amroz.ystore.MoreDetails
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_catogrey.*
+import kotlinx.android.synthetic.main.fragment_products.*
 
 
 class ProductsFragment : Fragment() {
-
+    var searchlist=ArrayList<Products>()
+    var posts=ArrayList<Products>()
 //    interface Callbacks {
 //        fun onProductsSelected(catId: Int)
 //    }
@@ -54,17 +58,65 @@ class ProductsFragment : Fragment() {
 //    }
 
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        var search= view.findViewById(R.id.searchfromT) as SearchView
 
             var products = Featchers()
             val newsLiveData=products.fetchProducts()
             newsLiveData.observe(this, Observer {
                 Log.d("test", "Response received: ${it}")
                 RecyclerView.adapter = productsAdapter(it)
+                search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextChange(txtsearch: String?): Boolean {
+
+                        searchlist.clear()
+                        for (i in it){
+
+                            if (i.title.contains(txtsearch.toString())){
+                                searchlist.add(i)
+                            }
+
+                        }
+                        RecyclerView.layoutManager=GridLayoutManager(context,2)
+                        RecyclerView.adapter = productsAdapter(searchlist)
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        return true
+
+                    }
+
+
+                    override fun onQueryTextSubmit(p0: String?): Boolean {
+
+
+
+
+
+
+                        return true
+                    }
+                })
 
             })
+
+
+
+
+
 
     }
 

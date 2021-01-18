@@ -1,25 +1,30 @@
 package com.amroz.ystore.Fragments
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.amroz.ystore.Featchers
+import com.amroz.ystore.*
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Models.Users
-import com.amroz.ystore.R
-import com.amroz.ystore.YstoreViewModels
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.catogrey_list.*
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.profile_list.*
 
 
 class ProfileFragment : Fragment() {
@@ -27,7 +32,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var usersViewModel: ViewModel
     var count:Int=0
-
+    private var adapter: ProductAdapter? = ProductAdapter(emptyList())
     private lateinit var RecyclerView: RecyclerView
     private lateinit var ProRecyclerView: RecyclerView
     var type=""
@@ -46,7 +51,7 @@ class ProfileFragment : Fragment() {
 
 
         var products = Featchers()
-        val newsLiveData=products.fetchProductsByCat(1)
+        val newsLiveData=products.fetchProductsByCat(2)
         newsLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             RecyclerView.adapter = ProductAdapter(it)
@@ -54,7 +59,7 @@ class ProfileFragment : Fragment() {
         })
 
 
-        val usersLiveData=products.fetchUsersInfo(2)
+        val usersLiveData=products.fetchUsersInfo(3)
         usersLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             ProRecyclerView.adapter = ProfileAdapter(it)
@@ -74,7 +79,7 @@ class ProfileFragment : Fragment() {
 
         RecyclerView = view.findViewById(R.id.profile_rec)
         ProRecyclerView = view.findViewById(R.id.profile_rec)
-        RecyclerView.layoutManager = GridLayoutManager(context,2)
+        RecyclerView.layoutManager = GridLayoutManager(context,1)
         ProRecyclerView = view.findViewById(R.id.product_rec)
         ProRecyclerView.layoutManager = GridLayoutManager(context,1)
         return view
@@ -95,6 +100,8 @@ class ProfileFragment : Fragment() {
         val user_raiting = view.findViewById(R.id.user_raiting) as ImageButton
         val address = view.findViewById(R.id.address) as TextView
         val iamge = view.findViewById(R.id.image) as ImageView
+        val edite = view.findViewById(R.id.bt_edite) as ImageView
+        val dashboard = view.findViewById(R.id.dashbourd) as LinearLayout
 
 
         fun bind(users: Users) {
@@ -108,6 +115,17 @@ class ProfileFragment : Fragment() {
             Picasso.with(context).load(users.user_image).into(iamge)
 
 
+            edite.setOnClickListener {
+
+                var intent=Intent(context,UpdateProfile::class.java)
+                intent.putExtra("data",users)
+                startActivity(intent)
+            }
+
+            dashboard.setOnClickListener {
+                var intent=Intent(context,Dashboard::class.java)
+                startActivity(intent)
+            }
 
 
         }
@@ -160,23 +178,46 @@ class ProfileFragment : Fragment() {
 
 
         val title = view.findViewById(R.id.title) as TextView
-        val deatils = view.findViewById(R.id.deatils) as TextView
+        val deatils = view.findViewById(R.id.details) as TextView
         val price = view.findViewById(R.id.price) as TextView
-        val Raitings = view.findViewById(R.id.Raitings) as TextView
+      //  val Raitings = view.findViewById(R.id.Raitings) as TextView
         val image = view.findViewById(R.id.image) as ImageView
+        val card_my_product = view.findViewById(R.id.card_my_product) as CardView
+        val delete = view.findViewById(R.id.delete) as Button
 
 
 
         fun bind2(products: Products){
 
-
+            var images=  products.images.split(",").toTypedArray()
             title.text = products.title
             deatils.text = products.details
-            Raitings.text = products.rating.toString()
-            Picasso.with(context).load(products.images).into(image)
+           // Raitings.text = products.rating.toString()
+            price.text="$"+products.price_d.toString()
+
+            Picasso.with(context).load(images[0]).into(image)
+
+
+
+
+
+            card_my_product.setOnClickListener {
+
+              //  delet_product(products.product_id)
+                var intent=Intent(context,UpdateProduct::class.java)
+                    intent.putExtra("data",products)
+                    startActivity(intent)
+                    onCreateAnimation(3000,true,R.anim.nav_default_pop_exit_anim)
+
+
+
+            }
 
 
         }
+
+
+
 
     }
 
@@ -195,7 +236,7 @@ class ProfileFragment : Fragment() {
 
 
                     val view = layoutInflater.inflate(
-                        R.layout.products_list,
+                        R.layout.myproduct_list,
                         parent, false
                     )
 
@@ -227,6 +268,7 @@ class ProfileFragment : Fragment() {
 
 
 
+
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
@@ -235,6 +277,11 @@ class ProfileFragment : Fragment() {
             if (holder is ProductHolder){
                 holder.bind2(products)
 
+                holder.delete.setOnClickListener {
+                    delet_product(products.product_id)
+                    notifyDataSetChanged()
+                    notifyItemChanged(products.product_id)
+                }
 
 
 
@@ -245,8 +292,42 @@ class ProfileFragment : Fragment() {
 
 
 
-}
+
+
 }
 
-    //adapter 2
+    fun delet_product(id:Int) {
+
+        val builder = AlertDialog.Builder(context)
+        //  builder.setTitle("AlertDialog")
+        builder.setMessage("Are you sure ")
+
+        // add the buttons
+
+        // add the buttons
+        builder.setPositiveButton("Continue"){_,_->
+            var del_cat = ManagementFeatchers()
+            del_cat.deleteProduct(id)
+
+
+
+        }
+        builder.setNegativeButton("Cancel") { _, _ ->
+
+        }
+        val dialog = builder.create()
+        dialog.show()
+
+
+
+    }
+//    fun updateUI(product: Products) {
+//
+//        adapter = ProductAdapter(product)
+//        product_rec.adapter = adapter
+//    }
+
+}
+
+
 

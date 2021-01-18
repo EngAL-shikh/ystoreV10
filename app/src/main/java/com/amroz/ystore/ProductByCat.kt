@@ -53,11 +53,11 @@ class ProductByCat : AppCompatActivity() {
 
 
         fun bind(products: Products) {
-
+            var images=  products.images.split(",").toTypedArray()
             title.text = products.title
             deatils.text = products.details
             Raitings.text = products.rating.toString()
-            Picasso.with(this@ProductByCat).load(products.images).into(image)
+            Picasso.with(this@ProductByCat).load(images[0]).into(image)
 
             productCardView.setOnClickListener {
                 var intent= Intent(this@ProductByCat,MoreDetails::class.java)
