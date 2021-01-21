@@ -155,6 +155,17 @@ interface YstoreApi {
     fun login(@Field("name") email:String, @Field("password")password:String) : Call<Users>
 
 
+    @FormUrlEncoded
+    @POST("StoreApi/api/users_api.php")
+    fun addUser( @Field("name") name: String,
+                    @Field("email") email: String,
+                    @Field("password") password: String,
+                    @Field("chat_id") chat_id: String,
+                    @Field("phone") phone: String,
+                    @Field("address") address: String
+    ): Call<Response>
+
+
 
 
 }
