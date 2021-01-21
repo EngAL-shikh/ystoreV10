@@ -18,7 +18,9 @@ class ManagementFeatchers {
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
+
             .baseUrl("http://192.168.137.1/")
+
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

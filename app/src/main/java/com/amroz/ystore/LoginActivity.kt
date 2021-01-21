@@ -24,8 +24,20 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
+
+import com.amroz.ystore.Models.Users
+import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
+
 import render.animations.Bounce
 import render.animations.Render
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var signup:TextView
@@ -41,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
         var loginbyphone:ImageView=findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
         var username:EditText=findViewById(R.id.username)
+        var password: ShowHidePasswordEditText = findViewById(R.id.password)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
         var linearLoginbyemail:LinearLayout=findViewById(R.id.linear_login_by_email)
         var linearLoginbyphone:LinearLayout=findViewById(R.id.linear_login_by_phone)
@@ -58,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
 
 // Set Animation
 
+
 //        login.setOnClickListener {
 //
 ////            var intent = Intent(this,MainActivity::class.java)
@@ -66,6 +80,28 @@ class LoginActivity : AppCompatActivity() {
 //
 //
 //        }
+
+        login.setOnClickListener {
+
+            var fetch=Featchers()
+            var call: Call<Users> = fetch.ystoreApi.login(username.text.toString(),password.text.toString())
+            call.enqueue(object : Callback<Users>{
+                override fun onFailure(call: Call<Users>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity,"User Not found",Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(call: Call<Users>, response: Response<Users>) {
+                    if (response.isSuccessful){
+                        Log.d("cxz","${response}")
+                        var intent = Intent(this@LoginActivity,MainActivity::class.java)
+                        intent.putExtra("admin",username.text.toString())
+                        startActivity(intent)
+                    }
+                }
+
+            })
+        }
+
 
         loginbyphone.setOnClickListener {
             linearLoginbyphone.visibility=View.VISIBLE
