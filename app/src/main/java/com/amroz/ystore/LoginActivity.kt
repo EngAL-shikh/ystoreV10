@@ -2,11 +2,14 @@ package com.amroz.ystore
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
+import com.amroz.ystore.Models.Users
+import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import com.amroz.ystore.Chating.ChatActivity
@@ -27,6 +30,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import render.animations.Bounce
 import render.animations.Render
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private var firebaseAuth: FirebaseAuth? = null
@@ -41,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
         var loginbyphone:ImageView=findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
         var username:EditText=findViewById(R.id.username)
+        var password: ShowHidePasswordEditText = findViewById(R.id.password)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
         var linearLoginbyemail:LinearLayout=findViewById(R.id.linear_login_by_email)
         var linearLoginbyphone:LinearLayout=findViewById(R.id.linear_login_by_phone)
@@ -50,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
 
 // Set Animation
 
+
 //        login.setOnClickListener {
 //
 ////            var intent = Intent(this,MainActivity::class.java)
@@ -58,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
 //
 //
 //        }
+
 
         loginbyphone.setOnClickListener {
             linearLoginbyphone.visibility=View.VISIBLE

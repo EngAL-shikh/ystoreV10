@@ -16,10 +16,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 open class Featchers {
 
-    private val ystoreApi: YstoreApi
+    val ystoreApi: YstoreApi
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
+      
             .baseUrl("http://172.16.16.253/")
 
             .addConverterFactory(GsonConverterFactory.create())
