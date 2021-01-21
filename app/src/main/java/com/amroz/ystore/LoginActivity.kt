@@ -2,6 +2,7 @@ package com.amroz.ystore
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.amroz.ystore.Chating.ChatActivity
 import com.amroz.ystore.Chating.ContactsActivity
 import com.amroz.ystore.Chating.MainChatActivity
+import com.amroz.ystore.Models.Contacts
 import com.amroz.ystore.Models.UserChat
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
@@ -30,6 +32,7 @@ import render.animations.Render
 
 class LoginActivity : AppCompatActivity() {
     private var firebaseAuth: FirebaseAuth? = null
+    private var db:FirebaseFirestore= FirebaseFirestore.getInstance()
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
     private var googleApiClient: GoogleApiClient? = null
     private var rootRef: FirebaseFirestore? = null
@@ -95,9 +98,22 @@ class LoginActivity : AppCompatActivity() {
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             val firebaseUser = auth.currentUser
             if (firebaseUser != null) {
-                val intent = Intent(this, MainChatActivity::class.java)
-                startActivity(intent)
-                finish()
+              //  addContacts(firebaseUser.uid)
+                var admin =0
+                if (admin==0){
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("admin",admin)
+                    startActivity(intent)
+                    finish()
+                }else{
+
+                    admin=1
+                    val intent = Intent(this, Dashboard::class.java)
+                    intent.putExtra("admin",admin)
+                    startActivity(intent)
+                    finish()
+                }
+
             }
         }
 
@@ -165,6 +181,34 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    fun addContacts(uid:String){
+
+
+
+
+
+        db= FirebaseFirestore.getInstance()
+
+
+
+
+        val contact = Contacts(uid)
+        db.collection("contacts")
+            .add(contact)
+            .addOnCompleteListener{
+
+                if (it.isSuccessful){
+                    //Toast.makeText(context,"added", Toast.LENGTH_LONG).show()
+
+                }else{
+                    Toast.makeText(this,"filde to add ${it.exception}", Toast.LENGTH_LONG).show()
+                    Log.d("test",it.exception.toString())
+
+                }
+            }
+
+
+    }
     public override fun onStart() {
         super.onStart()
         firebaseAuth!!.addAuthStateListener(authStateListener!!)

@@ -15,17 +15,11 @@ import kotlinx.android.synthetic.main.contact_list.*
 
 class ContactsActivity : AppCompatActivity() {
     lateinit var list_viw:ListView
-    lateinit var text:TextView
+   // lateinit var text:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_chat)
-
         list_viw=findViewById(R.id.list_viw)
-
-
-
-
-
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "Contacts"
 
@@ -40,10 +34,11 @@ class ContactsActivity : AppCompatActivity() {
                     if (document!!.exists()) {
                         val fromUser = document?.toObject(UserChat::class.java)
                         Toast.makeText(this,fromUser.toString(),Toast.LENGTH_LONG).show()
-                        text.text=fromUser.toString()+"||"+fromUid.toString()
+                      //  text.text=fromUser.toString()+"||"+fromUid.toString()
 
 
-                        val userContactsRef = rootRef.collection("contacts").document(fromUid).collection("userContacts")
+                        val userContactsRef = rootRef.collection("contacts")
+                            .document(fromUid).collection("userContacts")
                         userContactsRef.get().addOnCompleteListener{ t ->
                             if (t.isSuccessful) {
                                 val listOfToUserNames = ArrayList<String>()

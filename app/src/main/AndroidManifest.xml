@@ -15,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Chating.ChatPageActivity"></activity>
-        <activity android:name=".Chating.ContactsActivity"></activity>
+        <activity android:name=".Chating.TestChatProfile"></activity>
+
+        <activity android:name=".Chating.ContactsActivity" />
         <activity android:name=".Chating.MainChatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,10 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Chating.ChatActivity"></activity>
-        <activity android:name=".ChatingActivity">
-
-        </activity>
+        <activity android:name=".Chating.ChatActivity" />
+        <activity android:name=".ChatingActivity"></activity>
         <activity android:name=".Dashboard" />
         <activity android:name=".MoreDetails" />
         <activity android:name=".ProductByCat" />

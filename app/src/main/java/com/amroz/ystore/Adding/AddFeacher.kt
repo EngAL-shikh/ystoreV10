@@ -19,7 +19,7 @@ class AddFeacher {
 
         val retrofit: Retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl("http://172.16.16.253/")
+            .baseUrl("http://172.16.16.252/")
             .build()
 
         addApi = retrofit.create(YstoreApi::class.java)

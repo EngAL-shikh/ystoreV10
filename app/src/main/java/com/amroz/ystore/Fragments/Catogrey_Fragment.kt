@@ -21,13 +21,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_catogrey.*
 import kotlinx.android.synthetic.main.fragment_update_category.view.*
 
 
 class Catogrey_Fragment : Fragment() {
 
 
- var admin =""
+
+
 
     private lateinit var catViewModel: YstoreViewModels
 
@@ -49,8 +51,13 @@ class Catogrey_Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var intent=Intent()
 
+      var admin =  intent.extras?.getInt("admin")
+        if (admin!=null){
 
+            add_cat.visibility=View.GONE
+        }
 
         var user = Featchers()
         val LiveData = user.fetchCat()
@@ -76,10 +83,9 @@ class Catogrey_Fragment : Fragment() {
         RecyclerView.layoutManager = GridLayoutManager(context,2)
 
 
-        if (admin=="admin"){
 
-            addcat.visibility=View.VISIBLE
-        }
+
+           // addcat.visibility=View.VISIBLE
 
         addcat.setOnClickListener {
 
@@ -116,6 +122,7 @@ class Catogrey_Fragment : Fragment() {
                 intent.putExtra("cat_id",cat.cat_id)
                 startActivity(intent)
             }
+
 
 
 
