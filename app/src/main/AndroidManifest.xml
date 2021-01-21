@@ -15,8 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Chating.TestChatProfile"></activity>
-
+        <activity android:name=".Adding.AddUser"></activity>
+        <activity android:name=".Chating.ChatPageActivity" />
         <activity android:name=".Chating.ContactsActivity" />
         <activity android:name=".Chating.MainChatActivity">
             <intent-filter>

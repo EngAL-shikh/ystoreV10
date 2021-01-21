@@ -3,6 +3,7 @@ package com.amroz.ystore.Api
 
 
 import com.amroz.ystore.*
+import com.amroz.ystore.Models.Users
 
 import com.amroz.ystore.Response
 import retrofit2.Call
@@ -145,6 +146,24 @@ interface YstoreApi {
     ): Call<Response>
 //    fun updateCategory(@Path("cat_id") id:Int,
 //                      @Body category: HashMap<String, Any>):Call<String>
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////athu//////////////////////////////////////////////////////////////////////
+
+    @FormUrlEncoded
+    @POST("StoreApi/api/login.php")
+    fun login(@Field("name") email:String, @Field("password")password:String) : Call<Users>
+
+
+    @FormUrlEncoded
+    @POST("StoreApi/api/users_api.php")
+    fun addUser( @Field("name") name: String,
+                    @Field("email") email: String,
+                    @Field("password") password: String,
+                    @Field("chat_id") chat_id: String,
+                    @Field("phone") phone: String,
+                    @Field("address") address: String
+    ): Call<Response>
 
 
 

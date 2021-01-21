@@ -4,16 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
+import com.amroz.ystore.Adding.AddUser
 import com.amroz.ystore.Chating.ChatActivity
 import com.amroz.ystore.Chating.ContactsActivity
 import com.amroz.ystore.Chating.MainChatActivity
-import com.amroz.ystore.Models.Contacts
 import com.amroz.ystore.Models.UserChat
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
@@ -27,12 +24,24 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
+
+import com.amroz.ystore.Models.Users
+import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
+
 import render.animations.Bounce
 import render.animations.Render
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var signup:TextView
     private var firebaseAuth: FirebaseAuth? = null
-    private var db:FirebaseFirestore= FirebaseFirestore.getInstance()
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
     private var googleApiClient: GoogleApiClient? = null
     private var rootRef: FirebaseFirestore? = null
@@ -44,14 +53,24 @@ class LoginActivity : AppCompatActivity() {
         var loginbyphone:ImageView=findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
         var username:EditText=findViewById(R.id.username)
+        var password: ShowHidePasswordEditText = findViewById(R.id.password)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
         var linearLoginbyemail:LinearLayout=findViewById(R.id.linear_login_by_email)
         var linearLoginbyphone:LinearLayout=findViewById(R.id.linear_login_by_phone)
+        signup=findViewById(R.id.sign_in)
+
+        signup.setOnClickListener {
+            signIn()
+            val intent = Intent(this, AddUser::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 // Create Render Class
 
 
 // Set Animation
+
 
 //        login.setOnClickListener {
 //
@@ -61,6 +80,28 @@ class LoginActivity : AppCompatActivity() {
 //
 //
 //        }
+
+        login.setOnClickListener {
+
+            var fetch=Featchers()
+            var call: Call<Users> = fetch.ystoreApi.login(username.text.toString(),password.text.toString())
+            call.enqueue(object : Callback<Users>{
+                override fun onFailure(call: Call<Users>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity,"User Not found",Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(call: Call<Users>, response: Response<Users>) {
+                    if (response.isSuccessful){
+                        Log.d("cxz","${response}")
+                        var intent = Intent(this@LoginActivity,MainActivity::class.java)
+                        intent.putExtra("admin",username.text.toString())
+                        startActivity(intent)
+                    }
+                }
+
+            })
+        }
+
 
         loginbyphone.setOnClickListener {
             linearLoginbyphone.visibility=View.VISIBLE
@@ -98,22 +139,10 @@ class LoginActivity : AppCompatActivity() {
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             val firebaseUser = auth.currentUser
             if (firebaseUser != null) {
-              //  addContacts(firebaseUser.uid)
-                var admin =0
-                if (admin==0){
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("admin",admin)
-                    startActivity(intent)
-                    finish()
-                }else{
 
-                    admin=1
-                    val intent = Intent(this, Dashboard::class.java)
-                    intent.putExtra("admin",admin)
-                    startActivity(intent)
-                    finish()
-                }
-
+                val intent = Intent(this, MainChatActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
 
@@ -149,6 +178,7 @@ class LoginActivity : AppCompatActivity() {
                 val googleSignInAccount = task.getResult(ApiException::class.java)
                 firebaseSignInWithGoogle(googleSignInAccount!!)
             } catch (e: ApiException) {
+                Log.d("abdoodi","${e}")
                 makeText(this, "Google sign in failed!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -170,6 +200,9 @@ class LoginActivity : AppCompatActivity() {
         val userName = firebaseUser.displayName
         val user = UserChat(uid, userName!!)
 
+        SharedPref.setEmail(this, firebaseUser.email!!)
+        SharedPref.setUid(this,firebaseUser.uid!!)
+
         val uidRef = rootRef!!.collection("users").document(uid)
         uidRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -181,34 +214,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun addContacts(uid:String){
-
-
-
-
-
-        db= FirebaseFirestore.getInstance()
-
-
-
-
-        val contact = Contacts(uid)
-        db.collection("contacts")
-            .add(contact)
-            .addOnCompleteListener{
-
-                if (it.isSuccessful){
-                    //Toast.makeText(context,"added", Toast.LENGTH_LONG).show()
-
-                }else{
-                    Toast.makeText(this,"filde to add ${it.exception}", Toast.LENGTH_LONG).show()
-                    Log.d("test",it.exception.toString())
-
-                }
-            }
-
-
-    }
     public override fun onStart() {
         super.onStart()
         firebaseAuth!!.addAuthStateListener(authStateListener!!)
