@@ -1,11 +1,16 @@
 package com.amroz.ystore
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProviders
+import com.amroz.ystore.Fragments.ProductsFragment
+import com.amroz.ystore.Fragments.ReportFragment
 import com.amroz.ystore.Models.Products
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
@@ -35,8 +40,9 @@ class MoreDetails : AppCompatActivity() {
         var addqn:FloatingActionButton=findViewById(R.id.fab_qty_add)
         var subqn:FloatingActionButton=findViewById(R.id.fab_qty_sub)
         var tv_qty:TextView=findViewById(R.id.tv_qty)
-
         var products=intent.getSerializableExtra("data") as Products
+
+
 
 
         title.text=products.title
@@ -47,6 +53,20 @@ class MoreDetails : AppCompatActivity() {
         owner.text="sold by:"+products.user_name
 
 
+        report.setOnClickListener {
+            //cart.visibility= View.VISIBLE
+
+            var intent= Intent(this,product_report::class.java)
+            intent.putExtra("data",products)
+            startActivity(intent)
+        }
+      owner.setOnClickListener{
+
+          var intent= Intent(this,UserReport::class.java)
+          intent.putExtra("data",products)
+          startActivity(intent)
+
+}
 
       var images=  products.images.split(",").toTypedArray()
 

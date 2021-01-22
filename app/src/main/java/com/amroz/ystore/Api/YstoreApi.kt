@@ -167,7 +167,23 @@ interface YstoreApi {
     ): Call<Response>
 
 
+//update user report
 
+    @FormUrlEncoded
+    @PUT("StoreApi/api/users_api.php")
+    fun updateReportUser(@Query("user_id")user_id : Int?,
+                   @Field("user_report") user_report: Int
+    ): Call<Response>
+
+
+    //produuct_report
+    @FormUrlEncoded
+    @POST("StoreApi/api/reports_api.php")
+    fun productReport
+                (@Field("report_id") report_id:Int,
+                @Field("report_reason") report_reason:String,
+                      @Field("product_id") product_id:Int,
+                    @Field("user_id") user_id:Int): Call<Response>
 
 }
 

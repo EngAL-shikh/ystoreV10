@@ -15,6 +15,14 @@ class YstoreViewModels: ViewModel() {
             MutableLiveData<Response> {
         return  ManagementFeatchers().updateCategory(catId,category)
     }
+
+    //update_user_report
+
+    fun update_user_report(user_id:Int, user_report:Int): MutableLiveData<Response> {
+        return ManagementFeatchers(). updateReportUser(user_id, user_report)
+    }
+
+
     fun updateProfile(id:Int,
                       name: String,
                       email:String,
@@ -87,6 +95,12 @@ class YstoreViewModels: ViewModel() {
     fun addCart(user_id:Int,product_id:Int,Quantity:Int):MutableLiveData<Response> {
         return AddFeacher().addCart(user_id,product_id,Quantity)
     }
+
+
+    //addReportProduct
+    fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
+        return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
+    }
 }
 
 
@@ -98,6 +112,7 @@ class YstoreViewModels: ViewModel() {
 //    fun loadUsers(id:Int){
 //        LiveDataUsersInfo.value=id
 //    }
+
 
 
 

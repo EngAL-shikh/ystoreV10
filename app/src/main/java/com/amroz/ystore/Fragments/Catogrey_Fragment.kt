@@ -1,6 +1,7 @@
 
 package com.amroz.ystore.Fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -71,6 +72,7 @@ class Catogrey_Fragment : Fragment() {
 
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

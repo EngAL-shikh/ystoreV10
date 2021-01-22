@@ -3,7 +3,6 @@
     package="com.amroz.ystore">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -15,11 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity android:name=".product_report"></activity>
+        <activity android:name=".UserReport" />
+        <activity android:name=".Dashboard" />
+        <activity android:name=".MoreDetails" />
+        <activity android:name=".ProductByCat" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Splash.Splash">
+
         <activity android:name=".Adding.AddUser"></activity>
         <activity android:name=".Chating.ContactsActivity" />
         <activity android:name=".Chating.MainChatActivity">
 
         </activity>
+
         <activity android:name=".Chating.ChatActivity" />
         <activity android:name=".ChatingActivity"></activity>
         <activity android:name=".Dashboard" />
