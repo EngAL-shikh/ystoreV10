@@ -1,5 +1,6 @@
 package com.amroz.ystore.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amroz.ystore.AddProductActivity
 import com.amroz.ystore.Featchers
 
 import com.amroz.ystore.Models.Report
@@ -26,13 +28,16 @@ class ReportFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         reportViewModel = ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-        type=arguments?.getSerializable("type")as String
+      //  type=arguments?.getSerializable("type")as String
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (type == "report") {
+
+
+        var intent= Intent(context,AddProductActivity::class.java)
+        startActivity(intent)
 
 
             var report = Featchers()
@@ -42,7 +47,7 @@ class ReportFragment : Fragment() {
                 RecyclerView.adapter = ReportAdapter(it)
 
             })
-        }
+
     }
 
     override fun onCreateView(
@@ -59,24 +64,17 @@ class ReportFragment : Fragment() {
     }
 
     companion object {
+        fun newInstance() = ReportFragment()
+    }
 
-        fun newInstance(data: String): ReportFragment {
-            val args = Bundle().apply {
-                putSerializable("type", data)
-            }
-            return ReportFragment().apply {
-                arguments = args
-            }
-        }
 
-                }
     // Holder
     private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
         val report_id = view.findViewById(R.id.report_id) as TextView
-        val report_reason = view.findViewById(R.id.report_reason) as TextView
-        val report_author = view.findViewById(R.id.report_author) as TextView
+        val report_reason = view.findViewById(R.id.reason) as TextView
+        val product_name = view.findViewById(R.id.prouct_name) as TextView
 
 
 
@@ -84,7 +82,7 @@ class ReportFragment : Fragment() {
 
             report_id.text = reports.report_id.toString()
             report_reason.text =reports.report_reason
-            report_author.text =reports.author
+            product_name.text =reports.author
 
 
         }
@@ -111,6 +109,8 @@ class ReportFragment : Fragment() {
             return UsersHolder(view)
 
         }
+
+
 
 
         override fun getItemCount(): Int {

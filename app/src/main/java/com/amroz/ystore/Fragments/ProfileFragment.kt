@@ -1,0 +1,333 @@
+package com.amroz.ystore.Fragments
+
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.amroz.ystore.*
+import com.amroz.ystore.Models.Products
+import com.amroz.ystore.Models.Users
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.catogrey_list.*
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.profile_list.*
+
+
+class ProfileFragment : Fragment() {
+
+
+    private lateinit var usersViewModel: ViewModel
+    var count:Int=0
+    private var adapter: ProductAdapter? = ProductAdapter(emptyList())
+    private lateinit var RecyclerView: RecyclerView
+    private lateinit var ProRecyclerView: RecyclerView
+    var type=""
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        usersViewModel =
+            ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+
+        // type=arguments?.getSerializable("type")as String
+
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        var products = Featchers()
+        val newsLiveData=products.fetchProductsByCat(2)
+        newsLiveData.observe(this, Observer {
+            Log.d("test", "Response received: ${it}")
+            RecyclerView.adapter = ProductAdapter(it)
+
+        })
+
+
+        val usersLiveData=products.fetchUsersInfo(3)
+        usersLiveData.observe(this, Observer {
+            Log.d("test", "Response received: ${it}")
+            ProRecyclerView.adapter = ProfileAdapter(it)
+
+        })
+
+
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        var view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        RecyclerView = view.findViewById(R.id.profile_rec)
+        ProRecyclerView = view.findViewById(R.id.profile_rec)
+        RecyclerView.layoutManager = GridLayoutManager(context,1)
+        ProRecyclerView = view.findViewById(R.id.product_rec)
+        ProRecyclerView.layoutManager = GridLayoutManager(context,1)
+        return view
+    }
+
+
+
+
+    //  Holder users
+    private inner class profileHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+
+
+        val name = view.findViewById(R.id.name) as TextView
+        val email = view.findViewById(R.id.email) as TextView
+        val phone = view.findViewById(R.id.phone) as ImageButton
+        val message = view.findViewById(R.id.message) as ImageButton
+        val user_raiting = view.findViewById(R.id.user_raiting) as ImageButton
+        val address = view.findViewById(R.id.address) as TextView
+        val iamge = view.findViewById(R.id.image) as ImageView
+        val edite = view.findViewById(R.id.bt_edite) as ImageView
+        val dashboard = view.findViewById(R.id.dashbourd) as LinearLayout
+
+
+        fun bind(users: Users) {
+
+            name.text = users.name
+            email.text = users.email
+//            phone.text = users.rating.toString()
+//            message.text = users.rating.toString()
+//            user_raiting.text = users.rating.toString()
+            address.text = users.address.toString()
+            Picasso.with(context).load(users.user_image).into(iamge)
+
+
+            edite.setOnClickListener {
+
+                var intent=Intent(context,UpdateProfile::class.java)
+                intent.putExtra("data",users)
+                startActivity(intent)
+            }
+
+            dashboard.setOnClickListener {
+                var intent=Intent(context,Dashboard::class.java)
+                startActivity(intent)
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+}
+    //userAdapter
+    inner class ProfileAdapter(var users: List<Users>) :
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            var view: View
+
+
+
+            view = layoutInflater.inflate(
+                R.layout.profile_list,
+                parent, false
+            )
+
+            return profileHolder(view)
+
+        }
+
+
+        override fun getItemCount(): Int {
+
+            return users.size
+
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+            val users=users[position]
+            if(holder is profileHolder)
+                holder.bind(users)
+
+
+        }
+    }
+
+
+
+    private  inner class ProductHolder(view: View) : RecyclerView.ViewHolder(view){
+
+
+        val title = view.findViewById(R.id.title) as TextView
+        val deatils = view.findViewById(R.id.details) as TextView
+        val price = view.findViewById(R.id.price) as TextView
+      //  val Raitings = view.findViewById(R.id.Raitings) as TextView
+        val image = view.findViewById(R.id.image) as ImageView
+        val card_my_product = view.findViewById(R.id.card_my_product) as CardView
+        val delete = view.findViewById(R.id.delete) as Button
+
+
+
+        fun bind2(products: Products){
+
+            var images=  products.images.split(",").toTypedArray()
+            title.text = products.title
+            deatils.text = products.details
+           // Raitings.text = products.rating.toString()
+            price.text="$"+products.price_d.toString()
+
+            Picasso.with(context).load(images[0]).into(image)
+
+
+
+
+
+            card_my_product.setOnClickListener {
+
+              //  delet_product(products.product_id)
+                var intent=Intent(context,UpdateProduct::class.java)
+                    intent.putExtra("data",products)
+                    startActivity(intent)
+                    onCreateAnimation(3000,true,R.anim.nav_default_pop_exit_anim)
+
+
+
+            }
+
+
+        }
+
+
+
+
+    }
+
+
+
+    // Adapter
+    inner class ProductAdapter(var products: List<Products>) :
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+        ): RecyclerView.ViewHolder {
+
+
+
+
+                    val view = layoutInflater.inflate(
+                        R.layout.myproduct_list,
+                        parent, false
+                    )
+
+                   return ProductHolder(view)
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+        override fun getItemCount(): Int {
+
+
+            count=products.size
+            return products.size
+
+        }
+
+
+
+
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+
+
+            val products = products[position]
+            if (holder is ProductHolder){
+                holder.bind2(products)
+
+                holder.delete.setOnClickListener {
+                    delet_product(products.product_id)
+                    notifyDataSetChanged()
+                    notifyItemChanged(products.product_id)
+                }
+
+
+
+        }
+    }
+
+
+
+
+
+
+
+}
+
+    fun delet_product(id:Int) {
+
+        val builder = AlertDialog.Builder(context)
+        //  builder.setTitle("AlertDialog")
+        builder.setMessage("Are you sure ")
+
+        // add the buttons
+
+        // add the buttons
+        builder.setPositiveButton("Continue"){_,_->
+            var del_cat = ManagementFeatchers()
+            del_cat.deleteProduct(id)
+
+
+
+        }
+        builder.setNegativeButton("Cancel") { _, _ ->
+
+        }
+        val dialog = builder.create()
+        dialog.show()
+
+
+
+    }
+//    fun updateUI(product: Products) {
+//
+//        adapter = ProductAdapter(product)
+//        product_rec.adapter = adapter
+//    }
+
+}
+
+
+
