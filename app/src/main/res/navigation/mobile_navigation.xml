@@ -51,9 +51,9 @@
 
     <fragment
         android:id="@+id/report_nv"
-        android:name="com.amroz.ystore.Fragments.ReportFragment"
+        android:name="com.amroz.ystore.Adding.AddProductFragment"
         android:label="@string/title_Reports"
-        tools:layout="@layout/fragment_report" >
+        tools:layout="@layout/fragment_add_product" >
 
     </fragment>
 
