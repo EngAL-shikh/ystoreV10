@@ -1,5 +1,6 @@
 package com.amroz.ystore.Fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -58,13 +59,14 @@ class ProductsFragment : Fragment() {
 
 
 
+    @SuppressLint("FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var search= view.findViewById(R.id.searchfromT) as SearchView
 
             var products = Featchers()
             val newsLiveData=products.fetchProducts()
-            newsLiveData.observe(this, Observer {
+            newsLiveData.observe(this@ProductsFragment, Observer {
                 Log.d("test", "Response received: ${it}")
                 RecyclerView.adapter = productsAdapter(it)
                 search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -72,12 +74,9 @@ class ProductsFragment : Fragment() {
 
                         searchlist.clear()
                         for (i in it){
-
                             if (i.title.contains(txtsearch.toString())){
                                 searchlist.add(i)
-                            }
-
-                        }
+                            } }
                         RecyclerView.layoutManager=GridLayoutManager(context,2)
                         RecyclerView.adapter = productsAdapter(searchlist)
 
@@ -149,11 +148,13 @@ class ProductsFragment : Fragment() {
 
 
         fun bind(products: Products) {
+        var  avarage= products.rating/5.0
             var images=  products.images.split(",").toTypedArray()
             productsItem=products
             title.text = products.title
             deatils.text = products.details
-            Raitings.text = products.rating.toString()
+            Raitings.setText(avarage.toString())
+            Log.d("rett",  avarage.toString())
             Picasso.with(context).load(images[0]).into(image)
 
 //            card.setOnClickListener {

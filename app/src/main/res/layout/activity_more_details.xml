@@ -482,6 +482,100 @@ Advanced dual-camera system with 12MP Ultra Wide and"
                     </LinearLayout>
 
                     <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:layout_marginBottom="@dimen/spacing_middle"
+                        android:background="@color/grey_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rating Product"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_60" />
+
+                    <LinearLayout
+                        android:id="@+id/rating_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <RatingBar
+                            android:id="@+id/ratingProduct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="46dp"
+                            android:layout_margin="15dp"
+                            android:layout_gravity="center"
+                            android:progressDrawable="@drawable/ic_haert_rating"
+                            android:rating="0"
+                            android:numStars="3"
+                            android:stepSize="0.5" />
+
+                        <ImageButton
+                            android:id="@+id/btn_ratingProduct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/add_raiting"
+                            android:text="rating" />
+
+
+                    </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/rating_linear_t3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RatingBar
+                                android:id="@+id/ratingShow_rb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="46dp"
+                                android:layout_margin="15dp"
+                                android:progressDrawable="@drawable/ic_haert_rating"
+                                android:rating="1.5"
+                                android:numStars="3"
+                                android:stepSize="0.5" />
+                            <LinearLayout
+                                android:id="@+id/rating_linear_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:text="Rating Of Product : "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/avrage_rating_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:text="14.5"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/blue_900" />
+
+                            <TextView
+                                android:id="@+id/user_rating_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginLeft="50dp"
+                                android:text="14.5"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/blue_900" />
+                        </LinearLayout>
+                        </LinearLayout>
+
+
+                    <View
                         android:layout_width="0dp"
                         android:layout_height="@dimen/spacing_middle" />
 
