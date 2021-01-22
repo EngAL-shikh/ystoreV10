@@ -14,7 +14,7 @@
     <item
         android:id="@+id/report_nv"
         android:icon="@drawable/ic_baseline_add_box_24"
-        android:title="@string/title_Reports" />
+        android:title="ADD" />
     <item
         android:id="@+id/profile_nv"
         android:icon="@drawable/ic_baseline_person_24"

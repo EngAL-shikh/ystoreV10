@@ -3,11 +3,11 @@ package com.amroz.ystore
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.amroz.ystore.Api.YstoreApi
+import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 
 class ManagementFeatchers {
@@ -17,9 +17,13 @@ class ManagementFeatchers {
     private val mangApi: YstoreApi
 
     init {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.191.1:80/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://192.168.1.7:81/")
+           //.addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
         mangApi= retrofit.create(YstoreApi::class.java)
@@ -78,11 +82,13 @@ class ManagementFeatchers {
         cartRequest.enqueue(object : Callback< Response> {
             override fun onFailure(call: Call< Response>, t: Throwable) {
                 Log.d("tag", t.message.toString())
+                Log.d("fatma",call.toString())
             }
 
 
             override fun onResponse(call: Call< Response>, response: retrofit2.Response< Response>) {
                 Log.d("tag", "yes")
+                Log.d("fatma",call.toString())
             }
 
         })
@@ -223,6 +229,7 @@ class ManagementFeatchers {
         return responseLiveData
 
     }
+
     /////////////////////UpdateRating
     fun updateRating(id:Int, rating: Float,rating_vote:Int): MutableLiveData<Response> {
         val responseLiveData: MutableLiveData<Response> = MutableLiveData()
@@ -235,6 +242,23 @@ class ManagementFeatchers {
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.d("onResponse", t.message.toString())
+
+
+
+    //update user report
+    fun updateReportUser(user_id:Int, user_report: Int): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var user_reportUpdate = mangApi.updateReportUser(user_id,user_report)
+        user_reportUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+                Log.d("onResponse_report", "yes")
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.d("onResponse_report", t.message.toString())
+
+
             }
 
 
@@ -243,4 +267,27 @@ class ManagementFeatchers {
 
 
     }
+
+//add report
+
+    //ADD REPORT
+
+    fun addReport(id:Int,report_reason:String,product_id:Int,user_id:Int): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        val newsRequest: Call<Response> = mangApi.productReport(id,report_reason,product_id,user_id)
+        newsRequest.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.e("fatma", "Failed to post ", t)
+            }
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
+            ) {
+
+
+                Log.e("fatma", "Response received")
+
+            }
+        })
+        return responseLiveData
+    }
+
 }

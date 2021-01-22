@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "14343407697",
+    "project_id": "ystore-5c695",
+    "storage_bucket": "ystore-5c695.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14343407697:android:8873b0d8711ca0e1e21070",
+        "android_client_info": {
+          "package_name": "com.amroz.ystore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14343407697-tg3lduonpqe4vboj54tvl1t2u9dksjc0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amroz.ystore",
+            "certificate_hash": "3139133b07d7215e5433b83ce18e9b2ee9262330"
+          }
+        },
+        {
+          "client_id": "14343407697-tlhg1goqgqtgdn2klsi1rckgr99q8opt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyUlo_yCHZeZR_NnMGmGdB97pb6ivawBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14343407697-tlhg1goqgqtgdn2klsi1rckgr99q8opt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
