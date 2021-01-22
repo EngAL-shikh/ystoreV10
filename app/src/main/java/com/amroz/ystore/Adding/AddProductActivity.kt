@@ -1,22 +1,27 @@
 package com.amroz.ystore
 
+import android.app.Activity
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.activity_add_category.*
 import kotlinx.android.synthetic.main.activity_add_product.*
+import kotlinx.android.synthetic.main.activity_add_user.*
 import java.io.ByteArrayOutputStream
-import java.io.IOException
 
 
 class AddProductActivity : AppCompatActivity() {
@@ -25,6 +30,17 @@ class AddProductActivity : AppCompatActivity() {
     var a=0
     var IMAGE_REQUST=1
 
+    lateinit var smallimage:ImageView
+    lateinit var smallimage2:ImageView
+    lateinit var smallimage3:ImageView
+    lateinit var smallimage4:ImageView
+    lateinit var smallimage5:ImageView
+
+var  images=ArrayList<String>()
+    private var context: Context? = null
+    var PICK_IMAGE_MULTIPLE = 1
+    lateinit var imagePath: String
+    var imagesPathList: MutableList<String> = arrayListOf()
     private val ystoreViewModels: YstoreViewModels by lazy {
         ViewModelProviders.of(this).get(YstoreViewModels::class.java)
     }
@@ -38,7 +54,12 @@ class AddProductActivity : AppCompatActivity() {
         val productPriceY:EditText=findViewById(R.id.PriceY)
         val productPriceD:EditText=findViewById(R.id.PriceD)
         val getimage:LinearLayout=findViewById(R.id.gitimage)
-        val smallimage:ImageView=findViewById(R.id.smallimage)
+         smallimage=findViewById(R.id.smallimage)
+         smallimage2=findViewById(R.id.smallimage2)
+         smallimage3=findViewById(R.id.smallimage3)
+         smallimage4=findViewById(R.id.smallimage4)
+         smallimage5=findViewById(R.id.smallimage5)
+
         val bt_close:ImageButton=findViewById(R.id.bt_close)
      //   val cat:EditText=findViewById(R.id.PriceD)
        val add:ImageView=findViewById(R.id.add)
@@ -58,15 +79,16 @@ class AddProductActivity : AppCompatActivity() {
 
 
         add.setOnClickListener {
+           // var allimages=images[0]+","+images[1]+","+images[2]+","+images[3]+","+images[4]
             ystoreViewModels.addProduct(productTitle.text.toString(),
                 productDetails.text.toString(),
-                image,productColor.text.toString(),
+                images[0]+","+images[1]+","+images[2]+","+images[3],productColor.text.toString(),
                 productFeature.text.toString(),
                0
                 ,productPriceY.text.toString().toInt(),
                 productPriceD.text.toString().toInt(),
                 3,
-               2,
+               20,
                 2,
                 "",
                 "")
@@ -105,45 +127,101 @@ class AddProductActivity : AppCompatActivity() {
 
     //--------------------------------------start get image-----------------------------------------------------------------
 
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//
+//            if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+//                var filePath = data.getData();
+//                try {
+//                    var   bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath)
+//                    lastBitmap = bitmap;
+//                    smallimage.setImageBitmap(bitmap)
+//                    a=1
+//                    // choseImage.setImageBitmap(lastBitmap)
+//                    image = getStringImage(lastBitmap);
+//
+//                    Log.d("image",image)
+//                } catch (e: IOException) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            super.onActivityResult(requestCode, resultCode, data)
+//
+//
+//
+//
+//
+//    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        if (resultCode == Activity.RESULT_OK && requestCode == 1){
 
-            if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-                var filePath = data.getData();
-                try {
-                    var   bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath)
-                    lastBitmap = bitmap;
-                    smallimage.setImageBitmap(bitmap)
-                    a=1
-                    // choseImage.setImageBitmap(lastBitmap)
-                    image = getStringImage(lastBitmap);
+            // if multiple images are selected
+            if (data?.getClipData() != null) {
+                var count = data.clipData!!.itemCount
 
-                    Log.d("image",image)
-                } catch (e: IOException) {
-                    e.printStackTrace();
+                for (i in 0..count - 1) {
+                    var imageUri: Uri = data.clipData!!.getItemAt(i).uri
+
+                    var   bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri)
+
+                    image = getStringImage(bitmap);
+                    images.add(image)
+
+
+
                 }
+                smallimage.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), data.clipData!!.getItemAt(0).uri))
+                smallimage2.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), data.clipData!!.getItemAt(1).uri))
+                smallimage3.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), data.clipData!!.getItemAt(2).uri))
+                smallimage4.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), data.clipData!!.getItemAt(3).uri))
+                smallimage5.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), data.clipData!!.getItemAt(4).uri))
+//                Log.d("imageUri 1 ::::",images[0].toString())
+//                Log.d("imageUri 2 ::::",images[1].toString())
+//                Log.d("imageUri 3 ::::",images[2].toString())
+
+            } else if (data?.getData() != null) {
+                // if single image is selected
+
+                var imageUri: Uri = data.data!!
+                //   iv_image.setImageURI(imageUri) Here you can assign the picked image uri to your imageview
+
             }
-
-            super.onActivityResult(requestCode, resultCode, data)
-
-
-
-
-
+        }
     }
 
 
     private fun showFileChooser() {
-        val pickImageIntent = Intent(Intent.ACTION_PICK,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        pickImageIntent.type = "image/*"
-        pickImageIntent.putExtra("aspectX", 1)
-        pickImageIntent.putExtra("aspectY", 1)
-        pickImageIntent.putExtra("scale", true)
-        pickImageIntent.putExtra("outputFormat",
-            Bitmap.CompressFormat.JPEG.toString())
-        startActivityForResult(pickImageIntent,IMAGE_REQUST)
+//        val pickImageIntent = Intent(Intent.ACTION_PICK,
+//            MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//        pickImageIntent.type = "image/*"
+//        pickImageIntent.putExtra("aspectX", 1)
+//        pickImageIntent.putExtra("aspectY", 1)
+//        pickImageIntent.putExtra("scale", true)
+//        pickImageIntent.putExtra("outputFormat",
+//            Bitmap.CompressFormat.JPEG.toString())
+//        startActivityForResult(pickImageIntent,IMAGE_REQUST)
+
+        if (Build.VERSION.SDK_INT < 19) {
+            var intent = Intent()
+            intent.type = "image/*"
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(
+                Intent.createChooser(intent, "Select Picture")
+                , PICK_IMAGE_MULTIPLE
+            )
+        } else {
+            var intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "image/*"
+            startActivityForResult(intent, PICK_IMAGE_MULTIPLE);
+        }
     }
 
 

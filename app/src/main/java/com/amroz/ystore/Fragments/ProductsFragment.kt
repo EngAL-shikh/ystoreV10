@@ -19,11 +19,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.amroz.ystore.Featchers
+import com.amroz.ystore.*
 import com.amroz.ystore.Models.Products
-import com.amroz.ystore.MoreDetails
-import com.amroz.ystore.R
-import com.amroz.ystore.YstoreViewModels
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_catogrey.*
 import kotlinx.android.synthetic.main.fragment_products.*

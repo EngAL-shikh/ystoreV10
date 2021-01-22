@@ -30,7 +30,7 @@ class ChatActivity : AppCompatActivity() {
         rec=findViewById(R.id.recyclerView)
         rootRef = FirebaseFirestore.getInstance()
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+     //   supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         val fromUser = intent.extras?.get("fromUser") as UserChat
         fromUid = fromUser.uid
@@ -98,7 +98,7 @@ class ChatActivity : AppCompatActivity() {
 
 
              textView.text = message.messageText
-           // time.text = message.sentAt.toString()
+              time.text = message.sentAt.toString()
 
         }
     }

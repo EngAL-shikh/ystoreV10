@@ -21,7 +21,7 @@ class AddFeacher : AppCompatActivity() {
         val retrofit: Retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
 
-            .baseUrl("http://172.16.16.246/")
+            .baseUrl("http://192.168.1.4/")
 
             .build()
 
@@ -83,9 +83,9 @@ class AddFeacher : AppCompatActivity() {
     }
 
     fun addUser(name: String, email: String,password: String,chat_id: String,
-                phone: String,address: String): MutableLiveData<Response> {
+                phone: String,address: String,image:String): MutableLiveData<Response> {
         val responseLiveData: MutableLiveData<Response> = MutableLiveData()
-        val newsRequest: Call<Response> = addApi.addUser(name,email,password,chat_id,phone,address)
+        val newsRequest: Call<Response> = addApi.addUser(name,email,password,chat_id,phone,address,image)
         newsRequest.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.e("TAG", "Failed to post ", t)
@@ -93,7 +93,7 @@ class AddFeacher : AppCompatActivity() {
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
             ) {
 
-                Toast.makeText(this@AddFeacher,"User Added",Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@AddFeacher,"User Added",Toast.LENGTH_LONG).show()
                 Log.e("TAG", "Response received")
 
             }

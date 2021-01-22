@@ -4,6 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
+
 import android.widget.*
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +19,7 @@ import com.amroz.ystore.Chating.ChatActivity
 import com.amroz.ystore.Chating.ContactsActivity
 import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.UserChat
+
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.google.android.gms.auth.api.Auth
@@ -41,6 +49,8 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var signup:TextView
+    var db:FirebaseFirestore= FirebaseFirestore.getInstance()
+
     private var firebaseAuth: FirebaseAuth? = null
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
     private var googleApiClient: GoogleApiClient? = null
@@ -49,6 +59,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        var auth = FirebaseAuth.getInstance()
+        var currentUser = auth.currentUser
+        if(currentUser != null) {
+            startActivity(Intent(applicationContext, MainActivity::class.java))
+            finish()
+        }
+
+        lateinit var userProfile:YstoreViewModels
+
 
         var loginbyphone:ImageView=findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
@@ -61,10 +80,13 @@ class LoginActivity : AppCompatActivity() {
 
         signup.setOnClickListener {
             signIn()
-            val intent = Intent(this, AddUser::class.java)
-            startActivity(intent)
-            finish()
+
         }
+
+        userProfile=
+            ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+
+
 
 // Create Render Class
 
@@ -81,26 +103,26 @@ class LoginActivity : AppCompatActivity() {
 //
 //        }
 
-        login.setOnClickListener {
-
-            var fetch=Featchers()
-            var call: Call<Users> = fetch.ystoreApi.login(username.text.toString(),password.text.toString())
-            call.enqueue(object : Callback<Users>{
-                override fun onFailure(call: Call<Users>, t: Throwable) {
-                    Toast.makeText(this@LoginActivity,"User Not found",Toast.LENGTH_LONG).show()
-                }
-
-                override fun onResponse(call: Call<Users>, response: Response<Users>) {
-                    if (response.isSuccessful){
-                        Log.d("cxz","${response}")
-                        var intent = Intent(this@LoginActivity,MainActivity::class.java)
-                        intent.putExtra("admin",username.text.toString())
-                        startActivity(intent)
-                    }
-                }
-
-            })
-        }
+//        login.setOnClickListener {
+//
+//            var fetch=Featchers()
+//            var call: Call<Users> = fetch.ystoreApi.login(username.text.toString(),password.text.toString())
+//            call.enqueue(object : Callback<Users>{
+//                override fun onFailure(call: Call<Users>, t: Throwable) {
+//                    Toast.makeText(this@LoginActivity,"User Not found",Toast.LENGTH_LONG).show()
+//                }
+//
+//                override fun onResponse(call: Call<Users>, response: Response<Users>) {
+//                    if (response.isSuccessful){
+//                        Log.d("cxz","${response}")
+//                        var intent = Intent(this@LoginActivity,MainActivity::class.java)
+//                        intent.putExtra("admin",username.text.toString())
+//                        startActivity(intent)
+//                    }
+//                }
+//
+//            })
+//        }
 
 
         loginbyphone.setOnClickListener {
@@ -133,16 +155,43 @@ class LoginActivity : AppCompatActivity() {
 
         rootRef = FirebaseFirestore.getInstance()
 
-        login.setOnClickListener { signIn() }
+        login.setOnClickListener {
+//            signIn()
+
+
+
+        }
 
         firebaseAuth = FirebaseAuth.getInstance()
         authStateListener = FirebaseAuth.AuthStateListener { auth ->
             val firebaseUser = auth.currentUser
             if (firebaseUser != null) {
 
-                val intent = Intent(this, MainChatActivity::class.java)
-                startActivity(intent)
-                finish()
+                var fetch=Featchers()
+                var call: Call<Users> = fetch.ystoreApi.login(firebaseUser.email.toString(),password.text.toString())
+                call.enqueue(object : Callback<Users>{
+                    override fun onFailure(call: Call<Users>, t: Throwable) {
+                        db= FirebaseFirestore.getInstance()
+                       // val user = UserChat(chatid, username!!)
+
+                        Toast.makeText(this@LoginActivity,"User Not found",Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@LoginActivity, AddUser::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    override fun onResponse(call: Call<Users>, response: Response<Users>) {
+                        if (response.isSuccessful){
+                            Log.d("cxz","${response}")
+                            var intent = Intent(this@LoginActivity,MainActivity::class.java)
+                            // intent.putExtra("admin",username.text.toString())
+                            startActivity(intent)
+                        }
+                    }
+
+                })
+
+
             }
         }
 
@@ -167,6 +216,7 @@ class LoginActivity : AppCompatActivity() {
     private fun signIn() {
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         startActivityForResult(signInIntent, RC_SIGN_IN)
+
     }
 
 
@@ -202,14 +252,22 @@ class LoginActivity : AppCompatActivity() {
 
         SharedPref.setEmail(this, firebaseUser.email!!)
         SharedPref.setUid(this,firebaseUser.uid!!)
+        var userid=UserChat(firebaseUser.uid,firebaseUser.displayName.toString())
+        val adduser = rootRef!!
+            .collection("contacts")
+            .document(firebaseUser.uid)
+            .collection("userContacts")
+            .add(userid)
+
+        Toast.makeText(this,"added user for decoment contacts",Toast.LENGTH_LONG).show()
+
+//        val intent = Intent(this, AddUser::class.java)
+//        startActivity(intent)
 
         val uidRef = rootRef!!.collection("users").document(uid)
         uidRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val document = task.result
-                if (!document!!.exists()) {
-                    uidRef.set(user)
-                }
+
             }
         }
     }
