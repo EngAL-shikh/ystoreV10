@@ -162,7 +162,8 @@ interface YstoreApi {
                     @Field("password") password: String,
                     @Field("chat_id") chat_id: String,
                     @Field("phone") phone: String,
-                    @Field("address") address: String
+                    @Field("address") address: String,
+                    @Field("image") image: String
     ): Call<Response>
 
 

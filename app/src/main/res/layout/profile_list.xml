@@ -113,12 +113,12 @@
                     android:tint="@color/grey_20"
                     app:srcCompat="@drawable/ic_chat_outline" />
                 <ImageButton
-                    android:id="@+id/send_email"
+                    android:id="@+id/logout"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:tint="@color/grey_20"
-                    app:srcCompat="@drawable/ic_email" />
+                    app:srcCompat="@drawable/ic_logout" />
 
             </LinearLayout>
 

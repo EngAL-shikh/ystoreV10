@@ -21,7 +21,7 @@ open class Featchers {
     init {
         val retrofit: Retrofit = Retrofit.Builder()
 
-            .baseUrl("http://192.168.1.7:81/")
+            .baseUrl("http://192.168.1.4/")
 
 
             .addConverterFactory(GsonConverterFactory.create())
