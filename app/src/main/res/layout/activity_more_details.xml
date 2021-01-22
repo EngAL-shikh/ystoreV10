@@ -72,6 +72,7 @@
                                 android:orientation="horizontal">
 
                                 <ImageView
+                                    android:background="@drawable/edit_text_round_bg_outline"
                                     android:id="@+id/image_1"
                                     android:layout_width="90dp"
                                     android:layout_height="90dp"
@@ -82,6 +83,8 @@
 
                                 <ImageView
                                     android:id="@+id/image_2"
+                                    android:background="@drawable/edit_text_round_bg_outline"
+
                                     android:layout_width="90dp"
                                     android:layout_height="90dp"
                                     android:layout_marginEnd="@dimen/spacing_medium"
@@ -96,10 +99,14 @@
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
                                     android:scaleType="centerCrop"
+                                    android:background="@drawable/edit_text_round_bg_outline"
+
                                     android:src="@color/grey_20" />
 
                                 <ImageView
                                     android:id="@+id/image_4"
+                                    android:background="@drawable/edit_text_round_bg_outline"
+
                                     android:layout_width="90dp"
                                     android:layout_height="90dp"
                                     android:layout_marginEnd="@dimen/spacing_medium"
@@ -113,6 +120,7 @@
                                     android:layout_height="90dp"
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
+                                    android:background="@drawable/edit_text_round_bg_outline"
                                     android:scaleType="centerCrop"
                                     android:src="@color/grey_20" />
 

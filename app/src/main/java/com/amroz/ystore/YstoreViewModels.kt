@@ -73,6 +73,11 @@ class YstoreViewModels: ViewModel() {
     fun addCategory(cat_title:String,images:String) : MutableLiveData<Response> {
         return AddFeacher().addCategory(cat_title,images)
     }
+    fun addUsers(name: String, email: String,password: String,chat_id: String,
+                 phone: String,address: String,image:String) : MutableLiveData<Response> {
+        return AddFeacher().addUser(name, email,password,chat_id,
+            phone,address,image)
+    }
     fun addProduct(title:String,details:String,images:String,color:String,product_features:String,rating:Int,
                    price_y:Int,price_d:Int,user_id: Int,cat_id:Int,report_id:Int, order_data:String, data:String): MutableLiveData<Response>
     {

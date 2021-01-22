@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.amroz.ystore.Models.Products
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_more_details.*
 
 class MoreDetails : AppCompatActivity() {
     var count:Int=0
@@ -23,6 +24,7 @@ class MoreDetails : AppCompatActivity() {
         var price:TextView=findViewById(R.id.price)
         var details:TextView=findViewById(R.id.deatils)
         var image:ImageView=findViewById(R.id.image)
+        var image_1:ImageView=findViewById(R.id.image_1)
         var image2:ImageView=findViewById(R.id.image_2)
         var image3:ImageView=findViewById(R.id.image_3)
         var image4:ImageView=findViewById(R.id.image_4)
@@ -53,10 +55,57 @@ class MoreDetails : AppCompatActivity() {
 
 
         Picasso.with(this).load(image1).into(image)
+        Picasso.with(this).load(images[0]).into(image_1)
         Picasso.with(this).load(image22).into(image2)
         Picasso.with(this).load(images[2]).into(image3)
         Picasso.with(this).load(images[3]).into(image4)
         Picasso.with(this).load(images[4]).into(image5)
+
+
+        image_1.setOnClickListener {
+            Picasso.with(this).load(images[0]).into(image)
+            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+
+        }
+        image2.setOnClickListener {
+            Picasso.with(this).load(images[1]).into(image)
+            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+        }
+        image3.setOnClickListener {
+            Picasso.with(this).load(images[2]).into(image)
+            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+        }
+        image4.setOnClickListener {
+            Picasso.with(this).load(images[3]).into(image)
+            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+
+        }
+        image5.setOnClickListener {
+            Picasso.with(this).load(images[4]).into(image)
+            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+
+        }
+
 
 
         addtocard.setOnClickListener {

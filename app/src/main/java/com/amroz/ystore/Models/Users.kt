@@ -10,6 +10,12 @@ data class Users (
     var name:String="",
     @SerializedName("email")
     var email:String="",
+    @SerializedName("password")
+    var password:String="",
+    @SerializedName("chat_id")
+    var chat_id:String="",
+    @SerializedName("rule")
+    var rule:String="",
     @SerializedName("phone")
     var phone:String="",
     @SerializedName("address")
