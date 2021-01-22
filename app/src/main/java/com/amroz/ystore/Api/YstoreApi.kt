@@ -38,6 +38,9 @@ interface YstoreApi {
     @GET("/StoreApi/api/products_api.php")
     fun fetchProductsByCat(@Query("cat_id") cat_id: Int): Call<Response>
 
+    @GET("/StoreApi/api/products_api.php")
+    fun fetchProductsByUser(@Query("user_id") user_id: Int): Call<Response>
+
     @GET("StoreApi/api/Users_api.php?")
     fun fetchSingleUsers(@Query("user_id") user_id: Int): Call<Response>
 

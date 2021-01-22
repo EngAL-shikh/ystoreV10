@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_add_category.*
@@ -19,9 +20,13 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 
-class AddProductActivity : AppCompatActivity() {
+class AddProductActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     lateinit var  image:String
     lateinit  var lastBitmap:Bitmap ;
+    lateinit var selectCategorySv: Spinner
+    lateinit var categoriesName: MutableList<String>
+    lateinit var categoriesList: MutableList<Category>
+    var selectedCategoryId = 0
     var a=0
     var IMAGE_REQUST=1
 
@@ -31,6 +36,10 @@ class AddProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
+        categoriesList = emptyList<Category>().toMutableList()
+        categoriesName = emptyList<String>().toMutableList()
+        selectCategorySv=findViewById(R.id.category_spinner)
+        loadCategories()
         val productTitle: EditText =findViewById(R.id.title)
         val productDetails:EditText=findViewById(R.id.details)
         val productColor:EditText=findViewById(R.id.color)
@@ -66,7 +75,7 @@ class AddProductActivity : AppCompatActivity() {
                 ,productPriceY.text.toString().toInt(),
                 productPriceD.text.toString().toInt(),
                 3,
-               2,
+                 selectedCategoryId ,
                 2,
                 "",
                 "")
@@ -79,16 +88,12 @@ class AddProductActivity : AppCompatActivity() {
 
     }
 
-    fun onCat( view: View){
+  /* fun onCat( view: View){
 
 
-            val array = arrayOf(
-                "Elctrnic", "Clothes", "Ecssorics", "Cars"
+       //     val array = arrayOf(
+       //         "Elctrnic", "Clothes", "Ecssorics", "Cars"
             )
-
-
-
-
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
             builder.setTitle("Country")
             builder.setSingleChoiceItems(array, -1,
@@ -99,9 +104,31 @@ class AddProductActivity : AppCompatActivity() {
             builder.show()
 
 
+    }*/
+
+    private fun loadCategories() {
+        ystoreViewModels.liveDataCategory.observe(
+            this,
+            Observer {
+
+                for (item in it) {
+                    categoriesName.add(item.cat_title)
+                    categoriesList.add(item)
+                }
+                //spinner adapter
+                val dataAdapter = ArrayAdapter(
+                    this,
+                    R.layout.support_simple_spinner_dropdown_item,
+                    categoriesName
+                )
+
+                dataAdapter.setDropDownViewResource(
+                    android.R.layout.simple_spinner_dropdown_item
+                )
+                selectCategorySv.adapter = dataAdapter
+            }
+        )
     }
-
-
 
     //--------------------------------------start get image-----------------------------------------------------------------
 
@@ -154,6 +181,17 @@ class AddProductActivity : AppCompatActivity() {
         val imageBytes = baos.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
 
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        selectCategorySv.prompt =
+            getString(R.string.spiner_nothing_selected_message)
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val item = parent?.get(position).toString()
+        selectCategorySv.prompt = item
+        selectedCategoryId = categoriesList[position].cat_id!!
     }
 
     //------------------------------------------------------------end get images--------------------------------------

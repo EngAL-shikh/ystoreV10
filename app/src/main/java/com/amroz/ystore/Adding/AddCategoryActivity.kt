@@ -7,13 +7,18 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.*
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.get
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_add_category.*
+import kotlinx.android.synthetic.main.activity_add_product.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
-class AddCategoryActivity : AppCompatActivity() {
+class AddCategoryActivity : AppCompatActivity(){
     //---- for image------//
     lateinit var  image:String
     lateinit  var lastBitmap:Bitmap ;
@@ -32,6 +37,12 @@ class AddCategoryActivity : AppCompatActivity() {
         val smallimage:ImageView=findViewById(R.id.smalimage)
         val bt_close:ImageButton=findViewById(R.id.bt_close)
 
+
+
+
+
+
+
         getimage.setOnClickListener {
 
             showFileChooser()
@@ -49,6 +60,8 @@ class AddCategoryActivity : AppCompatActivity() {
             finish()
         }
     }
+
+
 
 
     //--------------------------------------start get image-----------------------------------------------------------------
@@ -103,6 +116,7 @@ class AddCategoryActivity : AppCompatActivity() {
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
 
     }
+
 
     //------------------------------------------------------------end get images--------------------------------------
 
