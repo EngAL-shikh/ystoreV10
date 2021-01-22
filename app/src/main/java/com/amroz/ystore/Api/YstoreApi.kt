@@ -143,6 +143,16 @@ interface YstoreApi {
     fun updateCart(@Query("cart_id") cat_id: Int?,
                    @Field("Quantity") quantity: String
     ): Call<Response>
+
+    ////////////////////////////////////////UpdateCart
+    @FormUrlEncoded
+    @PUT("StoreApi/api/addRating.php")
+    fun updateRating(@Query("product_id") product_id: Int?,
+                   @Field("rating") rating: Float
+                 , @Field("rating_vote") rating_vote: Int
+
+    ): Call<Response>
+
 //    fun updateCategory(@Path("cat_id") id:Int,
 //                      @Body category: HashMap<String, Any>):Call<String>
 
