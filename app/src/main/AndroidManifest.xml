@@ -20,7 +20,9 @@
         <activity android:name=".Dashboard" />
         <activity android:name=".MoreDetails" />
         <activity android:name=".ProductByCat" />
+
         <activity android:name=".Splash.Splash"></activity>
+
 
         <activity android:name=".Adding.AddUser"></activity>
         <activity android:name=".Chating.ContactsActivity" />
@@ -30,6 +32,7 @@
 
         <activity android:name=".Chating.ChatActivity" />
         <activity android:name=".ChatingActivity"></activity>
+
         <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
