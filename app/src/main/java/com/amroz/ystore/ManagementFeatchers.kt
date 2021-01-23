@@ -233,7 +233,7 @@ class ManagementFeatchers {
     /////////////////////UpdateRating
     fun updateRating(id:Int, rating: Float,rating_vote:Int): MutableLiveData<Response> {
         val responseLiveData: MutableLiveData<Response> = MutableLiveData()
-        var cartUpdate = mangApi.updateRating(id,rating,rating_vote)
+        var cartUpdate = mangApi.updateRating(id, rating, rating_vote)
         cartUpdate.enqueue(object : Callback<Response> {
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
 
@@ -242,6 +242,10 @@ class ManagementFeatchers {
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.d("onResponse", t.message.toString())
+            }
+        })
+     return  responseLiveData
+    }
 
 
 
