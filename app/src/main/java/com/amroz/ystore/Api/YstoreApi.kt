@@ -145,7 +145,7 @@ interface YstoreApi {
                    @Field("Quantity") quantity: String
     ): Call<Response>
 
-    ////////////////////////////////////////UpdateCart
+    ////////////////////////////////////////UpdateRatingProduct
     @FormUrlEncoded
     @PUT("StoreApi/api/addRating.php")
     fun updateRating(@Query("product_id") product_id: Int?,
@@ -153,7 +153,12 @@ interface YstoreApi {
                  , @Field("rating_vote") rating_vote: Int
 
     ): Call<Response>
-
+    ////////////////////////////////////////UpdateRatingUser
+    @FormUrlEncoded
+    @PUT("StoreApi/api/ratingUser.php")
+    fun updateRatingUser(@Query("user_id") product_id: Int?,
+                     @Field("user_raiting") rating: Int
+    ): Call<Response>
 //    fun updateCategory(@Path("cat_id") id:Int,
 //                      @Body category: HashMap<String, Any>):Call<String>
 

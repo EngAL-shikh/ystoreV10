@@ -49,6 +49,7 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
         var avgRatingtv:TextView=findViewById(R.id.avrage_rating_tv)
         var userRating:TextView=findViewById(R.id.user_rating_tv)
         var ratingBar:RatingBar=findViewById(R.id.ratingProduct)
+        var ratingBar2:RatingBar=findViewById(R.id.ratingShow_rb)
 
 
 
@@ -158,6 +159,10 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
 
 
 //ratingBar.onRatingBarChangeListener.onRatingChanged()
+        var ratingBarValue = 0.0f
+        var  count=products.rating_vote+1
+        var sumRating=0.0f
+        var avregeRating=0.0f
         ratingBar.onRatingBarChangeListener =
             RatingBar.OnRatingBarChangeListener { _, rating, _ ->
                 if(rating.toInt()<0){
@@ -176,22 +181,28 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
                                 rating, Toast.LENGTH_SHORT
                     ).show()}
 
+
             }
-        val ratingBarValue = ratingBar.rating
-        var  count=products.rating_vote+1
-        var sumRating=products.rating+ratingBarValue
-        var avregeRating=sumRating/3.0f
+
        // if()
+        var countR=products.rating_vote
         btn_ratingProduct.setOnClickListener{
+            ratingBarValue = ratingBar.rating
+            count=products.rating_vote+1
+            sumRating=products.rating + ratingBar.rating.toFloat()
+            avregeRating=sumRating/count
             ManagementFeatchers().updateRating(products.product_id,sumRating,count)
             Toast.makeText(
                 this,
-                "Thanks For rating us : " + ratingBarValue.toString(), Toast.LENGTH_SHORT
+                "Thanks For rating us : " + ratingBar.rating, Toast.LENGTH_SHORT
             ).show()
         }
-        avgRatingtv.text=avregeRating.toString()
-        Log.d("hager","$avregeRating")
+
+        var avg=products.rating /3.0f
+        var avg1=avg/products.rating_vote.toFloat()
+        avgRatingtv.text=avg1.toString()
         userRating.text=count.toString()
+
 
     }
 
