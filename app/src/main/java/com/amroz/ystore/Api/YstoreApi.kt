@@ -3,6 +3,7 @@ package com.amroz.ystore.Api
 
 
 import com.amroz.ystore.*
+import com.amroz.ystore.Models.Users
 
 import com.amroz.ystore.Response
 import retrofit2.Call
@@ -19,7 +20,7 @@ interface YstoreApi {
     fun fetchCategory(): Call<Response>
 
     @GET("StoreApi/api/cart_api.php")
-    fun fetchCart(): Call<Response>
+    fun fetchCart(@Query("user_id") user_id: Int): Call<Response>
 
     @GET("StoreApi/api/reports_api.php")
     fun fetchReports(): Call<Response>
@@ -146,11 +147,56 @@ interface YstoreApi {
     fun updateCart(@Query("cart_id") cat_id: Int?,
                    @Field("Quantity") quantity: String
     ): Call<Response>
+
+    ////////////////////////////////////////UpdateCart
+    @FormUrlEncoded
+    @PUT("StoreApi/api/addRating.php")
+    fun updateRating(@Query("product_id") product_id: Int?,
+                   @Field("rating") rating: Float
+                 , @Field("rating_vote") rating_vote: Int
+
+    ): Call<Response>
+
 //    fun updateCategory(@Path("cat_id") id:Int,
 //                      @Body category: HashMap<String, Any>):Call<String>
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////athu//////////////////////////////////////////////////////////////////////
+
+    @FormUrlEncoded
+    @POST("StoreApi/api/login.php")
+    fun login(@Field("name") email:String, @Field("password")password:String) : Call<Users>
 
 
+    @FormUrlEncoded
+    @POST("StoreApi/api/users_api.php")
+    fun addUser( @Field("name") name: String,
+                    @Field("email") email: String,
+                    @Field("password") password: String,
+                    @Field("chat_id") chat_id: String,
+                    @Field("phone") phone: String,
+                    @Field("address") address: String,
+                    @Field("image") image: String
+    ): Call<Response>
+
+
+//update user report
+
+    @FormUrlEncoded
+    @PUT("StoreApi/api/users_api.php")
+    fun updateReportUser(@Query("user_id")user_id : Int?,
+                   @Field("user_report") user_report: Int
+    ): Call<Response>
+
+
+    //produuct_report
+    @FormUrlEncoded
+    @POST("StoreApi/api/reports_api.php")
+    fun productReport
+                (@Field("report_id") report_id:Int,
+                @Field("report_reason") report_reason:String,
+                      @Field("product_id") product_id:Int,
+                    @Field("user_id") user_id:Int): Call<Response>
 
 }
 

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 
 android {
@@ -59,11 +60,17 @@ dependencies {
     implementation 'com.github.scottyab:showhidepasswordedittext:0.8'
     implementation 'com.github.gayanvoice:android-animations-kotlin:1.0.1'
     implementation 'com.daimajia.androidanimations:library:2.4@aar'
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation 'com.google.firebase:firebase-auth:16.0.3'
+    implementation 'com.google.firebase:firebase-firestore:17.1.0'
+
 
     compile 'com.itextpdf:itextg:5.5.10'
 
-
-
+    //Firebase-UI
+    implementation 'com.firebaseui:firebase-ui-auth:4.2.0'
+    implementation 'com.firebaseui:firebase-ui-firestore:4.2.0'
 
 
 
