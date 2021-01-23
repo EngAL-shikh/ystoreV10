@@ -274,4 +274,26 @@ class ManagementFeatchers {
         })
         return responseLiveData
     }
+
+    //ResetPassword
+    fun ResetPassword(user_id:Int, password:String): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var user_reportUpdate = mangApi.ResetPassword(user_id,password)
+        user_reportUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+                Log.d("onResponse", "Reset")
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.d("onResponse", t.message.toString())
+
+            }
+
+
+        })
+        return responseLiveData
+
+
+    }
 }

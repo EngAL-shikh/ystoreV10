@@ -19,7 +19,9 @@ data class Users (
     @SerializedName("user_image")
     var user_image:String="",
     @SerializedName("user_raiting")
-    var user_raiting:Int=0
+    var user_raiting:Int=0,
+    @SerializedName("password")
+var password:String=""
 //
 ): Serializable {
 }

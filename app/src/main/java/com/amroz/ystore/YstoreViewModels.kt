@@ -96,6 +96,14 @@ class YstoreViewModels: ViewModel() {
     fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
         return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
     }
+
+    //ResetPassword
+
+
+    fun ResetPassword(user_id:Int, password:String): MutableLiveData<Response> {
+        return ManagementFeatchers(). ResetPassword(user_id, password )
+    }
+
 }
 
 

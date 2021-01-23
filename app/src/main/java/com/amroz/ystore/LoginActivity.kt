@@ -3,14 +3,12 @@ package com.amroz.ystore
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import kotlinx.android.synthetic.main.update_profile_user.*
 import render.animations.Bounce
 import render.animations.Render
 
@@ -68,9 +66,6 @@ class LoginActivity : AppCompatActivity() {
                 .duration(2000)
                 .playOn(findViewById(R.id.linear_login_by_email))
         }
-
-
-
 
     }
 }

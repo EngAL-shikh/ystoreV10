@@ -165,5 +165,13 @@ interface YstoreApi {
                       @Field("product_id") product_id:Int,
                     @Field("user_id") user_id:Int): Call<Response>
 
+
+    //Reset_Password
+    @FormUrlEncoded
+    @PUT("StoreApi/api/users_api.php")
+    fun ResetPassword(@Query("user_id")user_id : Int?,
+                         @Field("password") password: String
+    ): Call<Response>
+
 }
 
