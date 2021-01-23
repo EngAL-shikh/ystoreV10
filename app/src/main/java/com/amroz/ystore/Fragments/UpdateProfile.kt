@@ -45,8 +45,8 @@ class UpdateProfile : AppCompatActivity() {
        logout=findViewById(R.id.logout)
        update=findViewById(R.id.linear_update)
         pass=findViewById(R.id.pass)
+        
 ///////////////////////////////////////////////////
-
 
         val currentpass: EditText = findViewById(R.id.cpass)
         val newpass: EditText = findViewById(R.id.npass)
