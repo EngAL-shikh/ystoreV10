@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 object SharedPref {
-    const val EMAIL= "email"
+    const val EMAIL= ""
     const val UID="uid"
 
     private  fun getSharedPreference(ctx: Context?): SharedPreferences? {

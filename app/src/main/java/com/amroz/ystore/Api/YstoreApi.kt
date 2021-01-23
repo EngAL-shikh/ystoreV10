@@ -20,7 +20,7 @@ interface YstoreApi {
     fun fetchCategory(): Call<Response>
 
     @GET("StoreApi/api/cart_api.php")
-    fun fetchCart(): Call<Response>
+    fun fetchCart(@Query("user_id") user_id: Int): Call<Response>
 
     @GET("StoreApi/api/reports_api.php")
     fun fetchReports(): Call<Response>

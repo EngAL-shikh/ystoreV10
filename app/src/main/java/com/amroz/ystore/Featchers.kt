@@ -77,9 +77,9 @@ fun fetchCat(): LiveData<List<Category>> {
 }
 
     //cart
-    fun fetchCart(): LiveData<List<Cart>> {
-        val responseLiveData: MutableLiveData<List<Cart>> = MutableLiveData()
-        val newsRequest: Call<Response> = ystoreApi.fetchCart()
+    fun fetchCart(user_id:Int): LiveData<List<Products>> {
+        val responseLiveData: MutableLiveData<List<Products>> = MutableLiveData()
+        val newsRequest: Call<Response> = ystoreApi.fetchCart(user_id)
         newsRequest.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.e("TAG", "Failed to fetch ", t)
@@ -88,7 +88,7 @@ fun fetchCat(): LiveData<List<Category>> {
             ) {
 
                 val response:Response? = response.body()
-                val carts:List<Cart> = response?.carts
+                val carts:List<Products> = response?.carts
                     ?: mutableListOf()
                 Log.d("TAG", "Response received")
                 responseLiveData.value = carts

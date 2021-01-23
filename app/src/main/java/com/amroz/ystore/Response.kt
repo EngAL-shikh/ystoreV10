@@ -13,8 +13,8 @@ data class Response (
     var reports:List<Report>,
     @SerializedName("getAllCat")
     var cats: List<Category>,
-    @SerializedName("getAllCart")
-    var carts: List<Cart>,
+    @SerializedName("getProductsInCart")
+    var carts: List<Products>,
     @SerializedName("getAllProducts")
     var products: List<Products>,
     @SerializedName("getAllUsers")

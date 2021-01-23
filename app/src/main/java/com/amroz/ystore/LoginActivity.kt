@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 
 import android.widget.*
 import android.widget.Toast.makeText
-import androidx.appcompat.app.AppCompatActivity
+
 import com.amroz.ystore.Adding.AddUser
 import com.amroz.ystore.Chating.ChatActivity
 import com.amroz.ystore.Chating.ContactsActivity
@@ -33,9 +33,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
+
 import android.widget.Toast
 
 import com.amroz.ystore.Models.Users
