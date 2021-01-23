@@ -33,7 +33,9 @@
         <activity android:name=".UpdateProduct"></activity>
         <activity android:name=".Fragments.UpdateProfile" />
         <activity android:name=".AddCartActivity"></activity>
-        <activity android:name=".AddProductActivity"></activity>
+        <activity android:name=".AddProductActivity">
+
+        </activity>
         <activity android:name=".AddCategoryActivity"></activity>
     </application>
 

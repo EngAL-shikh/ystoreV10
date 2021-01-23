@@ -1,7 +1,5 @@
 package com.amroz.ystore
 
-import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.icu.text.SimpleDateFormat
 import android.os.Build
@@ -12,20 +10,16 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.Models.Products
 import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
-import com.squareup.picasso.Picasso
 import java.io.FileOutputStream
 import java.util.*
 import java.util.jar.Manifest
@@ -36,7 +30,7 @@ private lateinit var productTitle: TextView
 private lateinit var date: TextView
 private lateinit var pdf : Button
 var user_id :Int=3
-val STORAGE_CODE=0
+val STORAGE_CODE=100
 class UserReports : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,15 +81,19 @@ if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
         }
 
 
+@RequiresApi(Build.VERSION_CODES.N)
 fun savePdf(){
     val mDo=Document()
     try{
-    val mFilepath= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         val mFileName=SimpleDateFormat("yyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
+    val mFilepath= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         Environment.getStorageDirectory().toString() + "/" + mFileName +".pdf"
     } else {
         TODO("VERSION.SDK_INT < R")
     }
+
+
+
         PdfWriter.getInstance(mDo,FileOutputStream(mFilepath))
         mDo.open()
         val productLiveData = Featchers().fetchProductsByUser(user_id) as String
@@ -129,7 +127,7 @@ fun savePdf(){
     }
     private inner class ProductByUserAdapter(var product:List<Products>): RecyclerView.Adapter<ProductsByUserHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsByUserHolder {
-            var view: View = layoutInflater.inflate(R.layout.userreport_ltem,parent,false)
+            var view: View = layoutInflater.inflate(R.layout.userreports_ltem,parent,false)
             return ProductsByUserHolder(view)
         }
 
