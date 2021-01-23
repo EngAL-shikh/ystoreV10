@@ -18,7 +18,11 @@ data class Products(
     @SerializedName("product_features")
     var product_features:String="" ,
     @SerializedName("rating")
-    var rating:Int=0,
+    var rating:Float=0.0f,
+    @SerializedName("avarage_vote")
+    var avarage_vote:Float=0.0f,
+    @SerializedName("rating_vote")
+    var rating_vote:Int=0,
     @SerializedName("price_y")
     var price_y:Int=0,
     @SerializedName("price_d")

@@ -21,11 +21,9 @@ class ManagementFeatchers {
             .setLenient()
             .create()
         val retrofit: Retrofit = Retrofit.Builder()
-
             .baseUrl("http://192.168.1.7:81/")
            //.addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
-
             .build()
 
         mangApi= retrofit.create(YstoreApi::class.java)
@@ -232,6 +230,24 @@ class ManagementFeatchers {
 
     }
 
+    /////////////////////UpdateRating
+    fun updateRating(id:Int, rating: Float,rating_vote:Int): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var cartUpdate = mangApi.updateRating(id, rating, rating_vote)
+        cartUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+                Log.d("onResponse", "yes")
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.d("onResponse", t.message.toString())
+            }
+        })
+     return  responseLiveData
+    }
+
+
 
     //update user report
     fun updateReportUser(user_id:Int, user_report: Int): MutableLiveData<Response> {
@@ -245,6 +261,7 @@ class ManagementFeatchers {
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.d("onResponse_report", t.message.toString())
+
 
             }
 
@@ -276,4 +293,5 @@ class ManagementFeatchers {
         })
         return responseLiveData
     }
+
 }

@@ -31,8 +31,8 @@
                     android:text="  Adulterated product"
                     android:textSize="20dp"
                     android:layout_margin="10dp"
-                    android:textColor="#ffffff"
-                    android:background="@color/blue_A100"
+                    android:textColor="#000000"
+                    android:background="@drawable/edittext_round"
                     />
                 <TextView
                     android:id="@+id/report2"
@@ -40,8 +40,8 @@
                     android:layout_height="wrap_content"
                     android:text="  The price is overrated"
                     android:textSize="20dp"
-                    android:textColor="#ffffff"
-                    android:background="@color/blue_A100"
+                    android:textColor="#000000"
+                    android:background="@drawable/edittext_round"
                     android:layout_margin="10dp"
 
                     />
@@ -52,8 +52,8 @@
                     android:text="  The product is not in the required specifications"
                     android:textSize="20dp"
                     android:layout_margin="10dp"
-                    android:textColor="#ffffff"
-                    android:background="@color/blue_A100"/>
+                    android:textColor="#000000"
+                    android:background="@drawable/edittext_round"/>
                 <TextView
                     android:id="@+id/report4"
                     android:layout_width="match_parent"
@@ -61,8 +61,8 @@
                     android:layout_margin="10dp"
                     android:text="  The product is an imitation"
                     android:textSize="20dp"
-                    android:textColor="#ffffff"
-                    android:background="@color/blue_A100"
+                    android:textColor="#000000"
+                    android:background="@drawable/edittext_round"
                     />
 
                 <LinearLayout

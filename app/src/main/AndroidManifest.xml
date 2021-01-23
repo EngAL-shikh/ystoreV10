@@ -21,6 +21,7 @@
         <activity android:name=".MoreDetails" />
         <activity android:name=".ProductByCat" />
 
+        <activity android:name=".Splash.Splash"></activity>
 
 
         <activity android:name=".Adding.AddUser"></activity>
@@ -32,16 +33,13 @@
         <activity android:name=".Chating.ChatActivity" />
         <activity android:name=".ChatingActivity"></activity>
 
-
         <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".Splash.Splash" />
         <activity android:name=".Mangs_Delete" />
         <activity android:name=".LoginActivity" >
 
