@@ -21,9 +21,7 @@ open class Featchers {
     init {
         val retrofit: Retrofit = Retrofit.Builder()
 
-
-            .baseUrl("http://172.16.16.251/")
-
+            .baseUrl("http://192.168.1.4/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -166,6 +164,27 @@ fun fetchCat(): LiveData<List<Category>> {
         return responseLiveData
 
     }
+    fun fetchProductsByUser(user_id:Int): LiveData<List<Products>> {
+        val responseLiveData: MutableLiveData<List<Products>> = MutableLiveData()
+        val ystoreRequest: Call<Response> = ystoreApi.fetchProductsByUser(user_id)
+        ystoreRequest.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.e("TAG", "Failed to fetch ", t)
+            }
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
+            ) {
+
+                val response:Response? = response.body()
+                val products:List<Products> = response?.productByUser
+                    ?: mutableListOf()
+                Log.d("TAG", "Response received")
+                responseLiveData.value = products
+                Log.d("onResponse", products.toString())
+            }
+        })
+        return responseLiveData
+
+    }
 
     //get userinfo
     fun fetchUsersInfo(id:Int): LiveData<List<Users>> {
@@ -180,29 +199,6 @@ fun fetchCat(): LiveData<List<Category>> {
 
                 val response:Response? = response.body()
                 val users:List<Users> = response?.singleUsers
-                    ?: mutableListOf()
-                Log.d("TAG", "Response received")
-                responseLiveData.value = users
-                Log.d("onResponse", users.toString())
-            }
-        })
-        return responseLiveData
-
-    }
-
-    //get id by email
-    fun fetchUsersInfoBYemail(email:String): LiveData<List<Users>> {
-        val responseLiveData: MutableLiveData<List<Users>> = MutableLiveData()
-        val ystoreRequest: Call<Response> = ystoreApi.fetchSingleUsersbyemail(email)
-        ystoreRequest.enqueue(object : Callback<Response> {
-            override fun onFailure(call: Call<Response>, t: Throwable) {
-                Log.e("TAG", "Failed to fetch ", t)
-            }
-            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
-            ) {
-
-                val response:Response? = response.body()
-                val users:List<Users> = response?.getSingleuUserid
                     ?: mutableListOf()
                 Log.d("TAG", "Response received")
                 responseLiveData.value = users
