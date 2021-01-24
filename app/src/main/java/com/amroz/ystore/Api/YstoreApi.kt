@@ -208,6 +208,15 @@ interface YstoreApi {
                  @Field("user_id") user_id:Int): Call<Response>
 
 
+
+    //Reset_Password
+    @FormUrlEncoded
+    @PUT("StoreApi/api/users_api.php")
+    fun ResetPassword(@Query("user_id")user_id : Int?,
+                         @Field("password") password: String
+    ): Call<Response>
+
+
     ///////////////////////////////RatingUs [ Post Put Delete]
 
     @FormUrlEncoded
@@ -227,5 +236,6 @@ interface YstoreApi {
     @DELETE("StoreApi/api/rating_api.php")
     fun  deleteRating(@Query("rating_id")id:Int): Call<Response>
     ///////////////////////////////////////////////
+
 }
 

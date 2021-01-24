@@ -4,8 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
-
 import androidx.lifecycle.ViewModelProviders
 
 import android.widget.*
@@ -16,9 +17,9 @@ import com.amroz.ystore.Chating.ChatActivity
 import com.amroz.ystore.Chating.ContactsActivity
 import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.UserChat
-
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import kotlinx.android.synthetic.main.update_profile_user.*
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -152,8 +153,6 @@ class LoginActivity : AppCompatActivity() {
                 .duration(2000)
                 .playOn(findViewById(R.id.linear_login_by_email))
         }
-
-
 
 
         ////////////////////////////////////////////////////////////////////
@@ -360,5 +359,6 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         //private val TAG = "LoginActivity"
         private const val RC_SIGN_IN = 123
+
     }
 }

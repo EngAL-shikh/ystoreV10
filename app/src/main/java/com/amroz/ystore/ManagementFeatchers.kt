@@ -289,6 +289,25 @@ class ManagementFeatchers {
         })
         return responseLiveData
     }
+
+
+    //ResetPassword
+    fun ResetPassword(user_id:Int, password:String): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var user_reportUpdate = mangApi.ResetPassword(user_id,password)
+        user_reportUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+                Log.d("onResponse", "Reset")
+                          }
+
+
+        })
+        return responseLiveData
+
+
+    }
+
 ////////////////////////////////////////RatingUs[ Post  Put   delete ]
 fun addRating( rating: Float,product_id: Int,user_id: Int): MutableLiveData<Response> {
     val responseLiveData: MutableLiveData<Response> = MutableLiveData()
@@ -305,6 +324,8 @@ fun addRating( rating: Float,product_id: Int,user_id: Int): MutableLiveData<Resp
     } )
     return responseLiveData
 }
+  
+  
     //***********************************************//
     fun updateRating(id:Int, rating: Float): MutableLiveData<Response> {
         val responseLiveData: MutableLiveData<Response> = MutableLiveData()
@@ -317,10 +338,13 @@ fun addRating( rating: Float,product_id: Int,user_id: Int): MutableLiveData<Resp
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.d("onResponse", t.message.toString())
+
             }
         } )
         return responseLiveData
     }
+  
+  
     //***********************************************//
     fun deleteRating(id: Int) {
  val cartRequest: Call< Response> =mangApi.deleteRating(id)
@@ -336,5 +360,6 @@ fun addRating( rating: Float,product_id: Int,user_id: Int): MutableLiveData<Resp
         })
 
 }
+
 
 }

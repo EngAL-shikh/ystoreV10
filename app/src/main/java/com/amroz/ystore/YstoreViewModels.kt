@@ -99,6 +99,16 @@ class YstoreViewModels: ViewModel() {
     fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
         return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
     }
+
+
+    //ResetPassword
+
+
+    fun ResetPassword(user_id:Int, password:String): MutableLiveData<Response> {
+        return ManagementFeatchers(). ResetPassword(user_id, password )
+    }
+
+
     /////////////////rating ViewModel
     fun updateRating(id:Int, rating: Float): MutableLiveData<Response> {
         return ManagementFeatchers().updateRating(id,rating)
@@ -111,6 +121,7 @@ class YstoreViewModels: ViewModel() {
     fun deleteRating(id:Int) {
         return ManagementFeatchers().deleteRating(id)
     }
+
 }
 
 
