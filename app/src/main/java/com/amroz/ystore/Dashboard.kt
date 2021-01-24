@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.amroz.ystore.Fragments.Catogrey_Fragment
 import com.amroz.ystore.Fragments.ProductsFragment
@@ -22,6 +23,7 @@ var  card_users:CardView=findViewById(R.id.card_users)
 var  card_products:CardView=findViewById(R.id.card_products)
 var  card_reports:CardView=findViewById(R.id.card_reports)
 var  contact:CardView=findViewById(R.id.conactDashboard)
+var  logout:TextView=findViewById(R.id.logout)
 
         var admin=intent.extras?.getString("admin")
         cat.setOnClickListener {
@@ -71,6 +73,15 @@ var  contact:CardView=findViewById(R.id.conactDashboard)
                     .commit()
             }
 
+        }
+
+        logout.setOnClickListener {
+//            var shared=getSharedPreferences("admin",0)
+//            var edit=shared?.edit()
+//            edit?.putString("rule","0")
+//            edit?.commit()
+            var intent=Intent(this,LoginActivity::class.java)
+            startActivity(intent)
         }
 
 

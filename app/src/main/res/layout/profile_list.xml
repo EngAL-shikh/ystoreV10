@@ -30,13 +30,13 @@
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="25dp"
                 android:src="@drawable/ii"
                 app:civ_border="true"
-                app:civ_border_color="@color/colorPrimary"
-                app:civ_border_width="1dp"
+                app:civ_border_color="@color/yallow2"
+                app:civ_border_width="2dp"
                 app:civ_shadow="true"
                 app:civ_shadow_radius="0" />
 
@@ -80,6 +80,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:tint="@color/grey_20"
+                    android:visibility="gone"
                     app:srcCompat="@drawable/ic_phone" />
                 <ImageButton
                     android:id="@+id/bt_edite"
@@ -100,6 +101,17 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:tint="@color/grey_20"
                     app:srcCompat="@drawable/add_raiting" />
+                <TextView
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:text="124"
+                    android:textStyle="bold"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/grey_20"
+                    android:gravity="center">
+
+                </TextView>
+
 
                 <View
                     android:layout_width="25dp"

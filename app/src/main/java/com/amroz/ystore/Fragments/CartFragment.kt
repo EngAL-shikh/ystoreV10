@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -16,12 +17,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.amroz.ystore.Featchers
+import com.amroz.ystore.*
 import com.amroz.ystore.Models.Cart
 import com.amroz.ystore.Models.Products
-import com.amroz.ystore.MoreDetails
-import com.amroz.ystore.R
-import com.amroz.ystore.YstoreViewModels
 import com.squareup.picasso.Picasso
 
 
@@ -47,11 +45,17 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cartViewModel.fetchCart(3).observe(viewLifecycleOwner, Observer {
+//
+//        var shaerd=context?.getSharedPreferences("userid",0)
+//        var id= shaerd?.getString("id",null)?.toInt()
+
+        cartViewModel.fetchCart(QueryPreferences.getStoredQueryUserid(context!!).toString().toInt()).
+        observe(viewLifecycleOwner, Observer {
             it?.let {
                 cartRecyclerView.adapter= CartAdapter(it)
             }
         })
+
 
 
 
@@ -65,7 +69,7 @@ class CartFragment : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_cart, container, false)
         cartRecyclerView= view.findViewById(R.id.cart_recycler_view)
-        cartRecyclerView.layoutManager= GridLayoutManager(context,2)
+        cartRecyclerView.layoutManager= LinearLayoutManager(context)
         return view
     }
 
@@ -84,20 +88,25 @@ class CartFragment : Fragment() {
         private  lateinit var productsItem:Products
 
         val title = view.findViewById(R.id.title) as TextView
-        val deatils = view.findViewById(R.id.deatils) as TextView
+       // val deatils = view.findViewById(R.id.deatils) as TextView
         val price = view.findViewById(R.id.price) as TextView
-        val Raitings = view.findViewById(R.id.Raitings) as TextView
+        //val Raitings = view.findViewById(R.id.Raitings) as TextView
         val image = view.findViewById(R.id.image) as ImageView
-        val card= view.findViewById(R.id.ProductCard) as CardView
+        val pluse = view.findViewById(R.id.pluse) as ImageButton
+        val minse = view.findViewById(R.id.minse) as ImageButton
+        val quntity = view.findViewById(R.id.quantity_id) as TextView
+        //val card= view.findViewById(R.id.ProductCard) as CardView
 
 
         fun bind(products: Products) {
             var images=  products.images.split(",").toTypedArray()
             productsItem=products
             title.text = products.title
-            deatils.text = products.details
-            Raitings.text = products.rating.toString()
-            price.text=products.price_d.toString()
+           // quntity.text = products.rating
+           // deatils.text = products.details
+           // Raitings.text = products.rating.toString()
+            price.text="$ "+products.price_d.toString()
+
             Picasso.with(context).load(images[0]).into(image)
 
 //            card.setOnClickListener {
@@ -123,7 +132,7 @@ class CartFragment : Fragment() {
             val view =
 
 
-                LayoutInflater.from(parent.context).inflate(R.layout.products_list, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.cartlist, parent, false)
 
 
             return CartHolder(view)

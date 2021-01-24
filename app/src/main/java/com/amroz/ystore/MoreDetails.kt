@@ -26,7 +26,6 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
     lateinit var ratingUs:List<RatingUs>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_details)
         var title:TextView=findViewById(R.id.title)
@@ -45,9 +44,7 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
         var subqn:FloatingActionButton=findViewById(R.id.fab_qty_sub)
         var tv_qty:TextView=findViewById(R.id.tv_qty)
         var btn_ratingProduct:ImageButton=findViewById(R.id.btn_ratingProduct)
-
         var products=intent.getSerializableExtra("data") as Products
-
         var avgRatingtv:TextView=findViewById(R.id.avrage_rating_tv)
         var userRating:TextView=findViewById(R.id.user_rating_tv)
         var ratingBar:RatingBar=findViewById(R.id.ratingProduct)
@@ -140,7 +137,10 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
 
 
         addtocard.setOnClickListener {
-            ystoreViewModels.addCart(3,products.product_id,count)
+            var id= QueryPreferences.getStoredQueryUserid(this!!).toInt()
+            ystoreViewModels.addCart(id!!,products.product_id,count)
+            Toast.makeText(this,"Product added to your Cart",Toast.LENGTH_LONG).show()
+            Log.d("cartadd",QueryPreferences.getStoredQueryUserid(this!!).toString())
         }
 
         addqn.setOnClickListener {

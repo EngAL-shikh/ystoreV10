@@ -46,6 +46,9 @@ interface YstoreApi {
     @GET("StoreApi/api/Users_api.php?")
     fun fetchSingleUsers(@Query("user_id") user_id: Int): Call<Response>
 
+    @GET("StoreApi/api/gitUserid_api.php?")
+    fun fetchSingleUsersbyemail(@Query("email") email: String): Call<Response>
+
 
 
 
@@ -65,15 +68,15 @@ interface YstoreApi {
                     @Field("rating") rating: Int,
                     @Field("price_y") price_y:Int,
                     @Field("price_d") price_d: Int,
-                    @Field("user_d") user_d: Int,
-                    @Field("cat_d") cat_d: Int,
+                    @Field("user_id") user_id: Int,
+                    @Field("cat_id") cat_id: Int,
                     @Field("report_id") report_id: Int,
                     @Field("order_date") order_date: String,
                     @Field("date")date: String
                                                   ): Call<Response>
     @FormUrlEncoded
     @POST("StoreApi/api/cart_api.php")
-    fun addCart(@Field("user_id:") user_id:Int,
+    fun addCart(@Field("user_id") user_id:Int,
                 @Field("product_id") product_id:Int,
                 @Field("Quantity") Quantity:Int
     ): Call<Response>

@@ -66,7 +66,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Sales    operations "
                                 android:gravity="left"
-                                android:layout_margin="10dp"
+
                                 android:textStyle="bold"
                                 android:textColor="@color/amber_50"
                                 android:textSize="20sp">
@@ -450,6 +450,18 @@
 
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:text="logout"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:background="@drawable/butn_round"
+                android:layout_height="50dp">
+
+            </TextView>
 
 
 

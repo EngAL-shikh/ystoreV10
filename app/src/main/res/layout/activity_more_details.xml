@@ -496,55 +496,16 @@ Advanced dual-camera system with 12MP Ultra Wide and"
                         android:textColor="@color/grey_60" />
 
                     <LinearLayout
-                        android:id="@+id/rating_linear"
+                        android:id="@+id/rating_linear_t3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="horizontal">
-
-
-                        <RatingBar
-                            android:id="@+id/ratingProduct"
-                            android:layout_width="wrap_content"
-                            android:layout_height="46dp"
-                            android:layout_margin="15dp"
-                            android:layout_gravity="center"
-                            android:progressDrawable="@drawable/ic_haert_rating"
-                            android:rating="0"
-                            android:numStars="3"
-                            android:stepSize="0.5" />
-
-                        <ImageButton
-                            android:id="@+id/btn_ratingProduct"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/add_raiting"
-                            android:text="rating" />
-
-
-                    </LinearLayout>
+                        android:orientation="vertical">
 
                         <LinearLayout
-                            android:id="@+id/rating_linear_t3"
+                            android:id="@+id/rating_linear_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <RatingBar
-                                android:id="@+id/ratingShow_rb"
-                                android:layout_width="wrap_content"
-                                android:layout_height="46dp"
-                                android:layout_margin="15dp"
-                                android:progressDrawable="@drawable/ic_haert_rating"
-                                android:rating="1.5"
-                                android:numStars="3"
-                                android:stepSize="0.5" />
-                            <LinearLayout
-                                android:id="@+id/rating_linear_text"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                            android:orientation="horizontal">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -572,7 +533,39 @@ Advanced dual-camera system with 12MP Ultra Wide and"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/blue_900" />
                         </LinearLayout>
-                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/rating_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+
+
+                        <RatingBar
+                            android:id="@+id/ratingProduct"
+                            android:layout_width="248dp"
+                            android:layout_height="46dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="40dp"
+                            android:numStars="5"
+                            android:progressDrawable="@drawable/ic_haert_rating"
+                            android:rating="0"
+                            android:stepSize="0.5" />
+
+                        <ImageButton
+                            android:id="@+id/btn_ratingProduct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/add_raiting"
+                            android:text="rating" />
+
+
+                    </LinearLayout>
+
+
 
 
                     <View

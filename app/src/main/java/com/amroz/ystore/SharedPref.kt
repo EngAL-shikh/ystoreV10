@@ -1,45 +1,58 @@
-package com.amroz.ystore
-
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
-object SharedPref {
-    const val EMAIL= ""
-    const val UID="uid"
+var RULE_ADMIN="getadmin"
+var RULE_EMAIL="email"
+var CHAT_ID="chatid"
+var USER_ID="userid"
+object QueryPreferences {
 
-    private  fun getSharedPreference(ctx: Context?): SharedPreferences? {
-        return PreferenceManager.getDefaultSharedPreferences(ctx)
+    fun getStoredQuery(context: Context): String {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getString(RULE_ADMIN, "")!!
+    }
+    fun setStoredQuery(context: Context, query: String) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .putString(RULE_ADMIN, query)
+            .apply()
     }
 
-    private fun  editor(context: Context, const:String, string: String){
-        getSharedPreference(
-            context
-        )?.edit()?.putString(const,string)?.apply()
+    fun getStoredQueryEmail(context: Context): String {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getString(RULE_EMAIL, "")!!
     }
 
-    fun getEmail(context: Context)= getSharedPreference(
-        context
-    )?.getString(EMAIL,"")
-
-    fun setEmail(context: Context, email: String){
-        editor(
-            context,
-            EMAIL,
-            email
-        )
+    fun setStoredQueryEmail(context: Context, query: String) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .putString(RULE_EMAIL, query)
+            .apply()
     }
 
-    fun setUid(context: Context, uid:String){
-        editor(
-            context,
-            UID,
-            uid
-        )
+    fun getStoredQueryChatid(context: Context): String {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getString(CHAT_ID, "")!!
     }
 
-    fun getUid(context: Context) = getSharedPreference(
-        context
-    )?.getString(UID,"")
+    fun setStoredQueryChatid(context: Context, query: String) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .putString(CHAT_ID, query)
+            .apply()
+    }
+
+    fun getStoredQueryUserid(context: Context): String {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getString(USER_ID, "")!!
+    }
+
+    fun setStoredQueryUserid(context: Context, query: String) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+            .edit()
+            .putString(USER_ID, query)
+            .apply()
+    }
+
 
 }

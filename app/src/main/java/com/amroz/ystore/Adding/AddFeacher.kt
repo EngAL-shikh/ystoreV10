@@ -20,7 +20,7 @@ class AddFeacher : AppCompatActivity() {
 
         val retrofit: Retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl("http://192.168.191.1:80/")
+            .baseUrl("http://192.168.1.2/")
             .build()
 
         addApi = retrofit.create(YstoreApi::class.java)
@@ -47,7 +47,7 @@ class AddFeacher : AppCompatActivity() {
     ): MutableLiveData<Response>{
         val responseLiveData: MutableLiveData<Response> = MutableLiveData()
         val newsRequest: Call<Response> = addApi.addProduct(title,details,images,color,
-            product_features,rating,price_y,price_d,1,1,1,"","")
+            product_features,rating,price_y,price_d,user_id,cat_id,1,"","")
         newsRequest.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.e("TAG", "Failed to post ", t)

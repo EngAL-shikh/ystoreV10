@@ -1,5 +1,6 @@
 package com.amroz.ystore.Fragments
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.amroz.ystore.MainActivity
 import com.amroz.ystore.Models.Users
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
@@ -74,6 +76,9 @@ userProfile=
 
                 val response=
                     userProfile.updateProfile(users.user_id,nameUser.text.toString(),ed_email.text.toString(),uphone.toString(),ed_address.text.toString())
+                    var intent=Intent(this,MainActivity::class.java)
+                             startActivity(intent)
+                             finish()
                 response.observe(
                     this,
                     Observer { message ->

@@ -29,6 +29,8 @@ data class Response (
     var result:String,
     @SerializedName("getAllRating")
 var rating: List<RatingUs>
+    @SerializedName("getSingleuUserid")
+    var getSingleuUserid: List<Users>
 
 ){
 
