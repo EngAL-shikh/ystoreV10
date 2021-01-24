@@ -43,7 +43,6 @@
         <activity android:name=".Mangs_Delete" />
         <activity android:name=".LoginActivity" >
 
-
         </activity>
         <activity android:name=".UpdateProduct" />
         <activity android:name=".Fragments.UpdateProfile" />

@@ -9,31 +9,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.catogrey_list.*
 import kotlinx.android.synthetic.main.fragment_catogrey.*
 import kotlinx.android.synthetic.main.fragment_update_category.view.*
 
 
 class Catogrey_Fragment : Fragment() {
 
+var admin=0
 
-
-
+    var shaerd=context?.getSharedPreferences("admin",0)
 
     private lateinit var catViewModel: YstoreViewModels
-
+  lateinit var addcat:FloatingActionButton
+ // lateinit var total:TextView
     var count:Int=0
 
     private lateinit var RecyclerView: RecyclerView
@@ -49,16 +49,23 @@ class Catogrey_Fragment : Fragment() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+
+
+
+
+
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var intent=Intent()
 
-      var admin =  intent.extras?.getInt("admin")
-        if (admin!=null){
 
-            add_cat.visibility=View.GONE
-        }
+
+
+
 
         var user = Featchers()
         val LiveData = user.fetchCat()
@@ -67,6 +74,10 @@ class Catogrey_Fragment : Fragment() {
             RecyclerView.adapter = CatAdapter(it)
 
         })
+
+
+
+
 
 
 
@@ -81,18 +92,28 @@ class Catogrey_Fragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_catogrey, container, false)
 
         RecyclerView = view.findViewById(R.id.rec)
-        val addcat= view.findViewById(R.id.add_cat) as FloatingActionButton
+         addcat= view.findViewById(R.id.add_cat)
+       //  total= view.findViewById(R.id.total)
         RecyclerView.layoutManager = GridLayoutManager(context,2)
 
 
+        if (QueryPreferences.getStoredQuery(context!!)=="admin"){
+
+            addcat.visibility=View.VISIBLE
+
+        }else{
+            addcat.visibility=View.GONE
+
+        }
 
 
-           // addcat.visibility=View.VISIBLE
 
         addcat.setOnClickListener {
 
             var intent=Intent(context,AddCategoryActivity::class.java)
             startActivity(intent)
+
+
         }
         return view
     }
@@ -123,7 +144,25 @@ class Catogrey_Fragment : Fragment() {
                 var intent = Intent(context,ProductByCat::class.java)
                 intent.putExtra("cat_id",cat.cat_id)
                 startActivity(intent)
+
+
+
+
+                Log.d("btnupdate",QueryPreferences.getStoredQuery(context!!))
+
+                if (QueryPreferences.getStoredQuery(context!!)== "admin"){
+
+
+
+
+
+                    update.visibility=View.GONE
+                }
+
             }
+
+
+
 
 
 
@@ -143,6 +182,8 @@ class Catogrey_Fragment : Fragment() {
 
 
         }
+
+
 
 
     }

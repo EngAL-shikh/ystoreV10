@@ -15,7 +15,7 @@
         android:id="@+id/ProductCard"
 
         android:elevation="15dp"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="8dp">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -109,15 +109,27 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/add_Raiting"
+                            android:id="@+id/remove_fivort_Raiting"
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
                             android:background="@drawable/add_raiting"
                             android:layout_gravity="center"
                             android:layout_margin="4dp"
                             android:layout_weight="1">
+                        </ImageView>
+                        <ImageView
+                            android:id="@+id/add_fivort"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ic_add_fivort"
+                            android:layout_gravity="center"
+                            android:layout_margin="4dp"
+                            android:visibility="gone"
+                            android:layout_weight="1">
 
                         </ImageView>
+
+
                         <TextView
                             android:id="@+id/Raitings"
                             android:layout_width="150dp"

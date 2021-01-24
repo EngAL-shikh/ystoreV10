@@ -8,6 +8,9 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.widget.*
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 import com.amroz.ystore.*
 import com.amroz.ystore.Chating.MainChatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +28,7 @@ class AddUser : AppCompatActivity() {
     var a=0
     var IMAGE_REQUST=1
     //--------------------//
+
     private lateinit var addName: EditText
     private lateinit var addEmail:TextView
     private lateinit var smallimage:ImageView
@@ -35,8 +39,11 @@ class AddUser : AppCompatActivity() {
     private lateinit var singUp:ImageButton
     private lateinit var bt_close:ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_user)
+
+
         val getimage:LinearLayout=findViewById(R.id.gitimage)
         smallimage =findViewById(R.id.smalimage)
         singUp=findViewById(R.id.signUpBtn)
@@ -47,18 +54,21 @@ class AddUser : AppCompatActivity() {
        // addChatID=findViewById(R.id.chat_id)
         addPhone=findViewById(R.id.phone)
         addAddress=findViewById(R.id.address)
-        addEmail.text= SharedPref.getEmail(this)
+        addEmail.text= QueryPreferences.getStoredQueryEmail(this)
         //addChatID.text= SharedPref.getUid(this)
 
         singUp.setOnClickListener {
             var user= YstoreViewModels()
-            user.addUsers(addName.text.toString(),SharedPref.getEmail(this).toString(),addPassword.text.toString(),
-                            SharedPref.getUid(this).toString(),addPhone.text.toString(),addAddress.text.toString(),image)
+            user.addUsers(addName.text.toString(),QueryPreferences.getStoredQueryEmail(this).toString(),addPassword.text.toString(),
+                QueryPreferences.getStoredQueryChatid(this).toString(),addPhone.text.toString(),addAddress.text.toString(),image)
+                             val intent = Intent(this, MainActivity::class.java)
+                               getuserid()
+                                Thread.sleep(1500)
+                               startActivity(intent)
 
-            val intent = Intent(this, MainChatActivity::class.java)
-            startActivity(intent)
-            finish()
+
         }
+
         getimage.setOnClickListener {
 
             showFileChooser()
@@ -128,4 +138,27 @@ class AddUser : AppCompatActivity() {
     }
 
     //------------------------------------------------------------end get images--------------------------------------
+
+
+    fun getuserid(){
+        var usersid = Featchers()
+        val newsLiveData=usersid.fetchUsersInfoBYemail(QueryPreferences.getStoredQueryEmail(this).toString())
+        newsLiveData.observe(this,
+            Observer {
+
+
+            Log.d("useridtestin", "Response received: ${it[0].user_id}")
+               // Log.d("useridtestin", "Response received: ${it[0].user_id}")
+                // SharedPref.setid(this@LoginActivity,it[0].user_id.toString())
+//                var shaerd=getSharedPreferences("userid",0)
+//                var edit=shaerd.edit()
+//                edit.putString("id",it[0].user_id.toString())
+//                edit.commit()
+
+              //  QueryPreferences.setStoredQuery(this, it[0].rule)
+               QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
+
+
+        })
+    }
 }

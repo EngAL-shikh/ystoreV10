@@ -24,20 +24,23 @@ import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Models.UserChat
 import com.amroz.ystore.Models.Users
+import com.firebase.ui.auth.data.model.User
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.flags.impl.SharedPreferencesFactory.getSharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.catogrey_list.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.profile_list.*
+import kotlinx.android.synthetic.main.users_list.*
 import kotlinx.coroutines.NonCancellable.start
 
 
 class ProfileFragment : Fragment() {
 
-
+    var idd:Int=0
     private lateinit var usersViewModel: ViewModel
     var count:Int=0
     private var adapter: ProductAdapter? = ProductAdapter(emptyList())
@@ -62,7 +65,7 @@ class ProfileFragment : Fragment() {
 
 
         var products = Featchers()
-        val newsLiveData=products.fetchProductsByCat(2)
+        val newsLiveData=products.fetchProductsByCat(20)
         newsLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             RecyclerView.adapter = ProductAdapter(it)
@@ -70,12 +73,20 @@ class ProfileFragment : Fragment() {
         })
 
 
-        val usersLiveData=products.fetchUsersInfo(15)
+//        var shaerd=context?.getSharedPreferences("userid",0)
+//       var id= shaerd?.getString("id",null)?.toInt()
+        if(QueryPreferences.getStoredQuery(context!!)!= ""){
+        val usersLiveData=products.fetchUsersInfo(QueryPreferences.getStoredQueryUserid(context!!).toString().toInt())
+        Log.d("diiiiii", id.toString())
         usersLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             ProRecyclerView.adapter = ProfileAdapter(it)
 
-        })
+        })}
+        else{
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -95,6 +106,7 @@ class ProfileFragment : Fragment() {
         ProRecyclerView.layoutManager = GridLayoutManager(context,1)
         return view
     }
+
 
 
 
@@ -141,6 +153,7 @@ class ProfileFragment : Fragment() {
             }
             logout.setOnClickListener {
                 signOut()
+
 //                var intent=Intent(context,LoginActivity::class.java)
 //                startActivity(intent)
 //                activity?.finish()
@@ -350,9 +363,15 @@ class ProfileFragment : Fragment() {
     private fun signOut() {
         var auth = FirebaseAuth.getInstance()
         auth?.signOut()
+
+
+//        var shared= context?.getSharedPreferences("admin",0)
+//        var edit=shared?.edit()
+//        edit?.putString("rule","0")
+//        edit?.commit()
+       // QueryPreferences.setStoredQuery(context!!,"")
         var i =Intent(context,LoginActivity::class.java)
         startActivity(i)
-        activity?.finish()
     }
 
 
@@ -394,6 +413,9 @@ class ProfileFragment : Fragment() {
 
 
     }
+
+
+
 
 }
 

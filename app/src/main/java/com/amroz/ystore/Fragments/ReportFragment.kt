@@ -36,8 +36,7 @@ class ReportFragment : Fragment() {
 
 
 
-        var intent= Intent(context,AddProductActivity::class.java)
-        startActivity(intent)
+
 
 
             var report = Featchers()

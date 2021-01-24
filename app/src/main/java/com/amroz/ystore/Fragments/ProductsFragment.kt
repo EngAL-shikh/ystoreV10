@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -21,7 +18,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.*
+import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.Products
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_catogrey.*
@@ -92,6 +93,7 @@ class ProductsFragment : Fragment() {
 
 
 
+
                         return true
 
                     }
@@ -115,6 +117,7 @@ class ProductsFragment : Fragment() {
 
 
 
+
     }
 
     override fun onCreateView(
@@ -125,7 +128,45 @@ class ProductsFragment : Fragment() {
         var view = inflater.inflate(R.layout.fragment_products, container, false)
 
         RecyclerView = view.findViewById(R.id.products_rec)
+        val sittings= view.findViewById(R.id.sittings) as ImageButton
+        val nave_view2= view.findViewById(R.id.nav_view2) as NavigationView
+        val close_nav= view.findViewById(R.id.btn_close_nav) as ImageView
+        val login= view.findViewById(R.id.login) as LinearLayout
+        val chating= view.findViewById(R.id.chating) as LinearLayout
+        val dashboard= view.findViewById(R.id.dashbourd) as LinearLayout
         RecyclerView.layoutManager = GridLayoutManager(context,2)
+
+        sittings.setOnClickListener {
+            nave_view2.visibility=View.VISIBLE
+            YoYo.with(Techniques.BounceInLeft)
+                .duration(2000)
+                .playOn(nave_view2)
+
+        }
+        close_nav.setOnClickListener {
+            nave_view2.visibility=View.GONE
+            YoYo.with(Techniques.BounceInRight)
+                .duration(2000)
+                .playOn(nave_view2)
+        }
+
+        dashboard.setOnClickListener {
+            var shaerd=context?.getSharedPreferences("dashbourd",0)
+            var edit=shaerd?.edit()
+            edit?.putString("dashbourd","22")
+            edit?.commit()
+            var intent=Intent(context,Dashboard::class.java)
+            startActivity(intent)
+
+        }
+        login.setOnClickListener {
+            var intent=Intent(context,LoginActivity::class.java)
+            startActivity(intent)
+        }
+        chating.setOnClickListener {
+            var intent=Intent(context,MainChatActivity::class.java)
+            startActivity(intent)
+        }
         return view
     }
 
@@ -145,6 +186,9 @@ class ProductsFragment : Fragment() {
         val Raitings = view.findViewById(R.id.Raitings) as TextView
         val image = view.findViewById(R.id.image) as ImageView
         val card= view.findViewById(R.id.ProductCard) as CardView
+        val remov_fevort= view.findViewById(R.id.remove_fivort_Raiting) as ImageView
+        val add_fevort= view.findViewById(R.id.add_fivort) as ImageView
+
 
 
         fun bind(products: Products) {
@@ -154,6 +198,7 @@ class ProductsFragment : Fragment() {
             title.text = products.title
             deatils.text = products.details
             Raitings.setText(avarage.toString())
+            price.text="$ "+products.price_d.toString()
             Log.d("rett",  avarage.toString())
             Picasso.with(context).load(images[0]).into(image)
 
@@ -163,11 +208,28 @@ class ProductsFragment : Fragment() {
 //            }
 
 
+
             image.setOnClickListener {
 
                 var intent= Intent(context,MoreDetails::class.java)
                 intent.putExtra("data",products)
                 startActivity(intent)
+            }
+
+            add_fevort.setOnClickListener {
+                remov_fevort.visibility=View.VISIBLE
+                add_fevort.visibility=View.GONE
+                YoYo.with(Techniques.BounceInDown)
+                    .duration(2000)
+                    .playOn(remov_fevort)
+
+            }
+            remov_fevort.setOnClickListener {
+                remov_fevort.visibility=View.GONE
+                add_fevort.visibility=View.VISIBLE
+                YoYo.with(Techniques.BounceIn)
+                    .duration(2000)
+                    .playOn(add_fevort)
             }
 
 

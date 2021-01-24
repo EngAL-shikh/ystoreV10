@@ -26,7 +26,9 @@ data class Response (
     @SerializedName("code")
     var code:String,
     @SerializedName("messege")
-    var result:String
+    var result:String,
+    @SerializedName("getSingleuUserid")
+    var getSingleuUserid: List<Users>
 
 
 ){

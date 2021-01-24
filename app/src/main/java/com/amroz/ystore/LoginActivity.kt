@@ -32,6 +32,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 
 import com.amroz.ystore.Models.Users
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
@@ -44,6 +47,8 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var signup:TextView
+    private lateinit var usersViewModel: ViewModel
+    private lateinit var username: EditText
     var db:FirebaseFirestore= FirebaseFirestore.getInstance()
 
     private var firebaseAuth: FirebaseAuth? = null
@@ -52,12 +57,14 @@ class LoginActivity : AppCompatActivity() {
     private var rootRef: FirebaseFirestore? = null
     val render = Render(this)
     override fun onCreate(savedInstanceState: Bundle?) {
+        usersViewModel =
+            ViewModelProviders.of(this).get(YstoreViewModels::class.java)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         var auth = FirebaseAuth.getInstance()
         var currentUser = auth.currentUser
         if(currentUser != null) {
-            startActivity(Intent(applicationContext, MainActivity::class.java))
+          startActivity(Intent(applicationContext, MainActivity::class.java))
             finish()
         }
 
@@ -66,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
 
         var loginbyphone:ImageView=findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
-        var username:EditText=findViewById(R.id.username)
+         username=findViewById(R.id.username)
         var password: ShowHidePasswordEditText = findViewById(R.id.password)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
         var linearLoginbyemail:LinearLayout=findViewById(R.id.linear_login_by_email)
@@ -151,8 +158,32 @@ class LoginActivity : AppCompatActivity() {
         rootRef = FirebaseFirestore.getInstance()
 
         login.setOnClickListener {
-//            signIn()
 
+            var fetch=Featchers()
+            var call: Call<Users> = fetch.ystoreApi.login(username.text.toString(),password.text.toString())
+            call.enqueue(object : Callback<Users>{
+                override fun onFailure(call: Call<Users>, t: Throwable) {
+                Toast.makeText(this@LoginActivity,"userNotFound",Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(call: Call<Users>, response: Response<Users>) {
+                    if (response.isSuccessful){
+                        Log.d("cxz","${response}")
+
+
+
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+
+                         getuserid()
+                       // cheackadmin()
+                       Thread.sleep(4000)
+                        startActivity(intent)
+
+
+                    }
+                }
+
+            })
 
 
         }
@@ -169,8 +200,9 @@ class LoginActivity : AppCompatActivity() {
                         db= FirebaseFirestore.getInstance()
                        // val user = UserChat(chatid, username!!)
 
-                        Toast.makeText(this@LoginActivity,"User Not found",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@LoginActivity,"you shoud give some info about you",Toast.LENGTH_LONG).show()
                         val intent = Intent(this@LoginActivity, AddUser::class.java)
+
                         startActivity(intent)
                         finish()
                     }
@@ -245,8 +277,8 @@ class LoginActivity : AppCompatActivity() {
         val userName = firebaseUser.displayName
         val user = UserChat(uid, userName!!)
 
-        SharedPref.setEmail(this, firebaseUser.email!!)
-        SharedPref.setUid(this,firebaseUser.uid!!)
+        QueryPreferences.setStoredQueryEmail(this, firebaseUser.email!!)
+        QueryPreferences.setStoredQueryChatid(this,firebaseUser.uid!!)
         var userid=UserChat(firebaseUser.uid,firebaseUser.displayName.toString())
         val adduser = rootRef!!
             .collection("contacts")
@@ -254,7 +286,7 @@ class LoginActivity : AppCompatActivity() {
             .collection("userContacts")
             .add(userid)
 
-        Toast.makeText(this,"added user for decoment contacts",Toast.LENGTH_LONG).show()
+        //Toast.makeText(this,"added user for decoment contacts",Toast.LENGTH_LONG).show()
 
 //        val intent = Intent(this, AddUser::class.java)
 //        startActivity(intent)
@@ -278,7 +310,50 @@ class LoginActivity : AppCompatActivity() {
             firebaseAuth!!.removeAuthStateListener(authStateListener!!)
         }
     }
+    fun getuserid(){
+        var usersid = Featchers()
+        val newsLiveData=usersid.fetchUsersInfoBYemail(username.text.toString())
+        newsLiveData.observe(this@LoginActivity,
+            Observer {
 
+//
+//                Log.d("useridtestin", "Response received: ${it[0].user_id}")
+//               // SharedPref.setid(this@LoginActivity,it[0].user_id.toString())
+//                var shaerd=getSharedPreferences("userid",0)
+//                var edit=shaerd.edit()
+//                edit.putString("id",it[0].user_id.toString())
+//                edit.commit()
+//
+//
+//                Log.d("cheackamdin", "Response received: ${it[0].rule}")
+//
+//                if (it[0].rule=="1"){
+//                    SharedPrefAdmin.setRule(this@LoginActivity,it[0].rule)
+//                    var shaerd2=getSharedPreferences("admin",0)
+//                    var edit2=shaerd2.edit()
+//                    edit2.putString("rule","1")
+//                    edit2.commit()
+//                }
+
+                QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
+                QueryPreferences.setStoredQuery(this, it[0].rule)
+
+
+            })
+    }
+    fun cheackadmin(){
+        var usersid = Featchers()
+        val newsLiveData=usersid.fetchUsersInfoBYemail(username.text.toString())
+        newsLiveData.observe(this@LoginActivity,
+            Observer {
+
+
+
+
+
+
+            })
+    }
     companion object {
         //private val TAG = "LoginActivity"
         private const val RC_SIGN_IN = 123

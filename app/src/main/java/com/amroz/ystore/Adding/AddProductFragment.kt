@@ -50,21 +50,9 @@ class AddProductFragment : Fragment() {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        if(SharedPref.EMAIL == ""){
-            Toast.makeText(context,"You must authenticate First ", Toast.LENGTH_LONG).show()
-            var intent= Intent(context,LoginActivity::class.java)
-            startActivity(intent)
-        }
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -105,7 +93,7 @@ class AddProductFragment : Fragment() {
         add.setOnClickListener {
             ystoreViewModels.addProduct(productTitle.text.toString(),
                 productDetails.text.toString(),
-                images[0]+","+images[1]+","+images[2]+","+images[3],productColor.text.toString(),
+                images[0]+","+images[1]+","+images[2]+","+images[3]+","+images[4],productColor.text.toString(),
                 productFeature.text.toString(),
                 0
                 ,productPriceY.text.toString().toInt(),
