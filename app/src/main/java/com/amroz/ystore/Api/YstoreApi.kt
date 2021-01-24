@@ -31,7 +31,8 @@ interface YstoreApi {
     @GET("StoreApi/api/Users_api.php")
     fun fetchUsers(): Call<Response>
 
-
+    @GET("StoreApi/api/rating_api.php")
+    fun fetchRating(): Call<Response>
 
 
 
@@ -197,8 +198,28 @@ interface YstoreApi {
     fun productReport
                 (@Field("report_id") report_id:Int,
                 @Field("report_reason") report_reason:String,
-                      @Field("product_id") product_id:Int,
-                    @Field("user_id") user_id:Int): Call<Response>
+                @Field("product_id") product_id:Int,
+                 @Field("user_id") user_id:Int): Call<Response>
 
+
+    ///////////////////////////////RatingUs [ Post Put Delete]
+
+    @FormUrlEncoded
+    @PUT("StoreApi/api/rating_api.php")
+    fun updateRating(@Query("rating_id")rating_id : Int?,
+                         @Field("ratingNum") ratingNum: Float
+    ): Call<Response>
+//*****************//
+    @FormUrlEncoded
+    @POST("StoreApi/api/rating_api.php")
+    fun addRating
+                (
+                 @Field("ratingNum") ratingNum:Float,
+                 @Field("product_id") product_id:Int,
+                 @Field("user_id") user_id:Int): Call<Response>
+    //*****************//
+    @DELETE("StoreApi/api/rating_api.php")
+    fun  deleteRating(@Query("rating_id")id:Int): Call<Response>
+    ///////////////////////////////////////////////
 }
 

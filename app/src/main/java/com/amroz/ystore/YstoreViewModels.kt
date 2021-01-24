@@ -5,10 +5,8 @@ package com.amroz.ystore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.amroz.ystore.Models.Cart
-import com.amroz.ystore.Models.Products
-import com.amroz.ystore.Models.Report
-import com.amroz.ystore.Models.Users
+import com.amroz.ystore.Models.*
+
 class YstoreViewModels: ViewModel() {
     /////////////////////////////////Update Category
     fun updateCategory(catId:Int,category: String):
@@ -61,6 +59,7 @@ class YstoreViewModels: ViewModel() {
     var liveDataCart: LiveData<List<Cart>>
     var LiveDataReport: LiveData<List<Report>>
     var LiveDataUsers: LiveData<List<Users>>
+    var liveDataRatingUs: LiveData<List<RatingUs>>
     var LiveDataProducts: LiveData<List<Products>>
     var LiveDataUsersInfo = MutableLiveData<Int>()
 
@@ -72,8 +71,7 @@ class YstoreViewModels: ViewModel() {
         LiveDataReport = Featchers().fetchReport()
         LiveDataUsers = Featchers().fetchUsers()
         LiveDataProducts = Featchers().fetchProducts()
-
-
+        liveDataRatingUs= Featchers().fetchRating()
     }
 
     /////////////////////Rug////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,8 +99,19 @@ class YstoreViewModels: ViewModel() {
     fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
         return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
     }
+    /////////////////rating ViewModel
+    fun updateRating(id:Int, rating: Float): MutableLiveData<Response> {
+        return ManagementFeatchers().updateRating(id,rating)
+    }
+    //////////////////addRating
+    fun addRating(rating:Float,product_id:Int,user_id:Int):MutableLiveData<Response> {
+        return ManagementFeatchers().addRating(rating,product_id,user_id)
+    }
+    /////////////////delete
+    fun deleteRating(id:Int) {
+        return ManagementFeatchers().deleteRating(id)
+    }
 }
-
 
 
 //
