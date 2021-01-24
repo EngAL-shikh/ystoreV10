@@ -16,9 +16,9 @@ class UserReport : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_report)
 
-        lateinit var nameUser: EditText
-        lateinit var ed_email: EditText
-        lateinit var ed_address: EditText
+        lateinit var nameUser: TextView
+        lateinit var ed_email: TextView
+        lateinit var ed_address: TextView
 
 
         var user_report:YstoreViewModels = ViewModelProviders.of(this).get(YstoreViewModels::class.java)
@@ -29,11 +29,13 @@ class UserReport : AppCompatActivity() {
         var products=intent.getSerializableExtra("data") as Products
         var ratingUser :ImageButton=findViewById(R.id.user_raiting)
         ed_email=findViewById(R.id.email)
-        ed_email.setText(products.email)
+
        nameUser =findViewById(R.id.name)
-        nameUser.setText(products.user_name)
+
         ed_address=findViewById(R.id.address)
-       ed_address.setText(products.adress)
+       ed_address.text=products.adress
+        ed_email.text=products.email
+        nameUser.text=products.user_name
        // Log.d("fatma", products.email)
        // Log.d("fatma",(products.user_name))
 
@@ -57,8 +59,7 @@ class UserReport : AppCompatActivity() {
         }
     image_back.setOnClickListener {
 
-        var intent= Intent(this,MoreDetails::class.java)
-        startActivity(intent)
+      onBackPressed()
     }
         ratingUser.setOnClickListener{
       var ratingCount = products.user_raiting +1

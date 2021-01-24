@@ -12,5 +12,6 @@
     <string name="title_profile">Profile</string>
     <string name="title_proByCat">ProductsByCat</string>
     <string name="title_cart">Cart</string>
+    <string name="spiner_nothing_selected_message">nothing</string>
 
 </resources>

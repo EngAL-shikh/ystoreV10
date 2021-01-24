@@ -56,12 +56,6 @@
             android:paddingRight="@dimen/spacing_mxlarge"
             android:paddingBottom="@dimen/spacing_xxlarge">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Project logo"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textColor="@color/grey_40" />
 
             <LinearLayout
                 android:id="@+id/gitimage"
@@ -70,29 +64,108 @@
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:background="@drawable/edit_text_round_bg_outline"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
                 android:padding="@dimen/spacing_large">
 
-                <RelativeLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@color/grey_3">
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbarSize="1dp"
+                    >
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/grey_3">
 
-                    <ImageView
-                        android:id="@+id/smallimage"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/ic_photo"
-                        />
+                            <ImageView
+                                android:id="@+id/smallimage"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_photo"
+                                />
 
-                </RelativeLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/grey_3">
+
+                            <ImageView
+                                android:id="@+id/smallimage2"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_photo"
+                                />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/grey_3">
+
+                            <ImageView
+                                android:id="@+id/smallimage3"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_photo"
+                                />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/grey_3">
+
+                            <ImageView
+                                android:id="@+id/smallimage4"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_photo"
+                                />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/grey_3">
+
+                            <ImageView
+                                android:id="@+id/smallimage5"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_photo"
+                                />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+
+
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="Add Logo"
+                    android:text="Chose 5 images for your product"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/grey_40" />
 

@@ -33,15 +33,31 @@ var cancel:Button=findViewById(R.id.cancle)
 
         report1.setOnClickListener {
             reson_report= report1.text as String
+            report1.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            report2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
         }
         report2.setOnClickListener {
             reson_report= report2.text as String
+            report2.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            report1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
         }
         report3.setOnClickListener {
             reson_report= report3.text as String
+            report3.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            report2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
         }
         report4.setOnClickListener {
             reson_report= report4.text as String
+            report4.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            report2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
         }
 
     save.setOnClickListener {

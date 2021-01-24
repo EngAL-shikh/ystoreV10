@@ -242,7 +242,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/color"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="26dp"
                     android:background="@drawable/edit_text_round_bg_outline"
                     android:hint="red, green, black."
                     android:textColorHint="@color/grey_20" />
@@ -323,7 +323,19 @@
                     android:textColorHint="@color/grey_20" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:text="Category"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40" />
+<Spinner
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/category_spinner"
 
+    />
 
             <TextView
                 android:layout_width="wrap_content"

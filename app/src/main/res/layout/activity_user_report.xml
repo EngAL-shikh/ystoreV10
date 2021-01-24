@@ -3,16 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="384dp"
+        android:layout_height="704dp"
         android:layout_margin="10dp"
-        app:cardCornerRadius="8dp"
         android:elevation="20dp"
+        app:cardCornerRadius="8dp"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -56,6 +57,7 @@
                 android:text="\u0040adams.green"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/grey_40" />
+
             <TextView
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
@@ -63,8 +65,6 @@
                 android:text="sanaa - airport"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/grey_40" />
-
-
 
 
             <LinearLayout
@@ -83,11 +83,17 @@
                     app:srcCompat="@drawable/add_raiting" />
 
 
-
                 <View
                     android:layout_width="25dp"
                     android:layout_height="0dp" />
 
+                <ImageButton
+                    android:id="@+id/message"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/grey_20"
+                    app:srcCompat="@drawable/ic_chat_outline" />
 
 
                 <View
@@ -99,8 +105,8 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/grey_20"
-                    app:srcCompat="@drawable/ic_create" />
+
+                    app:srcCompat="@drawable/report" />
 
             </LinearLayout>
 
