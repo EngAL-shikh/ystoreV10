@@ -3,6 +3,7 @@ package com.amroz.ystore.Api
 
 
 import com.amroz.ystore.*
+import com.amroz.ystore.Models.Users
 
 import com.amroz.ystore.Response
 import retrofit2.Call
@@ -19,7 +20,7 @@ interface YstoreApi {
     fun fetchCategory(): Call<Response>
 
     @GET("StoreApi/api/cart_api.php")
-    fun fetchCart(): Call<Response>
+    fun fetchCart(@Query("user_id") user_id: Int): Call<Response>
 
     @GET("StoreApi/api/reports_api.php")
     fun fetchReports(): Call<Response>
@@ -30,7 +31,8 @@ interface YstoreApi {
     @GET("StoreApi/api/Users_api.php")
     fun fetchUsers(): Call<Response>
 
-
+    @GET("StoreApi/api/rating_api.php")
+    fun fetchRating(): Call<Response>
 
 
 
@@ -38,8 +40,14 @@ interface YstoreApi {
     @GET("/StoreApi/api/products_api.php")
     fun fetchProductsByCat(@Query("cat_id") cat_id: Int): Call<Response>
 
+    @GET("/StoreApi/api/products_api.php")
+    fun fetchProductsByUser(@Query("user_id") user_id: Int): Call<Response>
+
     @GET("StoreApi/api/Users_api.php?")
     fun fetchSingleUsers(@Query("user_id") user_id: Int): Call<Response>
+
+    @GET("StoreApi/api/gitUserid_api.php?")
+    fun fetchSingleUsersbyemail(@Query("email") email: String): Call<Response>
 
 
 
@@ -60,15 +68,15 @@ interface YstoreApi {
                     @Field("rating") rating: Int,
                     @Field("price_y") price_y:Int,
                     @Field("price_d") price_d: Int,
-                    @Field("user_d") user_d: Int,
-                    @Field("cat_d") cat_d: Int,
+                    @Field("user_id") user_id: Int,
+                    @Field("cat_id") cat_id: Int,
                     @Field("report_id") report_id: Int,
                     @Field("order_date") order_date: String,
                     @Field("date")date: String
                                                   ): Call<Response>
     @FormUrlEncoded
     @POST("StoreApi/api/cart_api.php")
-    fun addCart(@Field("user_id:") user_id:Int,
+    fun addCart(@Field("user_id") user_id:Int,
                 @Field("product_id") product_id:Int,
                 @Field("Quantity") Quantity:Int
     ): Call<Response>
@@ -143,8 +151,42 @@ interface YstoreApi {
     fun updateCart(@Query("cart_id") cat_id: Int?,
                    @Field("Quantity") quantity: String
     ): Call<Response>
+
+    ////////////////////////////////////////UpdateRatingProduct
+    @FormUrlEncoded
+    @PUT("StoreApi/api/addRating.php")
+    fun updateRating(@Query("product_id") product_id: Int?,
+                   @Field("rating") rating: Float
+                 , @Field("rating_vote") rating_vote: Int
+
+    ): Call<Response>
+    ////////////////////////////////////////UpdateRatingUser
+    @FormUrlEncoded
+    @PUT("StoreApi/api/ratingUser.php")
+    fun updateRatingUser(@Query("user_id") product_id: Int?,
+                     @Field("user_raiting") rating: Int
+    ): Call<Response>
 //    fun updateCategory(@Path("cat_id") id:Int,
 //                      @Body category: HashMap<String, Any>):Call<String>
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////athu//////////////////////////////////////////////////////////////////////
+
+    @FormUrlEncoded
+    @POST("StoreApi/api/login.php")
+    fun login(@Field("name") email:String, @Field("password")password:String) : Call<Users>
+
+
+    @FormUrlEncoded
+    @POST("StoreApi/api/users_api.php")
+    fun addUser( @Field("name") name: String,
+                    @Field("email") email: String,
+                    @Field("password") password: String,
+                    @Field("chat_id") chat_id: String,
+                    @Field("phone") phone: String,
+                    @Field("address") address: String,
+                    @Field("image") image: String
+    ): Call<Response>
 
 
 //update user report
@@ -162,8 +204,9 @@ interface YstoreApi {
     fun productReport
                 (@Field("report_id") report_id:Int,
                 @Field("report_reason") report_reason:String,
-                      @Field("product_id") product_id:Int,
-                    @Field("user_id") user_id:Int): Call<Response>
+                @Field("product_id") product_id:Int,
+                 @Field("user_id") user_id:Int): Call<Response>
+
 
 
     //Reset_Password
@@ -172,6 +215,27 @@ interface YstoreApi {
     fun ResetPassword(@Query("user_id")user_id : Int?,
                          @Field("password") password: String
     ): Call<Response>
+
+
+    ///////////////////////////////RatingUs [ Post Put Delete]
+
+    @FormUrlEncoded
+    @PUT("StoreApi/api/rating_api.php")
+    fun updateRating(@Query("rating_id")rating_id : Int?,
+                         @Field("ratingNum") ratingNum: Float
+    ): Call<Response>
+//*****************//
+    @FormUrlEncoded
+    @POST("StoreApi/api/rating_api.php")
+    fun addRating
+                (
+                 @Field("ratingNum") ratingNum:Float,
+                 @Field("product_id") product_id:Int,
+                 @Field("user_id") user_id:Int): Call<Response>
+    //*****************//
+    @DELETE("StoreApi/api/rating_api.php")
+    fun  deleteRating(@Query("rating_id")id:Int): Call<Response>
+    ///////////////////////////////////////////////
 
 }
 

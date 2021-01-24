@@ -1,6 +1,7 @@
 package com.amroz.ystore.Fragments
 
 import android.app.AlertDialog
+import android.app.LauncherActivity
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -19,22 +20,35 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.*
+import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.Products
+import com.amroz.ystore.Models.UserChat
 import com.amroz.ystore.Models.Users
+import com.firebase.ui.auth.data.model.User
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.flags.impl.SharedPreferencesFactory.getSharedPreferences
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.catogrey_list.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.profile_list.*
+import kotlinx.android.synthetic.main.users_list.*
+import kotlinx.coroutines.NonCancellable.start
 
 
 class ProfileFragment : Fragment() {
 
-
+    var idd:Int=0
     private lateinit var usersViewModel: ViewModel
     var count:Int=0
     private var adapter: ProductAdapter? = ProductAdapter(emptyList())
     private lateinit var RecyclerView: RecyclerView
     private lateinit var ProRecyclerView: RecyclerView
+    private var firebaseAuth: FirebaseAuth? = null
+    private var authStateListener: FirebaseAuth.AuthStateListener? = null
+    private var googleApiClient: GoogleApiClient? = null
     var type=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +65,7 @@ class ProfileFragment : Fragment() {
 
 
         var products = Featchers()
-        val newsLiveData=products.fetchProductsByCat(2)
+        val newsLiveData=products.fetchProductsByCat(20)
         newsLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             RecyclerView.adapter = ProductAdapter(it)
@@ -59,12 +73,20 @@ class ProfileFragment : Fragment() {
         })
 
 
-        val usersLiveData=products.fetchUsersInfo(3)
+//        var shaerd=context?.getSharedPreferences("userid",0)
+//       var id= shaerd?.getString("id",null)?.toInt()
+        if(QueryPreferences.getStoredQuery(context!!)!= ""){
+        val usersLiveData=products.fetchUsersInfo(QueryPreferences.getStoredQueryUserid(context!!).toString().toInt())
+        Log.d("diiiiii", id.toString())
         usersLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             ProRecyclerView.adapter = ProfileAdapter(it)
 
-        })
+        })}
+        else{
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -88,12 +110,14 @@ class ProfileFragment : Fragment() {
 
 
 
+
     //  Holder users
     private inner class profileHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
 
         val name = view.findViewById(R.id.name) as TextView
+        val logout = view.findViewById(R.id.logout) as ImageButton
         val email = view.findViewById(R.id.email) as TextView
         val phone = view.findViewById(R.id.phone) as ImageButton
         val message = view.findViewById(R.id.message) as ImageButton
@@ -115,6 +139,7 @@ class ProfileFragment : Fragment() {
             Picasso.with(context).load(users.user_image).into(iamge)
 
 
+
             edite.setOnClickListener {
 
                 var intent=Intent(context,UpdateProfile::class.java)
@@ -125,6 +150,19 @@ class ProfileFragment : Fragment() {
             dashboard.setOnClickListener {
                 var intent=Intent(context,Dashboard::class.java)
                 startActivity(intent)
+            }
+            logout.setOnClickListener {
+                signOut()
+
+//                var intent=Intent(context,LoginActivity::class.java)
+//                startActivity(intent)
+//                activity?.finish()
+            }
+
+            message.setOnClickListener {
+
+                addContacts(users.chat_id,users.name)
+
             }
 
 
@@ -321,11 +359,63 @@ class ProfileFragment : Fragment() {
 
 
     }
+
+    private fun signOut() {
+        var auth = FirebaseAuth.getInstance()
+        auth?.signOut()
+
+
+//        var shared= context?.getSharedPreferences("admin",0)
+//        var edit=shared?.edit()
+//        edit?.putString("rule","0")
+//        edit?.commit()
+       // QueryPreferences.setStoredQuery(context!!,"")
+        var i =Intent(context,LoginActivity::class.java)
+        startActivity(i)
+    }
+
+
 //    fun updateUI(product: Products) {
 //
 //        adapter = ProductAdapter(product)
 //        product_rec.adapter = adapter
 //    }
+
+    fun addContacts(chatid:String,username:String){
+
+
+
+        var db:FirebaseFirestore= FirebaseFirestore.getInstance()
+
+
+        db= FirebaseFirestore.getInstance()
+
+
+
+
+        val user = UserChat(chatid, username!!)
+        db.collection("contacts")
+            .document("ANdhyn4pyPMdeH8vB7JEbUETpRA3").collection("userContacts").document(chatid)
+            .set(user)
+            .addOnCompleteListener{
+
+                if (it.isSuccessful){
+                    Toast.makeText(context,"added", Toast.LENGTH_LONG).show()
+                    var intent=Intent(context,MainChatActivity::class.java)
+                    startActivity(intent)
+
+                }else{
+                    Toast.makeText(context,"filde to add ${it.exception}", Toast.LENGTH_LONG).show()
+                    Log.d("test",it.exception.toString())
+
+                }
+            }
+
+
+    }
+
+
+
 
 }
 

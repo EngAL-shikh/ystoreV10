@@ -21,7 +21,7 @@ class ManagementFeatchers {
             .setLenient()
             .create()
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.7:81/")
+            .baseUrl("http://192.168.1.2/")
            //.addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -223,13 +223,27 @@ class ManagementFeatchers {
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.d("onResponse", t.message.toString())
             }
-
-
         })
         return responseLiveData
 
     }
+     /////////////////////UpdateRatingUser//////////////////////////////////////////
+    fun updateRatingUser(id:Int, rating: Int): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var cartUpdate = mangApi.updateRatingUser(id,rating)
+        cartUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
 
+                Log.d("onResponse", "yes")
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.d("onResponse", t.message.toString())
+            }
+        } )
+        return responseLiveData
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //update user report
     fun updateReportUser(user_id:Int, user_report: Int): MutableLiveData<Response> {
@@ -243,6 +257,7 @@ class ManagementFeatchers {
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.d("onResponse_report", t.message.toString())
+
 
             }
 
@@ -275,6 +290,7 @@ class ManagementFeatchers {
         return responseLiveData
     }
 
+
     //ResetPassword
     fun ResetPassword(user_id:Int, password:String): MutableLiveData<Response> {
         val responseLiveData: MutableLiveData<Response> = MutableLiveData()
@@ -283,12 +299,7 @@ class ManagementFeatchers {
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
 
                 Log.d("onResponse", "Reset")
-            }
-
-            override fun onFailure(call: Call<Response>, t: Throwable) {
-                Log.d("onResponse", t.message.toString())
-
-            }
+                          }
 
 
         })
@@ -296,4 +307,59 @@ class ManagementFeatchers {
 
 
     }
+
+////////////////////////////////////////RatingUs[ Post  Put   delete ]
+fun addRating( rating: Float,product_id: Int,user_id: Int): MutableLiveData<Response> {
+    val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+    var ratingadd = mangApi.addRating(rating,product_id,user_id)
+    ratingadd.enqueue(object : Callback<Response> {
+        override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+            Log.d("onResponse", "yes")
+        }
+
+        override fun onFailure(call: Call<Response>, t: Throwable) {
+            Log.d("onResponse", t.message.toString())
+        }
+    } )
+    return responseLiveData
+}
+  
+  
+    //***********************************************//
+    fun updateRating(id:Int, rating: Float): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var ratingUpdate = mangApi.updateRating(id,rating)
+    ratingUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+                Log.d("onResponse", "yes")
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.d("onResponse", t.message.toString())
+
+            }
+        } )
+        return responseLiveData
+    }
+  
+  
+    //***********************************************//
+    fun deleteRating(id: Int) {
+ val cartRequest: Call< Response> =mangApi.deleteRating(id)
+  cartRequest.enqueue(object : Callback< Response> {
+            override fun onFailure(call: Call< Response>, t: Throwable) {
+                Log.d("tag", t.message.toString())
+            }
+      override fun onResponse(call: Call< Response>,
+                              response: retrofit2.Response< Response>)
+      {
+                Log.d("tag", "yes")
+            }
+        })
+
+}
+
+
 }

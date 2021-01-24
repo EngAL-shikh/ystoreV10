@@ -5,10 +5,8 @@ package com.amroz.ystore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.amroz.ystore.Models.Cart
-import com.amroz.ystore.Models.Products
-import com.amroz.ystore.Models.Report
-import com.amroz.ystore.Models.Users
+import com.amroz.ystore.Models.*
+
 class YstoreViewModels: ViewModel() {
     /////////////////////////////////Update Category
     fun updateCategory(catId:Int,category: String):
@@ -61,6 +59,7 @@ class YstoreViewModels: ViewModel() {
     var liveDataCart: LiveData<List<Cart>>
     var LiveDataReport: LiveData<List<Report>>
     var LiveDataUsers: LiveData<List<Users>>
+    var liveDataRatingUs: LiveData<List<RatingUs>>
     var LiveDataProducts: LiveData<List<Products>>
     var LiveDataUsersInfo = MutableLiveData<Int>()
 
@@ -72,14 +71,18 @@ class YstoreViewModels: ViewModel() {
         LiveDataReport = Featchers().fetchReport()
         LiveDataUsers = Featchers().fetchUsers()
         LiveDataProducts = Featchers().fetchProducts()
-
-
+        liveDataRatingUs= Featchers().fetchRating()
     }
 
     /////////////////////Rug////////////////////////////////////////////////////////////////////////////////////////////////
 
     fun addCategory(cat_title:String,images:String) : MutableLiveData<Response> {
         return AddFeacher().addCategory(cat_title,images)
+    }
+    fun addUsers(name: String, email: String,password: String,chat_id: String,
+                 phone: String,address: String,image:String) : MutableLiveData<Response> {
+        return AddFeacher().addUser(name, email,password,chat_id,
+            phone,address,image)
     }
     fun addProduct(title:String,details:String,images:String,color:String,product_features:String,rating:Int,
                    price_y:Int,price_d:Int,user_id: Int,cat_id:Int,report_id:Int, order_data:String, data:String): MutableLiveData<Response>
@@ -97,6 +100,7 @@ class YstoreViewModels: ViewModel() {
         return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
     }
 
+
     //ResetPassword
 
 
@@ -104,8 +108,21 @@ class YstoreViewModels: ViewModel() {
         return ManagementFeatchers(). ResetPassword(user_id, password )
     }
 
-}
 
+    /////////////////rating ViewModel
+    fun updateRating(id:Int, rating: Float): MutableLiveData<Response> {
+        return ManagementFeatchers().updateRating(id,rating)
+    }
+    //////////////////addRating
+    fun addRating(rating:Float,product_id:Int,user_id:Int):MutableLiveData<Response> {
+        return ManagementFeatchers().addRating(rating,product_id,user_id)
+    }
+    /////////////////delete
+    fun deleteRating(id:Int) {
+        return ManagementFeatchers().deleteRating(id)
+    }
+
+}
 
 
 //

@@ -72,6 +72,7 @@
                                 android:orientation="horizontal">
 
                                 <ImageView
+                                    android:background="@drawable/edit_text_round_bg_outline"
                                     android:id="@+id/image_1"
                                     android:layout_width="90dp"
                                     android:layout_height="90dp"
@@ -82,6 +83,8 @@
 
                                 <ImageView
                                     android:id="@+id/image_2"
+                                    android:background="@drawable/edit_text_round_bg_outline"
+
                                     android:layout_width="90dp"
                                     android:layout_height="90dp"
                                     android:layout_marginEnd="@dimen/spacing_medium"
@@ -96,10 +99,14 @@
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
                                     android:scaleType="centerCrop"
+                                    android:background="@drawable/edit_text_round_bg_outline"
+
                                     android:src="@color/grey_20" />
 
                                 <ImageView
                                     android:id="@+id/image_4"
+                                    android:background="@drawable/edit_text_round_bg_outline"
+
                                     android:layout_width="90dp"
                                     android:layout_height="90dp"
                                     android:layout_marginEnd="@dimen/spacing_medium"
@@ -113,6 +120,7 @@
                                     android:layout_height="90dp"
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
+                                    android:background="@drawable/edit_text_round_bg_outline"
                                     android:scaleType="centerCrop"
                                     android:src="@color/grey_20" />
 
@@ -472,6 +480,93 @@ Advanced dual-camera system with 12MP Ultra Wide and"
                             android:textColor="@color/cyan_50" />
 
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:layout_marginBottom="@dimen/spacing_middle"
+                        android:background="@color/grey_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rating Product"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_60" />
+
+                    <LinearLayout
+                        android:id="@+id/rating_linear_t3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/rating_linear_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:text="Rating Of Product : "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/avrage_rating_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:text="14.5"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/blue_900" />
+
+                            <TextView
+                                android:id="@+id/user_rating_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginLeft="50dp"
+                                android:text="14.5"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/blue_900" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/rating_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+
+
+                        <RatingBar
+                            android:id="@+id/ratingProduct"
+                            android:layout_width="248dp"
+                            android:layout_height="46dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="40dp"
+                            android:numStars="5"
+                            android:progressDrawable="@drawable/ic_haert_rating"
+                            android:rating="0"
+                            android:stepSize="0.5" />
+
+                        <ImageButton
+                            android:id="@+id/btn_ratingProduct"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/add_raiting"
+                            android:text="rating" />
+
+
+                    </LinearLayout>
+
+
+
 
                     <View
                         android:layout_width="0dp"

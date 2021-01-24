@@ -57,6 +57,7 @@ class ProductByCat : AppCompatActivity() {
             title.text = products.title
             deatils.text = products.details
             Raitings.text = products.rating.toString()
+            Log.d("rett",  Raitings.text.toString())
             Picasso.with(this@ProductByCat).load(images[0]).into(image)
 ///////////////////////////
             productCardView.setOnClickListener {
