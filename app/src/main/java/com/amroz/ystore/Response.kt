@@ -1,10 +1,8 @@
 package com.amroz.ystore
 
 
-import com.amroz.ystore.Models.Cart
-import com.amroz.ystore.Models.Products
-import com.amroz.ystore.Models.Report
-import com.amroz.ystore.Models.Users
+import android.media.Rating
+import com.amroz.ystore.Models.*
 import com.google.gson.annotations.SerializedName
 
 
@@ -29,9 +27,10 @@ data class Response (
     var code:String,
     @SerializedName("messege")
     var result:String,
+    @SerializedName("getAllRating")
+var rating: List<RatingUs>
     @SerializedName("getSingleuUserid")
     var getSingleuUserid: List<Users>
-
 
 ){
 
