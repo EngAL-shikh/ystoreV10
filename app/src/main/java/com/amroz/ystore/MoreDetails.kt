@@ -202,14 +202,14 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
                         Log.d("total1", "$total")
                     }
                 }
-                    avarage=total/products.rating_vote
-              var avg= avarage/3.0f
+                    avarage=total/3.0f
+              var avg= avarage/products.rating_vote.toFloat()
               var avg2=avg
                   .toBigDecimal()
                   .setScale(1, RoundingMode.CEILING)
                   .toString()
                 Log.d("avarage", "$avg")
-                avgRatingtv.text=avg.toString()
+                avgRatingtv.text=avg2.toString()
                 userRating.text=products.rating_vote.toString()
                 ratingBar2.rating=avg
                 ratingBar2.setIsIndicator(true)
