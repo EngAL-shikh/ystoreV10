@@ -134,8 +134,7 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
 
 
         addtocard.setOnClickListener {
-            var shaerd=getSharedPreferences("userid",0)
-            var id= shaerd?.getString("id",null)?.toInt()
+            var id= QueryPreferences.getStoredQueryUserid(this!!).toInt()
             ystoreViewModels.addCart(id!!,products.product_id,count)
             Toast.makeText(this,"Product added to your Cart",Toast.LENGTH_LONG).show()
             Log.d("cartadd",QueryPreferences.getStoredQueryUserid(this!!).toString())
