@@ -30,33 +30,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (QueryPreferences.getStoredQuery(this@MainActivity)== "admin"){
 
+
+
+        if (QueryPreferences.getStoredQuery(this@MainActivity)== "admin"){
             val intent = Intent(this, Dashboard::class.java)
             startActivity(intent)
 
 
         }
-//        else if (QueryPreferences.getStoredQuery(this@MainActivity)== "user"){
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
 
-//        var shared= getSharedPreferences("admin",0)
-//        var cheack=shared.getString("rule",null)
-//        if (cheack =="1"){
-//
-//            var intent = Intent(this,Dashboard::class.java)
-//            startActivity(intent)
-//        }else{
-//
-//
-//        }
 
             Toast.makeText(this,QueryPreferences.getStoredQuery(this),Toast.LENGTH_LONG).show()
 
 
-            //  getuserid()
+
 
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -86,10 +74,6 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
 
-
-        // val appBarConfiguration = AppBarConfiguration(setOf(
-        //    R.id.products_nv, R.id.cats_nv, R.id.report_nv))
-        //  setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
         var admin=intent.extras?.getString("admin")
 

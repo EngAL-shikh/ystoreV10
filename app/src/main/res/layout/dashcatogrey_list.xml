@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_cat"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="6dp"
         android:elevation="15dp"
@@ -34,7 +34,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/update"
-                    android:visibility="gone"
+
+                    android:background="@drawable/shapeupdatecat"
                     android:text="update"></Button>
 
                 <ImageView
