@@ -155,9 +155,8 @@ interface YstoreApi {
     ////////////////////////////////////////UpdateRatingProduct
     @FormUrlEncoded
     @PUT("StoreApi/api/addRating.php")
-    fun updateRating(@Query("product_id") product_id: Int?,
-                   @Field("rating") rating: Float
-                 , @Field("rating_vote") rating_vote: Int
+    fun updateRatingVote(@Query("product_id") product_id: Int?,
+                     @Field("rating_vote") rating_vote: Int
 
     ): Call<Response>
     ////////////////////////////////////////UpdateRatingUser
