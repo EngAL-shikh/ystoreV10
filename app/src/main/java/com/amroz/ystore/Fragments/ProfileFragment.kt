@@ -147,10 +147,7 @@ class ProfileFragment : Fragment() {
                 startActivity(intent)
             }
 
-            dashboard.setOnClickListener {
-                var intent=Intent(context,Dashboard::class.java)
-                startActivity(intent)
-            }
+            dashboard.visibility=View.GONE
             logout.setOnClickListener {
                 signOut()
 

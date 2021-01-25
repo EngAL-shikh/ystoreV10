@@ -301,6 +301,10 @@ class ManagementFeatchers {
                 Log.d("onResponse", "Reset")
                           }
 
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
 
         })
         return responseLiveData

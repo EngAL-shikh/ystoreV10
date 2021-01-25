@@ -56,7 +56,7 @@ class YstoreViewModels: ViewModel() {
     }
 /////////////////////////////////////////
     var liveDataCategory: LiveData<List<Category>>
-    var liveDataCart: LiveData<List<Cart>>
+   // var liveDataCart: LiveData<List<Cart>>
     var LiveDataReport: LiveData<List<Report>>
     var LiveDataUsers: LiveData<List<Users>>
     var liveDataRatingUs: LiveData<List<RatingUs>>
@@ -67,7 +67,7 @@ class YstoreViewModels: ViewModel() {
 
     init {
         liveDataCategory = Featchers().fetchCat()
-        liveDataCart = Featchers().fetchCart()
+      //  liveDataCart = Featchers().fetchCart()
         LiveDataReport = Featchers().fetchReport()
         LiveDataUsers = Featchers().fetchUsers()
         LiveDataProducts = Featchers().fetchProducts()
@@ -95,9 +95,10 @@ class YstoreViewModels: ViewModel() {
     }
 
 
-    //addReportProduct
-    fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
-        return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
+
+    fun fetchCart(user_id:Int):LiveData<List<Products>>{
+        return Featchers().fetchCart(user_id)
+
     }
 
 
@@ -122,7 +123,19 @@ class YstoreViewModels: ViewModel() {
         return ManagementFeatchers().deleteRating(id)
     }
 
+
+    //addReportProduct
+    fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
+        return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
+    }
 }
+
+
+
+
+
+
+
 
 
 //

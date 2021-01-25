@@ -235,14 +235,11 @@
                     android:background="@drawable/edittext_round"
                     android:gravity="center"
                     android:hint="Current_password"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
-                    android:textCursorDrawable="@drawable/grey_cursor_color"
                     android:textSize="15sp"
-                    android:drawable_hide="@drawable/hide1"
-                    android:drawable_show="@drawable/show"
-                    android:tint_color="#d5d5d5"/>
+
+                   />
 
                 <EditText
                     android:layout_marginTop="8dp"
@@ -252,14 +249,11 @@
                     android:background="@drawable/edittext_round"
                     android:gravity="center"
                     android:hint="New_password"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
-                    android:textCursorDrawable="@drawable/grey_cursor_color"
                     android:textSize="15sp"
-                    android:drawable_hide="@drawable/hide1"
-                    android:drawable_show="@drawable/show"
-                    android:tint_color="#d5d5d5"/>
+
+                   />
 
                 <EditText
                     android:id="@+id/rpass"
@@ -272,18 +266,15 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
-                    android:textCursorDrawable="@drawable/grey_cursor_color"
                     android:textSize="15sp"
-                    android:drawable_hide="@drawable/hide1"
-                    android:drawable_show="@drawable/show"
-                    android:tint_color="#d5d5d5" />
+                    />
 
                 <Button
                     android:id="@+id/reset"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#fffff"
+                   android:background="@color/green_900"
                     android:text="Reset" />
 
             </LinearLayout>
