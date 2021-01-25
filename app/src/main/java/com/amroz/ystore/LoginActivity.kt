@@ -53,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var signup:TextView
     private lateinit var usersViewModel: ViewModel
     private lateinit var username: EditText
-
     private var firebaseAuth: FirebaseAuth? = null
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
     private var googleApiClient: GoogleApiClient? = null
@@ -76,8 +75,8 @@ class LoginActivity : AppCompatActivity() {
 
         var loginbyphone: ImageView =findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
-        var username: EditText =findViewById(R.id.username)
-         username=findViewById(R.id.username)
+       // var username: EditText =findViewById(R.id.username)
+        username=findViewById(R.id.username)
         var password: ShowHidePasswordEditText = findViewById(R.id.password)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
         var linearLoginbyemail: LinearLayout =findViewById(R.id.linear_login_by_email)

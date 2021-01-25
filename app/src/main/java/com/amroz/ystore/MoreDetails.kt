@@ -205,8 +205,8 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
                     avarage=total/3.0f
               var avg= avarage/products.rating_vote.toFloat()
               var avg2=avg
-                  .toBigDecimal()
-                  .setScale(1, RoundingMode.CEILING)
+                  .toDouble()
+                  //.setScale(1, RoundingMode.CEILING)
                   .toString()
                 Log.d("avarage", "$avg")
                 avgRatingtv.text=avg2.toString()
