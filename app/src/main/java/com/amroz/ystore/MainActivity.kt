@@ -30,33 +30,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (QueryPreferences.getStoredQuery(this@MainActivity)== "admin"){
 
+
+
+        if (QueryPreferences.getStoredQuery(this@MainActivity)== "admin"){
             val intent = Intent(this, Dashboard::class.java)
             startActivity(intent)
 
 
         }
-//        else if (QueryPreferences.getStoredQuery(this@MainActivity)== "user"){
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
-
-//        var shared= getSharedPreferences("admin",0)
-//        var cheack=shared.getString("rule",null)
-//        if (cheack =="1"){
-//
-//            var intent = Intent(this,Dashboard::class.java)
-//            startActivity(intent)
-//        }else{
-//
-//
-//        }
-
-            Toast.makeText(this,QueryPreferences.getStoredQuery(this),Toast.LENGTH_LONG).show()
 
 
-            //  getuserid()
+        Toast.makeText(this,QueryPreferences.getStoredQuery(this),Toast.LENGTH_LONG).show()
+
+
+
 
 
         firebaseAuth = FirebaseAuth.getInstance()
@@ -70,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-           // shaerd2.getString("id",null)
+        // shaerd2.getString("id",null)
         if(QueryPreferences.getStoredQuery(this)=="") {
             //navView.menu.findItem(R.id.profile_nv).isVisible=false
             navView.menu.findItem(R.id.report_nv).isVisible=false
@@ -85,10 +73,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val navController = findNavController(R.id.nav_host_fragment)
-            navView.menu.findItem(R.id.report_nv).isEnabled=false
-        // val appBarConfiguration = AppBarConfiguration(setOf(
-        //    R.id.products_nv, R.id.cats_nv, R.id.report_nv))
-        //  setupActionBarWithNavController(navController)
+
         navView.setupWithNavController(navController)
         var admin=intent.extras?.getString("admin")
 
@@ -101,9 +86,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-   }
+    }
 
 
 }
-
-
