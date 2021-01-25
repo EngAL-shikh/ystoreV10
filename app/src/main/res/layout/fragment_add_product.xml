@@ -30,7 +30,7 @@
             app:fontFamily="sans-serif-medium" />
 
         <ImageButton
-            android:id="@+id/add"
+            android:id="@+id/addproduct"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/selectableItemBackgroundBorderless"

@@ -7,6 +7,8 @@ var CHAT_ID="chatid"
 var USER_ID="userid"
 object QueryPreferences {
 
+
+
     fun getStoredQuery(context: Context): String {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getString(RULE_ADMIN, "")!!
