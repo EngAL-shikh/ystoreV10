@@ -21,7 +21,7 @@ class ManagementFeatchers {
             .setLenient()
             .create()
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.2/")
+            .baseUrl("http://192.168.191.1/")
            //.addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -364,6 +364,24 @@ fun addRating( rating: Float,product_id: Int,user_id: Int): MutableLiveData<Resp
         })
 
 }
+    ///////////////////////////////////////////
+    fun updateRatingVote(id:Int, ratingVote: Int): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var ratingUpdate = mangApi.updateRatingVote(id,ratingVote)
+        ratingUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+                Log.d("onResponse", "yes")
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.d("onResponse", t.message.toString())
+
+            }
+        } )
+        return responseLiveData
+    }
+
 
 
 }

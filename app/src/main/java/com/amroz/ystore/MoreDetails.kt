@@ -185,11 +185,12 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
 //            }
         btn_ratingProduct.setOnClickListener{
 
-            count=products.rating_vote+1
+         var  countuser=products.rating_vote+1
             ystoreViewModels.addRating(ratingBar.rating,products.product_id,products.user_id)
+            ManagementFeatchers().updateRatingVote(products.product_id,products.rating_vote+1)
             Toast.makeText(
                 this,
-                "Thanks For rating us : " + ratingBar.rating, Toast.LENGTH_SHORT
+                "Thanks For rating us : " + countuser, Toast.LENGTH_SHORT
             ).show()
         }
  ystoreViewModels.liveDataRatingUs.observe(
@@ -205,10 +206,7 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
                     avarage=total/3.0f
               var avg= avarage/products.rating_vote.toFloat()
               var avg2=avg
-                  .toBigDecimal()
-                  .setScale(1, RoundingMode.CEILING)
-                  .toString()
-                Log.d("avarage", "$avg")
+               Log.d("avarage", "$avg")
                 avgRatingtv.text=avg2.toString()
                 userRating.text=products.rating_vote.toString()
                 ratingBar2.rating=avg

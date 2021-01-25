@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
 
         var loginbyphone: ImageView =findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
-        var username: EditText =findViewById(R.id.username)
+       // var username: EditText =findViewById(R.id.username)
          username=findViewById(R.id.username)
         var password: ShowHidePasswordEditText = findViewById(R.id.password)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
