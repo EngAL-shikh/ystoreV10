@@ -41,8 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-            Toast.makeText(this,QueryPreferences.getStoredQuery(this),Toast.LENGTH_LONG).show()
-
+        Toast.makeText(this,QueryPreferences.getStoredQuery(this),Toast.LENGTH_LONG).show()
 
 
 
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-           // shaerd2.getString("id",null)
+        // shaerd2.getString("id",null)
         if(QueryPreferences.getStoredQuery(this)=="") {
             //navView.menu.findItem(R.id.profile_nv).isVisible=false
             navView.menu.findItem(R.id.report_nv).isVisible=false
@@ -86,9 +85,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-   }
+    }
 
 
 }
-
-
