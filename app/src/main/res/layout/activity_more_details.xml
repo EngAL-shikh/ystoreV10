@@ -553,6 +553,16 @@ Advanced dual-camera system with 12MP Ultra Wide and"
                             android:progressDrawable="@drawable/ic_haert_rating"
                             android:rating="0"
                             android:stepSize="0.5" />
+                        <RatingBar
+                            android:id="@+id/ratingShow_rb"
+                            android:layout_width="248dp"
+                            android:layout_height="46dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="40dp"
+                            android:numStars="5"
+                            android:progressDrawable="@drawable/ic_haert_rating"
+                            android:rating="0"
+                            android:stepSize="0.5" />
 
                         <ImageButton
                             android:id="@+id/btn_ratingProduct"

@@ -14,26 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".product_report"></activity>
+        <activity android:name=".CatDashbourdActivity"></activity>
+        <activity android:name=".product_report" />
         <activity android:name=".UserReport" />
         <activity android:name=".Dashboard" />
         <activity android:name=".MoreDetails" />
         <activity android:name=".ProductByCat" />
-
-        <activity android:name=".Splash.Splash"></activity>
-
-
-        <activity android:name=".Adding.AddUser"></activity>
+        <activity android:name=".Splash.Splash" />
+        <activity android:name=".Adding.AddUser" />
         <activity android:name=".Chating.ContactsActivity" />
-        <activity android:name=".Chating.MainChatActivity">
-
-        </activity>
-
+        <activity android:name=".Chating.MainChatActivity"></activity>
         <activity android:name=".Chating.ChatActivity" />
-        <activity android:name=".ChatingActivity"></activity>
-
-        <activity android:name=".MainActivity" >
+        <activity android:name=".ChatingActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,9 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Mangs_Delete" />
-        <activity android:name=".LoginActivity" >
-
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".UpdateProduct" />
         <activity android:name=".Fragments.UpdateProfile" />
         <activity android:name=".AddCartActivity" />

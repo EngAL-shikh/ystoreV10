@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,7 +54,14 @@ var admin=0
         super.onStart()
 
 
+        if (QueryPreferences.getStoredQuery(context!!)=="admin"){
 
+            addcat.visibility=View.VISIBLE
+
+        }else{
+            addcat.visibility=View.GONE
+
+        }
 
 
     }
@@ -94,17 +102,16 @@ var admin=0
         RecyclerView = view.findViewById(R.id.rec)
          addcat= view.findViewById(R.id.add_cat)
        //  total= view.findViewById(R.id.total)
-        RecyclerView.layoutManager = GridLayoutManager(context,2)
-
-
         if (QueryPreferences.getStoredQuery(context!!)=="admin"){
-
-            addcat.visibility=View.VISIBLE
+            RecyclerView.layoutManager = LinearLayoutManager(context)
 
         }else{
-            addcat.visibility=View.GONE
-
+            RecyclerView.layoutManager = GridLayoutManager(context,2)
         }
+
+
+
+
 
 
 
@@ -148,22 +155,23 @@ var admin=0
 
 
 
-                Log.d("btnupdate",QueryPreferences.getStoredQuery(context!!))
-
-                if (QueryPreferences.getStoredQuery(context!!)== "admin"){
 
 
 
-
-
-                    update.visibility=View.GONE
-                }
 
             }
 
 
 
+            Log.d("btnupdate",QueryPreferences.getStoredQuery(context!!))
 
+            if (QueryPreferences.getStoredQuery(context!!)== "admin"){
+
+                update.visibility=View.VISIBLE
+            }else{
+                update.visibility=View.GONE
+
+            }
 
 
 
@@ -171,6 +179,7 @@ var admin=0
 
 
                 categoryDialogUpdate(cat)
+
             }
 
             card_cat.setOnClickListener {
@@ -197,12 +206,15 @@ var admin=0
         ): RecyclerView.ViewHolder {
 
 
-            var view: View = layoutInflater.inflate(
-                R.layout.catogrey_list,
-                parent, false
-            )
 
-            return CatHolder(view)
+                var view: View = layoutInflater.inflate(
+                    R.layout.dashcatogrey_list,
+                    parent, false
+                )
+                return CatHolder(view)
+
+
+
 
         }
 
@@ -221,6 +233,9 @@ var admin=0
             val news = news[position]
             if (holder is CatHolder)
                 holder.bind(news)
+
+
+
 
 
         }

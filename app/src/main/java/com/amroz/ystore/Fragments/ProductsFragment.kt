@@ -207,6 +207,15 @@ class ProductsFragment : Fragment() {
 //                callbacks?.onProductsSelected(productsItem.cat_id)
 //            }
 
+            Log.d("btnupdate",QueryPreferences.getStoredQuery(context!!))
+
+            if (QueryPreferences.getStoredQuery(context!!)== "admin"){
+
+                dashbourd.visibility=View.VISIBLE
+            }else{
+                dashbourd.visibility=View.GONE
+
+            }
 
 
             image.setOnClickListener {
