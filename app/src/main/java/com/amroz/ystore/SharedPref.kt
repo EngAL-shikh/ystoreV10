@@ -18,6 +18,7 @@ object QueryPreferences {
             .apply()
     }
 
+
     fun getStoredQueryEmail(context: Context): String {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getString(RULE_EMAIL, "")!!
@@ -53,6 +54,8 @@ object QueryPreferences {
             .putString(USER_ID, query)
             .apply()
     }
+
+
 
 
 }

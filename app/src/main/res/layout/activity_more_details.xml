@@ -541,6 +541,8 @@ Advanced dual-camera system with 12MP Ultra Wide and"
                         android:layout_gravity="center"
                         android:orientation="vertical">
 
+
+
                         <RatingBar
                             android:id="@+id/ratingProduct"
                             android:layout_width="248dp"

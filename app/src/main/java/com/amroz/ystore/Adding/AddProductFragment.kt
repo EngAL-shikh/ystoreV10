@@ -19,6 +19,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amroz.ystore.*
 import kotlinx.android.synthetic.main.activity_add_product.*
@@ -26,10 +28,14 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 
-class AddProductFragment : Fragment() {
+class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
     var app=AppCompatActivity()
     lateinit var  image:String
     lateinit  var lastBitmap: Bitmap
+    lateinit var selectCategorySv: Spinner
+    lateinit var categoriesName: MutableList<String>
+    lateinit var categoriesList: MutableList<Category>
+    var selectedCategoryId = 0
     var a=0
     var IMAGE_REQUST=1
     lateinit var smallimage:ImageView
@@ -60,6 +66,10 @@ class AddProductFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_product, container, false)
+        categoriesList = emptyList<Category>().toMutableList()
+        categoriesName = emptyList<String>().toMutableList()
+        selectCategorySv=view.findViewById(R.id.category_spinner)
+        loadCategories()
         val productTitle: EditText = view.findViewById(R.id.title)
         val productDetails: EditText =view.findViewById(R.id.details)
         val productColor: EditText =view.findViewById(R.id.color)
@@ -98,7 +108,7 @@ class AddProductFragment : Fragment() {
                 0
                 ,productPriceY.text.toString().toInt(),
                 productPriceD.text.toString().toInt(),
-                3,
+                QueryPreferences.getStoredQueryUserid(context!!).toInt(),
                 20,
                 2,
                 "",
@@ -108,32 +118,56 @@ class AddProductFragment : Fragment() {
             startActivity(intent)
             app.finish()
 
+          Log.d("adptercatid",selectedCategoryId.toString())
         }
 
 
         return view
     }
-    fun onCat( view: View){
+//    fun onCat( view: View){
+//
+//
+//        val array = arrayOf(
+//            "Elctrnic", "Clothes", "Ecssorics", "Cars"
+//        )
+//
+//
+//
+//
+//        val builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
+//        builder.setTitle("Country")
+//        builder.setSingleChoiceItems(array, -1,
+//            DialogInterface.OnClickListener { dialogInterface, i ->
+//                (view as EditText).setText(array[i])
+//                dialogInterface.dismiss()
+//            })
+//        builder.show()
+//
+//
+//    }
+    private fun loadCategories() {
+    ystoreViewModels.liveDataCategory.observe(
+        this,
+        Observer {
 
+            for (item in it) {
+                categoriesName.add(item.cat_title)
+                categoriesList.add(item)
+            }
+            //spinner adapter
+            val dataAdapter = ArrayAdapter(
+                context!!,
+                R.layout.support_simple_spinner_dropdown_item,
+                categoriesName
+            )
 
-        val array = arrayOf(
-            "Elctrnic", "Clothes", "Ecssorics", "Cars"
-        )
-
-
-
-
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
-        builder.setTitle("Country")
-        builder.setSingleChoiceItems(array, -1,
-            DialogInterface.OnClickListener { dialogInterface, i ->
-                (view as EditText).setText(array[i])
-                dialogInterface.dismiss()
-            })
-        builder.show()
-
-
-    }
+            dataAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item
+            )
+            selectCategorySv.adapter = dataAdapter
+        }
+    )
+}
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //
@@ -238,5 +272,16 @@ class AddProductFragment : Fragment() {
 
     }
 
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        selectCategorySv.prompt =
+            getString(R.string.spiner_nothing_selected_message)
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val item = parent?.get(position).toString()
+        selectCategorySv.prompt = item
+        selectedCategoryId = categoriesList[position].cat_id!!
+    }
 
 }

@@ -81,7 +81,9 @@ var  logout:TextView=findViewById(R.id.logout)
 //            edit?.putString("rule","0")
 //            edit?.commit()
             var intent=Intent(this,LoginActivity::class.java)
+            QueryPreferences.setStoredQuery(this,"")
             startActivity(intent)
+
         }
 
 
