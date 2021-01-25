@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
-
 import androidx.lifecycle.ViewModelProviders
 
 import android.widget.*
@@ -17,9 +18,9 @@ import com.amroz.ystore.Chating.ChatActivity
 import com.amroz.ystore.Chating.ContactsActivity
 import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.UserChat
-
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import kotlinx.android.synthetic.main.update_profile_user.*
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -47,10 +48,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+
+  
+    var db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var signup:TextView
     private lateinit var usersViewModel: ViewModel
     private lateinit var username: EditText
-    var db:FirebaseFirestore= FirebaseFirestore.getInstance()
 
     private var firebaseAuth: FirebaseAuth? = null
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
@@ -72,12 +75,13 @@ class LoginActivity : AppCompatActivity() {
         lateinit var userProfile:YstoreViewModels
 
 
-        var loginbyphone:ImageView=findViewById(R.id.login_by_phone)
+        var loginbyphone: ImageView =findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
+        var username: EditText =findViewById(R.id.username)
          username=findViewById(R.id.username)
         var password: ShowHidePasswordEditText = findViewById(R.id.password)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
-        var linearLoginbyemail:LinearLayout=findViewById(R.id.linear_login_by_email)
+        var linearLoginbyemail: LinearLayout =findViewById(R.id.linear_login_by_email)
         var linearLoginbyphone:LinearLayout=findViewById(R.id.linear_login_by_phone)
         var progress:ProgressBar=findViewById(R.id.progress)
         signup=findViewById(R.id.sign_in)
@@ -98,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         loginbyphone.setOnClickListener {
-            linearLoginbyphone.visibility=View.VISIBLE
+            linearLoginbyphone.visibility= View.VISIBLE
             linearLoginbyemail.visibility=View.GONE
             loginbyphone.visibility=View.GONE
             loginbyemail.visibility=View.VISIBLE
@@ -119,8 +123,6 @@ class LoginActivity : AppCompatActivity() {
                 .duration(2000)
                 .playOn(findViewById(R.id.linear_login_by_email))
         }
-
-
 
 
         ////////////////////////////////////////////////////////////////////
@@ -173,7 +175,7 @@ class LoginActivity : AppCompatActivity() {
 
                 var fetch=Featchers()
                 var call: Call<Users> = fetch.ystoreApi.login(firebaseUser.email.toString(),password.text.toString())
-                call.enqueue(object : Callback<Users>{
+                call.enqueue(object : Callback<Users> {
                     override fun onFailure(call: Call<Users>, t: Throwable) {
                         db= FirebaseFirestore.getInstance()
                        // val user = UserChat(chatid, username!!)
@@ -305,5 +307,6 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         //private val TAG = "LoginActivity"
         private const val RC_SIGN_IN = 123
+
     }
 }

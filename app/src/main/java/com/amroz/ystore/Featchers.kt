@@ -2,14 +2,12 @@ package com.amroz.ystore
 
 
 
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.amroz.ystore.Api.YstoreApi
-import com.amroz.ystore.Models.Cart
-import com.amroz.ystore.Models.Products
-import com.amroz.ystore.Models.Report
-import com.amroz.ystore.Models.Users
+import com.amroz.ystore.Models.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -75,9 +73,9 @@ fun fetchCat(): LiveData<List<Category>> {
 }
 
     //cart
-    fun fetchCart(user_id:Int): LiveData<List<Products>> {
-        val responseLiveData: MutableLiveData<List<Products>> = MutableLiveData()
-        val newsRequest: Call<Response> = ystoreApi.fetchCart(user_id)
+    fun fetchCart(): LiveData<List<Cart>> {
+        val responseLiveData: MutableLiveData<List<Cart>> = MutableLiveData()
+        val newsRequest: Call<Response> = ystoreApi.fetchCart()
         newsRequest.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.e("TAG", "Failed to fetch ", t)
@@ -86,7 +84,7 @@ fun fetchCat(): LiveData<List<Category>> {
             ) {
 
                 val response:Response? = response.body()
-                val carts:List<Products> = response?.carts
+                val carts:List<Cart> = response?.carts
                     ?: mutableListOf()
                 Log.d("TAG", "Response received")
                 responseLiveData.value = carts
@@ -164,27 +162,6 @@ fun fetchCat(): LiveData<List<Category>> {
         return responseLiveData
 
     }
-    fun fetchProductsByUser(user_id:Int): LiveData<List<Products>> {
-        val responseLiveData: MutableLiveData<List<Products>> = MutableLiveData()
-        val ystoreRequest: Call<Response> = ystoreApi.fetchProductsByUser(user_id)
-        ystoreRequest.enqueue(object : Callback<Response> {
-            override fun onFailure(call: Call<Response>, t: Throwable) {
-                Log.e("TAG", "Failed to fetch ", t)
-            }
-            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
-            ) {
-
-                val response:Response? = response.body()
-                val products:List<Products> = response?.productByUser
-                    ?: mutableListOf()
-                Log.d("TAG", "Response received")
-                responseLiveData.value = products
-                Log.d("onResponse", products.toString())
-            }
-        })
-        return responseLiveData
-
-    }
 
     //get userinfo
     fun fetchUsersInfo(id:Int): LiveData<List<Users>> {
@@ -209,6 +186,31 @@ fun fetchCat(): LiveData<List<Category>> {
 
     }
 
+
+    ///////////////////fetchRating
+
+    fun fetchRating(): LiveData<List<RatingUs>> {
+        val responseLiveData: MutableLiveData<List<RatingUs>> = MutableLiveData()
+        val reportRequest: Call<Response> = ystoreApi.fetchRating()
+        reportRequest.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.e("TAG", "Failed to fetch ", t)
+            }
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
+            ) {
+                val response:Response? = response.body()
+                val ratingUs:List<RatingUs> = response?.rating
+                    ?: mutableListOf()
+                Log.d("TAG", "Response received")
+                responseLiveData.value =ratingUs
+                Log.d("onResponse", ratingUs.toString())
+            }
+        })
+        return responseLiveData
+
+    }
+
+
     //get id by email
     fun fetchUsersInfoBYemail(email:String): LiveData<List<Users>> {
         val responseLiveData: MutableLiveData<List<Users>> = MutableLiveData()
@@ -231,7 +233,6 @@ fun fetchCat(): LiveData<List<Category>> {
         return responseLiveData
 
     }
-
 
 }
 

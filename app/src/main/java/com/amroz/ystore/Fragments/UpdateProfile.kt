@@ -1,12 +1,13 @@
 package com.amroz.ystore.Fragments
 
+
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,6 +15,7 @@ import com.amroz.ystore.MainActivity
 import com.amroz.ystore.Models.Users
 import com.amroz.ystore.R
 import com.amroz.ystore.YstoreViewModels
+import kotlinx.android.synthetic.main.update_profile_user.*
 
 
 class UpdateProfile : AppCompatActivity() {
@@ -25,6 +27,8 @@ class UpdateProfile : AppCompatActivity() {
     lateinit var logout:LinearLayout
     lateinit var userProfile:YstoreViewModels
     lateinit var update:LinearLayout
+    lateinit var pass:LinearLayout
+    lateinit var cardpass:CardView
 
    // private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -44,8 +48,19 @@ class UpdateProfile : AppCompatActivity() {
          ed_address=findViewById(R.id.ed_address)
        logout=findViewById(R.id.logout)
        update=findViewById(R.id.linear_update)
+        pass=findViewById(R.id.pass)
+        
+///////////////////////////////////////////////////
 
+        val currentpass: EditText = findViewById(R.id.cpass)
+        val newpass: EditText = findViewById(R.id.npass)
+        val confirmpass: EditText = findViewById(R.id.rpass)
+        val buttRest: Button = findViewById(R.id.reset)
+        userProfile= ViewModelProviders.of(this).get(YstoreViewModels::class.java)
 
+        cardpass.visibility=View.GONE
+
+        /////////////////////////////////////////////////////////
 
         var uname=nameUser.text.toString()
         var uphone=77507987492358
@@ -100,10 +115,39 @@ userProfile=
             onBackPressed()
         }
 
+
+        //ResetPassword
+
+        pass.setOnClickListener{
+            cardpass.visibility=View.VISIBLE
+        }
+
+        reset.setOnClickListener {
+
+                if (cpass.text.toString() == users.password.toString()) {
+                    if (npass.text.toString().trim().length > 5) {
+                        if (npass.text.toString() == rpass.text.toString()) {
+                            userProfile.ResetPassword(users.user_id, rpass.text.toString())
+                            Toast.makeText(this, "Password successfully Rest  ", Toast.LENGTH_LONG)
+                                .show();
+
+                        } else {
+
+                            Toast.makeText(this, "New Password is not the same ", Toast.LENGTH_LONG)
+                                .show();
+                        }
+                    }
+                    else { Toast.makeText(this, "password is not enaph ", Toast.LENGTH_SHORT).show()}
+                }
+
+            else {
+                    Toast.makeText(
+                        this,
+                        "Password is not  successfully Rest ,, please try again ",
+                        Toast.LENGTH_LONG
+                    ).show();
+                }
+            }
+
+        }
     }
-
-
-
-
-
-}
