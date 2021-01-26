@@ -1,8 +1,11 @@
 package com.amroz.ystore
 
+import android.app.PendingIntent
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.MutableLiveData
 import com.amroz.ystore.Api.YstoreApi
 
@@ -59,8 +62,7 @@ class AddFeacher : AppCompatActivity() {
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
             ) {
 
-
-                Log.e("TAG", "Response received")
+                Log.d("esharat", "Response received")
 
             }
         })

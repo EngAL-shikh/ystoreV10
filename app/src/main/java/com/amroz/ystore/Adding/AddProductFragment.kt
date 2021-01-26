@@ -1,6 +1,7 @@
 package com.amroz.ystore.Adding
 
 import android.app.Activity
+import android.app.PendingIntent
 import android.content.ContentResolver
 import android.content.Context
 import android.content.DialogInterface
@@ -19,6 +20,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -29,6 +32,9 @@ import java.io.IOException
 
 
 class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
+
+
+    lateinit var  add: ImageView
     var app=AppCompatActivity()
     lateinit var  image:String
     lateinit  var lastBitmap: Bitmap
@@ -36,6 +42,7 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
     lateinit var categoriesName: MutableList<String>
     lateinit var categoriesList: MutableList<Category>
     var selectedCategoryId = 0
+    var pos=0
     var a=0
     var IMAGE_REQUST=1
     lateinit var smallimage:ImageView
@@ -85,7 +92,7 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
         smallimage5=view.findViewById(R.id.smallimage5)
         val bt_close: ImageButton =view.findViewById(R.id.bt_close)
 
-        val add: ImageView =view.findViewById(R.id.add)
+         add =view.findViewById(R.id.addproduct)
 
         getimage.setOnClickListener {
             showFileChooser()
@@ -108,11 +115,35 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
                 0
                 ,productPriceY.text.toString().toInt(),
                 productPriceD.text.toString().toInt(),
+
+
                 QueryPreferences.getStoredQueryUserid(context!!).toInt(),
-                20,
+                selectedCategoryId,
+  
                 2,
                 "",
                 "")
+
+
+
+            Log.d("vcx",selectedCategoryId.toString())
+
+
+
+            val intent1 = MainActivity.newIntent(context!!)
+            val pendingIntent = PendingIntent.getActivity(context!!, 0, intent1, 0)
+            val resources =context!!.resources
+            val notification = NotificationCompat
+                .Builder(context!!, NOTIFICATION_CHANNEL_ID)
+                .setTicker(resources.getString(R.string.new_pictures_title))
+                .setSmallIcon(R.drawable.ic_baseline_fiber_new_24)
+                .setContentTitle(resources.getString(R.string.new_pictures_title))
+                .setContentText(resources.getString(R.string.new_pictures_text))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build()
+            val notificationManager = NotificationManagerCompat.from(context!!)
+            notificationManager.notify(0, notification)
 
             var intent= Intent(context,MainActivity::class.java)
             startActivity(intent)
@@ -146,6 +177,7 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
 //
 //    }
     private fun loadCategories() {
+
     ystoreViewModels.liveDataCategory.observe(
         this,
         Observer {
@@ -153,6 +185,7 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
             for (item in it) {
                 categoriesName.add(item.cat_title)
                 categoriesList.add(item)
+
             }
             //spinner adapter
             val dataAdapter = ArrayAdapter(
@@ -165,6 +198,9 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
                 android.R.layout.simple_spinner_dropdown_item
             )
             selectCategorySv.adapter = dataAdapter
+            selectCategorySv.onItemSelectedListener=this
+
+
         }
     )
 }
@@ -279,9 +315,18 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val item = parent?.get(position).toString()
-        selectCategorySv.prompt = item
+        //val item = parent?.get(position).toString()
+        val idd =parent?.getItemAtPosition(position).toString()
+        selectCategorySv.prompt = idd
         selectedCategoryId = categoriesList[position].cat_id!!
+
+
+
+
+
+
+
+
     }
 
 }

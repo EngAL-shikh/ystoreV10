@@ -10,6 +10,8 @@ var USER_NAME="username"
 var USER_ADDRESS="address"
 object QueryPreferences {
 
+
+
     fun getStoredQuery(context: Context): String {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getString(RULE_ADMIN, "")!!

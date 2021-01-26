@@ -13,5 +13,8 @@
     <string name="title_proByCat">ProductsByCat</string>
     <string name="title_cart">Cart</string>
     <string name="spiner_nothing_selected_message">nothing</string>
+    <string name="notification_channel_name">yStore</string>
+    <string name="new_pictures_title">New yStore Products</string>
+    <string name="new_pictures_text">You have new products in yStore.</string>
 
 </resources>
