@@ -63,12 +63,12 @@ class LoginActivity : AppCompatActivity() {
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        var auth = FirebaseAuth.getInstance()
-        var currentUser = auth.currentUser
-        if(currentUser != null) {
-          startActivity(Intent(applicationContext, MainActivity::class.java))
-            finish()
-        }
+//        var auth = FirebaseAuth.getInstance()
+//        var currentUser = auth.currentUser
+//        if(currentUser != null) {
+//          startActivity(Intent(applicationContext, MainActivity::class.java))
+//            finish()
+//        }
 
         lateinit var userProfile:YstoreViewModels
 
@@ -87,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
         signup=findViewById(R.id.sign_in)
 
         signup.setOnClickListener {
+            progress.visibility=View.VISIBLE
             signIn()
 
         }
@@ -182,6 +183,7 @@ class LoginActivity : AppCompatActivity() {
 
                         Toast.makeText(this@LoginActivity,"you shoud give some info about you",Toast.LENGTH_LONG).show()
                         val intent = Intent(this@LoginActivity, AddUser::class.java)
+                        progress.visibility=View.GONE
 
                         startActivity(intent)
                         finish()
@@ -225,10 +227,8 @@ class LoginActivity : AppCompatActivity() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
 
     }
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode,resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -295,10 +295,12 @@ class LoginActivity : AppCompatActivity() {
         val newsLiveData=usersid.fetchUsersInfoBYemail(username.text.toString())
         newsLiveData.observe(this@LoginActivity,
             Observer {
-
-
                 QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
                 QueryPreferences.setStoredQuery(this, it[0].rule)
+                QueryPreferences.setStoredQueryUserimage(this, it[0].user_image)
+                QueryPreferences.setStoredQueryUsername(this, it[0].name)
+                QueryPreferences.setStoredQueryUseraddress(this, it[0].address)
+
 
 
             })

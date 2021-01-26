@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@android:color/white"
@@ -18,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/card_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -65,7 +67,7 @@
                         android:orientation="horizontal">
 
                         <ImageButton
-                            android:id="@+id/minse"
+                            android:id="@+id/subqn"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/spacing_xlarge"
                             android:background="?attr/selectableItemBackgroundBorderless"
@@ -73,7 +75,7 @@
                             app:srcCompat="@drawable/ic_mince" />
 
                         <TextView
-                            android:id="@+id/quantity_id"
+                            android:id="@+id/tv_qty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/spacing_large"
@@ -85,7 +87,7 @@
                             app:fontFamily="sans-serif-medium" />
 
                         <ImageButton
-                            android:id="@+id/pluse"
+                            android:id="@+id/addqn"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/spacing_xlarge"
                             android:background="?attr/selectableItemBackgroundBorderless"

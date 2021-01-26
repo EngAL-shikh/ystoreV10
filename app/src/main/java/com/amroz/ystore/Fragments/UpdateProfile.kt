@@ -42,6 +42,7 @@ class UpdateProfile : AppCompatActivity() {
 
 
          ed_email=findViewById(R.id.ed_email)
+        cardpass=findViewById(R.id.cardpass)
         ed_email.setText(users.email)
        // phone=findViewById(R.id.ed_phone)
         nameUser =findViewById(R.id.ed_name)

@@ -4,9 +4,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -17,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_add_category.*
 import kotlinx.android.synthetic.main.activity_add_product.*
 import kotlinx.android.synthetic.main.activity_add_user.*
+import kotlinx.android.synthetic.main.activity_login.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
@@ -55,16 +58,39 @@ class AddUser : AppCompatActivity() {
         addPhone=findViewById(R.id.phone)
         addAddress=findViewById(R.id.address)
         addEmail.text= QueryPreferences.getStoredQueryEmail(this)
+//        var progress:ProgressBar=findViewById(R.id.progress)
         //addChatID.text= SharedPref.getUid(this)
 
         singUp.setOnClickListener {
             var user= YstoreViewModels()
-            user.addUsers(addName.text.toString(),QueryPreferences.getStoredQueryEmail(this).toString(),addPassword.text.toString(),
-                QueryPreferences.getStoredQueryChatid(this).toString(),addPhone.text.toString(),addAddress.text.toString(),image)
-                             val intent = Intent(this, MainActivity::class.java)
-                               getuserid()
-                                Thread.sleep(1500)
-                               startActivity(intent)
+
+            if (addName.text.toString().trim().length>3){
+
+                Toast.makeText(this,"invlaid name",Toast.LENGTH_LONG).show()
+            }else if (addEmail.text.toString().trim().length<3){
+                Toast.makeText(this,"invlaid email",Toast.LENGTH_LONG).show()
+            }else if (addEmail.text.toString().trim().length<3){
+                Toast.makeText(this,"invlaid password",Toast.LENGTH_LONG).show()
+            }else if (addAddress.text.toString().trim().length<3){
+                Toast.makeText(this,"invlaid Address",Toast.LENGTH_LONG).show()
+            }else if (image.trim().length<0){
+
+                Toast.makeText(this,"chose image",Toast.LENGTH_LONG).show()
+            }else{
+
+                user.addUsers(addPassword.text.toString(),QueryPreferences.getStoredQueryEmail(this).toString(),addPassword.text.toString(),
+                    QueryPreferences.getStoredQueryChatid(this).toString(),addPhone.text.toString(),addAddress.text.toString(),image)
+                val intent = Intent(this, MainActivity::class.java)
+                getuserid()
+                Handler().postDelayed(Runnable {
+                    startActivity(intent)
+                },4000)
+
+            }
+
+            // cheackadmin()
+            // Thread.sleep(4000)
+
 
 
         }
@@ -142,7 +168,7 @@ class AddUser : AppCompatActivity() {
 
     fun getuserid(){
         var usersid = Featchers()
-        val newsLiveData=usersid.fetchUsersInfoBYemail(QueryPreferences.getStoredQueryEmail(this).toString())
+        val newsLiveData=usersid.fetchUsersInfoBYemail(addEmail.text.toString())
         newsLiveData.observe(this,
             Observer {
 
@@ -157,6 +183,11 @@ class AddUser : AppCompatActivity() {
 
               //  QueryPreferences.setStoredQuery(this, it[0].rule)
                QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
+                QueryPreferences.setStoredQuery(this, it[0].rule)
+                QueryPreferences.setStoredQueryUserimage(this, it[0].user_image)
+                QueryPreferences.setStoredQueryUsername(this, it[0].name)
+                QueryPreferences.setStoredQueryUseraddress(this, it[0].address)
+                QueryPreferences.setStoredQueryChatid(this, it[0].chat_id)
 
 
         })

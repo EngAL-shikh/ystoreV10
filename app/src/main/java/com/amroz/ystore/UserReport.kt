@@ -7,9 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.lifecycle.ViewModelProviders
+import com.amroz.ystore.Chating.ContactsActivity
 import com.amroz.ystore.Models.Products
-import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.activity_user_report.view.*
+import com.amroz.ystore.Models.UserChat
+import com.google.firebase.firestore.FirebaseFirestore
 
 class UserReport : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,21 +22,23 @@ class UserReport : AppCompatActivity() {
         lateinit var ed_address: TextView
 
 
+
         var user_report:YstoreViewModels = ViewModelProviders.of(this).get(YstoreViewModels::class.java)
         var image: ImageView =findViewById(R.id.image)
+        var message: ImageButton =findViewById(R.id.message)
         val report = findViewById<ImageButton>(R.id.bt_report)
         var image_back: ImageView =findViewById(R.id.ba)
 
-        var products=intent.getSerializableExtra("data") as Products
+        var users=intent.getSerializableExtra("data") as Products
         var ratingUser :ImageButton=findViewById(R.id.user_raiting)
         ed_email=findViewById(R.id.email)
 
        nameUser =findViewById(R.id.name)
 
         ed_address=findViewById(R.id.address)
-       ed_address.text=products.adress
-        ed_email.text=products.email
-        nameUser.text=products.user_name
+        ed_address.text=users.adress
+        ed_email.text=users.email
+        nameUser.text=users.user_name
        // Log.d("fatma", products.email)
        // Log.d("fatma",(products.user_name))
 
@@ -46,7 +49,7 @@ class UserReport : AppCompatActivity() {
             builder.setMessage("Are you sure ")
 
             builder.setPositiveButton("Continue"){_,_->
-                user_report.update_user_report(products.user_id,0 )
+                user_report.update_user_report(users.user_id,0 )
 
                 Toast.makeText(applicationContext, "  This user has been reported", Toast.LENGTH_SHORT).show()
             }
@@ -61,11 +64,52 @@ class UserReport : AppCompatActivity() {
 
       onBackPressed()
     }
+
         ratingUser.setOnClickListener{
-      var ratingCount = products.user_raiting +1
-           ManagementFeatchers().updateRatingUser(products.user_id,ratingCount)
+      var ratingCount = users.user_raiting +1
+           ManagementFeatchers().updateRatingUser(users.user_id,ratingCount)
             Toast.makeText(this, "you like us$ratingCount", Toast.LENGTH_SHORT).show()
         }
+
+
+
+        message.setOnClickListener {
+            addContacts(users.chat_id,users.user_name)
+            Log.d("hhhhhhhhhhhh",users.chat_id)
+          //  Toast.makeText(this,users.chat_id,Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun addContacts(chatid:String,username:String){
+
+
+
+        var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+
+
+        db= FirebaseFirestore.getInstance()
+
+
+
+
+        val user = UserChat(chatid, username!!)
+        db.collection("contacts")
+            .document(QueryPreferences.getStoredQueryChatid(this!!)).collection("userContacts").document(chatid)
+            .set(user)
+            .addOnCompleteListener{
+
+                if (it.isSuccessful){
+                    Toast.makeText(this,"added", Toast.LENGTH_LONG).show()
+                    var intent=Intent(this, ContactsActivity::class.java)
+                    startActivity(intent)
+
+                }else{
+                    Toast.makeText(this,"filde to add ${it.exception}", Toast.LENGTH_LONG).show()
+                    Log.d("test",it.exception.toString())
+
+                }
+            }
+
 
     }
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -13,6 +14,7 @@ import com.amroz.ystore.Fragments.ProductsFragment
 import com.amroz.ystore.Fragments.ReportFragment
 import com.amroz.ystore.Fragments.UsersFragment
 import com.amroz.ystore.Models.Products
+import com.squareup.picasso.Picasso
 
 class Dashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +25,16 @@ var  card_users:CardView=findViewById(R.id.card_users)
 var  card_products:CardView=findViewById(R.id.card_products)
 var  card_reports:CardView=findViewById(R.id.card_reports)
 var  contact:CardView=findViewById(R.id.conactDashboard)
+var  name:TextView=findViewById(R.id.user_name)
+var  image:ImageView=findViewById(R.id.image)
+var  address:TextView=findViewById(R.id.address)
 var  logout:TextView=findViewById(R.id.logout)
+
+
+        name.text=QueryPreferences.getStoredQueryUsername(this)
+        address.text=QueryPreferences.getStoredQueryUseraddress(this)
+        Picasso.with(this).load(QueryPreferences.getStoredQueryUserimage(this)).into(image)
+
 
         var admin=intent.extras?.getString("admin")
         cat.setOnClickListener {

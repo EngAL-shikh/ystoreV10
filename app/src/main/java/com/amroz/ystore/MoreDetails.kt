@@ -43,7 +43,7 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
         var addqn:FloatingActionButton=findViewById(R.id.fab_qty_add)
         var subqn:FloatingActionButton=findViewById(R.id.fab_qty_sub)
         var tv_qty:TextView=findViewById(R.id.tv_qty)
-        var btn_ratingProduct:ImageButton=findViewById(R.id.btn_ratingProduct)
+        var btn_ratingProduct:TextView=findViewById(R.id.btn_ratingProduct)
         var products=intent.getSerializableExtra("data") as Products
         var avgRatingtv:TextView=findViewById(R.id.avrage_rating_tv)
         var userRating:TextView=findViewById(R.id.user_rating_tv)

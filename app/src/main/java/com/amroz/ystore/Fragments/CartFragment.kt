@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
@@ -24,7 +25,7 @@ import com.squareup.picasso.Picasso
 
 
 class CartFragment : Fragment() {
-
+var count=1
     private val cartViewModel: YstoreViewModels by lazy {
         ViewModelProviders.of(this).get(YstoreViewModels::class.java)
     }
@@ -92,9 +93,10 @@ class CartFragment : Fragment() {
         val price = view.findViewById(R.id.price) as TextView
         //val Raitings = view.findViewById(R.id.Raitings) as TextView
         val image = view.findViewById(R.id.image) as ImageView
-        val pluse = view.findViewById(R.id.pluse) as ImageButton
-        val minse = view.findViewById(R.id.minse) as ImageButton
-        val quntity = view.findViewById(R.id.quantity_id) as TextView
+        val addqn = view.findViewById(R.id.addqn) as ImageButton
+        val subqn = view.findViewById(R.id.subqn) as ImageButton
+        val tv_qty = view.findViewById(R.id.tv_qty) as TextView
+        val card_cart = view.findViewById(R.id.card_cart) as LinearLayout
         //val card= view.findViewById(R.id.ProductCard) as CardView
 
 
@@ -115,13 +117,25 @@ class CartFragment : Fragment() {
 //            }
 
 
-            image.setOnClickListener {
+            card_cart.setOnClickListener {
 
                 var intent= Intent(context, MoreDetails::class.java)
                 intent.putExtra("data",products)
                 startActivity(intent)
             }
+            addqn.setOnClickListener {
+                ++ count
+                tv_qty.text=count.toString()
+            }
+            subqn.setOnClickListener {
 
+                count--
+                tv_qty.text=count.toString()
+                if (count==0){
+
+                    count=10
+                }
+            }
 
         }
     }
