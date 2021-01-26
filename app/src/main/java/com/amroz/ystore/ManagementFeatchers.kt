@@ -21,7 +21,7 @@ class ManagementFeatchers {
             .setLenient()
             .create()
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.137.239/")
+            .baseUrl("http://192.168.1.3/")
            //.addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
