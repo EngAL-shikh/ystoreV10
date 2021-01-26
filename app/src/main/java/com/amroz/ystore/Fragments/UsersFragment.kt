@@ -21,6 +21,11 @@ import com.amroz.ystore.YstoreViewModels
 class UsersFragment : Fragment() {
     private lateinit var userViewModel: ViewModel
     private lateinit var userRecyclerView: RecyclerView
+    ///////////user_status////////////////
+    private val ystoreViewModels: YstoreViewModels by lazy {
+        ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+    }
+    ///////////user_status////////////////
     var type=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,15 +76,45 @@ class UsersFragment : Fragment() {
 //        val phone=view.findViewById(R.id.phone) as TextView
 //        val address= view.findViewById(R.id.address) as TextView
 //        val user_report= view.findViewById(R.id.user_report) as TextView
+      val userstatus= view.findViewById(R.id.userstatus) as TextView
 
+        ///////////user_status////////////////
         fun bind(user:Users){
+
             user_id.text= user.user_id.toString()
             name.text= user.name
-//            email.text= user.email
-//            phone.text= user.phone
-//            address.text= user.address
-//            user_report.text= user.user_report.toString()
-        }
+            var user_active:Int
+            if(user.user_status==0) userstatus.text="Disactive"
+            else  userstatus.text="Active"
+
+
+            userstatus.setOnClickListener {
+                if(user.user_status==0)
+                {
+                    user_active=1
+                    userstatus.text="Active"
+
+                }
+                else{
+                    user_active=0
+                    userstatus.text="Disactive"
+                }
+                ystoreViewModels.userStatus(user.user_id, user_active)
+                Log.d("done", user_active.toString())
+
+                //Toast.makeText(this, "User status has changed   ", Toast.LENGTH_SHORT).show()
+            }
+            //////////////////////user_status///////////////////////////
+
+//        fun bind(user:Users){
+//            user_id.text= user.user_id.toString()
+//            name.text= user.name
+////            email.text= user.email
+////            phone.text= user.phone
+////            address.text= user.address
+////            user_report.text= user.user_report.toString()
+//        }
+    }
     }
 
     private inner class UsersAdapter(var user : List<Users>) : RecyclerView.Adapter<UsersHolder>(){
@@ -102,4 +137,5 @@ class UsersFragment : Fragment() {
             holder.bind(user)
         }
     }
+
 }

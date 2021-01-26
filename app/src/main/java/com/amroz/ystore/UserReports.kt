@@ -1,7 +1,9 @@
 package com.amroz.ystore
 
+import android.content.Context
 import android.content.pm.PackageManager
-import android.icu.text.SimpleDateFormat
+import android.graphics.pdf.PdfDocument
+import java.text.SimpleDateFormat
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,9 +19,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.Models.Products
+import com.google.common.collect.Table
+
 import com.itextpdf.text.Document
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
+
 import java.io.FileOutputStream
 import java.util.*
 import java.util.jar.Manifest
@@ -35,10 +40,10 @@ class UserReports : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_reports)
-
-
-
-
+//
+//
+//
+//
 //        val productsByUser = Featchers().fetchProductsByUser(user_id)
 //        productsByUser.observe(this, Observer {
 //            Log.d("ENS","${it}")
@@ -46,12 +51,13 @@ class UserReports : AppCompatActivity() {
 //            recyclerView.adapter = ProductByUserAdapter(it)})
 //        recyclerView= findViewById(R.id.ProByUserRecActivity)
 //        recyclerView.layoutManager= GridLayoutManager(this,2)
-    }
-
+//    }
+//
 //    private inner class ProductsByUserHolder(view: View) : RecyclerView.ViewHolder(view) {
 //
 //        val productTitle = view.findViewById(R.id.prouct_title) as TextView
 //        val date = view.findViewById(R.id.date) as TextView
+//        val type = view.findViewById(R.id.type) as TextView
 //        val pdf=view.findViewById(R.id.pdf) as Button
 //
 //
@@ -60,55 +66,74 @@ class UserReports : AppCompatActivity() {
 //
 //
 //            productTitle.text = products.title
-//            date.text = products.rating.toString()
+//            type.text= products.type.toString()
+//            date.text = products.date.toString()
 //
 //
 //            pdf.setOnClickListener {
-//if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-//    if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED){
-//        val permissions= arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//        requestPermissions(permissions,STORAGE_CODE)
-//    }
-//    else {
-//        savePdf()
-//    }
-//} else{
-//    savePdf()
-//}
+//                if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+//                    if(checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED){
+//                        val permissions= arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                        requestPermissions(permissions,STORAGE_CODE)
+//                    }
+//                    else {
+//                        savePdf()
+//                    }
+//                } else{
+//
+//                    savePdf()
+//
+//                }
 //            }
 //        }
 //
-//        }
-//
-//
-//@RequiresApi(Build.VERSION_CODES.N)
-//fun savePdf(){
-//    val mDo=Document()
-//    try{
-//        val mFileName=SimpleDateFormat("yyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
-//    val mFilepath= if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//        Environment.getStorageDirectory().toString() + "/" + mFileName +".pdf"
-//    } else {
-//        TODO("VERSION.SDK_INT < R")
 //    }
 //
 //
 //
-//        PdfWriter.getInstance(mDo,FileOutputStream(mFilepath))
-//        mDo.open()
-//        val productLiveData = Featchers().fetchProductsByUser(user_id) as String
-//        mDo.add(Paragraph(productLiveData))
-//        mDo.close()
-//        Toast.makeText(this,"file pdf download",Toast.LENGTH_LONG).show()
+//    fun savePdf(){
+//        val mFileName= SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
+//        val mFilepath=    Environment.getExternalStorageDirectory().toString() + "/" + mFileName +".pdf"
+//
+//
+//        val pdfDocument = PdfDocument(PdfWriter( mFilepath))
+//
+//        val document = Document(pdfDocument)
+//
+//
+//
+//
+//        val table = Table(UnitValue.createPercentArray(floatArrayOf(8f, 23f, 15f))).useAllAvailableWidth()
+//
+////Add Header Cells
+//        table.addHeaderCell(Table.Cell().add(Paragraph("Product").setTextAlignment(TextAlignment.CENTER)))
+//        table.addHeaderCell(Table.Cell().add(Paragraph("date").setTextAlignment(TextAlignment.CENTER)))
+//        table.addHeaderCell(Table.Cell().add(Paragraph("type").setTextAlignment(TextAlignment.CENTER)))
+//        //document.add(Paragraph("hello world"))
+//        val productsByUser = Featchers().fetchProductsByUser(user_id)
+//        productsByUser.observe(this, Observer{
+//            for (entry in  it) {
+//                table.addCell(Paragraph(entry.title).setTextAlignment(TextAlignment.CENTER))
+//                table.addCell(
+//                    Table.Cell().add(
+//                        Paragraph(entry.date).setTextAlignment(
+//                            TextAlignment.CENTER
+//                        )
+//                    )
+//                )
+//
+//                table.addCell(Table.Cell().add(Paragraph("$entry.type").setTextAlignment(TextAlignment.RIGHT)))
+//
+//            }})
+//        document.add(table)
+//
+//        Toast.makeText(this," $mFileName +\".pdf\\nis saved to\\n\"+ $mFilepath",Toast.LENGTH_LONG).show()
+//        document.close()
+//
 //    }
-//    catch (e:Exception){
-//    }
-}
-
-
-
-
-
+//
+//
+//
 //    override fun onRequestPermissionsResult(
 //        requestCode: Int,
 //        permissions: Array<out String>,
@@ -139,7 +164,7 @@ class UserReports : AppCompatActivity() {
 //            val getP= product[position]
 //            holder.bind(getP)
 //        }
-//    }
+   }
 
 
-
+}

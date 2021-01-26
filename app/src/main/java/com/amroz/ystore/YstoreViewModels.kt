@@ -136,6 +136,14 @@ class YstoreViewModels: ViewModel() {
     fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
         return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
     }
+
+    ///////////user_status////////////////
+    //user_status
+    fun userStatus(user_id:Int, user_status:Int): MutableLiveData<Response> {
+        return ManagementFeatchers().updateUserStatus(user_id,user_status )
+    }
+
+    ///////////user_status////////////////
 }
 
 
