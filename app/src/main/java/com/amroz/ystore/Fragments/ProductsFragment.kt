@@ -162,6 +162,16 @@ class ProductsFragment : Fragment() {
             startActivity(intent)
 
         }
+
+        if (QueryPreferences.getStoredQuery(context!!)=="user" ||QueryPreferences.getStoredQuery(context!!)=="admin"){
+            login.visibility=View.GONE
+
+        }else
+        {
+            login.visibility=View.VISIBLE
+
+
+        }
         login.setOnClickListener {
             var intent=Intent(context,LoginActivity::class.java)
             startActivity(intent)

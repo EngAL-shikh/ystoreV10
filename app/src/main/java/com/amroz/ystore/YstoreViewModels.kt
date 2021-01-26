@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.amroz.ystore.Models.*
+import com.firebase.ui.auth.data.model.User
 
 class YstoreViewModels: ViewModel() {
 
@@ -86,7 +87,7 @@ class YstoreViewModels: ViewModel() {
         return AddFeacher().addCategory(cat_title,images)
     }
     fun addUsers(name: String, email: String,password: String,chat_id: String,
-                 phone: String,address: String,image:String) : MutableLiveData<Response> {
+                 phone: String,address: String,image:String) : MutableLiveData<List<Users>> {
         return AddFeacher().addUser(name, email,password,chat_id,
             phone,address,image)
     }
