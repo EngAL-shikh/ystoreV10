@@ -7,14 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.AddProductActivity
 import com.amroz.ystore.Featchers
+import com.amroz.ystore.Models.Products
 
 import com.amroz.ystore.Models.Report
 import com.amroz.ystore.R
@@ -25,6 +28,7 @@ class ReportFragment : Fragment() {
     private lateinit var RecyclerView: RecyclerView
     private lateinit var reportViewModel: ViewModel
     var type=""
+    var searchlist=ArrayList<Report>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         reportViewModel = ViewModelProviders.of(this).get(YstoreViewModels::class.java)
@@ -33,7 +37,7 @@ class ReportFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        var search= view.findViewById(R.id.searchfromT) as SearchView
 
 
 
@@ -44,7 +48,45 @@ class ReportFragment : Fragment() {
             LiveData.observe(this, Observer {
                 Log.d("test", "Response received: ${it}")
                 RecyclerView.adapter = ReportAdapter(it)
+                search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextChange(txtsearch: String?): Boolean {
 
+                        searchlist.clear()
+                        for (i in it){
+                            if (i.author.contains(txtsearch.toString())){
+                                searchlist.add(i)
+                            } }
+                        RecyclerView.layoutManager=LinearLayoutManager(context)
+                        RecyclerView.adapter = ReportAdapter(searchlist)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        return true
+
+                    }
+
+
+                    override fun onQueryTextSubmit(p0: String?): Boolean {
+
+
+
+
+
+
+                        return true
+                    }
+                })
             })
 
     }

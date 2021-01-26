@@ -56,7 +56,7 @@ class ProductByCat : AppCompatActivity() {
             var images=  products.images.split(",").toTypedArray()
             title.text = products.title
             deatils.text = products.details
-            Raitings.text = products.rating.toString()
+            Raitings.text = products.rating_vote.toString()
             Log.d("rett",  Raitings.text.toString())
             Picasso.with(this@ProductByCat).load(images[0]).into(image)
 ///////////////////////////

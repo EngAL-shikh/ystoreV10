@@ -9,8 +9,13 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#ffff"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/image"
@@ -21,6 +26,48 @@
             app:layout_collapseMode="parallax"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/orderdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center|left"
+                android:paddingLeft="15dp"
+                android:text="Date order">
+
+            </TextView>
+
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_middle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/grey_90" />
+
+
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -167,67 +214,41 @@
 
 
                                 </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            <TextView
+                                android:id="@+id/deatils"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/orderdate"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center|left"
-                                    android:paddingLeft="15dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:text="Date order">
-
-                                </TextView>
-
-                                <TextView
-                                    android:id="@+id/owner"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center|left"
-                                    android:paddingLeft="15dp"
-                                    android:text="sold by  oamr">
-
-                                </TextView>
-
-                                <LinearLayout
-
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/spacing_middle"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Description"
-                                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                                        android:textColor="@color/grey_90" />
-
-                                    <TextView
-                                        android:id="@+id/deatils"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/spacing_medium"
-                                        android:text="About this item
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="About this item
 6.1-inch Super Retina XDR display
 Ceramic Shield, tougher than any smartphone glass
 A14 Bionic chip, the fastest chip ever in a smartphone
 Advanced dual-camera system with 12MP Ultra Wide and"
-                                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                                        android:textColor="@color/grey_60" />
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_60" />
 
+                            <TextView
+                                android:id="@+id/owner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:layout_margin="5dp"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/green_900"
+                                android:text="sold by  oamr">
 
-                                </LinearLayout>
-
-
-                            </LinearLayout>
-
+                            </TextView>
+                            <RatingBar
+                                android:id="@+id/ratingShow_rb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="46dp"
+                                android:numStars="5"
+                                android:rating="5"
+                                style="@style/Widget.AppCompat.RatingBar.Small"
+                                android:secondaryProgressTint="@color/yellow_400"
+                                android:progressTint="@color/yellow_400"
+                                android:stepSize="0.5" />
                         </LinearLayout>
 
 
@@ -538,39 +559,31 @@ Advanced dual-camera system with 12MP Ultra Wide and"
                         android:id="@+id/rating_linear"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:orientation="horizontal">
-
 
 
                         <RatingBar
                             android:id="@+id/ratingProduct"
-                            android:layout_width="248dp"
-                            android:layout_height="46dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="40dp"
-                            android:numStars="5"
-                            android:progressDrawable="@drawable/ic_haert_rating"
-                            android:rating="0"
-                            android:stepSize="0.5" />
-                        <RatingBar
-                            android:id="@+id/ratingShow_rb"
-                            android:layout_width="248dp"
-                            android:layout_height="46dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="40dp"
-                            android:numStars="5"
-                            android:progressDrawable="@drawable/ic_haert_rating"
-                            android:rating="0"
+                            android:layout_width="243dp"
+                            android:layout_height="43dp"
+                            android:numStars="3"
+                            android:progressBackgroundTint="@color/yellow_400"
+                            android:progressTint="@color/yellow_400"
+                            android:rating="3"
                             android:stepSize="0.5" />
 
-                        <ImageButton
+
+                        <TextView
                             android:id="@+id/btn_ratingProduct"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:textColor="@color/colorWhite"
+                            android:padding="5dp"
+                            android:background="@drawable/shape_button"
                             android:layout_gravity="center"
                             android:src="@drawable/add_raiting"
-                            android:text="rating" />
+                            android:text="Raiting this product" />
 
 
                     </LinearLayout>

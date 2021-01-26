@@ -19,15 +19,6 @@
         android:layout_height="@dimen/spacing_xxlarge"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="@dimen/spacing_xxlarge"
-            android:layout_height="@dimen/spacing_xxlarge"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="13dp"
-            app:srcCompat="@drawable/ic_sentiment_satisfied"
-            app:tint="@color/grey_40" />
-
         <EditText
             android:id="@+id/messagetext"
             android:layout_width="0dp"
@@ -35,16 +26,8 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:hint="Message"
+            android:paddingLeft="20dp"
             android:imeOptions="actionSearch" />
-
-        <ImageView
-            android:layout_width="@dimen/spacing_xxlarge"
-            android:layout_height="@dimen/spacing_xxlarge"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="14dp"
-            app:srcCompat="@drawable/ic_attach_file"
-            app:tint="@color/grey_40" />
 
         <ImageView
             android:id="@+id/send"
@@ -52,6 +35,7 @@
             android:layout_height="@dimen/spacing_xxlarge"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+
             android:padding="12dp"
             app:srcCompat="@drawable/ic_send_24"
             app:tint="#0382FE" />

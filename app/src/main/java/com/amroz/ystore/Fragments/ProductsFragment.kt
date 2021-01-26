@@ -195,14 +195,13 @@ class ProductsFragment : Fragment() {
 
 
         fun bind(products: Products) {
-        var  avarage= products.rating/5.0
+
             var images=  products.images.split(",").toTypedArray()
             productsItem=products
             title.text = products.title
             deatils.text = products.details
-            Raitings.setText(avarage.toString())
+            Raitings.text=products.rating_vote.toString()
             price.text="$ "+products.price_d.toString()
-            Log.d("rett",  avarage.toString())
             Picasso.with(context).load(images[0]).into(image)
 
 //            card.setOnClickListener {

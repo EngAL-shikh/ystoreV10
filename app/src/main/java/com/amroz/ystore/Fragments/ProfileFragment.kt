@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.*
+import com.amroz.ystore.Chating.ContactsActivity
 import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Models.UserChat
@@ -86,6 +87,7 @@ class ProfileFragment : Fragment() {
         else{
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
+            activity?.finish()
         }
 
 
@@ -158,7 +160,9 @@ class ProfileFragment : Fragment() {
 
             message.setOnClickListener {
 
-                addContacts(users.chat_id,users.name)
+               // addContacts(users.chat_id,users.name)
+                var intent=Intent(context,MainChatActivity::class.java)
+                startActivity(intent)
 
             }
 
@@ -360,6 +364,7 @@ class ProfileFragment : Fragment() {
     private fun signOut() {
         var auth = FirebaseAuth.getInstance()
         auth?.signOut()
+        QueryPreferences.setStoredQuery(context!!,"")
 
 
 //        var shared= context?.getSharedPreferences("admin",0)
@@ -392,13 +397,13 @@ class ProfileFragment : Fragment() {
 
         val user = UserChat(chatid, username!!)
         db.collection("contacts")
-            .document("ANdhyn4pyPMdeH8vB7JEbUETpRA3").collection("userContacts").document(chatid)
+            .document(QueryPreferences.getStoredQueryChatid(context!!)).collection("userContacts").document(chatid)
             .set(user)
             .addOnCompleteListener{
 
                 if (it.isSuccessful){
                     Toast.makeText(context,"added", Toast.LENGTH_LONG).show()
-                    var intent=Intent(context,MainChatActivity::class.java)
+                    var intent=Intent(context,ContactsActivity::class.java)
                     startActivity(intent)
 
                 }else{

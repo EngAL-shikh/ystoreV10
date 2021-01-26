@@ -115,7 +115,11 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
                 0
                 ,productPriceY.text.toString().toInt(),
                 productPriceD.text.toString().toInt(),
-                3, selectedCategoryId,
+
+
+                QueryPreferences.getStoredQueryUserid(context!!).toInt(),
+                selectedCategoryId,
+  
                 2,
                 "",
                 "")
@@ -145,6 +149,7 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
             startActivity(intent)
             app.finish()
 
+          Log.d("adptercatid",selectedCategoryId.toString())
         }
 
 

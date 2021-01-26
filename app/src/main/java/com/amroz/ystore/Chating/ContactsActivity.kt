@@ -20,7 +20,7 @@ class ContactsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_chat)
         list_viw=findViewById(R.id.list_viw)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+       // supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "Contacts"
 
         val firebaseUser = FirebaseAuth.getInstance().currentUser
