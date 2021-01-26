@@ -1,6 +1,7 @@
 package com.amroz.ystore.Adding
 
 import android.app.Activity
+import android.app.PendingIntent
 import android.content.ContentResolver
 import android.content.Context
 import android.content.DialogInterface
@@ -19,6 +20,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -120,6 +123,23 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
 
 
             Log.d("vcx",selectedCategoryId.toString())
+
+
+
+            val intent1 = MainActivity.newIntent(context!!)
+            val pendingIntent = PendingIntent.getActivity(context!!, 0, intent1, 0)
+            val resources =context!!.resources
+            val notification = NotificationCompat
+                .Builder(context!!, NOTIFICATION_CHANNEL_ID)
+                .setTicker(resources.getString(R.string.new_pictures_title))
+                .setSmallIcon(R.drawable.ic_baseline_fiber_new_24)
+                .setContentTitle(resources.getString(R.string.new_pictures_title))
+                .setContentText(resources.getString(R.string.new_pictures_text))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .build()
+            val notificationManager = NotificationManagerCompat.from(context!!)
+            notificationManager.notify(0, notification)
 
             var intent= Intent(context,MainActivity::class.java)
             startActivity(intent)

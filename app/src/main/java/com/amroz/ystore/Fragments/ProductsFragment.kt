@@ -1,6 +1,7 @@
 package com.amroz.ystore.Fragments
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -272,6 +275,8 @@ class ProductsFragment : Fragment() {
             val news = products[position]
             if (holder is UsersHolder)
                 holder.bind(news)
+
+
 
 
         }
