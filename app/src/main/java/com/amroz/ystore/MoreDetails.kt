@@ -5,24 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.cardview.widget.CardView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.amroz.ystore.Fragments.ProductsFragment
-import com.amroz.ystore.Fragments.ReportFragment
 import com.amroz.ystore.Models.Products
+import com.amroz.ystore.Models.RatingUs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_more_details.*
+import kotlinx.android.synthetic.main.catogrey_list.*
+import java.math.RoundingMode
 
 class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
     var count:Int=0
     private val ystoreViewModels: YstoreViewModels by lazy {
         ViewModelProviders.of(this).get(YstoreViewModels::class.java)
     }
+    lateinit var ratingUs:List<RatingUs>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_details)
@@ -46,6 +48,7 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
         var avgRatingtv:TextView=findViewById(R.id.avrage_rating_tv)
         var userRating:TextView=findViewById(R.id.user_rating_tv)
         var ratingBar:RatingBar=findViewById(R.id.ratingProduct)
+        var ratingBar2:RatingBar=findViewById(R.id.ratingShow_rb)
 
 
 
@@ -153,51 +156,72 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
                 count=10
             }
         }
+/////////////////////////////Add rating
 
-
-
-
+        var total=0.0f
+        var avarage=0.0f
+        var ratingBarValue = 0.0f
 //ratingBar.onRatingBarChangeListener.onRatingChanged()
-        ratingBar.onRatingBarChangeListener =
-            RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                if(rating.toInt()<0){
-                Toast.makeText(
-                    this, "please rating  " +
-                            rating, Toast.LENGTH_SHORT
-                ).show()}
-                else  if(rating.toInt()<1){
-                    Toast.makeText(
-                        this, "You are rating:${rating.toInt()} heart  " +
-                                rating, Toast.LENGTH_SHORT
-                    ).show()}
-                else  if(rating.toInt()==3){
-                    Toast.makeText(
-                        this, "Thanks for rating us:${rating.toInt()} heart" +
-                                rating, Toast.LENGTH_SHORT
-                    ).show()}
-
-            }
-        val ratingBarValue = ratingBar.rating
-        var  count=products.rating_vote+1
-        var sumRating=products.rating+ratingBarValue
-        var avregeRating=sumRating/3.0f
-       // if()
+//        var  count=products.rating_vote+1
+//        var sumRating=0.0f
+//        var avregeRating=0.0f
+//        ratingBar.onRatingBarChangeListener =
+//            RatingBar.OnRatingBarChangeListener { _, rating, _ ->
+//                if(rating.toInt()<0){
+//                Toast.makeText(
+//                    this, "please rating  " +
+//                            rating, Toast.LENGTH_SHORT
+//                ).show()}
+//                else  if(rating.toInt()<1){
+//                    Toast.makeText(
+//                        this, "You are rating:${rating.toInt()} heart  " +
+//                                rating, Toast.LENGTH_SHORT
+//                    ).show()}
+//                else  if(rating.toInt()==3){
+//                    Toast.makeText(
+//                        this, "Thanks for rating us:${rating.toInt()} heart" +
+//                                rating, Toast.LENGTH_SHORT
+//                    ).show()}
+//            }
         btn_ratingProduct.setOnClickListener{
-            ManagementFeatchers().updateRating(products.product_id,sumRating,count)
+
+            count=products.rating_vote+1
+            ystoreViewModels.addRating(ratingBar.rating,products.product_id,products.user_id)
             Toast.makeText(
                 this,
-                "Thanks For rating us : " + ratingBarValue.toString(), Toast.LENGTH_SHORT
+                "Thanks For rating us : " + ratingBar.rating, Toast.LENGTH_SHORT
             ).show()
         }
-        avgRatingtv.text=avregeRating.toString()
-        Log.d("hager","$avregeRating")
-        userRating.text=count.toString()
+ ystoreViewModels.liveDataRatingUs.observe(
+            this, Observer{ rating ->
+               this.ratingUs=rating
+                Log.d("rating", "$rating")
+                for (i in rating ) {
+                    if (products.product_id == i.product_id) {
+                        total += i.ratingNum
+                        Log.d("total1", "$total")
+                    }
+                }
+                    avarage=total/3.0f
+              var avg= avarage/products.rating_vote.toFloat()
+              var avg2=avg
+                  .toBigDecimal()
+                  .setScale(1, RoundingMode.CEILING)
+                  .toString()
+                Log.d("avarage", "$avg")
+                avgRatingtv.text=avg2.toString()
+                userRating.text=products.rating_vote.toString()
+                ratingBar2.rating=avg
+                ratingBar2.setIsIndicator(true)
+                })
+    }
+
+    override fun onRatingChanged(ratingBar: RatingBar?,
+                                 rating: Float,
+                                 fromUser: Boolean) {
 
     }
 
-    override fun onRatingChanged(ratingBar: RatingBar?, rating: Float, fromUser: Boolean) {
-
-    }
 
 
 }

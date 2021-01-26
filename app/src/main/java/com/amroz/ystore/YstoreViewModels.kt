@@ -9,10 +9,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.amroz.ystore.Models.Cart
-import com.amroz.ystore.Models.Products
-import com.amroz.ystore.Models.Report
-import com.amroz.ystore.Models.Users
+import com.amroz.ystore.Models.*
+
 class YstoreViewModels: ViewModel() {
 
 
@@ -64,9 +62,10 @@ class YstoreViewModels: ViewModel() {
     }
 /////////////////////////////////////////
     var liveDataCategory: LiveData<List<Category>>
-    //var liveDataCart: LiveData<List<Cart>>
+   // var liveDataCart: LiveData<List<Cart>>
     var LiveDataReport: LiveData<List<Report>>
     var LiveDataUsers: LiveData<List<Users>>
+    var liveDataRatingUs: LiveData<List<RatingUs>>
     var LiveDataProducts: LiveData<List<Products>>
     var LiveDataUsersInfo = MutableLiveData<Int>()
 
@@ -74,12 +73,11 @@ class YstoreViewModels: ViewModel() {
 
     init {
         liveDataCategory = Featchers().fetchCat()
-        //liveDataCart = Featchers().fetchCart()
+      //  liveDataCart = Featchers().fetchCart()
         LiveDataReport = Featchers().fetchReport()
         LiveDataUsers = Featchers().fetchUsers()
         LiveDataProducts = Featchers().fetchProducts()
-
-
+        liveDataRatingUs= Featchers().fetchRating()
     }
 
     /////////////////////Rug////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,15 +102,46 @@ class YstoreViewModels: ViewModel() {
     }
 
 
+
+    fun fetchCart(user_id:Int):LiveData<List<Products>>{
+        return Featchers().fetchCart(user_id)
+
+    }
+
+
+    //ResetPassword
+
+
+    fun ResetPassword(user_id:Int, password:String): MutableLiveData<Response> {
+        return ManagementFeatchers(). ResetPassword(user_id, password )
+    }
+
+
+    /////////////////rating ViewModel
+    fun updateRating(id:Int, rating: Float): MutableLiveData<Response> {
+        return ManagementFeatchers().updateRating(id,rating)
+    }
+    //////////////////addRating
+    fun addRating(rating:Float,product_id:Int,user_id:Int):MutableLiveData<Response> {
+        return ManagementFeatchers().addRating(rating,product_id,user_id)
+    }
+    /////////////////delete
+    fun deleteRating(id:Int) {
+        return ManagementFeatchers().deleteRating(id)
+    }
+
+
     //addReportProduct
     fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
         return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
     }
-
-    fun fetchCart(user_id:Int):LiveData<List<Products>>{
-        return Featchers().fetchCart(user_id)
-    }
 }
+
+
+
+
+
+
 
 
 

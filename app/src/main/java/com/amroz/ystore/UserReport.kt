@@ -8,6 +8,8 @@ import android.util.Log
 import android.widget.*
 import androidx.lifecycle.ViewModelProviders
 import com.amroz.ystore.Models.Products
+import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_user_report.view.*
 
 class UserReport : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +27,7 @@ class UserReport : AppCompatActivity() {
         var image_back: ImageView =findViewById(R.id.ba)
 
         var products=intent.getSerializableExtra("data") as Products
-
+        var ratingUser :ImageButton=findViewById(R.id.user_raiting)
         ed_email=findViewById(R.id.email)
 
        nameUser =findViewById(R.id.name)
@@ -59,6 +61,11 @@ class UserReport : AppCompatActivity() {
 
       onBackPressed()
     }
+        ratingUser.setOnClickListener{
+      var ratingCount = products.user_raiting +1
+           ManagementFeatchers().updateRatingUser(products.user_id,ratingCount)
+            Toast.makeText(this, "you like us$ratingCount", Toast.LENGTH_SHORT).show()
+        }
 
     }
 }

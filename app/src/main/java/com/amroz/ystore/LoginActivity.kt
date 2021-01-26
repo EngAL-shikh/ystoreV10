@@ -2,10 +2,11 @@ package com.amroz.ystore
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.*
 import android.widget.Button
-
 import androidx.lifecycle.ViewModelProviders
 
 import android.widget.*
@@ -16,9 +17,9 @@ import com.amroz.ystore.Chating.ChatActivity
 import com.amroz.ystore.Chating.ContactsActivity
 import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.UserChat
-
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import kotlinx.android.synthetic.main.update_profile_user.*
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -46,10 +47,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+
+  
+    var db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var signup:TextView
     private lateinit var usersViewModel: ViewModel
     private lateinit var username: EditText
-    var db:FirebaseFirestore= FirebaseFirestore.getInstance()
 
     private var firebaseAuth: FirebaseAuth? = null
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
@@ -71,13 +74,15 @@ class LoginActivity : AppCompatActivity() {
         lateinit var userProfile:YstoreViewModels
 
 
-        var loginbyphone:ImageView=findViewById(R.id.login_by_phone)
+        var loginbyphone: ImageView =findViewById(R.id.login_by_phone)
         var login:ImageView=findViewById(R.id.login)
+        var username: EditText =findViewById(R.id.username)
          username=findViewById(R.id.username)
         var password: ShowHidePasswordEditText = findViewById(R.id.password)
         var loginbyemail:ImageView=findViewById(R.id.login_by_email)
-        var linearLoginbyemail:LinearLayout=findViewById(R.id.linear_login_by_email)
+        var linearLoginbyemail: LinearLayout =findViewById(R.id.linear_login_by_email)
         var linearLoginbyphone:LinearLayout=findViewById(R.id.linear_login_by_phone)
+        var progress:ProgressBar=findViewById(R.id.progress)
         signup=findViewById(R.id.sign_in)
 
         signup.setOnClickListener {
@@ -93,42 +98,10 @@ class LoginActivity : AppCompatActivity() {
 // Create Render Class
 
 
-// Set Animation
-
-
-//        login.setOnClickListener {
-//
-////            var intent = Intent(this,MainActivity::class.java)
-////            intent.putExtra("admin",username.text.toString())
-////            startActivity(intent)
-//
-//
-//        }
-
-//        login.setOnClickListener {
-//
-//            var fetch=Featchers()
-//            var call: Call<Users> = fetch.ystoreApi.login(username.text.toString(),password.text.toString())
-//            call.enqueue(object : Callback<Users>{
-//                override fun onFailure(call: Call<Users>, t: Throwable) {
-//                    Toast.makeText(this@LoginActivity,"User Not found",Toast.LENGTH_LONG).show()
-//                }
-//
-//                override fun onResponse(call: Call<Users>, response: Response<Users>) {
-//                    if (response.isSuccessful){
-//                        Log.d("cxz","${response}")
-//                        var intent = Intent(this@LoginActivity,MainActivity::class.java)
-//                        intent.putExtra("admin",username.text.toString())
-//                        startActivity(intent)
-//                    }
-//                }
-//
-//            })
-//        }
 
 
         loginbyphone.setOnClickListener {
-            linearLoginbyphone.visibility=View.VISIBLE
+            linearLoginbyphone.visibility= View.VISIBLE
             linearLoginbyemail.visibility=View.GONE
             loginbyphone.visibility=View.GONE
             loginbyemail.visibility=View.VISIBLE
@@ -151,21 +124,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-
-
         ////////////////////////////////////////////////////////////////////
 
         rootRef = FirebaseFirestore.getInstance()
 
         login.setOnClickListener {
 
+            progress.visibility=View.VISIBLE
             var fetch=Featchers()
             var call: Call<Users> = fetch.ystoreApi.login(username.text.toString(),password.text.toString())
             call.enqueue(object : Callback<Users>{
                 override fun onFailure(call: Call<Users>, t: Throwable) {
-                Toast.makeText(this@LoginActivity,"userNotFound",Toast.LENGTH_LONG).show()
-                }
 
+                Toast.makeText(this@LoginActivity,"userNotFound",Toast.LENGTH_LONG).show()
+                    progress.visibility=View.GONE
+                }
                 override fun onResponse(call: Call<Users>, response: Response<Users>) {
                     if (response.isSuccessful){
                         Log.d("cxz","${response}")
@@ -176,8 +149,14 @@ class LoginActivity : AppCompatActivity() {
 
                          getuserid()
                        // cheackadmin()
-                       Thread.sleep(4000)
-                        startActivity(intent)
+                      // Thread.sleep(4000)
+
+
+                            Handler().postDelayed(Runnable {
+                                startActivity(intent)
+                            },4000)
+                        progress.visibility=View.GONE
+
 
 
                     }
@@ -195,7 +174,7 @@ class LoginActivity : AppCompatActivity() {
 
                 var fetch=Featchers()
                 var call: Call<Users> = fetch.ystoreApi.login(firebaseUser.email.toString(),password.text.toString())
-                call.enqueue(object : Callback<Users>{
+                call.enqueue(object : Callback<Users> {
                     override fun onFailure(call: Call<Users>, t: Throwable) {
                         db= FirebaseFirestore.getInstance()
                        // val user = UserChat(chatid, username!!)
@@ -316,24 +295,6 @@ class LoginActivity : AppCompatActivity() {
         newsLiveData.observe(this@LoginActivity,
             Observer {
 
-//
-//                Log.d("useridtestin", "Response received: ${it[0].user_id}")
-//               // SharedPref.setid(this@LoginActivity,it[0].user_id.toString())
-//                var shaerd=getSharedPreferences("userid",0)
-//                var edit=shaerd.edit()
-//                edit.putString("id",it[0].user_id.toString())
-//                edit.commit()
-//
-//
-//                Log.d("cheackamdin", "Response received: ${it[0].rule}")
-//
-//                if (it[0].rule=="1"){
-//                    SharedPrefAdmin.setRule(this@LoginActivity,it[0].rule)
-//                    var shaerd2=getSharedPreferences("admin",0)
-//                    var edit2=shaerd2.edit()
-//                    edit2.putString("rule","1")
-//                    edit2.commit()
-//                }
 
                 QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
                 QueryPreferences.setStoredQuery(this, it[0].rule)
@@ -341,21 +302,10 @@ class LoginActivity : AppCompatActivity() {
 
             })
     }
-    fun cheackadmin(){
-        var usersid = Featchers()
-        val newsLiveData=usersid.fetchUsersInfoBYemail(username.text.toString())
-        newsLiveData.observe(this@LoginActivity,
-            Observer {
 
-
-
-
-
-
-            })
-    }
     companion object {
         //private val TAG = "LoginActivity"
         private const val RC_SIGN_IN = 123
+
     }
 }

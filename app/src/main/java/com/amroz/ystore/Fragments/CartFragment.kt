@@ -39,7 +39,7 @@ class CartFragment : Fragment() {
 //        type=arguments?.getString("type") as String
 
 
-        }
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,7 +88,7 @@ class CartFragment : Fragment() {
         private  lateinit var productsItem:Products
 
         val title = view.findViewById(R.id.title) as TextView
-       // val deatils = view.findViewById(R.id.deatils) as TextView
+        // val deatils = view.findViewById(R.id.deatils) as TextView
         val price = view.findViewById(R.id.price) as TextView
         //val Raitings = view.findViewById(R.id.Raitings) as TextView
         val image = view.findViewById(R.id.image) as ImageView
@@ -102,9 +102,9 @@ class CartFragment : Fragment() {
             var images=  products.images.split(",").toTypedArray()
             productsItem=products
             title.text = products.title
-           // quntity.text = products.rating
-           // deatils.text = products.details
-           // Raitings.text = products.rating.toString()
+            // quntity.text = products.rating
+            // deatils.text = products.details
+            // Raitings.text = products.rating.toString()
             price.text="$ "+products.price_d.toString()
 
             Picasso.with(context).load(images[0]).into(image)
@@ -140,7 +140,7 @@ class CartFragment : Fragment() {
         }
 
         override fun getItemCount(): Int {
-           return cart.size
+            return cart.size
         }
 
         override fun onBindViewHolder(holder: CartHolder, position: Int) {
