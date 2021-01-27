@@ -48,7 +48,11 @@ data class Products(
     @SerializedName("user_raiting")
     var user_raiting:Int=0,
     @SerializedName("chat_id")
-    var chat_id:String=""
+    var chat_id:String="" ,
+    @SerializedName("date")
+    var date:String="",
+    @SerializedName("type")
+    var type:String=""
     ):Serializable {
 
 }

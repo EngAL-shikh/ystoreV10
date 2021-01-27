@@ -7,21 +7,60 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ProfileFragment">
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/product_rec"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:visibility="visible"
-        android:layout_height="392dp">
+        android:layout_height="77dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/bottom_raduse"
+        app:contentInsetStartWithNavigation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/products_rec"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="My Profile"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:textStyle="bold">
 
-    </androidx.recyclerview.widget.RecyclerView>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/profile_rec"
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/product_rec"
+                android:layout_width="match_parent"
+                android:visibility="visible"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_rec"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+
+    </ScrollView>
+
 
 
 </LinearLayout>

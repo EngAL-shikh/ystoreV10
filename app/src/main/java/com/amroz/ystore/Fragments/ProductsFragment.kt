@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.QuickViewConstants
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -138,7 +139,8 @@ class ProductsFragment : Fragment() {
         val chating= view.findViewById(R.id.chating) as LinearLayout
         val dashboard= view.findViewById(R.id.dashbourd) as LinearLayout
         RecyclerView.layoutManager = GridLayoutManager(context,2)
-
+        val imagenav= view.findViewById(R.id.imagenav) as ImageView
+        val username_nav= view.findViewById(R.id.username_nav) as TextView
         sittings.setOnClickListener {
             nave_view2.visibility=View.VISIBLE
             YoYo.with(Techniques.BounceInLeft)
@@ -165,7 +167,8 @@ class ProductsFragment : Fragment() {
 
         if (QueryPreferences.getStoredQuery(context!!)=="user" ||QueryPreferences.getStoredQuery(context!!)=="admin"){
             login.visibility=View.GONE
-
+            Picasso.with(context).load(QueryPreferences.getStoredQueryUserimage(context!!)).into(imagenav)
+            username_nav.text=QueryPreferences.getStoredQueryUsername(context!!)
         }else
         {
             login.visibility=View.VISIBLE
@@ -201,6 +204,7 @@ class ProductsFragment : Fragment() {
         val card= view.findViewById(R.id.ProductCard) as CardView
         val remov_fevort= view.findViewById(R.id.remove_fivort_Raiting) as ImageView
         val add_fevort= view.findViewById(R.id.add_fivort) as ImageView
+
 
 
 

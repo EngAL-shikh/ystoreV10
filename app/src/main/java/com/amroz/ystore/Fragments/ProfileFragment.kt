@@ -63,16 +63,19 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         var products = Featchers()
-        val newsLiveData=products.fetchProductsByCat(20)
-        newsLiveData.observe(this, Observer {
-            Log.d("test", "Response received: ${it}")
-            RecyclerView.adapter = ProductAdapter(it)
+        if(QueryPreferences.getStoredQuery(context!!)!= "") {
 
-        })
 
+            val newsLiveData = products.fetchProductsByUser(
+                QueryPreferences.getStoredQueryUserid(context!!).toInt()
+            )
+            newsLiveData.observe(this, Observer {
+                Log.d("test", "Response received: ${it}")
+                RecyclerView.adapter = ProductAdapter(it)
+
+            })
+        }
 
 //        var shaerd=context?.getSharedPreferences("userid",0)
 //       var id= shaerd?.getString("id",null)?.toInt()
@@ -127,7 +130,7 @@ class ProfileFragment : Fragment() {
         val address = view.findViewById(R.id.address) as TextView
         val iamge = view.findViewById(R.id.image) as ImageView
         val edite = view.findViewById(R.id.bt_edite) as ImageView
-        val dashboard = view.findViewById(R.id.dashbourd) as LinearLayout
+        val Your_Reports = view.findViewById(R.id.Your_Reports) as ImageButton
 
 
         fun bind(users: Users) {
@@ -141,7 +144,6 @@ class ProfileFragment : Fragment() {
             Picasso.with(context).load(users.user_image).into(iamge)
 
 
-
             edite.setOnClickListener {
 
                 var intent=Intent(context,UpdateProfile::class.java)
@@ -149,7 +151,11 @@ class ProfileFragment : Fragment() {
                 startActivity(intent)
             }
 
-            dashboard.visibility=View.GONE
+            Your_Reports.setOnClickListener {
+
+                var intent=Intent(context,UserReports::class.java)
+                startActivity(intent)
+            }
             logout.setOnClickListener {
                 signOut()
 

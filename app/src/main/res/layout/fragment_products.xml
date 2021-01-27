@@ -11,11 +11,10 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view2"
         android:layout_width="230dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="5dp"
         app:elevation="5dp"
-
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:visibility="gone"
@@ -49,7 +48,7 @@
                         android:layout_height="0dp" />
 
                     <com.mikhaellopez.circularimageview.CircularImageView
-                        android:id="@+id/image"
+                        android:id="@+id/imagenav"
                         android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:layout_margin="@dimen/spacing_xsmall"
@@ -61,13 +60,14 @@
                         app:civ_shadow_radius="0" />
 
                     <TextView
+                        android:id="@+id/username_nav"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/spacing_large"
                         android:layout_marginRight="@dimen/spacing_large"
                         android:text="Evans C"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        android:textColor="@color/grey_20"
+                        android:textColor="@color/colorBalck"
                         app:fontFamily="sans-serif-medium" />
 
 
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dashboard"
-                        android:textColor="@color/grey_40" />
+                        android:textColor="@color/colorBalck" />
 
                 </LinearLayout>
 
@@ -157,7 +157,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Chat"
-                        android:textColor="@color/grey_40" />
+                        android:textColor="@color/colorBalck" />
 
                 </LinearLayout>
 
@@ -187,7 +187,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Login"
-                        android:textColor="@color/grey_40" />
+                        android:textColor="@color/colorBalck"  />
 
                 </LinearLayout>
                 <TextView

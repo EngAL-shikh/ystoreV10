@@ -93,11 +93,13 @@ class UsersFragment : Fragment() {
                 {
                     user_active=1
                     userstatus.text="Active"
+                    userstatus.setBackgroundResource(R.color.green_900)
 
                 }
                 else{
                     user_active=0
                     userstatus.text="Disactive"
+                    userstatus.setBackgroundResource(R.color.red)
                 }
                 ystoreViewModels.userStatus(user.user_id, user_active)
                 Log.d("done", user_active.toString())
