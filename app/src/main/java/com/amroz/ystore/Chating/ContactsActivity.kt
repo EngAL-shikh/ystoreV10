@@ -15,14 +15,19 @@ import kotlinx.android.synthetic.main.contact_list.*
 
 class ContactsActivity : AppCompatActivity() {
     lateinit var list_viw:ListView
+    lateinit var back:TextView
    // lateinit var text:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_chat)
         list_viw=findViewById(R.id.list_viw)
+       back=findViewById(R.id.back)
        // supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         title = "Contacts"
 
+       back.setOnClickListener {
+           onBackPressed()
+       }
         val firebaseUser = FirebaseAuth.getInstance().currentUser
         if (firebaseUser != null) {
             val fromUid = firebaseUser.uid

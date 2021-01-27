@@ -64,29 +64,25 @@ class AddUser : AppCompatActivity() {
         singUp.setOnClickListener {
             var user= YstoreViewModels()
 
-            if (addName.text.toString().trim().length>3){
+                   var LiveData= user.addUsers(addName.text.toString(),QueryPreferences.getStoredQueryEmail(this).toString(),addPassword.text.toString(),
+                        QueryPreferences.getStoredQueryChatid(this).toString(),addPhone.text.toString(),addAddress.text.toString(),image)
 
-                Toast.makeText(this,"invlaid name",Toast.LENGTH_LONG).show()
-            }else if (addEmail.text.toString().trim().length<3){
-                Toast.makeText(this,"invlaid email",Toast.LENGTH_LONG).show()
-            }else if (addEmail.text.toString().trim().length<3){
-                Toast.makeText(this,"invlaid password",Toast.LENGTH_LONG).show()
-            }else if (addAddress.text.toString().trim().length<3){
-                Toast.makeText(this,"invlaid Address",Toast.LENGTH_LONG).show()
-            }else if (image.trim().length<0){
+          //  getuserid()
 
-                Toast.makeText(this,"chose image",Toast.LENGTH_LONG).show()
-            }else{
+            LiveData.observe(this, Observer {
 
-                user.addUsers(addPassword.text.toString(),QueryPreferences.getStoredQueryEmail(this).toString(),addPassword.text.toString(),
-                    QueryPreferences.getStoredQueryChatid(this).toString(),addPhone.text.toString(),addAddress.text.toString(),image)
+                QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
+                QueryPreferences.setStoredQuery(this, it[0].rule)
+                QueryPreferences.setStoredQueryUserimage(this, it[0].user_image)
+                QueryPreferences.setStoredQueryUsername(this, it[0].name)
+                QueryPreferences.setStoredQueryUseraddress(this, it[0].address)
+                QueryPreferences.setStoredQueryChatid(this, it[0].chat_id)
                 val intent = Intent(this, MainActivity::class.java)
-                getuserid()
-                Handler().postDelayed(Runnable {
-                    startActivity(intent)
-                },4000)
+               // intent.putExtra("userrule",)
+                startActivity(intent)
+            })
 
-            }
+
 
             // cheackadmin()
             // Thread.sleep(4000)
@@ -168,12 +164,12 @@ class AddUser : AppCompatActivity() {
 
     fun getuserid(){
         var usersid = Featchers()
-        val newsLiveData=usersid.fetchUsersInfoBYemail(addEmail.text.toString())
+        val newsLiveData=usersid.fetchUsersInfoBYemail(QueryPreferences.getStoredQueryEmail(this).toString())
         newsLiveData.observe(this,
             Observer {
 
 
-            Log.d("useridtestin", "Response received: ${it[0].user_id}")
+           // Log.d("useridtestin", "Response received: ${it[0].user_id}")
                // Log.d("useridtestin", "Response received: ${it[0].user_id}")
                 // SharedPref.setid(this@LoginActivity,it[0].user_id.toString())
 //                var shaerd=getSharedPreferences("userid",0)
@@ -181,13 +177,15 @@ class AddUser : AppCompatActivity() {
 //                edit.putString("id",it[0].user_id.toString())
 //                edit.commit()
 
+              //  Thread.sleep(4000)
               //  QueryPreferences.setStoredQuery(this, it[0].rule)
-               QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
-                QueryPreferences.setStoredQuery(this, it[0].rule)
-                QueryPreferences.setStoredQueryUserimage(this, it[0].user_image)
-                QueryPreferences.setStoredQueryUsername(this, it[0].name)
-                QueryPreferences.setStoredQueryUseraddress(this, it[0].address)
-                QueryPreferences.setStoredQueryChatid(this, it[0].chat_id)
+//               QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
+//                QueryPreferences.setStoredQuery(this, it[0].rule)
+//                QueryPreferences.setStoredQueryUserimage(this, it[0].user_image)
+//                QueryPreferences.setStoredQueryUsername(this, it[0].name)
+//                QueryPreferences.setStoredQueryUseraddress(this, it[0].address)
+//                QueryPreferences.setStoredQueryChatid(this, it[0].chat_id)
+
 
 
         })

@@ -19,7 +19,9 @@ open class Featchers {
     init {
         val retrofit: Retrofit = Retrofit.Builder()
 
-            .baseUrl("http://172.16.16.249/")
+
+            .baseUrl("http://192.168.1.3/")
+
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -236,6 +238,7 @@ fun fetchCat(): LiveData<List<Category>> {
 
     }
 
+
     fun fetchReportByID(report_id:Int): LiveData<List<Report>> {
         val responseLiveData: MutableLiveData<List<Report>> = MutableLiveData()
         val reportRequest: Call<Response> = ystoreApi.fetchReportsByID(report_id)
@@ -243,15 +246,40 @@ fun fetchCat(): LiveData<List<Category>> {
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.e("TAG", "Failed to fetch ", t)
             }
-            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
+           override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
             ) {
-
-                val response:Response? = response.body()
-                val reports:List<Report> = response?.getReportDByID
+             val response:Response? = response.body()
+             val reports:List<Report> = response?.getReportDByID
                     ?: mutableListOf()
                 Log.d("TAG", "Response received")
                 responseLiveData.value = reports
                 Log.d("onResponse", reports.toString())
+                }
+        })
+           return responseLiveData
+
+    }
+          
+
+
+    fun fetchProductsByUser(user_id:Int): LiveData<List<Products>> {
+        val responseLiveData: MutableLiveData<List<Products>> = MutableLiveData()
+        val ystoreRequest: Call<Response> = ystoreApi.fetchProductsByUser(user_id)
+        ystoreRequest.enqueue(object : Callback<Response> {
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.e("TAG", "Failed to fetch ", t)
+            }
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
+            ) {
+
+                val response:Response? = response.body()
+                val products:List<Products> = response?.productByUser
+                    ?: mutableListOf()
+                Log.d("TAG", "Response received")
+                responseLiveData.value = products
+                Log.d("onResponse", products.toString())
+
             }
         })
         return responseLiveData

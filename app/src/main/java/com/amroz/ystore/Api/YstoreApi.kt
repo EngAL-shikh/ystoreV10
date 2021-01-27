@@ -239,5 +239,15 @@ interface YstoreApi {
     fun  deleteRating(@Query("rating_id")id:Int): Call<Response>
     ///////////////////////////////////////////////
 
+
+    ///////////user_status////////////////
+    //user_status
+    @FormUrlEncoded
+    @PUT("StoreApi/api/status_api.php")
+    fun updateUserStatus(@Query("user_id")user_id : Int?,
+                         @Field("user_status") user_status: Int
+    ): Call<Response>
+    ///////////user_status////////////////
+
 }
 

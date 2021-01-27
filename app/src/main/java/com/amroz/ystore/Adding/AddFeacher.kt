@@ -1,6 +1,8 @@
 package com.amroz.ystore
 
+import android.app.Application
 import android.app.PendingIntent
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +10,12 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.MutableLiveData
 import com.amroz.ystore.Api.YstoreApi
+
 import com.amroz.ystore.Models.Products
-import com.amroz.ystore.Models.Users
+
 import com.firebase.ui.auth.data.model.User
+
+import com.amroz.ystore.Models.Users
 
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -21,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AddFeacher : AppCompatActivity() {
     private lateinit var addApi: YstoreApi
 
+
     init {
         val  gson=GsonBuilder().setLenient().create()
 
@@ -28,7 +34,9 @@ class AddFeacher : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create(gson))
 
 
-            .baseUrl("http://172.16.16.249/")
+
+            .baseUrl("http://192.168.1.3/")
+
 
 
             .build()
@@ -89,19 +97,56 @@ class AddFeacher : AppCompatActivity() {
         return responseLiveData
     }
 
+//    fun addUser(name: String, email: String,password: String,chat_id: String,
+//                phone: String,address: String,image:String): MutableLiveData<Response> {
+//        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+//        val newsRequest: Call<Response> = addApi.addUser(name,email,password,chat_id,phone,address,image)
+//        newsRequest.enqueue(object : Callback<Response> {
+//            override fun onFailure(call: Call<Response>, t: Throwable) {
+//                Log.e("TAG", "Failed to post ", t)
+//            }
+//            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
+//            ) {
+//
+//                //Toast.makeText(this@AddFeacher,"User Added",Toast.LENGTH_LONG).show()
+//                Log.e("TAG", "Response received")
+//
+//            }
+//        })
+//        return responseLiveData
+//    }
+
     fun addUser(name: String, email: String,password: String,chat_id: String,
                 phone: String,address: String,image:String): MutableLiveData<List<Users>> {
         val responseLiveData: MutableLiveData<List<Users>> = MutableLiveData()
         val newsRequest: Call<Response> = addApi.addUser(name,email,password,chat_id,phone,address,image)
         newsRequest.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>, t: Throwable) {
-                Log.e("TAG", "Failed to post ", t)
+                Log.e("adkljfadsf", t.message.toString())
+                Log.e("TAG", "Response received")
+
+
             }
             override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
             ) {
 
                 //Toast.makeText(this@AddFeacher,"User Added",Toast.LENGTH_LONG).show()
-                Log.e("TAG", "Response received")
+                val response:Response? = response.body()
+                val user:List<Users> = response?.getUserIDByEmail
+                    ?: mutableListOf()
+                Log.d("TAG", "Response received")
+                responseLiveData.value = user
+                Log.d("alksdjflkjaskfj", user.toString())
+
+               // val context: Context = AddFeacher.applicationContext()
+
+             //   QueryPreferences.setStoredQuery(this@AddFeacher, user[0].user_id.toString())
+//               QueryPreferences.setStoredQueryUserid(context, user[0].user_id.toString())
+//                QueryPreferences.setStoredQuery(context, user[0].rule)
+//                QueryPreferences.setStoredQueryUserimage(context, user[0].user_image)
+//                QueryPreferences.setStoredQueryUsername(context, user[0].name)
+//                QueryPreferences.setStoredQueryUseraddress(context, user[0].address)
+//                QueryPreferences.setStoredQueryChatid(context, user[0].chat_id)
 
                 val response:Response? = response.body()
                 val user:List<Users> = response?.getUserIDByEmail

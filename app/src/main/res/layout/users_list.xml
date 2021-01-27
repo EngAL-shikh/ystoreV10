@@ -58,7 +58,7 @@
 
             </TextView>
             <TextView
-                android:id="@+id/disactive"
+                android:id="@+id/userstatus"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:text="Disactive"

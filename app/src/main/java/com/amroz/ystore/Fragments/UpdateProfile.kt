@@ -29,6 +29,8 @@ class UpdateProfile : AppCompatActivity() {
     lateinit var update:LinearLayout
     lateinit var pass:LinearLayout
     lateinit var cardpass:CardView
+    lateinit var rpass:EditText
+    lateinit var cpass:EditText
 
    // private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -50,7 +52,9 @@ class UpdateProfile : AppCompatActivity() {
        logout=findViewById(R.id.logout)
        update=findViewById(R.id.linear_update)
         pass=findViewById(R.id.pass)
-        
+        rpass=findViewById(R.id.rpass)
+        cpass=findViewById(R.id.cpass)
+
 ///////////////////////////////////////////////////
 
         val currentpass: EditText = findViewById(R.id.cpass)

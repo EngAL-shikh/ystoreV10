@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.amroz.ystore.Models.*
+import com.firebase.ui.auth.data.model.User
 
 class YstoreViewModels: ViewModel() {
 
@@ -139,6 +140,14 @@ class YstoreViewModels: ViewModel() {
     fun addReportProduct(id:Int,report_reason:String,product_id:Int,user_id:Int):MutableLiveData<Response> {
         return ManagementFeatchers().addReport(id,report_reason,product_id,user_id)
     }
+
+    ///////////user_status////////////////
+    //user_status
+    fun userStatus(user_id:Int, user_status:Int): MutableLiveData<Response> {
+        return ManagementFeatchers().updateUserStatus(user_id,user_status )
+    }
+
+    ///////////user_status////////////////
 }
 
 

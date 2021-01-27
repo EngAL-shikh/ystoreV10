@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import com.amroz.ystore.LoginActivity
 import com.amroz.ystore.MainActivity
 import com.amroz.ystore.Models.UserChat
@@ -21,10 +22,14 @@ class MainChatActivity : AppCompatActivity() {
     private var firebaseAuth: FirebaseAuth? = null
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
     private var googleApiClient: GoogleApiClient? = null
+    lateinit var back: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_chat)
-
+        back=findViewById(R.id.back)
+        back.setOnClickListener {
+            onBackPressed()
+        }
 
         firebaseAuth = FirebaseAuth.getInstance()
         authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
