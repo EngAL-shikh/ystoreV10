@@ -30,8 +30,11 @@ data class Response (
     @SerializedName("getAllRating")
     var rating: List<RatingUs>,
     @SerializedName("getSingleuUserid")
-    var getSingleuUserid: List<Users>
-
+    var getSingleuUserid: List<Users>,
+    @SerializedName("getUserIDByEmail")
+    var getUserIDByEmail: List<Users>,
+    @SerializedName("getSingleReport")
+    var getReportDByID: List<Report>
 ){
 
 

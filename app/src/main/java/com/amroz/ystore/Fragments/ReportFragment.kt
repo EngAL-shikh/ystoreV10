@@ -110,9 +110,13 @@ class ReportFragment : Fragment() {
 
 
     // Holder
-    private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private inner class UsersHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
+        init {
+            itemView.setOnClickListener(this)
 
+        }
+        private lateinit var reportDetailsReport: Report
         val report_id = view.findViewById(R.id.report_id) as TextView
         val report_reason = view.findViewById(R.id.reason) as TextView
         val product_name = view.findViewById(R.id.prouct_name) as TextView
@@ -120,12 +124,16 @@ class ReportFragment : Fragment() {
 
 
         fun bind(reports: Report) {
-
+            reportDetailsReport=reports
             report_id.text = reports.report_id.toString()
             report_reason.text =reports.report_reason
             product_name.text =reports.author
 
 
+        }
+
+        override fun onClick(v: View?) {
+            reportDetailsReport.report_id
         }
 
 

@@ -8,6 +8,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.MutableLiveData
 import com.amroz.ystore.Api.YstoreApi
+import com.amroz.ystore.Models.Products
+import com.amroz.ystore.Models.Users
+import com.firebase.ui.auth.data.model.User
 
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -25,7 +28,7 @@ class AddFeacher : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create(gson))
 
 
-            .baseUrl("http://192.168.174.2/")
+            .baseUrl("http://172.16.16.249/")
 
 
             .build()
@@ -87,8 +90,8 @@ class AddFeacher : AppCompatActivity() {
     }
 
     fun addUser(name: String, email: String,password: String,chat_id: String,
-                phone: String,address: String,image:String): MutableLiveData<Response> {
-        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+                phone: String,address: String,image:String): MutableLiveData<List<Users>> {
+        val responseLiveData: MutableLiveData<List<Users>> = MutableLiveData()
         val newsRequest: Call<Response> = addApi.addUser(name,email,password,chat_id,phone,address,image)
         newsRequest.enqueue(object : Callback<Response> {
             override fun onFailure(call: Call<Response>, t: Throwable) {
@@ -99,6 +102,13 @@ class AddFeacher : AppCompatActivity() {
 
                 //Toast.makeText(this@AddFeacher,"User Added",Toast.LENGTH_LONG).show()
                 Log.e("TAG", "Response received")
+
+                val response:Response? = response.body()
+                val user:List<Users> = response?.getUserIDByEmail
+                    ?: mutableListOf()
+                Log.d("TAG", "Response received")
+                responseLiveData.value = user
+                Log.d("onResponse", user.toString())
 
             }
         })

@@ -86,7 +86,7 @@ class YstoreViewModels: ViewModel() {
         return AddFeacher().addCategory(cat_title,images)
     }
     fun addUsers(name: String, email: String,password: String,chat_id: String,
-                 phone: String,address: String,image:String) : MutableLiveData<Response> {
+                 phone: String,address: String,image:String) : MutableLiveData<List<Users>> {
         return AddFeacher().addUser(name, email,password,chat_id,
             phone,address,image)
     }
@@ -99,6 +99,10 @@ class YstoreViewModels: ViewModel() {
     }
     fun addCart(user_id:Int,product_id:Int,Quantity:Int):MutableLiveData<Response> {
         return AddFeacher().addCart(user_id,product_id,Quantity)
+    }
+
+    fun fetchReportByID(report_id:Int): LiveData<List<Report>> {
+        return Featchers().fetchReportByID(report_id)
     }
 
 
