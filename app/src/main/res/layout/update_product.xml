@@ -14,7 +14,31 @@
         android:layout_marginTop="10dp"
         android:gravity="center|top"
         android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/bottom_raduse"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/products_rec"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Update"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:textStyle="bold">
 
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="291dp"
@@ -46,93 +70,163 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_mlarge"
+                    android:text="product title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40" />
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColorHint="@color/colorGrey2"
-                    >
+                    android:layout_height="@dimen/spacing_xmlarge"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@color/grey_3"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_title"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="product title"
-                        android:textColor="@color/colorGrey2" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:hint="Ex. iphone 12"
+                        android:textColorHint="@color/grey_20" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_mlarge"
+                    android:text="Product Description"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColorHint="@color/colorGrey2"
-                    >
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@color/grey_3"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_details"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="details"
-                        android:textColor="@color/colorGrey2" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:gravity="start"
+                        android:inputType="textMultiLine"
+                        android:lines="4"
+                        android:hint="EX. iphone 12 pro max ...."
+                        android:textColor="@color/grey_60" />
+
                 </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_mlarge"
+                    android:text="Product Color"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40" />
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColorHint="@color/colorGrey2"
-                    >
+                    android:layout_height="@dimen/spacing_xmlarge"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@color/grey_3"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_color"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="color"
-                        android:textColor="@color/colorGrey2" />
+                        android:layout_height="40dp"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:hint="red, green, black."
+                        android:textColorHint="@color/grey_20" />
+
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_mlarge"
+                    android:text="Product Features"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40" />
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColorHint="@color/colorGrey2"
-                    >
+                    android:layout_height="@dimen/spacing_xmlarge"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@color/grey_3"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_product_features"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="productFeatures"
-                        android:textColor="@color/colorGrey2" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:hint="128gb, camer 12mb, black."
+                        android:textColorHint="@color/grey_20" />
+
                 </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_mlarge"
+                    android:text="Product Price RY"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColorHint="@color/colorGrey2"
-                    >
+                    android:layout_height="@dimen/spacing_xmlarge"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@color/grey_3"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_price_y"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="price_y"
-                        android:textColor="@color/colorGrey2" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:hint="RY 1200"
+                        android:textColorHint="@color/grey_20" />
+
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_mlarge"
+                    android:text="Product Price D"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40" />
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColorHint="@color/colorGrey2"
-                    >
+                    android:layout_height="@dimen/spacing_xmlarge"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@color/grey_3"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_price_d"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="price_d"
-                        android:textColor="@color/colorGrey2" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:hint="$ 1200"
+                        android:textColorHint="@color/grey_20" />
+
                 </com.google.android.material.textfield.TextInputLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

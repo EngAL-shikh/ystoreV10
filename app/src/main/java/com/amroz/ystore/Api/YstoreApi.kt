@@ -49,7 +49,9 @@ interface YstoreApi {
     @GET("StoreApi/api/gitUserid_api.php?")
     fun fetchSingleUsersbyemail(@Query("email") email: String): Call<Response>
 
-
+    @GET("StoreApi/api/getProductsDetails.php")
+    fun fetchProductsByReportID(@Query("report_id") report_id: Int,
+                                @Query("product_id") product_id: Int): Call<Response>
 
 
     // adding/////////////////////////////////////////////////////////////////////////////////

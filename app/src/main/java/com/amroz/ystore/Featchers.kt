@@ -19,7 +19,7 @@ open class Featchers {
     init {
         val retrofit: Retrofit = Retrofit.Builder()
 
-            .baseUrl("http://192.168.137.239/")
+            .baseUrl("http://192.168.5.1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -253,6 +253,29 @@ fun fetchCat(): LiveData<List<Category>> {
                 Log.d("TAG", "Response received")
                 responseLiveData.value = products
                 Log.d("onResponse", products.toString())
+            }
+        })
+        return responseLiveData
+
+    }
+
+
+    ////////
+    fun fetchProductsByReportID(report_id: Int,product_id:Int): LiveData<List<Products>> {
+        val responseLiveData: MutableLiveData<List<Products>> = MutableLiveData()
+        val reportRequest: Call<Response> = ystoreApi.fetchProductsByReportID(report_id,product_id)
+        reportRequest.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.e("jksshgdfhsdgf",t.message.toString())
+            }
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
+            ) {
+                val response:Response? = response.body()
+                val product:List<Products> = response?.getProductsReports
+                    ?: mutableListOf()
+                Log.d("TAG", "Response received")
+                responseLiveData.value = product
+                Log.d("hjdfhfgashf", product.toString())
             }
         })
         return responseLiveData

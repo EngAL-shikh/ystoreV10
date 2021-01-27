@@ -29,7 +29,7 @@ class AddFeacher : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create(gson))
 
 
-            .baseUrl("http://192.168.137.239/")
+            .baseUrl("http://192.168.5.1/")
 
 
             .build()
