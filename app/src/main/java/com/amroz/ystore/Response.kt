@@ -33,7 +33,14 @@ data class Response (
     var getSingleuUserid: List<Users>,
 
     @SerializedName("getUserIDByEmail")
+    var getUserIDByEmail: List<Users>,
+    @SerializedName("getSingleReport")
+    var getReportDByID: List<Report>
+
+
+    @SerializedName("getUserIDByEmail")
     var getUserIDByEmail: List<Users>
+
 
 ){
 

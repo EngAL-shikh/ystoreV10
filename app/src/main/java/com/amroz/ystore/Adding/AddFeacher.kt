@@ -10,6 +10,11 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.MutableLiveData
 import com.amroz.ystore.Api.YstoreApi
+
+import com.amroz.ystore.Models.Products
+
+import com.firebase.ui.auth.data.model.User
+
 import com.amroz.ystore.Models.Users
 
 import com.google.gson.GsonBuilder
@@ -29,7 +34,9 @@ class AddFeacher : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create(gson))
 
 
+
             .baseUrl("http://192.168.1.3/")
+
 
 
             .build()
@@ -140,6 +147,13 @@ class AddFeacher : AppCompatActivity() {
 //                QueryPreferences.setStoredQueryUsername(context, user[0].name)
 //                QueryPreferences.setStoredQueryUseraddress(context, user[0].address)
 //                QueryPreferences.setStoredQueryChatid(context, user[0].chat_id)
+
+                val response:Response? = response.body()
+                val user:List<Users> = response?.getUserIDByEmail
+                    ?: mutableListOf()
+                Log.d("TAG", "Response received")
+                responseLiveData.value = user
+                Log.d("onResponse", user.toString())
 
             }
         })
