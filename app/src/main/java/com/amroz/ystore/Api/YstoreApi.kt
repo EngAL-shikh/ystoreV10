@@ -34,6 +34,9 @@ interface YstoreApi {
     @GET("StoreApi/api/rating_api.php")
     fun fetchRating(): Call<Response>
 
+    @GET("StoreApi/api/reports.php")
+    fun fetchReportsByID(@Query("report_id") report_id: Int): Call<Response>
+
 
 
 

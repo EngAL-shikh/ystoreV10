@@ -102,6 +102,10 @@ class YstoreViewModels: ViewModel() {
         return AddFeacher().addCart(user_id,product_id,Quantity)
     }
 
+    fun fetchReportByID(report_id:Int): LiveData<List<Report>> {
+        return Featchers().fetchReportByID(report_id)
+    }
+
 
 
     fun fetchCart(user_id:Int):LiveData<List<Products>>{
