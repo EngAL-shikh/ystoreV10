@@ -26,6 +26,7 @@
             android:paddingRight="@dimen/spacing_medium">
 
             <ImageButton
+                android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginLeft="5dp"
@@ -71,6 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="offline"
+                android:visibility="gone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/grey_10" />
 

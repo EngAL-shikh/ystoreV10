@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        Toast.makeText(this, QueryPreferences.getStoredQuery(this), Toast.LENGTH_LONG).show()
+       // Toast.makeText(this, QueryPreferences.getStoredQuery(this), Toast.LENGTH_LONG).show()
 
 
 

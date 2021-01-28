@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +30,11 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
         rec = findViewById(R.id.recyclerView)
         var name: TextView = findViewById(R.id.name)
+        var back: ImageButton = findViewById(R.id.back)
+
+        back.setOnClickListener {
+            onBackPressed()
+        }
         rootRef = FirebaseFirestore.getInstance()
 
         //   supportActionBar!!.setDisplayHomeAsUpEnabled(false)

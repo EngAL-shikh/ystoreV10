@@ -171,6 +171,7 @@ class ProductsFragment : Fragment() {
             username_nav.text=QueryPreferences.getStoredQueryUsername(context!!)
         }else
         {
+            chating.visibility=View.GONE
             login.visibility=View.VISIBLE
 
 

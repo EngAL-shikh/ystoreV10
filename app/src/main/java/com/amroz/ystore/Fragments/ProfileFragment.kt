@@ -22,6 +22,7 @@ import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Models.UserChat
 import com.amroz.ystore.Models.Users
+import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -322,6 +323,15 @@ class ProfileFragment : Fragment() {
         var auth = FirebaseAuth.getInstance()
         auth?.signOut()
         QueryPreferences.setStoredQuery(context!!, "")
+//        if (firebaseAuth != null) {
+//            firebaseAuth!!.signOut()
+//        }
+//
+//        if (googleApiClient!!.isConnected) {
+//            Auth.GoogleSignInApi.signOut(googleApiClient)
+//        }
+
+
 //        if (googleApiClient!!.isConnected) {
 //            googleApiClient!!.disconnect()
 //        }

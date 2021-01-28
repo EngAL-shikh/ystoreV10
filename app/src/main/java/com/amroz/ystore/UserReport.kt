@@ -106,7 +106,9 @@ class UserReport : AppCompatActivity() {
 
                 if (it.isSuccessful) {
                     Toast.makeText(this, "added", Toast.LENGTH_LONG).show()
+                  //  var users = intent.getSerializableExtra("data") as Products
                     var intent = Intent(this, ContactsActivity::class.java)
+                    //intent.putExtra("userimage",users.user_image)
                     startActivity(intent)
 
                 } else {
