@@ -16,10 +16,10 @@ class Mangs_Delete : AppCompatActivity() {
         var butuser = findViewById<Button>(R.id.del_user)
         var butcart = findViewById<Button>(R.id.del_cart)
         var butrep = findViewById<Button>(R.id.del_report)
-butrep.setOnClickListener {
+        butrep.setOnClickListener {
 
-    delet_report()
-}
+            delet_report()
+        }
 
         butcat.setOnClickListener {
             delet_catogrey()
@@ -47,7 +47,7 @@ butrep.setOnClickListener {
         // add the buttons
 
         // add the buttons
-        builder.setPositiveButton("Continue"){_,_->
+        builder.setPositiveButton("Continue") { _, _ ->
             var del_cat = ManagementFeatchers()
             del_cat.deleteCategory(1)
         }
@@ -69,7 +69,7 @@ butrep.setOnClickListener {
         // add the buttons
 
         // add the buttons
-        builder.setPositiveButton("Continue"){_,_->
+        builder.setPositiveButton("Continue") { _, _ ->
             var del_cat = ManagementFeatchers()
             del_cat.deleteProduct(3)
         }
@@ -85,13 +85,13 @@ butrep.setOnClickListener {
     fun delet_user() {
 
         val builder = AlertDialog.Builder(this)
-      //  builder.setTitle("AlertDialog")
+        //  builder.setTitle("AlertDialog")
         builder.setMessage("Are you sure ")
 
         // add the buttons
 
         // add the buttons
-        builder.setPositiveButton("Continue"){_,_->
+        builder.setPositiveButton("Continue") { _, _ ->
             var del_cat = ManagementFeatchers()
             del_cat.deleteUser(2)
 
@@ -101,7 +101,6 @@ butrep.setOnClickListener {
         }
         val dialog = builder.create()
         dialog.show()
-
 
 
     }
@@ -115,7 +114,7 @@ butrep.setOnClickListener {
         // add the buttons
 
         // add the buttons
-        builder.setPositiveButton("Continue"){_,_->
+        builder.setPositiveButton("Continue") { _, _ ->
             var del_cart = ManagementFeatchers()
             del_cart.deleteCart(1)
 
@@ -127,10 +126,9 @@ butrep.setOnClickListener {
         dialog.show()
 
 
-
     }
 
-    fun  delet_report(){
+    fun delet_report() {
         val builder = AlertDialog.Builder(this)
         //  builder.setTitle("AlertDialog")
         builder.setMessage("Are you sure ")
@@ -138,7 +136,7 @@ butrep.setOnClickListener {
         // add the buttons
 
         // add the buttons
-        builder.setPositiveButton("Continue"){_,_->
+        builder.setPositiveButton("Continue") { _, _ ->
             var del_rep = ManagementFeatchers()
             del_rep.deletereports(1)
 

@@ -44,7 +44,7 @@
                 android:paddingBottom="@dimen/spacing_medium">
 
                 <LinearLayout
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_middle"
@@ -81,6 +81,7 @@
                     android:background="@color/grey_80" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/checkout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_medium"

@@ -1,25 +1,23 @@
 package com.amroz.ystore
 
+
+import QueryPreferences
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.*
-import android.widget.Button
-import androidx.lifecycle.ViewModelProviders
-
-import android.widget.*
 import android.widget.Toast.makeText
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 import com.amroz.ystore.Adding.AddUser
-import com.amroz.ystore.Chating.ChatActivity
-import com.amroz.ystore.Chating.ContactsActivity
-import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.UserChat
+import com.amroz.ystore.Models.Users
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
-import kotlinx.android.synthetic.main.update_profile_user.*
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -30,16 +28,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
-
-
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-
-import com.amroz.ystore.Models.Users
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
-
 import render.animations.Bounce
 import render.animations.Render
 import retrofit2.Call
@@ -48,9 +37,9 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
-  
+
     var db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private lateinit var signup:TextView
+    private lateinit var signup: TextView
     private lateinit var usersViewModel: ViewModel
     private lateinit var username: EditText
     private var firebaseAuth: FirebaseAuth? = null
@@ -70,43 +59,40 @@ class LoginActivity : AppCompatActivity() {
 //            finish()
 //        }
 
-        lateinit var userProfile:YstoreViewModels
+        lateinit var userProfile: YstoreViewModels
 
 
-        var loginbyphone: ImageView =findViewById(R.id.login_by_phone)
-        var login:ImageView=findViewById(R.id.login)
-       // var username: EditText =findViewById(R.id.username)
+        var loginbyphone: ImageView = findViewById(R.id.login_by_phone)
+        var login: ImageView = findViewById(R.id.login)
+        // var username: EditText =findViewById(R.id.username)
 
-        username=findViewById(R.id.username)
+        username = findViewById(R.id.username)
 
         var password: ShowHidePasswordEditText = findViewById(R.id.password)
-        var loginbyemail:ImageView=findViewById(R.id.login_by_email)
-        var linearLoginbyemail: LinearLayout =findViewById(R.id.linear_login_by_email)
-        var linearLoginbyphone:LinearLayout=findViewById(R.id.linear_login_by_phone)
-        var progress:ProgressBar=findViewById(R.id.progress)
-        signup=findViewById(R.id.sign_in)
+        var loginbyemail: ImageView = findViewById(R.id.login_by_email)
+        var linearLoginbyemail: LinearLayout = findViewById(R.id.linear_login_by_email)
+        var linearLoginbyphone: LinearLayout = findViewById(R.id.linear_login_by_phone)
+        var progress: ProgressBar = findViewById(R.id.progress)
+        signup = findViewById(R.id.sign_in)
 
         signup.setOnClickListener {
-            progress.visibility=View.VISIBLE
+            progress.visibility = View.VISIBLE
             signIn()
 
         }
 
-        userProfile=
+        userProfile =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
-
 
 
 // Create Render Class
 
 
-
-
         loginbyphone.setOnClickListener {
-            linearLoginbyphone.visibility= View.VISIBLE
-            linearLoginbyemail.visibility=View.GONE
-            loginbyphone.visibility=View.GONE
-            loginbyemail.visibility=View.VISIBLE
+            linearLoginbyphone.visibility = View.VISIBLE
+            linearLoginbyemail.visibility = View.GONE
+            loginbyphone.visibility = View.GONE
+            loginbyemail.visibility = View.VISIBLE
             render.setAnimation(Bounce().InDown(loginbyemail))
             render.start()
             YoYo.with(Techniques.BounceIn)
@@ -116,10 +102,10 @@ class LoginActivity : AppCompatActivity() {
 
         loginbyemail.setOnClickListener {
 
-            linearLoginbyphone.visibility=View.GONE
-            linearLoginbyemail.visibility=View.VISIBLE
-            loginbyphone.visibility=View.VISIBLE
-            loginbyemail.visibility=View.GONE
+            linearLoginbyphone.visibility = View.GONE
+            linearLoginbyemail.visibility = View.VISIBLE
+            loginbyphone.visibility = View.VISIBLE
+            loginbyemail.visibility = View.GONE
             YoYo.with(Techniques.BounceIn)
                 .duration(2000)
                 .playOn(findViewById(R.id.linear_login_by_email))
@@ -132,33 +118,33 @@ class LoginActivity : AppCompatActivity() {
 
         login.setOnClickListener {
 
-            progress.visibility=View.VISIBLE
-            var fetch=Featchers()
-            var call: Call<Users> = fetch.ystoreApi.login(username.text.toString(),password.text.toString())
-            call.enqueue(object : Callback<Users>{
+            progress.visibility = View.VISIBLE
+            var fetch = Featchers()
+            var call: Call<Users> =
+                fetch.ystoreApi.login(username.text.toString(), password.text.toString())
+            call.enqueue(object : Callback<Users> {
                 override fun onFailure(call: Call<Users>, t: Throwable) {
 
-                Toast.makeText(this@LoginActivity,"userNotFound",Toast.LENGTH_LONG).show()
-                    progress.visibility=View.GONE
+                    Toast.makeText(this@LoginActivity, "userNotFound", Toast.LENGTH_LONG).show()
+                    progress.visibility = View.GONE
                 }
-                override fun onResponse(call: Call<Users>, response: Response<Users>) {
-                    if (response.isSuccessful){
-                        Log.d("cxz","${response}")
 
+                override fun onResponse(call: Call<Users>, response: Response<Users>) {
+                    if (response.isSuccessful) {
+                        Log.d("cxz", "${response}")
 
 
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
 
-                         getuserid()
-                       // cheackadmin()
-                      // Thread.sleep(4000)
+                        getuserid()
+                        // cheackadmin()
+                        // Thread.sleep(4000)
 
 
-                            Handler().postDelayed(Runnable {
-                                startActivity(intent)
-                            },4000)
-                        progress.visibility=View.GONE
-
+                        Handler().postDelayed(Runnable {
+                            startActivity(intent)
+                        }, 4000)
+                        progress.visibility = View.GONE
 
 
                     }
@@ -174,25 +160,30 @@ class LoginActivity : AppCompatActivity() {
             val firebaseUser = auth.currentUser
             if (firebaseUser != null) {
 
-                var fetch=Featchers()
-                var call: Call<Users> = fetch.ystoreApi.login(firebaseUser.email.toString(),password.text.toString())
+                var fetch = Featchers()
+                var call: Call<Users> =
+                    fetch.ystoreApi.login(firebaseUser.email.toString(), password.text.toString())
                 call.enqueue(object : Callback<Users> {
                     override fun onFailure(call: Call<Users>, t: Throwable) {
-                        db= FirebaseFirestore.getInstance()
-                       // val user = UserChat(chatid, username!!)
+                        db = FirebaseFirestore.getInstance()
+                        // val user = UserChat(chatid, username!!)
 
-                        Toast.makeText(this@LoginActivity,"you shoud give some info about you",Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "you shoud give some info about you",
+                            Toast.LENGTH_LONG
+                        ).show()
                         val intent = Intent(this@LoginActivity, AddUser::class.java)
-                        progress.visibility=View.GONE
+                        progress.visibility = View.GONE
 
                         startActivity(intent)
                         finish()
                     }
 
                     override fun onResponse(call: Call<Users>, response: Response<Users>) {
-                        if (response.isSuccessful){
-                            Log.d("cxz","${response}")
-                            var intent = Intent(this@LoginActivity,MainActivity::class.java)
+                        if (response.isSuccessful) {
+                            Log.d("cxz", "${response}")
+                            var intent = Intent(this@LoginActivity, MainActivity::class.java)
                             // intent.putExtra("admin",username.text.toString())
                             startActivity(intent)
                         }
@@ -210,13 +201,14 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         googleApiClient = GoogleApiClient.Builder(applicationContext)
-            .enableAutoManage(this) { makeText(this, "You got a GoogleApiClient Error!",
-                Toast.LENGTH_SHORT
-            ).show() }
+            .enableAutoManage(this) {
+                makeText(
+                    this, "You got a GoogleApiClient Error!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
             .build()
-
-
 
 
     }
@@ -227,15 +219,16 @@ class LoginActivity : AppCompatActivity() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode,resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val googleSignInAccount = task.getResult(ApiException::class.java)
                 firebaseSignInWithGoogle(googleSignInAccount!!)
             } catch (e: ApiException) {
-                Log.d("abdoodi","${e}")
+                Log.d("abdoodi", "${e}")
                 makeText(this, "Google sign in failed!", Toast.LENGTH_SHORT).show()
             }
         }
@@ -252,14 +245,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
     private fun createUserIfNotExists(firebaseUser: FirebaseUser) {
         val uid = firebaseUser.uid
         val userName = firebaseUser.displayName
         val user = UserChat(uid, userName!!)
-
         QueryPreferences.setStoredQueryEmail(this, firebaseUser.email!!)
-        QueryPreferences.setStoredQueryChatid(this,firebaseUser.uid!!)
-        var userid=UserChat(firebaseUser.uid,firebaseUser.displayName.toString())
+        QueryPreferences.setStoredQueryChatid(this, firebaseUser.uid)
+        var userid = UserChat(firebaseUser.uid, firebaseUser.displayName.toString())
         val adduser = rootRef!!
             .collection("contacts")
             .document(firebaseUser.uid)
@@ -274,10 +267,14 @@ class LoginActivity : AppCompatActivity() {
         val uidRef = rootRef!!.collection("users").document(uid)
         uidRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-
+                val document = task.result
+                if (!document.exists()) {
+                    uidRef.set(user)
+                }
             }
         }
     }
+
 
     public override fun onStart() {
         super.onStart()
@@ -290,9 +287,10 @@ class LoginActivity : AppCompatActivity() {
             firebaseAuth!!.removeAuthStateListener(authStateListener!!)
         }
     }
-    fun getuserid(){
+
+    fun getuserid() {
         var usersid = Featchers()
-        val newsLiveData=usersid.fetchUsersInfoBYemail(username.text.toString())
+        val newsLiveData = usersid.fetchUsersInfoBYemail(username.text.toString())
         newsLiveData.observe(this@LoginActivity,
             Observer {
                 QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
@@ -300,7 +298,6 @@ class LoginActivity : AppCompatActivity() {
                 QueryPreferences.setStoredQueryUserimage(this, it[0].user_image)
                 QueryPreferences.setStoredQueryUsername(this, it[0].name)
                 QueryPreferences.setStoredQueryUseraddress(this, it[0].address)
-
 
 
             })

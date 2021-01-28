@@ -71,7 +71,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:4.2.0'
     implementation 'androidx.core:core-ktx:1.0.0'
     implementation 'com.itextpdf:itext7-core:7.1.11'
-
+    implementation 'com.balysv:material-ripple:1.0.2'
 
 
 

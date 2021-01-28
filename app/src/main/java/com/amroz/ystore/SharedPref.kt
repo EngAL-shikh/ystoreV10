@@ -1,21 +1,22 @@
 import android.content.Context
 import android.preference.PreferenceManager
 
-var RULE_ADMIN="getadmin"
-var RULE_EMAIL="email"
-var CHAT_ID="chatid"
-var USER_ID="userid"
-var USER_IMAGE="userimage"
-var USER_NAME="username"
-var USER_ADDRESS="address"
-object QueryPreferences {
+var RULE_ADMIN = "getadmin"
+var RULE_EMAIL = "email"
+var CHAT_ID = "chatid"
+var USER_ID = "userid"
+var USER_IMAGE = "userimage"
+var USER_NAME = "username"
+var USER_ADDRESS = "address"
 
+object QueryPreferences {
 
 
     fun getStoredQuery(context: Context): String {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getString(RULE_ADMIN, "")!!
     }
+
     fun setStoredQuery(context: Context, query: String) {
         PreferenceManager.getDefaultSharedPreferences(context)
             .edit()
@@ -95,8 +96,6 @@ object QueryPreferences {
             .putString(USER_ADDRESS, query)
             .apply()
     }
-
-
 
 
 }

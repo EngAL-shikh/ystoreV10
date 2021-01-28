@@ -1,20 +1,17 @@
 package com.amroz.ystore
 
+import QueryPreferences
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 //import com.amroz.ystore.Fragments.ReportFragment
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        if (QueryPreferences.getStoredQuery(this@MainActivity)== "admin"){
+        if (QueryPreferences.getStoredQuery(this@MainActivity) == "admin") {
             val intent = Intent(this, Dashboard::class.java)
             startActivity(intent)
 
@@ -42,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        Toast.makeText(this,QueryPreferences.getStoredQuery(this),Toast.LENGTH_LONG).show()
+        Toast.makeText(this, QueryPreferences.getStoredQuery(this), Toast.LENGTH_LONG).show()
 
 
 
@@ -59,15 +56,15 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         // shaerd2.getString("id",null)
-        if(QueryPreferences.getStoredQuery(this)=="") {
+        if (QueryPreferences.getStoredQuery(this) == "") {
             //navView.menu.findItem(R.id.profile_nv).isVisible=false
-            navView.menu.findItem(R.id.report_nv).isVisible=false
-            navView.menu.findItem(R.id.cart_nv).isVisible=false
+            navView.menu.findItem(R.id.report_nv).isVisible = false
+            navView.menu.findItem(R.id.cart_nv).isVisible = false
 
-        }else{
+        } else {
             //navView.menu.findItem(R.id.profile_nv).isVisible=true
-            navView.menu.findItem(R.id.report_nv).isVisible=true
-            navView.menu.findItem(R.id.cart_nv).isVisible=true
+            navView.menu.findItem(R.id.report_nv).isVisible = true
+            navView.menu.findItem(R.id.cart_nv).isVisible = true
 
         }
 
@@ -75,14 +72,14 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
 
         navView.setupWithNavController(navController)
-        var admin=intent.extras?.getString("admin")
+        var admin = intent.extras?.getString("admin")
 
-        if (admin==1.toString()){
+        if (admin == 1.toString()) {
 
-            var intent = Intent(this,Dashboard::class.java)
-            intent.putExtra("admin",admin)
+            var intent = Intent(this, Dashboard::class.java)
+            intent.putExtra("admin", admin)
             startActivity(intent)
-        }else{
+        } else {
 
 
         }
@@ -93,7 +90,6 @@ class MainActivity : AppCompatActivity() {
             return Intent(context, MainActivity::class.java)
         }
     }
-
 
 
 }

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".Payment.CheckoutActivity">
+
+    <RelativeLayout
+        android:id="@+id/lyt_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/toolbar1"
+
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/checkoutshape_appbar"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/lyt_back"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_medium"
+                android:paddingRight="@dimen/spacing_medium">
+
+                <ImageButton
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/ic_arrow_back" />
+
+                <View
+                    android:layout_width="@dimen/spacing_medium"
+                    android:layout_height="0dp" />
+
+            </LinearLayout>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:text="Payment Method"
+               android:textColor="@color/colorWhite"
+               android:gravity="center"
+               android:textStyle="bold"
+               android:textSize="20sp">
+
+           </TextView>
+
+
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar1"
+            android:layout_marginLeft="@dimen/spacing_mlarge"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:layout_marginRight="@dimen/spacing_mlarge"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/cyan_800_overlay"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="3dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/world_map" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_mlarge">
+
+                    <ImageView
+                        android:id="@+id/card_logo"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="end|right"
+                        android:background="@drawable/shape_round_small"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_mastercard_new" />
+
+                    <TextView
+                        android:id="@+id/card_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:fontFamily="monospace"
+                        android:text="**** **** **** 9867"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                        android:textColor="@android:color/white" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_middle" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="EXPIRE"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/grey_10" />
+
+                            <TextView
+                                android:id="@+id/expire"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="monospace"
+                                android:text="05 / 24"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@android:color/white" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/spacing_xlarge"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CVV"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/grey_10" />
+
+                            <TextView
+                                android:id="@+id/cvv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="monospace"
+                                android:text="981"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@android:color/white" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_middle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NICK NAME"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/grey_10" />
+
+                    <TextView
+                        android:id="@+id/nick_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="monospace"
+                        android:text="Anderson Thomas"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/white" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_medium" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/card"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/card_mastercard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Payment"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_90"
+                    app:fontFamily="sans-serif-medium" />
+
+
+                <ImageView
+                    android:layout_width="@dimen/spacing_mlarge"
+                    android:layout_height="@dimen/spacing_mlarge"
+                    app:srcCompat="@drawable/ic_monetization_on"
+                    app:tint="@color/red_300" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/card_mastercard"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_large">
+
+
+                <EditText
+                    android:id="@+id/nick_name2"
+                    style="@style/EditText.Flat.Grey.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_xlarge"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@drawable/edit_text_round_bg_outline"
+                    android:drawableEnd="@drawable/ic_person_grey"
+                    android:drawableRight="@drawable/ic_person_grey"
+                    android:hint="Name on Card"
+                    android:minHeight="@dimen/spacing_xmlarge" />
+
+                <EditText
+                    android:id="@+id/card_number2"
+                    style="@style/EditText.Flat.Grey.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_xlarge"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@drawable/edit_text_round_bg_outline"
+                    android:drawableEnd="@drawable/ic_credit_card_grey"
+                    android:drawableRight="@drawable/ic_credit_card_grey"
+                    android:hint="Card Number"
+                    android:minHeight="@dimen/spacing_xmlarge" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/expire2"
+                        style="@style/EditText.Flat.Grey.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_xlarge"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:drawableEnd="@drawable/ic_event_grey"
+                        android:drawableRight="@drawable/ic_event_grey"
+                        android:hint="Expired Date" />
+
+                    <View
+                        android:layout_width="@dimen/spacing_middle"
+                        android:layout_height="0dp" />
+
+                    <EditText
+                        android:id="@+id/cvv2"
+                        style="@style/EditText.Flat.Grey.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_xlarge"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:hint="CVV" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/checkout"
+                style="@style/RippleStyleWhite"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxlarge"
+                android:background="@color/red_300">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Submit Order"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:textColor="@android:color/white" />
+
+                    <ImageView
+                        android:layout_width="@dimen/spacing_smlarge"
+                        android:layout_height="@dimen/spacing_smlarge"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        app:srcCompat="@drawable/ic_done"
+                        app:tint="@android:color/white" />
+
+                </LinearLayout>
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

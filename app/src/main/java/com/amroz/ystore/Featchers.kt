@@ -282,6 +282,30 @@ fun fetchCat(): LiveData<List<Category>> {
 
     }
 
+    ////////PAYMENT
+
+    fun fetchpayinfo(cvv:Int): LiveData<List<Bank>> {
+        val responseLiveData: MutableLiveData<List<Bank>> = MutableLiveData()
+        val newsRequest: Call<Response> = ystoreApi.fetchpayinfo(cvv)
+        newsRequest.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.e("fetchpayinfo", "Failed to fetch ", t)
+            }
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>
+            ) {
+
+                val response:Response? = response.body()
+                val bank:List<Bank> = response?.getSingleMembers
+                    ?: mutableListOf()
+                Log.d("fetchpayinfo", "Response received")
+                responseLiveData.value = bank
+                Log.d("fetchpayinfo", bank.toString())
+            }
+        })
+        return responseLiveData
+
+    }
+
 }
 
 

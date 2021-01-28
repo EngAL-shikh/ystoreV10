@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Payment.CheckoutActivity"></activity>
         <activity android:name=".product_report" />
         <activity android:name=".UserReport" />
         <activity android:name=".Dashboard" />
@@ -23,7 +24,7 @@
         <activity android:name=".Splash.Splash" />
         <activity android:name=".Adding.AddUser" />
         <activity android:name=".Chating.ContactsActivity" />
-        <activity android:name=".Chating.MainChatActivity"></activity>
+        <activity android:name=".Chating.MainChatActivity" />
         <activity android:name=".Chating.ChatActivity" />
         <activity android:name=".ChatingActivity" />
         <activity android:name=".MainActivity">
@@ -34,13 +35,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".Mangs_Delete" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".UpdateProduct" />
         <activity android:name=".Fragments.UpdateProfile" />
         <activity android:name=".AddCartActivity" />
         <activity android:name=".AddProductActivity" />
         <activity android:name=".AddCategoryActivity" />
-        <activity android:name=".UserReports"></activity>
+        <activity android:name=".UserReports" />
     </application>
 
 </manifest>

@@ -1,19 +1,16 @@
 package com.amroz.ystore.Fragments
 
+import QueryPreferences
 import android.app.AlertDialog
-import android.app.LauncherActivity
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -25,32 +22,24 @@ import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Models.UserChat
 import com.amroz.ystore.Models.Users
-import com.firebase.ui.auth.data.model.User
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.flags.impl.SharedPreferencesFactory.getSharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.catogrey_list.*
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.profile_list.*
-import kotlinx.android.synthetic.main.users_list.*
-import kotlinx.coroutines.NonCancellable.start
 
 
 class ProfileFragment : Fragment() {
 
-    var idd:Int=0
+    var idd: Int = 0
     private lateinit var usersViewModel: ViewModel
-    var count:Int=0
+    var count: Int = 0
     private var adapter: ProductAdapter? = ProductAdapter(emptyList())
     private lateinit var RecyclerView: RecyclerView
     private lateinit var ProRecyclerView: RecyclerView
     private var firebaseAuth: FirebaseAuth? = null
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
     private var googleApiClient: GoogleApiClient? = null
-    var type=""
+    var type = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         usersViewModel =
@@ -64,7 +53,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var products = Featchers()
-        if(QueryPreferences.getStoredQuery(context!!)!= "") {
+        if (QueryPreferences.getStoredQuery(context!!) != "") {
 
 
             val newsLiveData = products.fetchProductsByUser(
@@ -79,20 +68,21 @@ class ProfileFragment : Fragment() {
 
 //        var shaerd=context?.getSharedPreferences("userid",0)
 //       var id= shaerd?.getString("id",null)?.toInt()
-        if(QueryPreferences.getStoredQuery(context!!)!= ""){
-        val usersLiveData=products.fetchUsersInfo(QueryPreferences.getStoredQueryUserid(context!!).toString().toInt())
-        Log.d("diiiiii", id.toString())
-        usersLiveData.observe(this, Observer {
-            Log.d("test", "Response received: ${it}")
-            ProRecyclerView.adapter = ProfileAdapter(it)
+        if (QueryPreferences.getStoredQuery(context!!) != "") {
+            val usersLiveData = products.fetchUsersInfo(
+                QueryPreferences.getStoredQueryUserid(context!!).toString().toInt()
+            )
+            Log.d("diiiiii", id.toString())
+            usersLiveData.observe(this, Observer {
+                Log.d("test", "Response received: ${it}")
+                ProRecyclerView.adapter = ProfileAdapter(it)
 
-        })}
-        else{
+            })
+        } else {
             val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
             activity?.finish()
         }
-
 
 
     }
@@ -106,19 +96,15 @@ class ProfileFragment : Fragment() {
 
         RecyclerView = view.findViewById(R.id.profile_rec)
         ProRecyclerView = view.findViewById(R.id.profile_rec)
-        RecyclerView.layoutManager = GridLayoutManager(context,1)
+        RecyclerView.layoutManager = GridLayoutManager(context, 1)
         ProRecyclerView = view.findViewById(R.id.product_rec)
-        ProRecyclerView.layoutManager = GridLayoutManager(context,1)
+        ProRecyclerView.layoutManager = GridLayoutManager(context, 1)
         return view
     }
 
 
-
-
-
     //  Holder users
     private inner class profileHolder(view: View) : RecyclerView.ViewHolder(view) {
-
 
 
         val name = view.findViewById(R.id.name) as TextView
@@ -146,14 +132,14 @@ class ProfileFragment : Fragment() {
 
             edite.setOnClickListener {
 
-                var intent=Intent(context,UpdateProfile::class.java)
-                intent.putExtra("data",users)
+                var intent = Intent(context, UpdateProfile::class.java)
+                intent.putExtra("data", users)
                 startActivity(intent)
             }
 
             Your_Reports.setOnClickListener {
 
-                var intent=Intent(context,UserReports::class.java)
+                var intent = Intent(context, UserReports::class.java)
                 startActivity(intent)
             }
             logout.setOnClickListener {
@@ -166,8 +152,8 @@ class ProfileFragment : Fragment() {
 
             message.setOnClickListener {
 
-               // addContacts(users.chat_id,users.name)
-                var intent=Intent(context,MainChatActivity::class.java)
+                // addContacts(users.chat_id,users.name)
+                var intent = Intent(context, MainChatActivity::class.java)
                 startActivity(intent)
 
             }
@@ -176,13 +162,8 @@ class ProfileFragment : Fragment() {
         }
 
 
+    }
 
-
-
-
-
-
-}
     //userAdapter
     inner class ProfileAdapter(var users: List<Users>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -209,8 +190,8 @@ class ProfileFragment : Fragment() {
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-            val users=users[position]
-            if(holder is profileHolder)
+            val users = users[position]
+            if (holder is profileHolder)
                 holder.bind(users)
 
 
@@ -218,27 +199,26 @@ class ProfileFragment : Fragment() {
     }
 
 
-
-    private  inner class ProductHolder(view: View) : RecyclerView.ViewHolder(view){
+    private inner class ProductHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
         val title = view.findViewById(R.id.title) as TextView
         val deatils = view.findViewById(R.id.details) as TextView
         val price = view.findViewById(R.id.price) as TextView
-      //  val Raitings = view.findViewById(R.id.Raitings) as TextView
+
+        //  val Raitings = view.findViewById(R.id.Raitings) as TextView
         val image = view.findViewById(R.id.image) as ImageView
         val card_my_product = view.findViewById(R.id.card_my_product) as CardView
         val delete = view.findViewById(R.id.delete) as Button
 
 
+        fun bind2(products: Products) {
 
-        fun bind2(products: Products){
-
-            var images=  products.images.split(",").toTypedArray()
+            var images = products.images.split(",").toTypedArray()
             title.text = products.title
             deatils.text = products.details
-           // Raitings.text = products.rating.toString()
-            price.text="$"+products.price_d.toString()
+            // Raitings.text = products.rating.toString()
+            price.text = "$" + products.price_d.toString()
 
             Picasso.with(context).load(images[0]).into(image)
 
@@ -248,12 +228,11 @@ class ProfileFragment : Fragment() {
 
             card_my_product.setOnClickListener {
 
-              //  delet_product(products.product_id)
-                var intent=Intent(context,UpdateProduct::class.java)
-                    intent.putExtra("data",products)
-                    startActivity(intent)
-                    onCreateAnimation(3000,true,R.anim.nav_default_pop_exit_anim)
-
+                //  delet_product(products.product_id)
+                var intent = Intent(context, UpdateProduct::class.java)
+                intent.putExtra("data", products)
+                startActivity(intent)
+                onCreateAnimation(3000, true, R.anim.nav_default_pop_exit_anim)
 
 
             }
@@ -262,10 +241,7 @@ class ProfileFragment : Fragment() {
         }
 
 
-
-
     }
-
 
 
     // Adapter
@@ -278,25 +254,12 @@ class ProfileFragment : Fragment() {
         ): RecyclerView.ViewHolder {
 
 
+            val view = layoutInflater.inflate(
+                R.layout.myproduct_list,
+                parent, false
+            )
 
-
-                    val view = layoutInflater.inflate(
-                        R.layout.myproduct_list,
-                        parent, false
-                    )
-
-                   return ProductHolder(view)
-
-
-
-
-
-
-
-
-
-
-
+            return ProductHolder(view)
 
 
         }
@@ -305,21 +268,17 @@ class ProfileFragment : Fragment() {
         override fun getItemCount(): Int {
 
 
-            count=products.size
+            count = products.size
             return products.size
 
         }
 
 
-
-
-
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
-
             val products = products[position]
-            if (holder is ProductHolder){
+            if (holder is ProductHolder) {
                 holder.bind2(products)
 
                 holder.delete.setOnClickListener {
@@ -329,19 +288,13 @@ class ProfileFragment : Fragment() {
                 }
 
 
-
+            }
         }
+
+
     }
 
-
-
-
-
-
-
-}
-
-    fun delet_product(id:Int) {
+    fun delet_product(id: Int) {
 
         val builder = AlertDialog.Builder(context)
         //  builder.setTitle("AlertDialog")
@@ -350,10 +303,9 @@ class ProfileFragment : Fragment() {
         // add the buttons
 
         // add the buttons
-        builder.setPositiveButton("Continue"){_,_->
+        builder.setPositiveButton("Continue") { _, _ ->
             var del_cat = ManagementFeatchers()
             del_cat.deleteProduct(id)
-
 
 
         }
@@ -364,21 +316,24 @@ class ProfileFragment : Fragment() {
         dialog.show()
 
 
-
     }
 
     private fun signOut() {
         var auth = FirebaseAuth.getInstance()
         auth?.signOut()
-        QueryPreferences.setStoredQuery(context!!,"")
+        QueryPreferences.setStoredQuery(context!!, "")
+//        if (googleApiClient!!.isConnected) {
+//            googleApiClient!!.disconnect()
+//        }
 
+        // firebaseAuth!!.removeAuthStateListener(this.authStateListener!!)
 
 //        var shared= context?.getSharedPreferences("admin",0)
 //        var edit=shared?.edit()
 //        edit?.putString("rule","0")
 //        edit?.commit()
-       // QueryPreferences.setStoredQuery(context!!,"")
-        var i =Intent(context,LoginActivity::class.java)
+        // QueryPreferences.setStoredQuery(context!!,"")
+        var i = Intent(context, LoginActivity::class.java)
         startActivity(i)
     }
 
@@ -389,40 +344,37 @@ class ProfileFragment : Fragment() {
 //        product_rec.adapter = adapter
 //    }
 
-    fun addContacts(chatid:String,username:String){
+    fun addContacts(chatid: String, username: String) {
 
 
-
-        var db:FirebaseFirestore= FirebaseFirestore.getInstance()
-
-
-        db= FirebaseFirestore.getInstance()
+        var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
+        db = FirebaseFirestore.getInstance()
 
 
-        val user = UserChat(chatid, username!!)
+        val user = UserChat(chatid, username)
         db.collection("contacts")
-            .document(QueryPreferences.getStoredQueryChatid(context!!)).collection("userContacts").document(chatid)
+            .document(QueryPreferences.getStoredQueryChatid(context!!)).collection("userContacts")
+            .document(chatid)
             .set(user)
-            .addOnCompleteListener{
+            .addOnCompleteListener {
 
-                if (it.isSuccessful){
-                    Toast.makeText(context,"added", Toast.LENGTH_LONG).show()
-                    var intent=Intent(context,ContactsActivity::class.java)
+                if (it.isSuccessful) {
+                    Toast.makeText(context, "added", Toast.LENGTH_LONG).show()
+                    var intent = Intent(context, ContactsActivity::class.java)
                     startActivity(intent)
 
-                }else{
-                    Toast.makeText(context,"filde to add ${it.exception}", Toast.LENGTH_LONG).show()
-                    Log.d("test",it.exception.toString())
+                } else {
+                    Toast.makeText(context, "filde to add ${it.exception}", Toast.LENGTH_LONG)
+                        .show()
+                    Log.d("test", it.exception.toString())
 
                 }
             }
 
 
     }
-
-
 
 
 }

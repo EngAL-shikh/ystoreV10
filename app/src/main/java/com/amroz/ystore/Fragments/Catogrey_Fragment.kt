@@ -1,44 +1,45 @@
-
 package com.amroz.ystore.Fragments
 
+import QueryPreferences
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amroz.ystore.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.catogrey_list.*
-import kotlinx.android.synthetic.main.fragment_catogrey.*
 import kotlinx.android.synthetic.main.fragment_update_category.view.*
 
 
 class Catogrey_Fragment : Fragment() {
 
-var admin=0
+    var admin = 0
 
-    var shaerd=context?.getSharedPreferences("admin",0)
+    var shaerd = context?.getSharedPreferences("admin", 0)
 
     private lateinit var catViewModel: YstoreViewModels
-  lateinit var addcat:FloatingActionButton
- // lateinit var total:TextView
-    var count:Int=0
+    lateinit var addcat: FloatingActionButton
+
+    // lateinit var total:TextView
+    var count: Int = 0
 
     private lateinit var RecyclerView: RecyclerView
-    var type=""
+    var type = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +47,7 @@ var admin=0
         catViewModel =
             ViewModelProviders.of(this).get(YstoreViewModels::class.java)
 
-      //  admin=arguments?.getSerializable("type")as String
+        //  admin=arguments?.getSerializable("type")as String
 
     }
 
@@ -54,12 +55,12 @@ var admin=0
         super.onStart()
 
 
-        if (QueryPreferences.getStoredQuery(context!!)=="admin"){
+        if (QueryPreferences.getStoredQuery(context!!) == "admin") {
 
-            addcat.visibility=View.VISIBLE
+            addcat.visibility = View.VISIBLE
 
-        }else{
-            addcat.visibility=View.GONE
+        } else {
+            addcat.visibility = View.GONE
 
         }
 
@@ -71,10 +72,6 @@ var admin=0
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
-
-
         var user = Featchers()
         val LiveData = user.fetchCat()
         LiveData.observe(this, Observer {
@@ -82,11 +79,6 @@ var admin=0
             RecyclerView.adapter = CatAdapter(it)
 
         })
-
-
-
-
-
 
 
     }
@@ -100,13 +92,13 @@ var admin=0
         var view = inflater.inflate(R.layout.fragment_catogrey, container, false)
 
         RecyclerView = view.findViewById(R.id.rec)
-         addcat= view.findViewById(R.id.add_cat)
-       //  total= view.findViewById(R.id.total)
-        if (QueryPreferences.getStoredQuery(context!!)=="admin"){
+        addcat = view.findViewById(R.id.add_cat)
+        //  total= view.findViewById(R.id.total)
+        if (QueryPreferences.getStoredQuery(context!!) == "admin") {
             RecyclerView.layoutManager = LinearLayoutManager(context)
 
-        }else{
-            RecyclerView.layoutManager = GridLayoutManager(context,2)
+        } else {
+            RecyclerView.layoutManager = GridLayoutManager(context, 2)
         }
 
 
@@ -117,7 +109,7 @@ var admin=0
 
         addcat.setOnClickListener {
 
-            var intent=Intent(context,AddCategoryActivity::class.java)
+            var intent = Intent(context, AddCategoryActivity::class.java)
             startActivity(intent)
 
 
@@ -126,20 +118,15 @@ var admin=0
     }
 
 
-
-
-
     // Cat Holder
     private inner class CatHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 
         val cattitle = view.findViewById(R.id.title) as TextView
         val card_cat = view.findViewById(R.id.card_cat) as CardView
-        val catImage= view.findViewById(R.id.image) as ImageView
-        val cat_card= view.findViewById(R.id.card_cat) as CardView
-        val update= view.findViewById(R.id.update) as Button
-
-
+        val catImage = view.findViewById(R.id.image) as ImageView
+        val cat_card = view.findViewById(R.id.card_cat) as CardView
+        val update = view.findViewById(R.id.update) as Button
 
 
         fun bind(cat: Category) {
@@ -148,28 +135,22 @@ var admin=0
             Picasso.with(context).load(cat.images).into(catImage)
             cat_card.setOnClickListener {
 
-                var intent = Intent(context,ProductByCat::class.java)
-                intent.putExtra("cat_id",cat.cat_id)
+                var intent = Intent(context, ProductByCat::class.java)
+                intent.putExtra("cat_id", cat.cat_id)
                 startActivity(intent)
-
-
-
-
-
-
 
 
             }
 
 
 
-            Log.d("btnupdate",QueryPreferences.getStoredQuery(context!!))
+            Log.d("btnupdate", QueryPreferences.getStoredQuery(context!!))
 
-            if (QueryPreferences.getStoredQuery(context!!)== "admin"){
+            if (QueryPreferences.getStoredQuery(context!!) == "admin") {
 
-                update.visibility=View.VISIBLE
-            }else{
-                update.visibility=View.GONE
+                update.visibility = View.VISIBLE
+            } else {
+                update.visibility = View.GONE
 
             }
 
@@ -184,15 +165,13 @@ var admin=0
 
             card_cat.setOnClickListener {
 
-                var intent= Intent(context,ProductByCat::class.java)
-                intent.putExtra("cat_id",cat.cat_id)
+                var intent = Intent(context, ProductByCat::class.java)
+                intent.putExtra("cat_id", cat.cat_id)
                 startActivity(intent)
             }
 
 
         }
-
-
 
 
     }
@@ -206,14 +185,11 @@ var admin=0
         ): RecyclerView.ViewHolder {
 
 
-
-                var view: View = layoutInflater.inflate(
-                    R.layout.dashcatogrey_list,
-                    parent, false
-                )
-                return CatHolder(view)
-
-
+            var view: View = layoutInflater.inflate(
+                R.layout.dashcatogrey_list,
+                parent, false
+            )
+            return CatHolder(view)
 
 
         }
@@ -221,7 +197,7 @@ var admin=0
 
         override fun getItemCount(): Int {
 
-            count=news.size
+            count = news.size
 
             return news.size
 
@@ -235,14 +211,11 @@ var admin=0
                 holder.bind(news)
 
 
-
-
-
         }
     }
 
 
-    fun categoryDialogUpdate(cat: Category){
+    fun categoryDialogUpdate(cat: Category) {
         val alertBuilder = AlertDialog.Builder(requireContext())
         val view = layoutInflater.inflate(R.layout.fragment_update_category, null)
         alertBuilder.setView(view)
@@ -250,9 +223,9 @@ var admin=0
         alertDialog.show()
         view.ed_update_category.setText(cat.cat_title)
         view.btn_update.setOnClickListener {
-            var updateEditText =view.ed_update_category.text.toString()
-            if(updateEditText.isNotEmpty()) {
-                Log.d("hajar",updateEditText )
+            var updateEditText = view.ed_update_category.text.toString()
+            if (updateEditText.isNotEmpty()) {
+                Log.d("hajar", updateEditText)
                 val response = catViewModel.updateCategory(
                     cat.cat_id,
                     view.ed_update_category.text.toString()
@@ -265,9 +238,13 @@ var admin=0
                     }
                 )
                 alertDialog.dismiss()
-            }else{
+            } else {
                 view.ed_update_category.setBackgroundResource(R.drawable.erorrshape)
-                Toast.makeText(requireContext(), " one filed empty filed require", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    " one filed empty filed require",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
         view.btn_cancle.setOnClickListener {
@@ -278,13 +255,13 @@ var admin=0
 
     }
 
-    companion object{
-        fun newInstance(data: String):Catogrey_Fragment{
-            val args=Bundle().apply {
+    companion object {
+        fun newInstance(data: String): Catogrey_Fragment {
+            val args = Bundle().apply {
                 putSerializable("name", data)
             }
-            return  Catogrey_Fragment().apply {
-                arguments=args
+            return Catogrey_Fragment().apply {
+                arguments = args
             }
         }
     }

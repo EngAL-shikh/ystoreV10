@@ -37,6 +37,10 @@ interface YstoreApi {
     @GET("StoreApi/api/reports.php")
     fun fetchReportsByID(@Query("report_id") report_id: Int): Call<Response>
 
+    //payment
+    @GET("StoreApi/api/bank_api.php")
+    fun fetchpayinfo(@Query("cvv") cvv: Int): Call<Response>
+
 
 
 

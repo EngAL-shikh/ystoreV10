@@ -35,7 +35,9 @@ data class Response (
     @SerializedName("getUserIDByEmail")
     var getUserIDByEmail: List<Users>,
     @SerializedName("getProductsReports")
-    var getProductsReports: List<Products>
+    var getProductsReports: List<Products>,
+    @SerializedName("getSingleMembers")
+    var getSingleMembers: List<Bank>
 
 ){
 
