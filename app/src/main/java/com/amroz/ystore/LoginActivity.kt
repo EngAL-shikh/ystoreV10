@@ -274,7 +274,10 @@ class LoginActivity : AppCompatActivity() {
         val uidRef = rootRef!!.collection("users").document(uid)
         uidRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-
+                val document = task.result
+                if (!document.exists()) {
+                    uidRef.set(user)
+                }
             }
         }
     }
