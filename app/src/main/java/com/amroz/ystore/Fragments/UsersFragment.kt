@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +22,7 @@ import com.amroz.ystore.YstoreViewModels
 class UsersFragment : Fragment() {
     private lateinit var userViewModel: ViewModel
     private lateinit var userRecyclerView: RecyclerView
+    var searchlist = ArrayList<Users>()
 
     ///////////user_status////////////////
     private val ystoreViewModels: YstoreViewModels by lazy {
@@ -41,13 +43,50 @@ class UsersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        var search = view.findViewById(R.id.searchfromT) as SearchView
 
         var user = Featchers()
         var liveData = user.fetchUsers()
         liveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             userRecyclerView.adapter = UsersAdapter(it)
+
+            search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(txtsearch: String?): Boolean {
+
+                    searchlist.clear()
+                    for (i in it) {
+                        if (i.name.contains(txtsearch.toString())) {
+                            searchlist.add(i)
+                        }
+                    }
+                    userRecyclerView.layoutManager = LinearLayoutManager(context)
+                    userRecyclerView.adapter = UsersAdapter(searchlist)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    return true
+
+                }
+
+
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+
+
+                    return true
+                }
+            })
         })
 
     }
@@ -94,12 +133,12 @@ class UsersFragment : Fragment() {
                 if (user.user_status == 0) {
                     user_active = 1
                     userstatus.text = "Active"
-                    userstatus.setBackgroundResource(R.color.green_900)
+                    //  userstatus.setBackgroundResource(R.color.green_900)
 
                 } else {
                     user_active = 0
                     userstatus.text = "Disactive"
-                    userstatus.setBackgroundResource(R.color.red)
+                    //   userstatus.setBackgroundResource(R.color.red)
                 }
                 ystoreViewModels.userStatus(user.user_id, user_active)
                 Log.d("done", user_active.toString())

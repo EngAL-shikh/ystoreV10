@@ -52,7 +52,7 @@
                         android:layout_width="@dimen/spacing_xmlarge"
                         android:layout_height="@dimen/spacing_xmlarge"
                         android:layout_margin="@dimen/spacing_xsmall"
-                        android:src="@drawable/ii"
+                        android:src="@drawable/ic_baseline_shopping_cart_24"
                         app:civ_border="true"
                         app:civ_border_color="@color/grey_10"
                         app:civ_border_width="0dp"
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/spacing_large"
                         android:layout_marginRight="@dimen/spacing_large"
-                        android:text="Evans C"
+                        android:text="Vistor "
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="@color/colorBalck"
                         app:fontFamily="sans-serif-medium" />
@@ -190,6 +190,35 @@
                         android:textColor="@color/colorBalck"  />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/Myfavorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/spacing_middle"
+                        android:layout_height="0dp" />
+
+                    <ImageView
+                        android:layout_width="@dimen/spacing_mlarge"
+                        android:layout_height="@dimen/spacing_mlarge"
+                        android:layout_margin="@dimen/spacing_middle"
+                        app:srcCompat="@drawable/ic_favorite_border"
+                        app:tint="@color/deep_orange_300" />
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Favorite"
+                        android:textColor="@color/colorBalck"  />
+
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -221,7 +250,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="77dp"
-            android:background="@color/amber_400"
+            android:background="@drawable/bottom_raduse"
+
             app:contentInsetStartWithNavigation="0dp"
             app:layout_constraintBottom_toTopOf="@+id/products_rec"
             app:layout_constraintEnd_toEndOf="parent"
@@ -287,10 +317,11 @@
             android:layout_width="match_parent"
             android:layout_height="650dp"
             android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="5dp"
             app:layout_constraintVertical_bias="0.47000003">
 
         </androidx.recyclerview.widget.RecyclerView>

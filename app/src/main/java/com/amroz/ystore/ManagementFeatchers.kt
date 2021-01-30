@@ -20,7 +20,7 @@ class ManagementFeatchers {
             .setLenient()
             .create()
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.5.1/")
+            .baseUrl("http://192.168.1.3/")
             //.addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -428,6 +428,51 @@ class ManagementFeatchers {
 
     }
     ///////////user_status////////////////
+
+    ///////////payment////////////////
+
+    fun checkOut(card_number: Int, amount: Int): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var user_reportUpdate = mangApi.checkOut(card_number, amount)
+        user_reportUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+                Log.d("onResponse", "active")
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.d("onResponse", "non active")
+            }
+
+
+        })
+        return responseLiveData
+
+
+    }
+    ///////////payment////////////////
+
+    //////////////////////////product_status//////////////////////////
+    fun  updateProductStatus(product_id:Int, product_status:Int): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        var user_reportUpdate = mangApi.updateProductStatus(product_id,product_status)
+        user_reportUpdate.enqueue(object : Callback<Response> {
+            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
+
+                Log.d("onResponse", "active")
+            }
+
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.d("onResponse", "non active")
+            }
+
+
+        })
+        return responseLiveData
+
+
+    }
+    //////////////////////////product_status//////////////////////////
 
 
 }

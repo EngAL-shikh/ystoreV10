@@ -102,6 +102,7 @@
                     android:tint="@color/grey_20"
                     app:srcCompat="@drawable/add_raiting" />
                 <TextView
+                    android:id="@+id/usersrait"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:text="124"

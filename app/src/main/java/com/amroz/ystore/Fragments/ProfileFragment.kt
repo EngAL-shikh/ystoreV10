@@ -118,6 +118,7 @@ class ProfileFragment : Fragment() {
         val iamge = view.findViewById(R.id.image) as ImageView
         val edite = view.findViewById(R.id.bt_edite) as ImageView
         val Your_Reports = view.findViewById(R.id.Your_Reports) as ImageButton
+        val usersrait = view.findViewById(R.id.usersrait) as TextView
 
 
         fun bind(users: Users) {
@@ -128,6 +129,8 @@ class ProfileFragment : Fragment() {
 //            message.text = users.rating.toString()
 //            user_raiting.text = users.rating.toString()
             address.text = users.address.toString()
+            usersrait.text=users.user_raiting.toString()
+
             Picasso.with(context).load(users.user_image).into(iamge)
 
 

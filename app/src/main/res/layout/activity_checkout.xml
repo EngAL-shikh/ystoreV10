@@ -7,6 +7,31 @@
     android:background="@color/colorWhite"
     tools:context=".Payment.CheckoutActivity">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardpay"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:cardCornerRadius="6dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/amipay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            app:lottie_loop="true"
+            app:layout_constraintBottom_toBottomOf="@+id/lyt_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lyt_parent"
+            app:layout_constraintVertical_bias="0.22000003"
+            app:lottie_rawRes="@raw/pay" />
+    </androidx.cardview.widget.CardView>
     <RelativeLayout
         android:id="@+id/lyt_parent"
         android:layout_width="wrap_content"
@@ -305,6 +330,43 @@
                         android:hint="CVV" />
 
                 </LinearLayout>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Total"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_90"
+                        app:fontFamily="sans-serif-medium" />
+                    <TextView
+                        android:id="@id/total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="$ 1200"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_90"
+                        app:fontFamily="sans-serif-medium" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/spacing_mlarge"
+                        android:layout_height="@dimen/spacing_mlarge"
+                        app:srcCompat="@drawable/ic_monetization_on"
+                        app:tint="@color/red_300" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -325,7 +387,41 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Submit Order"
+                        android:text="Check card"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                        android:textColor="@android:color/white" />
+
+                    <ImageView
+
+                        android:layout_width="@dimen/spacing_smlarge"
+                        android:layout_height="@dimen/spacing_smlarge"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        app:srcCompat="@drawable/ic_done"
+                        app:tint="@android:color/white" />
+
+                </LinearLayout>
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/pay"
+                android:visibility="gone"
+                style="@style/RippleStyleWhite"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxlarge"
+                android:background="@color/light_green_500">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pay"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                         android:textColor="@android:color/white" />
 
@@ -340,6 +436,7 @@
                 </LinearLayout>
 
             </com.balysv.materialripple.MaterialRippleLayout>
+
         </LinearLayout>
 
 

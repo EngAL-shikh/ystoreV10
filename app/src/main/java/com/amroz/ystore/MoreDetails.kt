@@ -4,14 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Models.RatingUs
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_more_details.*
@@ -49,7 +53,66 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
         var userRating:TextView=findViewById(R.id.user_rating_tv)
         var ratingBar:RatingBar=findViewById(R.id.ratingProduct)
         var ratingBar2:RatingBar=findViewById(R.id.ratingShow_rb)
+        var card_report:CardView=findViewById(R.id.card_report)
 
+        // report -------------------------------------------------------------------------------
+        var reson_report = ""
+        var report1: TextView = findViewById(R.id.report1)
+        var report2: TextView = findViewById(R.id.report2)
+        var report3: TextView = findViewById(R.id.report3)
+        var report4: TextView = findViewById(R.id.report4)
+        var save: Button = findViewById(R.id.save)
+        var cancel: Button = findViewById(R.id.cancle)
+
+
+
+        report1.setOnClickListener {
+            reson_report = report1.text as String
+            report1.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            report2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+        }
+        report2.setOnClickListener {
+            reson_report = report2.text as String
+            report2.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            report1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+        }
+        report3.setOnClickListener {
+            reson_report = report3.text as String
+            report3.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            report2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+        }
+        report4.setOnClickListener {
+            reson_report = report4.text as String
+            report4.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+            report2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+            report1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+        }
+
+        save.setOnClickListener {
+            Log.d("repo", reson_report)
+            Log.d("repo", products.product_id.toString())
+            Log.d("repo", products.user_id.toString())
+
+            ystoreViewModels.addReportProduct(
+                0,
+                reson_report,
+                products.user_id,
+                products.product_id
+            )
+            card_report.visibility= View.GONE
+        }
+
+        cancel.setOnClickListener {
+            card_report.visibility= View.GONE
+        }
+        //-----------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -62,11 +125,12 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
 
 
         report.setOnClickListener {
-            //cart.visibility= View.VISIBLE
 
-            var intent= Intent(this,product_report::class.java)
-            intent.putExtra("data",products)
-            startActivity(intent)
+            card_report.visibility= View.VISIBLE
+            YoYo.with(Techniques.FadeInUp)
+                .duration(2000)
+                .playOn(card_report)
+
         }
       owner.setOnClickListener{
 

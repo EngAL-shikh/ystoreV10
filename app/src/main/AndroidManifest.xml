@@ -15,25 +15,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Payment.CheckoutActivity"></activity>
-        <activity android:name=".product_report" />
+        <activity android:name=".FavoriteActivity"></activity>
+        <activity android:name=".Intro.IntroActivity" >
+
+        </activity>
+        <activity android:name=".Payment.CheckoutActivity" />
         <activity android:name=".UserReport" />
         <activity android:name=".Dashboard" />
         <activity android:name=".MoreDetails" />
         <activity android:name=".ProductByCat" />
-        <activity android:name=".Splash.Splash" />
-        <activity android:name=".Adding.AddUser" />
-        <activity android:name=".Chating.ContactsActivity" />
-        <activity android:name=".Chating.MainChatActivity" />
-        <activity android:name=".Chating.ChatActivity" />
-        <activity android:name=".ChatingActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Splash.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Adding.AddUser" />
+        <activity android:name=".Chating.ContactsActivity" />
+        <activity android:name=".Chating.MainChatActivity" />
+        <activity android:name=".Chating.ChatActivity" />
+        <activity android:name=".ChatingActivity" />
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".Mangs_Delete" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".UpdateProduct" />

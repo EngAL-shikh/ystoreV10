@@ -102,6 +102,12 @@ class YstoreViewModels: ViewModel() {
         return AddFeacher().addCart(user_id,product_id,Quantity)
     }
 
+    //-----------------------------------------------------------------------------------
+
+    fun addFovarite(user_id:Int,product_id:Int):MutableLiveData<Response> {
+        return AddFeacher().addFovarite(user_id,product_id)
+    }
+
 
 
     fun fetchCart(user_id:Int):LiveData<List<Products>>{
@@ -144,6 +150,22 @@ class YstoreViewModels: ViewModel() {
     }
 
     ///////////user_status////////////////
+
+    ///////////payment////////////////
+    //user_status
+    fun checkOut(card_number:Int, amount:Int): MutableLiveData<Response> {
+        return ManagementFeatchers().checkOut(card_number,amount )
+    }
+
+    ///////////user_status////////////////
+
+    ///////////product_status////////////////
+
+    fun productStatus(product_id:Int, product_status:Int): MutableLiveData<Response> {
+        return ManagementFeatchers().updateProductStatus(product_id,product_status)
+    }
+
+    ///////////product_status////////////////
 }
 
 

@@ -36,6 +36,9 @@ import kotlinx.android.synthetic.main.fragment_products.*
 class ProductsFragment : Fragment() {
     var searchlist=ArrayList<Products>()
     var posts=ArrayList<Products>()
+    private val ystoreViewModels: YstoreViewModels by lazy {
+        ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+    }
 //    interface Callbacks {
 //        fun onProductsSelected(catId: Int)
 //    }
@@ -141,6 +144,7 @@ class ProductsFragment : Fragment() {
         RecyclerView.layoutManager = GridLayoutManager(context,2)
         val imagenav= view.findViewById(R.id.imagenav) as ImageView
         val username_nav= view.findViewById(R.id.username_nav) as TextView
+        val Myfavorite= view.findViewById(R.id.Myfavorite) as LinearLayout
         sittings.setOnClickListener {
             nave_view2.visibility=View.VISIBLE
             YoYo.with(Techniques.BounceInLeft)
@@ -172,6 +176,7 @@ class ProductsFragment : Fragment() {
         }else
         {
             chating.visibility=View.GONE
+            Myfavorite.visibility=View.GONE
             login.visibility=View.VISIBLE
 
 
@@ -182,6 +187,10 @@ class ProductsFragment : Fragment() {
         }
         chating.setOnClickListener {
             var intent=Intent(context,MainChatActivity::class.java)
+            startActivity(intent)
+        }
+        Myfavorite.setOnClickListener {
+            var intent=Intent(context,FavoriteActivity::class.java)
             startActivity(intent)
         }
         return view
@@ -200,7 +209,7 @@ class ProductsFragment : Fragment() {
         val title = view.findViewById(R.id.title) as TextView
         val deatils = view.findViewById(R.id.deatils) as TextView
         val price = view.findViewById(R.id.price) as TextView
-        val Raitings = view.findViewById(R.id.Raitings) as TextView
+        val Raitings = view.findViewById(R.id.Raitings) as ImageView
         val image = view.findViewById(R.id.image) as ImageView
         val card= view.findViewById(R.id.ProductCard) as CardView
         val remov_fevort= view.findViewById(R.id.remove_fivort_Raiting) as ImageView
@@ -215,7 +224,7 @@ class ProductsFragment : Fragment() {
             productsItem=products
             title.text = products.title
             deatils.text = products.details
-            Raitings.text=products.rating_vote.toString()
+            //Raitings.text=products.rating_vote.toString()
             price.text="$ "+products.price_d.toString()
             Picasso.with(context).load(images[0]).into(image)
 
@@ -245,12 +254,18 @@ class ProductsFragment : Fragment() {
             add_fevort.setOnClickListener {
                 remov_fevort.visibility=View.VISIBLE
                 add_fevort.visibility=View.GONE
+
+                    //Toast.makeText(this,"Product added to your Cart",Toast.LENGTH_LONG).show()
+                  //  Log.d("cartadd",QueryPreferences.getStoredQueryUserid(context!!).toString())
+
                 YoYo.with(Techniques.BounceInDown)
                     .duration(2000)
                     .playOn(remov_fevort)
 
             }
             remov_fevort.setOnClickListener {
+                var id= QueryPreferences.getStoredQueryUserid(context!!).toInt()
+                ystoreViewModels.addFovarite(id!!,products.product_id)
                 remov_fevort.visibility=View.GONE
                 add_fevort.visibility=View.VISIBLE
                 YoYo.with(Techniques.BounceIn)

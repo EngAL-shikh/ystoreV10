@@ -3,6 +3,7 @@ package com.amroz.ystore.Fragments
 import QueryPreferences
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,15 @@ class CartFragment : Fragment() {
             .observe(viewLifecycleOwner, Observer {
                 it?.let {
                     cartRecyclerView.adapter = CartAdapter(it)
+                         var x=0
+                    for (i in 0..it.size-1) {
+
+                        Log.d("totalprice",i.toString())
+
+                        totalprice += it[x++].price_d
+                        Log.d("totalprice2",totalprice.toString())
+                    }
+                    total.text = totalprice.toString()
                 }
             })
 
@@ -64,11 +74,12 @@ class CartFragment : Fragment() {
         checkout = view.findViewById(R.id.checkout)
         total = view.findViewById(R.id.total)
 
-        total.text = totalprice.toString()
+
 
         checkout.setOnClickListener {
 
             var intent = Intent(context, CheckoutActivity::class.java)
+            intent.putExtra("total_amount",total.text.toString())
             startActivity(intent)
         }
         return view
@@ -114,10 +125,7 @@ class CartFragment : Fragment() {
 
             Picasso.with(context).load(images[0]).into(image)
 
-            for (i in 0..products.price_d) {
 
-                totalprice += products.price_d
-            }
 
 //            card.setOnClickListener {
 //                Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show()

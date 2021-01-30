@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
@@ -22,15 +23,25 @@ import com.amroz.ystore.YstoreViewModels
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_report.*
 
 
 class ReportFragment : Fragment() {
-
+    //////////////////////////product_status//////////////////////////
+    private val ystoreViewModels: YstoreViewModels by lazy {
+        ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+    }
+    //////////////////////////product_status//////////////////////////
     private lateinit var title: TextView
     private lateinit var details: TextView
     private lateinit var image: ImageView
     private lateinit var close: ImageView
     private lateinit var ProByRpoCard: CardView
+    private lateinit var p_status: Button
+    private lateinit var enable_btn: Button
+   // var p_pause=0
+    var  p_st:Int=0
+    var  p_id:Int=0
 
     private lateinit var RecyclerView: RecyclerView
     private lateinit var reportViewModel: ViewModel
@@ -39,6 +50,7 @@ class ReportFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         reportViewModel = ViewModelProviders.of(this).get(YstoreViewModels::class.java)
+
         //  type=arguments?.getSerializable("type")as String
     }
 
@@ -105,6 +117,8 @@ class ReportFragment : Fragment() {
         image = view.findViewById(R.id.ProByRpoImage) as ImageView
         close = view.findViewById(R.id.ProByRepoClose) as ImageView
         ProByRpoCard = view.findViewById(R.id.ProByRpoCard) as CardView
+        p_status = view.findViewById(R.id.pause_btn) as Button
+        enable_btn = view.findViewById(R.id.enable_btn) as Button
 
         return view
 
@@ -127,6 +141,7 @@ class ReportFragment : Fragment() {
         //val cardReport= view.findViewById(R.id.CardReport) as CardView
 
 
+
         fun bind(reports: Report) {
             reportDetailsReport = reports
             report_id.text = reports.report_id.toString()
@@ -141,13 +156,56 @@ class ReportFragment : Fragment() {
                     title.text = it[0].title
                     details.text = it[0].details
                     Picasso.with(context).load(splitImage).into(image)
+                    //////////////////////////product_status//////////////////////////
+                        p_st=it[0].product_status
+                        p_id=it[0].product_id
+                    if(p_st==1){
 
+                        enable_btn.visibility=View.VISIBLE
+                        p_status.visibility=View.GONE
+                    }
+                    else{
+                        enable_btn.visibility=View.GONE
+                        p_status.visibility=View.VISIBLE
+                    }
+
+                    //////////////////////////product_status//////////////////////////
 
                 })
                 ProByRpoCard.visibility = View.VISIBLE
                 YoYo.with(Techniques.FadeInUp)
                     .duration(2000)
                     .playOn(ProByRpoCard)
+
+
+            }
+
+
+            p_status.setOnClickListener {
+                Log.d("801",p_st.toString())
+
+                     p_status.visibility=View.GONE
+                    enable_btn.visibility=View.VISIBLE
+                    ystoreViewModels.productStatus(p_id, 1)
+                    // p_status.text="Enable"
+                    //p_status.setBackgroundResource(R.color.green_900)
+
+
+
+
+
+            }
+            enable_btn.setOnClickListener {
+                Log.d("801",p_st.toString())
+
+                enable_btn.visibility=View.GONE
+                p_status.visibility=View.VISIBLE
+                ystoreViewModels.productStatus(p_id, 0)
+                // p_status.text="Enable"
+                //p_status.setBackgroundResource(R.color.green_900)
+
+
+
 
 
             }

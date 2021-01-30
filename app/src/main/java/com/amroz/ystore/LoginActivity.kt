@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.airbnb.lottie.LottieAnimationView
 import com.amroz.ystore.Adding.AddUser
 import com.amroz.ystore.Models.UserChat
 import com.amroz.ystore.Models.Users
@@ -64,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
 
         var loginbyphone: ImageView = findViewById(R.id.login_by_phone)
         var login: ImageView = findViewById(R.id.login)
+        var amiprogress: LottieAnimationView = findViewById(R.id.amiprogress)
         // var username: EditText =findViewById(R.id.username)
 
         username = findViewById(R.id.username)
@@ -76,7 +78,9 @@ class LoginActivity : AppCompatActivity() {
         signup = findViewById(R.id.sign_in)
 
         signup.setOnClickListener {
-            progress.visibility = View.VISIBLE
+           // progress.visibility = View.VISIBLE
+            amiprogress.visibility=View.VISIBLE
+            amiprogress.playAnimation()
             signIn()
 
         }
@@ -125,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
             call.enqueue(object : Callback<Users> {
                 override fun onFailure(call: Call<Users>, t: Throwable) {
 
-                    Toast.makeText(this@LoginActivity, "userNotFound", Toast.LENGTH_LONG).show()
+                  //  Toast.makeText(this@LoginActivity, "userNotFound", Toast.LENGTH_LONG).show()
                     progress.visibility = View.GONE
                 }
 
@@ -168,13 +172,15 @@ class LoginActivity : AppCompatActivity() {
                         db = FirebaseFirestore.getInstance()
                         // val user = UserChat(chatid, username!!)
 
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "you shoud give some info about you",
-                            Toast.LENGTH_LONG
-                        ).show()
+//                        Toast.makeText(
+//                            this@LoginActivity,
+//                            "you shoud give some info about you",
+//                            Toast.LENGTH_LONG
+//                        ).show()
                         val intent = Intent(this@LoginActivity, AddUser::class.java)
-                        progress.visibility = View.GONE
+                        //progress.visibility = View.GONE
+                        amiprogress.visibility=View.GONE
+                        amiprogress.loop(false)
 
                         startActivity(intent)
                         finish()
@@ -229,7 +235,7 @@ class LoginActivity : AppCompatActivity() {
                 firebaseSignInWithGoogle(googleSignInAccount!!)
             } catch (e: ApiException) {
                 Log.d("abdoodi", "${e}")
-                makeText(this, "Google sign in failed!", Toast.LENGTH_SHORT).show()
+               // makeText(this, "Google sign in failed!", Toast.LENGTH_SHORT).show()
             }
         }
     }

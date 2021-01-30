@@ -15,10 +15,11 @@ class Splash : AppCompatActivity() {
 
             override fun run() {
                 try {
-                    Thread.sleep(3000)
+                    Thread.sleep(5000)
 
-                    val toMain= Intent(baseContext, LoginActivity::class.java)
+                    val toMain= Intent(baseContext, MainActivity::class.java)
                     startActivity(toMain)
+                    finish()
                     overridePendingTransition(R.anim.nav_default_pop_enter_anim,R.anim.nav_default_pop_exit_anim)
 
 

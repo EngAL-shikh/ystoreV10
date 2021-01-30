@@ -52,7 +52,11 @@ data class Products(
     @SerializedName("date")
     var date:String="",
     @SerializedName("type")
-    var type:String=""
+    var type:String="",
+    //////////////////////////product_status//////////////////////////
+    @SerializedName("product_status")
+    var product_status:Int=0
+    //////////////////////////product_status//////////////////////////
     ):Serializable {
 
 }

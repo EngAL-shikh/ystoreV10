@@ -22,7 +22,7 @@ class AddFeacher : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create(gson))
 
 
-            .baseUrl("http://192.168.5.1/")
+            .baseUrl("http://192.168.1.3/")
 
 
             .build()
@@ -100,6 +100,25 @@ class AddFeacher : AppCompatActivity() {
 
 
                 Log.e("TAG", "Response received")
+
+            }
+        })
+        return responseLiveData
+    }
+    fun addFovarite(user_id: Int, product_id: Int): MutableLiveData<Response> {
+        val responseLiveData: MutableLiveData<Response> = MutableLiveData()
+        val newsRequest: Call<Response> = addApi.addFovarite(user_id, product_id)
+        newsRequest.enqueue(object : Callback<Response> {
+            override fun onFailure(call: Call<Response>, t: Throwable) {
+                Log.e("dfgdfgasdf", "Failed to post ", t)
+            }
+
+            override fun onResponse(
+                call: Call<Response>, response: retrofit2.Response<Response>
+            ) {
+
+
+                Log.e("dfgdfgasdf", "Response received")
 
             }
         })

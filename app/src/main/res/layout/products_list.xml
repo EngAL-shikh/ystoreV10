@@ -85,6 +85,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="1.4"
                             android:text="Iphone 12"
+                            android:maxLength="15"
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textSize="20sp"
@@ -94,7 +95,10 @@
                             android:id="@+id/deatils"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
                             android:layout_weight="1"
+                            android:maxLength="14"
                             android:text="red iphone 12 128Gb"
                             android:gravity="center"
                             ></TextView>
@@ -117,32 +121,45 @@
                             android:layout_margin="4dp"
                             android:layout_weight="1">
                         </ImageView>
+
+
                         <ImageView
                             android:id="@+id/add_fivort"
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:background="@drawable/ic_add_fivort"
                             android:layout_gravity="center"
                             android:layout_margin="4dp"
-                            android:visibility="gone"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_add_fivort"
+                            android:visibility="gone">
 
                         </ImageView>
 
-
-                        <TextView
+                        <ImageView
                             android:id="@+id/Raitings"
-                            android:layout_width="150dp"
-                            android:gravity="right|center"
-                           android:padding="10dp"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:text="1.5"
-
+                            android:layout_width="106dp"
                             android:layout_height="match_parent"
-                           >
+                            android:gravity="right|center"
+                            android:padding="10dp"
+                            android:text="1.5"
+                            android:textSize="20sp"
 
-                        </TextView>
+                            android:textStyle="bold">
+
+                        </ImageView>
+
+                        <ImageView
+                            android:id="@+id/Raitings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="right|center"
+                            android:padding="10dp"
+                            android:src="@drawable/add_to_cat_24"
+                            android:text="1.5"
+                            android:textSize="20sp"
+                            android:textStyle="bold">
+
+                        </ImageView>
 
                     </LinearLayout>
 

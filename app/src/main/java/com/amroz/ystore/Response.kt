@@ -38,6 +38,8 @@ data class Response (
     var getProductsReports: List<Products>,
     @SerializedName("getSingleMembers")
     var getSingleMembers: List<Bank>
+    ,@SerializedName("getSingleFavorite")
+    var getSingleFavorite: List<Products>
 
 ){
 

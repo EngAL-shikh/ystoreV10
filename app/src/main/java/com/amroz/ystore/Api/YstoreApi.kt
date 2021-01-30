@@ -60,6 +60,9 @@ interface YstoreApi {
     fun fetchProductsByReportID(@Query("report_id") report_id: Int,
                                 @Query("product_id") product_id: Int): Call<Response>
 
+    @GET("StoreApi/api/favorite_api.php?")
+    fun fetchFavorite(@Query("user_id") user_id: Int): Call<Response>
+
 
     // adding/////////////////////////////////////////////////////////////////////////////////
 
@@ -88,6 +91,13 @@ interface YstoreApi {
     fun addCart(@Field("user_id") user_id:Int,
                 @Field("product_id") product_id:Int,
                 @Field("Quantity") Quantity:Int
+    ): Call<Response>
+
+    @FormUrlEncoded
+    @POST("StoreApi/api/favorite_api.php")
+    fun addFovarite(@Field("user_id") user_id:Int,
+                @Field("product_id") product_id:Int
+
     ): Call<Response>
 
 
@@ -254,6 +264,24 @@ interface YstoreApi {
                          @Field("user_status") user_status: Int
     ): Call<Response>
     ///////////user_status////////////////
+
+
+    ///////////payment////////////////
+    //user_status
+    @FormUrlEncoded
+    @PUT("StoreApi/api/bank_api.php")
+    fun checkOut(@Query("card_number") card_number : Int?,
+                         @Field("amount") amount: Int
+    ): Call<Response>
+    ///////////user_status////////////////
+    ///////////product_status////////////////
+
+    @FormUrlEncoded
+    @PUT("StoreApi/api//productStatus_api.php")
+    fun updateProductStatus(@Query("product_id")product_id: Int?,
+                            @Field("product_status") product_status: Int
+    ): Call<Response>
+    ///////////product_status////////////////
 
 }
 

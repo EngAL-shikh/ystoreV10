@@ -38,6 +38,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
@@ -72,6 +74,9 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.0.0'
     implementation 'com.itextpdf:itext7-core:7.1.11'
     implementation 'com.balysv:material-ripple:1.0.2'
+
+
+
 
 
 
