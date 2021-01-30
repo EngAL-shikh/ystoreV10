@@ -108,46 +108,59 @@ class AddProductFragment : Fragment(),AdapterView.OnItemSelectedListener {
 
 
         add.setOnClickListener {
-            ystoreViewModels.addProduct(productTitle.text.toString(),
-                productDetails.text.toString(),
-                images[0]+","+images[1]+","+images[2]+","+images[3]+","+images[4],productColor.text.toString(),
-                productFeature.text.toString(),
-                0
-                ,productPriceY.text.toString().toInt(),
-                productPriceD.text.toString().toInt(),
-                QueryPreferences.getStoredQueryUserid(context!!).toInt(),
-                selectedCategoryId,
-  
-                2,
-                "",
-                "")
+            if(productTitle.text.isEmpty()||
+                productDetails.text.isEmpty()||
+                productColor.text.isEmpty()||
+                productFeature.text.isEmpty()||
+                productPriceY.text.isEmpty()||
+                productPriceD.text.isEmpty()) {
+                Toast.makeText(context,"one field empty ,It can not be empty",Toast.LENGTH_SHORT).show()
+            }
+            else {
+                ystoreViewModels.addProduct(
+                    productTitle.text.toString(),
+                    productDetails.text.toString(),
+                    images[0] + "," + images[1] + "," + images[2] + "," + images[3] + "," + images[4],
+                    productColor.text.toString(),
+                    productFeature.text.toString(),
+                    0
+                    ,
+                    productPriceY.text.toString().toInt(),
+                    productPriceD.text.toString().toInt(),
+                    QueryPreferences.getStoredQueryUserid(context!!).toInt(),
+                    selectedCategoryId,
+
+                    2,
+                    "",
+                    ""
+                )
 
 
 
-            Log.d("vcx",selectedCategoryId.toString())
+                Log.d("vcx", selectedCategoryId.toString())
 
 
+                val intent1 = MainActivity.newIntent(context!!)
+                val pendingIntent = PendingIntent.getActivity(context!!, 0, intent1, 0)
+                val resources = context!!.resources
+                val notification = NotificationCompat
+                    .Builder(context!!, NOTIFICATION_CHANNEL_ID)
+                    .setTicker(resources.getString(R.string.new_pictures_title))
+                    .setSmallIcon(R.drawable.ic_baseline_fiber_new_24)
+                    .setContentTitle(resources.getString(R.string.new_pictures_title))
+                    .setContentText(resources.getString(R.string.new_pictures_text))
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .build()
+                val notificationManager = NotificationManagerCompat.from(context!!)
+                notificationManager.notify(0, notification)
 
-            val intent1 = MainActivity.newIntent(context!!)
-            val pendingIntent = PendingIntent.getActivity(context!!, 0, intent1, 0)
-            val resources =context!!.resources
-            val notification = NotificationCompat
-                .Builder(context!!, NOTIFICATION_CHANNEL_ID)
-                .setTicker(resources.getString(R.string.new_pictures_title))
-                .setSmallIcon(R.drawable.ic_baseline_fiber_new_24)
-                .setContentTitle(resources.getString(R.string.new_pictures_title))
-                .setContentText(resources.getString(R.string.new_pictures_text))
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .build()
-            val notificationManager = NotificationManagerCompat.from(context!!)
-            notificationManager.notify(0, notification)
+                var intent = Intent(context, MainActivity::class.java)
+                startActivity(intent)
+                app.finish()
 
-            var intent= Intent(context,MainActivity::class.java)
-            startActivity(intent)
-            app.finish()
-
-          Log.d("adptercatid",selectedCategoryId.toString())
+                Log.d("adptercatid", selectedCategoryId.toString())
+            }
         }
 
 

@@ -33,10 +33,10 @@ class Mangs_Delete : AppCompatActivity() {
 
             delet_user()
         }
-        butcart.setOnClickListener {
-            delet_cart()
-
-        }
+//        butcart.setOnClickListener {
+//            delet_cart()
+//
+//        }
     }
 
     fun delet_catogrey() {
@@ -105,28 +105,28 @@ class Mangs_Delete : AppCompatActivity() {
 
     }
 
-    fun delet_cart() {
-
-        val builder = AlertDialog.Builder(this)
-        //  builder.setTitle("AlertDialog")
-        builder.setMessage("Are you sure ")
-
-        // add the buttons
-
-        // add the buttons
-        builder.setPositiveButton("Continue") { _, _ ->
-            var del_cart = ManagementFeatchers()
-            del_cart.deleteCart(1)
-
-        }
-        builder.setNegativeButton("Cancel") { _, _ ->
-
-        }
-        val dialog = builder.create()
-        dialog.show()
-
-
-    }
+//    fun delet_cart() {
+//
+//        val builder = AlertDialog.Builder(this)
+//        //  builder.setTitle("AlertDialog")
+//        builder.setMessage("Are you sure ")
+//
+//        // add the buttons
+//
+//        // add the buttons
+//        builder.setPositiveButton("Continue") { _, _ ->
+//            var del_cart = ManagementFeatchers()
+//            del_cart.deleteCart(1)
+//
+//        }
+//        builder.setNegativeButton("Cancel") { _, _ ->
+//
+//        }
+//        val dialog = builder.create()
+//        dialog.show()
+//
+//
+//    }
 
     fun delet_report() {
         val builder = AlertDialog.Builder(this)

@@ -116,7 +116,9 @@ interface YstoreApi {
     fun  deleteProduct(@Query("product_id")id:Int): Call< Response>
 
     @DELETE("StoreApi/api/cart_api.php")
-    fun  deletecart(@Query("user_id")id:Int): Call<Response>
+    fun  deletecart(@Query("user_id") user_id:Int,
+                    @Query("product_id") name: Int
+    ): Call<Response>
 
     @DELETE("StoreApi/api/reports_api.php")
     fun  deletereports(@Query("report_id")id:Int): Call<Response>

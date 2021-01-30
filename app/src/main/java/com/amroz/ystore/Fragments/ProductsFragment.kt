@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.amroz.ystore.*
 import com.amroz.ystore.Chating.MainChatActivity
 import com.amroz.ystore.Models.Products
@@ -145,6 +146,7 @@ class ProductsFragment : Fragment() {
         val imagenav= view.findViewById(R.id.imagenav) as ImageView
         val username_nav= view.findViewById(R.id.username_nav) as TextView
         val Myfavorite= view.findViewById(R.id.Myfavorite) as LinearLayout
+
         sittings.setOnClickListener {
             nave_view2.visibility=View.VISIBLE
             YoYo.with(Techniques.BounceInLeft)
@@ -171,14 +173,15 @@ class ProductsFragment : Fragment() {
 
         if (QueryPreferences.getStoredQuery(context!!)=="user" ||QueryPreferences.getStoredQuery(context!!)=="admin"){
             login.visibility=View.GONE
-            Picasso.with(context).load(QueryPreferences.getStoredQueryUserimage(context!!)).into(imagenav)
+
+            Picasso.get().load(QueryPreferences.getStoredQueryUserimage(context!!)).into(imagenav)
             username_nav.text=QueryPreferences.getStoredQueryUsername(context!!)
         }else
         {
             chating.visibility=View.GONE
             Myfavorite.visibility=View.GONE
             login.visibility=View.VISIBLE
-
+            dashboard.visibility=View.GONE
 
         }
         login.setOnClickListener {
@@ -214,6 +217,7 @@ class ProductsFragment : Fragment() {
         val card= view.findViewById(R.id.ProductCard) as CardView
         val remov_fevort= view.findViewById(R.id.remove_fivort_Raiting) as ImageView
         val add_fevort= view.findViewById(R.id.add_fivort) as ImageView
+        val bt_add_to_cart= view.findViewById(R.id.bt_add_to_cart) as ImageView
 
 
 
@@ -226,7 +230,7 @@ class ProductsFragment : Fragment() {
             deatils.text = products.details
             //Raitings.text=products.rating_vote.toString()
             price.text="$ "+products.price_d.toString()
-            Picasso.with(context).load(images[0]).into(image)
+            Picasso.get().load(images[0]).into(image)
 
 //            card.setOnClickListener {
 //                Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show()
@@ -244,6 +248,14 @@ class ProductsFragment : Fragment() {
             }
 
 
+
+            bt_add_to_cart.setOnClickListener {
+                var id= QueryPreferences.getStoredQueryUserid(context!!).toInt()
+                ystoreViewModels.addCart(id!!,products.product_id,1)
+
+               // Toast.makeText(this,"Product added to your Cart",Toast.LENGTH_LONG).show()
+                Log.d("cartadd",QueryPreferences.getStoredQueryUserid(context!!).toString())
+            }
             image.setOnClickListener {
 
                 var intent= Intent(context,MoreDetails::class.java)
@@ -264,13 +276,21 @@ class ProductsFragment : Fragment() {
 
             }
             remov_fevort.setOnClickListener {
-                var id= QueryPreferences.getStoredQueryUserid(context!!).toInt()
-                ystoreViewModels.addFovarite(id!!,products.product_id)
-                remov_fevort.visibility=View.GONE
-                add_fevort.visibility=View.VISIBLE
-                YoYo.with(Techniques.BounceIn)
-                    .duration(2000)
-                    .playOn(add_fevort)
+
+
+                if (QueryPreferences.getStoredQuery(context!!)=="user" ||QueryPreferences.getStoredQuery(context!!)=="admin"){
+                    var id= QueryPreferences.getStoredQueryUserid(context!!).toInt()
+                    ystoreViewModels.addFovarite(id!!,products.product_id)
+                    remov_fevort.visibility=View.GONE
+                    add_fevort.visibility=View.VISIBLE
+                    YoYo.with(Techniques.BounceIn)
+                        .duration(2000)
+                        .playOn(add_fevort)
+                }else{
+
+                    var intent = Intent(context, LoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
 
 

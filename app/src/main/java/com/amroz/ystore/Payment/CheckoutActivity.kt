@@ -34,16 +34,18 @@ class CheckoutActivity : AppCompatActivity() {
         var pay: MaterialRippleLayout = findViewById(R.id.pay)
         var nick_name2: EditText = findViewById(R.id.nick_name2)
         var card_number2: EditText = findViewById(R.id.card_number2)
-        var expire2: EditText = findViewById(R.id.expire2)
+        var expire2: TextView = findViewById(R.id.expire)
         var cvv2: EditText = findViewById(R.id.cvv2)
         var nick_name: TextView = findViewById(R.id.nick_name)
         var card_number: TextView = findViewById(R.id.card_number)
-        var expire: TextView = findViewById(R.id.expire)
+        var expire: EditText = findViewById(R.id.expirem)
+        var expirey: EditText = findViewById(R.id.expirey)
         var cvv: TextView = findViewById(R.id.cvv)
         var back: ImageButton = findViewById(R.id.back)
         var total: TextView = findViewById(R.id.total)
         var cardpay: CardView = findViewById(R.id.cardpay)
         var amipay: LottieAnimationView = findViewById(R.id.amipay)
+        var error: TextView = findViewById(R.id.errormessage)
 
 
         var total_amount=intent.extras?.getString("total_amount")
@@ -52,20 +54,48 @@ class CheckoutActivity : AppCompatActivity() {
 
         checkout.setOnClickListener {
             var products = Featchers()
-            val newsLiveData = products.fetchpayinfo(cvv2.text.toString().toInt())
-            newsLiveData.observe(this, Observer {
-                Log.d("fetchpayinfo", "Response received: ${it}")
+            if (cvv2.text.trim().length > 2){
 
-                nick_name.text = it[0].name
-                card_number.text = it[0].number.toString()
-                expire.text = it[0].Expiry_date
-                cvv.text = it[0].cvv.toString()
-                total_amount_in_bank=it[0].amount.toInt()
+                val newsLiveData = products.fetchpayinfo(cvv2.text.toString().toInt())
+                newsLiveData.observe(this, Observer {
+                    Log.d("fetchpayinfo", "Response received: ${it}")
+                    var number =it[0].number
+                    var date = it[0].Expiry_date.split("/").toTypedArray()
 
-            })
+                    if (card_number2.text.isNotEmpty() && nick_name2.text.isNotEmpty()){
 
-            checkout.visibility=View.GONE
-            pay.visibility=View.VISIBLE
+                        if (card_number2.text.toString().toInt()==number && nick_name2.text.toString()==it[0].name.toString()){
+                            nick_name.text = it[0].name
+                            card_number.text = it[0].number.toString()
+                            expire2.text = date[0]+"/"+date[1]
+                            cvv.text = it[0].cvv.toString()
+                            total_amount_in_bank=it[0].amount.toInt()
+                            error.visibility=View.GONE
+                            pay.visibility=View.VISIBLE
+                            checkout.visibility=View.GONE
+                        }else{
+                            error.visibility=View.VISIBLE
+                            error.setText("Invlid card")
+
+                        }
+                    }else{
+
+                        error.visibility=View.VISIBLE
+                        error.setText("check your card number or name")
+                    }
+
+
+
+                })
+            }else{
+
+                error.visibility=View.VISIBLE
+                error.setText("empty informtion")
+            }
+
+
+
+
 
         }
 

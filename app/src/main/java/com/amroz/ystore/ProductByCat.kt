@@ -58,7 +58,7 @@ class ProductByCat : AppCompatActivity() {
             Raitings.text = products.rating_vote.toString()
             price.text = "$ " + products.price_d
             Log.d("rett", Raitings.text.toString())
-            Picasso.with(this@ProductByCat).load(images[0]).into(image)
+            Picasso.get().load(images[0]).into(image)
 ///////////////////////////
             productCardView.setOnClickListener {
                 var intent = Intent(this@ProductByCat, MoreDetails::class.java)

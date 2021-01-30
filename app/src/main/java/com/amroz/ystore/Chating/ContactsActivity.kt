@@ -36,7 +36,7 @@ class ContactsActivity : AppCompatActivity() {
                     val document = task.result
                     if (document!!.exists()) {
                         val fromUser = document.toObject(UserChat::class.java)
-                        Toast.makeText(this, fromUser.toString(), Toast.LENGTH_LONG).show()
+                       // Toast.makeText(this, fromUser.toString(), Toast.LENGTH_LONG).show()
                         //  text.text=fromUser.toString()+"||"+fromUid.toString()
 
 
@@ -52,7 +52,7 @@ class ContactsActivity : AppCompatActivity() {
                                     listOfToUserNames.add(toUser.userName)
                                     listOfToUsers.add(toUser)
                                     //  listOfRooms.add(d.id)
-                                    Toast.makeText(this, toUser.userName, Toast.LENGTH_LONG).show()
+                                   // Toast.makeText(this, toUser.userName, Toast.LENGTH_LONG).show()
                                 }
 
 

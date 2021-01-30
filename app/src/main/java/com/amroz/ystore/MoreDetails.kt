@@ -16,6 +16,8 @@ import com.amroz.ystore.Models.Products
 import com.amroz.ystore.Models.RatingUs
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_more_details.*
@@ -32,28 +34,29 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_details)
-        var title:TextView=findViewById(R.id.title)
-        var price:TextView=findViewById(R.id.price)
-        var details:TextView=findViewById(R.id.deatils)
-        var image:ImageView=findViewById(R.id.image)
-        var image_1:ImageView=findViewById(R.id.image_1)
-        var image2:ImageView=findViewById(R.id.image_2)
-        var image3:ImageView=findViewById(R.id.image_3)
-        var image4:ImageView=findViewById(R.id.image_4)
-        var image5:ImageView=findViewById(R.id.image_5)
-        var addtocard:AppCompatButton=findViewById(R.id.bt_add_to_cart)
-        var orederdate:TextView=findViewById(R.id.orderdate)
-        var owner:TextView=findViewById(R.id.owner)
-        var addqn:FloatingActionButton=findViewById(R.id.fab_qty_add)
-        var subqn:FloatingActionButton=findViewById(R.id.fab_qty_sub)
-        var tv_qty:TextView=findViewById(R.id.tv_qty)
-        var btn_ratingProduct:TextView=findViewById(R.id.btn_ratingProduct)
-        var products=intent.getSerializableExtra("data") as Products
-        var avgRatingtv:TextView=findViewById(R.id.avrage_rating_tv)
-        var userRating:TextView=findViewById(R.id.user_rating_tv)
-        var ratingBar:RatingBar=findViewById(R.id.ratingProduct)
-        var ratingBar2:RatingBar=findViewById(R.id.ratingShow_rb)
-        var card_report:CardView=findViewById(R.id.card_report)
+        var title: TextView = findViewById(R.id.title)
+        var price: TextView = findViewById(R.id.price)
+        var details: TextView = findViewById(R.id.deatils)
+      //  var image: ImageView = findViewById(R.id.image)
+        var imageSlider: ImageSlider =findViewById(R.id.imageSlider)
+        var image_1: ImageView = findViewById(R.id.image_1)
+        var image2: ImageView = findViewById(R.id.image_2)
+        var image3: ImageView = findViewById(R.id.image_3)
+        var image4: ImageView = findViewById(R.id.image_4)
+        var image5: ImageView = findViewById(R.id.image_5)
+        var addtocard: AppCompatButton = findViewById(R.id.bt_add_to_cart)
+        var orederdate: TextView = findViewById(R.id.orderdate)
+        var owner: TextView = findViewById(R.id.owner)
+        var addqn: FloatingActionButton = findViewById(R.id.fab_qty_add)
+        var subqn: FloatingActionButton = findViewById(R.id.fab_qty_sub)
+        var tv_qty: TextView = findViewById(R.id.tv_qty)
+        var btn_ratingProduct: TextView = findViewById(R.id.btn_ratingProduct)
+        var products = intent.getSerializableExtra("data") as Products
+        var avgRatingtv: TextView = findViewById(R.id.avrage_rating_tv)
+        var userRating: TextView = findViewById(R.id.user_rating_tv)
+        var ratingBar: RatingBar = findViewById(R.id.ratingProduct)
+        var ratingBar2: RatingBar = findViewById(R.id.ratingShow_rb)
+        var card_report: CardView = findViewById(R.id.card_report)
 
         // report -------------------------------------------------------------------------------
         var reson_report = ""
@@ -96,6 +99,7 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
         }
 
         save.setOnClickListener {
+
             Log.d("repo", reson_report)
             Log.d("repo", products.product_id.toString())
             Log.d("repo", products.user_id.toString())
@@ -106,105 +110,144 @@ class MoreDetails : AppCompatActivity(), RatingBar.OnRatingBarChangeListener{
                 products.user_id,
                 products.product_id
             )
-            card_report.visibility= View.GONE
+            card_report.visibility = View.GONE
         }
 
         cancel.setOnClickListener {
-            card_report.visibility= View.GONE
+            card_report.visibility = View.GONE
         }
         //-----------------------------------------------------------------------------------------------------------------------------------------
 
 
-
-        title.text=products.title
-        price.text="$ "+products.price_d
-        details.text=products.details
-        details.text=products.details
-        orederdate.text="Oreder Date : after 10 days frome this date "+products.order_date
-        owner.text="sold by:"+products.user_name
+        title.text = products.title
+        price.text = "$ " + products.price_d
+        details.text = products.details
+        details.text = products.details
+        orederdate.text = "Oreder Date : after 10 days frome this date " + products.order_date
+        owner.text = "sold by:" + products.user_name
 
 
         report.setOnClickListener {
 
-            card_report.visibility= View.VISIBLE
-            YoYo.with(Techniques.FadeInUp)
-                .duration(2000)
-                .playOn(card_report)
+            if (QueryPreferences.getStoredQuery(this!!)=="user" ||QueryPreferences.getStoredQuery(this!!)=="admin"){
+                card_report.visibility = View.VISIBLE
+                YoYo.with(Techniques.FadeInUp)
+                    .duration(2000)
+                    .playOn(card_report)
+            }else{
+
+                var intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+
 
         }
-      owner.setOnClickListener{
-
-          var intent= Intent(this,UserReport::class.java)
-          intent.putExtra("data",products)
-          startActivity(intent)
-
-}
-
-      var images=  products.images.split(",").toTypedArray()
-
-       var image1= images[0]
-       var image22= images[1]
+        owner.setOnClickListener {
 
 
-        Picasso.with(this).load(image1).into(image)
-        Picasso.with(this).load(images[0]).into(image_1)
-        Picasso.with(this).load(image22).into(image2)
-        Picasso.with(this).load(images[2]).into(image3)
-        Picasso.with(this).load(images[3]).into(image4)
-        Picasso.with(this).load(images[4]).into(image5)
+            if (QueryPreferences.getStoredQuery(this!!)=="user" ||QueryPreferences.getStoredQuery(this!!)=="admin"){
+                var intent = Intent(this, UserReport::class.java)
+                intent.putExtra("data", products)
+                startActivity(intent)
+            }else{
 
+                var intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
 
-        image_1.setOnClickListener {
-            Picasso.with(this).load(images[0]).into(image)
-            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
-            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
 
         }
-        image2.setOnClickListener {
-            Picasso.with(this).load(images[1]).into(image)
-            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
-            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-        }
-        image3.setOnClickListener {
-            Picasso.with(this).load(images[2]).into(image)
-            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
-            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-        }
-        image4.setOnClickListener {
-            Picasso.with(this).load(images[3]).into(image)
-            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
-            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
 
-        }
-        image5.setOnClickListener {
-            Picasso.with(this).load(images[4]).into(image)
-            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
-            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
-            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+        var images = products.images.split(",").toTypedArray()
 
-        }
+        /////////////////////////////////////////////////slideShow////////////////////////////////////////////////////////////////////////////
+        var slideModel: MutableList<SlideModel> = ArrayList()
+        var imageS1= SlideModel(images[0])
+        var imageS2= SlideModel(images[1])
+        var imageS3= SlideModel(images[2])
+        var imageS4= SlideModel(images[3])
+        var imageS5= SlideModel(images[4])
+
+        slideModel.add(imageS1)
+        slideModel.add(imageS2)
+        slideModel.add(imageS3)
+        slideModel.add(imageS4)
+        slideModel.add(imageS5)
+
+        imageSlider.setImageList(slideModel)
+
+        var image1= images[0]
+        var image22= images[1]
+
+
+//        Picasso.get().load(image1).into(image)
+        Picasso.get().load(images[0]).into(image_1)
+        Picasso.get().load(image22).into(image2)
+        Picasso.get().load(images[2]).into(image3)
+        Picasso.get().load(images[3]).into(image4)
+        Picasso.get().load(images[4]).into(image5)
+
+
+
+//        image_1.setOnClickListener {
+//            Picasso.get().load(images[0]).into(image)
+//            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+//            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//
+//        }
+//        image2.setOnClickListener {
+//            Picasso.get().load(images[1]).into(image)
+//            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+//            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//        }
+//        image3.setOnClickListener {
+//            Picasso.get().load(images[2]).into(image)
+//            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+//            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//        }
+//        image4.setOnClickListener {
+//            Picasso.get().load(images[3]).into(image)
+//            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+//            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//
+//        }
+//        image5.setOnClickListener {
+//            Picasso.get().load(images[4]).into(image)
+//            image5.setBackgroundResource(R.drawable.edit_text_round_bg_outline_green)
+//            image_1.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image2.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image3.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//            image4.setBackgroundResource(R.drawable.edit_text_round_bg_outline)
+//
+//        }
 
 
 
         addtocard.setOnClickListener {
-            var id= QueryPreferences.getStoredQueryUserid(this!!).toInt()
-            ystoreViewModels.addCart(id!!,products.product_id,count)
-            Toast.makeText(this,"Product added to your Cart",Toast.LENGTH_LONG).show()
-            Log.d("cartadd",QueryPreferences.getStoredQueryUserid(this!!).toString())
+
+            if (QueryPreferences.getStoredQuery(this!!)=="user" ||QueryPreferences.getStoredQuery(this!!)=="admin"){
+                var id= QueryPreferences.getStoredQueryUserid(this!!).toInt()
+                ystoreViewModels.addCart(id!!,products.product_id,count)
+                // Toast.makeText(this,"Product added to your Cart",Toast.LENGTH_LONG).show()
+                Log.d("cartadd",QueryPreferences.getStoredQueryUserid(this!!).toString())
+            }else{
+
+                var intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
+
         }
 
         addqn.setOnClickListener {

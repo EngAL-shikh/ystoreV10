@@ -94,26 +94,8 @@ class ManagementFeatchers {
     }
 
 
-    //DELETCART
-
-    fun deleteCart(id: Int) {
 
 
-        val cartRequest: Call<Response> = mangApi.deletecart(id)
-
-        cartRequest.enqueue(object : Callback<Response> {
-            override fun onFailure(call: Call<Response>, t: Throwable) {
-                Log.d("tag", t.message.toString())
-            }
-
-
-            override fun onResponse(call: Call<Response>, response: retrofit2.Response<Response>) {
-                Log.d("tag", "yes")
-            }
-
-        })
-
-    }
 
     //DELETEREPORT
     fun deletereports(id: Int) {
@@ -473,6 +455,27 @@ class ManagementFeatchers {
 
     }
     //////////////////////////product_status//////////////////////////
+
+    //////////////////////////cart_delete//////////////////
+    //DELETCART
+
+    fun deleteCart(user_id: Int,product_id:Int) {
+        val cartRequest: Call< Response> =mangApi.deletecart(user_id,product_id)
+
+        cartRequest.enqueue(object : Callback< Response> {
+            override fun onFailure(call: Call< Response>, t: Throwable) {
+                Log.d("sdfgafgfg", t.message.toString())
+            }
+
+
+            override fun onResponse(call: Call< Response>, response: retrofit2.Response< Response>) {
+                Log.d("sdfgafgfg", "yes")
+            }
+
+        })
+
+    }
+    //////////////////////////cart_delete//////////////////
 
 
 }

@@ -32,7 +32,7 @@ class Dashboard : AppCompatActivity() {
 
         name.text = QueryPreferences.getStoredQueryUsername(this)
         address.text = QueryPreferences.getStoredQueryUseraddress(this)
-        Picasso.with(this).load(QueryPreferences.getStoredQueryUserimage(this)).into(image)
+        Picasso.get().load(QueryPreferences.getStoredQueryUserimage(this)).into(image)
 
 
         var admin = intent.extras?.getString("admin")

@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import com.amroz.ystore.Fragments.Catogrey_Fragment
 import kotlinx.android.synthetic.main.activity_add_category.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -51,11 +52,11 @@ class AddCategoryActivity : AppCompatActivity() {
 
             if (catTitle != null)
                 ystoreViewModels.addCategory(catTitle.text.toString(), image)
-            var intent = Intent(this, MainActivity::class.java)
+            var intent = Intent(this, Dashboard::class.java)
             startActivity(intent)
         }
         bt_close.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
+            var intent = Intent(this, Dashboard::class.java)
             startActivity(intent)
             finish()
         }

@@ -93,6 +93,14 @@
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:tint="@color/grey_40"
                             app:srcCompat="@drawable/ic_plus" />
+                        <Button
+                            android:id="@+id/delete_btn"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="100dp"
+                            android:background="@drawable/ic_delete"
+
+                            />
 
                     </LinearLayout>
 

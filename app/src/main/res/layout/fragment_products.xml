@@ -8,6 +8,7 @@
 
     tools:context=".Fragments.ProductsFragment">
 
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view2"
         android:layout_width="230dp"
@@ -241,7 +242,9 @@
 
 
     </com.google.android.material.navigation.NavigationView>
+
     <LinearLayout
+        android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -259,7 +262,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             <ImageButton
                 android:id="@+id/sittings"
@@ -269,15 +272,16 @@
                 android:background="@drawable/sitting2">
 
             </ImageButton>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_margin="20dp"
                 android:clipToPadding="false"
+                android:visibility="visible"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="8dp"
-                android:layout_margin="20dp"
-                android:visibility="visible"
                 app:cardElevation="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -303,9 +307,6 @@
                     <requestFocus />
 
 
-
-
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -317,8 +318,8 @@
             android:layout_width="match_parent"
             android:layout_height="650dp"
             android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

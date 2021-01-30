@@ -155,7 +155,7 @@ class ReportFragment : Fragment() {
                     var splitImage = images[0]
                     title.text = it[0].title
                     details.text = it[0].details
-                    Picasso.with(context).load(splitImage).into(image)
+                    Picasso.get().load(splitImage).into(image)
                     //////////////////////////product_status//////////////////////////
                         p_st=it[0].product_status
                         p_id=it[0].product_id

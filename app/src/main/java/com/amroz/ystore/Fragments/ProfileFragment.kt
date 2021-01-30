@@ -131,7 +131,7 @@ class ProfileFragment : Fragment() {
             address.text = users.address.toString()
             usersrait.text=users.user_raiting.toString()
 
-            Picasso.with(context).load(users.user_image).into(iamge)
+            Picasso.get().load(users.user_image).into(iamge)
 
 
             edite.setOnClickListener {
@@ -224,7 +224,7 @@ class ProfileFragment : Fragment() {
             // Raitings.text = products.rating.toString()
             price.text = "$" + products.price_d.toString()
 
-            Picasso.with(context).load(images[0]).into(image)
+            Picasso.get().load(images[0]).into(image)
 
 
 
@@ -310,7 +310,15 @@ class ProfileFragment : Fragment() {
         builder.setPositiveButton("Continue") { _, _ ->
             var del_cat = ManagementFeatchers()
             del_cat.deleteProduct(id)
+            var products = Featchers()
+            val newsLiveData = products.fetchProductsByUser(
+                QueryPreferences.getStoredQueryUserid(context!!).toInt()
+            )
+            newsLiveData.observe(this, Observer {
+                Log.d("test", "Response received: ${it}")
+                RecyclerView.adapter = ProductAdapter(it)
 
+            })
 
         }
         builder.setNegativeButton("Cancel") { _, _ ->
@@ -348,6 +356,7 @@ class ProfileFragment : Fragment() {
         // QueryPreferences.setStoredQuery(context!!,"")
         var i = Intent(context, LoginActivity::class.java)
         startActivity(i)
+        activity?.finish()
     }
 
 

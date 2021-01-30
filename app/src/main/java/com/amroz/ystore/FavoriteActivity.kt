@@ -57,7 +57,7 @@ class FavoriteActivity : AppCompatActivity() {
             deatils.text = products.details
            // Raitings.text=products.rating_vote.toString()
             price.text="$ "+products.price_d.toString()
-            Picasso.with(this@FavoriteActivity).load(images[0]).into(image)
+            Picasso.get().load(images[0]).into(image)
 
 
 

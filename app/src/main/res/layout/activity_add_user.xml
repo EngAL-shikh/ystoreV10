@@ -171,6 +171,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/edit_text_round_bg_outline"
                         android:hint="type phone number"
+                        android:inputType="number"
                         android:textColorHint="@color/grey_20" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -217,7 +218,7 @@
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/password_sg2"
+                        android:id="@+id/passwordConf"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/edit_text_round_bg_outline"

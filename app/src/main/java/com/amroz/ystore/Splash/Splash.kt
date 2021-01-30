@@ -3,6 +3,7 @@ package com.amroz.ystore.Splash
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.amroz.ystore.Intro.IntroActivity
 import com.amroz.ystore.LoginActivity
 import com.amroz.ystore.MainActivity
 import com.amroz.ystore.R
@@ -17,7 +18,7 @@ class Splash : AppCompatActivity() {
                 try {
                     Thread.sleep(5000)
 
-                    val toMain= Intent(baseContext, MainActivity::class.java)
+                    val toMain= Intent(baseContext, IntroActivity::class.java)
                     startActivity(toMain)
                     finish()
                     overridePendingTransition(R.anim.nav_default_pop_enter_anim,R.anim.nav_default_pop_exit_anim)

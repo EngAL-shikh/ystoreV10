@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_cat"
@@ -76,7 +78,18 @@
 
                 </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/deletcat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="13dp"
+                    android:layout_marginBottom="13dp"
+                    android:src="@drawable/ic_delete"
+ >
 
+                </ImageView>
             </RelativeLayout>
 
 
@@ -84,4 +97,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

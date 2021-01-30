@@ -209,7 +209,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NICK NAME"
+                        android:text=" NAME"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                         android:textColor="@color/grey_10" />
 
@@ -218,7 +218,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="monospace"
-                        android:text="Anderson Thomas"
+                        android:text="your name on card"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/white" />
 
@@ -306,15 +306,34 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/expirem"
+                        style="@style/EditText.Flat.Grey.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_xlarge"
+                        android:layout_weight="0.5"
+                        android:maxLength="2"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:hint="Month" />
+                    <EditText
+                        android:id="@+id/expirey"
+                        style="@style/EditText.Flat.Grey.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_xlarge"
+                        android:layout_weight="0.5"
+                        android:maxLength="2"
+                        android:background="@drawable/edit_text_round_bg_outline"
+                        android:hint="Year" />
+                    <EditText
                         android:id="@+id/expire2"
                         style="@style/EditText.Flat.Grey.Small"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/spacing_xlarge"
-                        android:layout_weight="1"
+                        android:layout_weight="0.3"
+                        android:gravity="center"
                         android:background="@drawable/edit_text_round_bg_outline"
                         android:drawableEnd="@drawable/ic_event_grey"
                         android:drawableRight="@drawable/ic_event_grey"
-                        android:hint="Expired Date" />
+                         />
 
                     <View
                         android:layout_width="@dimen/spacing_middle"
@@ -436,6 +455,18 @@
                 </LinearLayout>
 
             </com.balysv.materialripple.MaterialRippleLayout>
+            <TextView
+                android:id="@+id/errormessage"
+                android:textColor="@color/colorWhite"
+                android:text="error"
+                android:visibility="gone"
+                android:gravity="center"
+                android:background="@color/red_300"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
 
         </LinearLayout>
 

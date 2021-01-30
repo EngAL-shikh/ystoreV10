@@ -295,6 +295,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/edit_text_round_bg_outline"
                     android:hint="RY 120 000 "
+                    android:inputType="number"
                     android:textColorHint="@color/grey_20" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -328,6 +329,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_mlarge"
                 android:text="Category"
+                android:inputType="number"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/grey_40" />
 <Spinner

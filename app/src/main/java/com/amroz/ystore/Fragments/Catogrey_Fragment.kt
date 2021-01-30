@@ -127,12 +127,13 @@ class Catogrey_Fragment : Fragment() {
         val catImage = view.findViewById(R.id.image) as ImageView
         val cat_card = view.findViewById(R.id.card_cat) as CardView
         val update = view.findViewById(R.id.update) as Button
+        val del_cat = view.findViewById(R.id.deletcat) as ImageView
 
 
         fun bind(cat: Category) {
 
             cattitle.text = cat.cat_title
-            Picasso.with(context).load(cat.images).into(catImage)
+            Picasso.get().load(cat.images).into(catImage)
             cat_card.setOnClickListener {
 
                 var intent = Intent(context, ProductByCat::class.java)
@@ -144,22 +145,31 @@ class Catogrey_Fragment : Fragment() {
 
 
 
+
+
             Log.d("btnupdate", QueryPreferences.getStoredQuery(context!!))
 
             if (QueryPreferences.getStoredQuery(context!!) == "admin") {
 
                 update.visibility = View.VISIBLE
+                del_cat.visibility = View.VISIBLE
             } else {
                 update.visibility = View.GONE
+                del_cat.visibility = View.GONE
 
             }
 
 
 
+            del_cat.setOnClickListener {
+
+                delet_catogrey(cat.cat_id)
+            }
             update.setOnClickListener {
 
 
                 categoryDialogUpdate(cat)
+
 
             }
 
@@ -230,11 +240,18 @@ class Catogrey_Fragment : Fragment() {
                     cat.cat_id,
                     view.ed_update_category.text.toString()
                 )
+                var user = Featchers()
+                val LiveData = user.fetchCat()
+                LiveData.observe(viewLifecycleOwner, Observer {
+                    Log.d("test", "Response received: ${it}")
+                    RecyclerView.adapter = CatAdapter(it)
+
+                })
                 response.observe(
                     viewLifecycleOwner,
                     Observer { message ->
 
-                        Toast.makeText(requireContext(), "updated", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "updated", Toast.LENGTH_SHORT).show()
                     }
                 )
                 alertDialog.dismiss()
@@ -255,6 +272,7 @@ class Catogrey_Fragment : Fragment() {
 
     }
 
+
     companion object {
         fun newInstance(data: String): Catogrey_Fragment {
             val args = Bundle().apply {
@@ -265,7 +283,33 @@ class Catogrey_Fragment : Fragment() {
             }
         }
     }
+    fun delet_catogrey(id:Int) {
+        val builder = android.app.AlertDialog.Builder(context)
+        //  builder.setTitle("AlertDialog")
+        builder.setMessage("Are you sure ")
 
+        // add the buttons
+
+        // add the buttons
+        builder.setPositiveButton("Continue") { _, _ ->
+            var del_cat = ManagementFeatchers()
+            del_cat.deleteCategory(id)
+            var user = Featchers()
+            val LiveData = user.fetchCat()
+            LiveData.observe(viewLifecycleOwner, Observer {
+                Log.d("test", "Response received: ${it}")
+                RecyclerView.adapter = CatAdapter(it)
+
+            })
+        }
+        builder.setNegativeButton("Cancel") { _, _ ->
+
+        }
+        val dialog = builder.create()
+        dialog.show()
+
+
+    }
 
 }
 

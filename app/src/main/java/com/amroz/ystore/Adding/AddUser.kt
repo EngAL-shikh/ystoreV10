@@ -39,8 +39,10 @@ class AddUser : AppCompatActivity() {
   //  private lateinit var addChatID:TextView
     private lateinit var addPhone:EditText
     private lateinit var addAddress:EditText
+    private lateinit var passwordConf:EditText
     private lateinit var singUp:ImageButton
     private lateinit var bt_close:ImageButton
+    private val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -57,36 +59,70 @@ class AddUser : AppCompatActivity() {
        // addChatID=findViewById(R.id.chat_id)
         addPhone=findViewById(R.id.phone)
         addAddress=findViewById(R.id.address)
+        passwordConf=findViewById(R.id.passwordConf)
         addEmail.text= QueryPreferences.getStoredQueryEmail(this)
 //        var progress:ProgressBar=findViewById(R.id.progress)
         //addChatID.text= SharedPref.getUid(this)
 
         singUp.setOnClickListener {
-            var user= YstoreViewModels()
+            if (addName.text.isEmpty() ||
+                addEmail.text.isEmpty() ||
+                addPassword.text.isEmpty()||
+                passwordConf.text.isEmpty()||
+                addPhone.text.isEmpty()||
+                addAddress.text.isEmpty()) {
+                Toast.makeText(this, "It cannot be empty  ", Toast.LENGTH_SHORT).show()
+            } else{
+                if(addName.text.toString().trim().length<3){
+                    Toast.makeText(this,"Name is Empty ",Toast.LENGTH_SHORT).show()
+                    addName.setBackgroundResource(R.drawable.erorrshape)
+                }else if(addPassword.text.toString().trim().length<6){
+                    Toast.makeText(this,"Low password  ",Toast.LENGTH_SHORT).show()
+                    addPassword.setBackgroundResource(R.drawable.erorrshape)
+                }else if (addPassword.text.toString()!=passwordConf.text.toString()){
+                    Toast.makeText(this,"The password confirm is not the same ",Toast.LENGTH_SHORT).show()
+                    addPassword.setBackgroundResource(R.drawable.erorrshape)
+                    passwordConf.setBackgroundResource(R.drawable.erorrshape)
+                }else if(!addEmail.text.trim().matches(emailPattern.toRegex())) {
+                    addEmail.setBackgroundResource(R.drawable.erorrshape)
+                    Toast.makeText(this, "Invalide email address", Toast.LENGTH_SHORT).show()
+                }
+                else if(addPhone.text.toString().trim().length<9) {
+                    Toast.makeText(this, " phone Number is not correct ", Toast.LENGTH_SHORT).show()
+                    addName.setBackgroundResource(R.drawable.erorrshape)
 
-                   var LiveData= user.addUsers(addName.text.toString(),QueryPreferences.getStoredQueryEmail(this).toString(),addPassword.text.toString(),
-                        QueryPreferences.getStoredQueryChatid(this).toString(),addPhone.text.toString(),addAddress.text.toString(),image)
+                }else {
+                    var user = YstoreViewModels()
 
-          //  getuserid()
+                    var LiveData = user.addUsers(
+                        addName.text.toString(),
+                        QueryPreferences.getStoredQueryEmail(this).toString(),
+                        addPassword.text.toString(),
+                        QueryPreferences.getStoredQueryChatid(this).toString(),
+                        addPhone.text.toString(),
+                        addAddress.text.toString(),
+                        image
+                    )
 
-            LiveData.observe(this, Observer {
+                    //  getuserid()
 
-                QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
-                QueryPreferences.setStoredQuery(this, it[0].rule)
-                QueryPreferences.setStoredQueryUserimage(this, it[0].user_image)
-                QueryPreferences.setStoredQueryUsername(this, it[0].name)
-                QueryPreferences.setStoredQueryUseraddress(this, it[0].address)
-                QueryPreferences.setStoredQueryChatid(this, it[0].chat_id)
-                val intent = Intent(this, MainActivity::class.java)
-               // intent.putExtra("userrule",)
-                startActivity(intent)
-            })
+                    LiveData.observe(this, Observer {
+
+                        QueryPreferences.setStoredQueryUserid(this, it[0].user_id.toString())
+                        QueryPreferences.setStoredQuery(this, it[0].rule)
+                        QueryPreferences.setStoredQueryUserimage(this, it[0].user_image)
+                        QueryPreferences.setStoredQueryUsername(this, it[0].name)
+                        QueryPreferences.setStoredQueryUseraddress(this, it[0].address)
+                        QueryPreferences.setStoredQueryChatid(this, it[0].chat_id)
+                        val intent = Intent(this, MainActivity::class.java)
+                        // intent.putExtra("userrule",)
+                        startActivity(intent)
+                    })
 
 
-
-            // cheackadmin()
-            // Thread.sleep(4000)
-
+                    // cheackadmin()
+                    // Thread.sleep(4000)
+                }}
 
 
         }

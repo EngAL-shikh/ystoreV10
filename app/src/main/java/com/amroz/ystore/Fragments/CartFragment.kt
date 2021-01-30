@@ -1,22 +1,21 @@
 package com.amroz.ystore.Fragments
 
 import QueryPreferences
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amroz.ystore.ManagementFeatchers
 import com.amroz.ystore.Models.Products
 import com.amroz.ystore.MoreDetails
 import com.amroz.ystore.Payment.CheckoutActivity
@@ -112,6 +111,7 @@ class CartFragment : Fragment() {
         val tv_qty = view.findViewById(R.id.tv_qty) as TextView
         val card_cart = view.findViewById(R.id.card_cart) as LinearLayout
         //val card= view.findViewById(R.id.ProductCard) as CardView
+        val btn_cart = view.findViewById(R.id.delete_btn) as Button
 
 
         fun bind(products: Products) {
@@ -123,7 +123,7 @@ class CartFragment : Fragment() {
             // Raitings.text = products.rating.toString()
             price.text = "$ " + products.price_d.toString()
 
-            Picasso.with(context).load(images[0]).into(image)
+            Picasso.get().load(images[0]).into(image)
 
 
 
@@ -131,7 +131,49 @@ class CartFragment : Fragment() {
 //                Toast.makeText(context,"Hello",Toast.LENGTH_LONG).show()
 //                callbacks?.onProductsSelected(productsItem.cat_id)
 //            }
+//////////////////////////cart_delete/////////////////////////////
+            btn_cart.setOnClickListener {
 
+
+                val builder = AlertDialog.Builder(context)
+                //  builder.setTitle("AlertDialog")
+                builder.setMessage("Are you sure Delete")
+
+                // add the buttons
+
+                // add the buttons
+                builder.setPositiveButton("Continue"){_,_->
+                    var del_cart = ManagementFeatchers()
+                    del_cart.deleteCart(QueryPreferences.getStoredQueryUserid(context!!).toInt(),products.product_id)
+                    cartViewModel.fetchCart(QueryPreferences.getStoredQueryUserid(context!!).toString().toInt())
+                        .observe(viewLifecycleOwner, Observer {
+                            it?.let {
+                                cartRecyclerView.adapter = CartAdapter(it)
+                                var x=0
+                                for (i in 0..it.size-1) {
+
+                                    Log.d("totalprice",i.toString())
+
+                                    totalprice += it[x++].price_d
+                                    Log.d("totalprice2",totalprice.toString())
+                                }
+                                total.text = totalprice.toString()
+                            }
+                        })
+
+                }
+                builder.setNegativeButton("Cancel") { _, _ ->
+
+                }
+                val dialog = builder.create()
+                dialog.show()
+
+
+
+
+            }
+
+//////////////////////////cart_delete/////////////////////////////
 
             card_cart.setOnClickListener {
 
